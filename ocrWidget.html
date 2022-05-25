@@ -48,8 +48,8 @@
                 'eng',
                 {
                     workerPath: 'https://unpkg.com/tesseract.js@v2.1.0/dist/worker.min.js',
-                    langPath: '"/traineddata/eng.traineddata.gz"',
-                    corePath: 'https://unpkg.com/tesseract.js-core@v2.1.0/tesseract-core.wasm.js', 
+                    langPath: 'https://tessdata.projectnaptha.com/4.0.0/eng.traineddata.gz',
+                    corePath: 'https://unpkg.com/tesseract.js-core@v2.1.0/tesseract-core.wasm.js',
                     logger: m => console.log(m)
                 }
             ).then(({ data: { text } }) => {
