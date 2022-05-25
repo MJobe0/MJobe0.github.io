@@ -22,12 +22,6 @@
     <button id="readButton" onclick="readImage()">Read</button>
     <script type="text/javascript">
 
-        window.Tesseract = Tesseract.create({
-            workerPath: window.location.origin + "/tesseract/worker.js", //tesseract.js-1.0.10
-            langPath: window.location.origin + "/tesseract/",
-            corePath: window.location.origin + "/tesseract/index.js", //tesseract.js-core-0.1.0
-        });
-
         var valid = true;
         var value;
         var jotData;
