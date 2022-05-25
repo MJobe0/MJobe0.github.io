@@ -43,16 +43,18 @@
             }
             console.log("Run Tesseract")
 
-            Tesseract.workerOptions.langPath = './eng.traineddata';
-
             Tesseract.recognize(
                 currentSelectedFile,
                 'eng',
-                { logger: m => console.log(m) }
+                {
+                    workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
+                    langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+                    corePath: 'https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js', logger: m => console.log(m)
+                }
             ).then(({ data: { text } }) => {
                 value = text;
                 console.log(text);
-                process.exit();
+                //Tesseract.terminate();
                 // var contentArea = document.getElementById('document-content');
                 // contentArea.innerHTML = result.text;
             })
