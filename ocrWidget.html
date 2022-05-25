@@ -69,7 +69,8 @@
                     value: text,
                     valid: valid
                 }
-                fillConditionValue(data)
+                JFCustomWidget.sendData(data);
+                //fillConditionValue(data)
                 console.log(text);
                 //Tesseract.terminate();
                 // var contentArea = document.getElementById('document-content');
@@ -77,19 +78,19 @@
             })
         }
 
-        function fillConditionValue(data) {
-            // var inputValue = data.value || '';
-            //input.val(inputValue.split(","));
-            // inputValue = inputValue.split(",")
-            JFCustomWidget.hideWidgetError();
-            // console.log(inputValue[0])
-            // console.log(inputValue[1])
-            // jotFormDisplayName = JFCustomWidget.getWidgetSetting("displayName");
+        // function fillConditionValue(data) {
+        //     // var inputValue = data.value || '';
+        //     //input.val(inputValue.split(","));
+        //     // inputValue = inputValue.split(",")
+        //     JFCustomWidget.hideWidgetError();
+        //     // console.log(inputValue[0])
+        //     // console.log(inputValue[1])
+        //     // jotFormDisplayName = JFCustomWidget.getWidgetSetting("displayName");
 
-            // callNSFASCheck(inputValue[0], jotFormDisplayName);
-            console.log(data.value)
-            JFCustomWidget.sendData(data);
-        }
+        //     // callNSFASCheck(inputValue[0], jotFormDisplayName);
+        //     console.log(data.value)
+        //     JFCustomWidget.sendData(data);
+        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -106,9 +107,6 @@
                 // console.log(jotFormStudentName)
                 // console.log(jotFormDisplayName)
             });
-
-            JFCustomWidget.subscribe('populate', fillConditionValue);
-
         });
 
     </script>
