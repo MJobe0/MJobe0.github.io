@@ -66,7 +66,7 @@
 
             Tesseract.recognize(
                 currentSelectedFile,
-                'eng', {langPath: './lang-data', logger: m => console.log(m) }
+                'eng', {langPath: './lang-data/', logger: m => console.log(m) }
             ).then(({ data: { text } }) => {
                 value = text;
                 console.log(text);
