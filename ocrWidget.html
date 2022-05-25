@@ -43,6 +43,8 @@
             }
             console.log("Run Tesseract")
 
+            Tesseract.workerOptions.langPath = './eng.traineddata';
+
             Tesseract.recognize(
                 currentSelectedFile,
                 'eng',
@@ -50,6 +52,9 @@
             ).then(({ data: { text } }) => {
                 value = text;
                 console.log(text);
+                process.exit();
+                // var contentArea = document.getElementById('document-content');
+                // contentArea.innerHTML = result.text;
             })
         }
 
