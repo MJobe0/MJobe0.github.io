@@ -37,8 +37,7 @@
 <body>
     <span id="labelText"></span>
     <input type="file" id="input">
-    <!-- <button id="readButton" onclick="readImage()">Read</button> -->
-    <button id="readButton">Read</button>
+    <button id="readButton" onclick="readImage()">Read</button>
     <script type="text/javascript">
 
         var valid = true;
@@ -66,7 +65,11 @@
                 currentSelectedFile,
                 'eng', { logger: m => console.log(m) }
             ).then(({ data: { text } }) => {
-                value = text;
+                var data = {
+                    value: text,
+                    valid: valid
+                }
+                fillConditionValue(data)
                 console.log(text);
                 //Tesseract.terminate();
                 // var contentArea = document.getElementById('document-content');
@@ -84,13 +87,6 @@
             // jotFormDisplayName = JFCustomWidget.getWidgetSetting("displayName");
 
             // callNSFASCheck(inputValue[0], jotFormDisplayName);
-            document.getElementById("readButton").onclick = function() {readImage()};
-
-            var data = {
-                value: value,
-                valid: valid
-            }
-
             console.log(data.value)
             JFCustomWidget.sendData(data);
         }
