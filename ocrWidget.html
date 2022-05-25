@@ -4,7 +4,7 @@
 <head>
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+    <!-- <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.5/tesseract.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.5/worker.min.js"></script>
     <script type="text/javascript">
@@ -14,7 +14,7 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
-    <script>
+    <!-- <script>
         //Set the worker, core and lang to local files
         (function () {
             var path = (function () { //absolute path
@@ -30,7 +30,7 @@
                 corePath: path + '/js/index.js'
             });
         })();
-    </script>
+    </script> -->
 </head>
 <style>
 </style>
@@ -41,7 +41,7 @@
     <button id="readButton" onclick="readImage()">Read</button>
     <script scr="js/tesseract.js"></script>
 
-    <script type="text/javascript" src="js/tesseract.js">
+    <script type="text/javascript">
 
         var valid = true;
         var value;
