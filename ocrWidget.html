@@ -44,12 +44,12 @@
         function readImage() {
             const currentSelectedFile = fileInput.files[0];
             console.log(currentSelectedFile);
-            if (currentSelectedFile === null && currentSelectedFile === undefined) {
+            if (currentSelectedFile === null && currentSelectedFile === undefined) { //may not be needed due to second guard statement
                 contentArea.innerHTML = "Unable to run no file found";
                 console.log("Unable to run no file found");
                 return
             }
-            if (currentSelectedFile.type !== "image/jpeg" && currentSelectedFile.type !== "image/png" && currentSelectedFile.type === "image/jpg") {
+            if (currentSelectedFile?.type !== "image/jpeg" && currentSelectedFile?.type !== "image/png") {
                 contentArea.innerHTML = "Unable to run, not an image file. Only JPEGs and PNGs";
                 console.log("Unable to run, not an image file. Only JPEGs and PNGs");
                 return
