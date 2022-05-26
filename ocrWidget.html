@@ -13,23 +13,6 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
-    <!-- <script>
-        //Set the worker, core and lang to local files
-        (function () {
-            var path = (function () { //absolute path
-                var pathArray = window.location.pathname.split('/');
-                pathArray.pop(); //Remove the last ("**.html")
-                return window.location.origin + pathArray.join("/");
-            })();
-            console.log(path);
-
-            window.Tesseract = Tesseract.create({
-                workerPath: path + '/js/worker.js',
-                langPath: path + '/js/eng.traineddata.gz',
-                corePath: path + '/js/index.js'
-            });
-        })();
-    </script> -->
 </head>
 <style>
 </style>
@@ -38,11 +21,14 @@
     <span id="labelText"></span>
     <input type="file" id="input">
     <button id="readButton" onclick="readImage()">Read</button>
+    <p id="imageResult"></p>
     <script type="text/javascript">
 
+        //Global values
         var valid = true;
         var value;
         var jotData;
+        var contentArea = document.getElementById('imageResult');
 
         const fileInput = document.getElementById('input');
         fileInput.onchange = () => {
@@ -50,47 +36,47 @@
             console.log(selectedFile);
         }
 
+        /**
+        * This is a function that checks if the image uploaded is an jpeg or png, if true it sends it to be read and sends the results to jotform and returns. if false it prints a warning message and returns
+        * @param {void} doesn't take a parameter
+        * @returns {void} doesn't return anything
+        */
         function readImage() {
             const currentSelectedFile = fileInput.files[0];
-            console.log(currentSelectedFile)
+            console.log(currentSelectedFile);
             if (currentSelectedFile === null && currentSelectedFile === undefined) {
-                return console.log("Unable to run no file found")
+                contentArea.innerHTML = "Unable to run no file found";
+                console.log("Unable to run no file found");
+                return
             }
-            if (currentSelectedFile.type !== "image/jpeg" && currentSelectedFile.type !== "image/png") {
-                return console.log("Unable to run, not an image file. Only JPEGs and PNGs")
+            if (currentSelectedFile.type !== "image/jpeg" && currentSelectedFile.type !== "image/png" && currentSelectedFile.type === "image/jpg") {
+                contentArea.innerHTML = "Unable to run, not an image file. Only JPEGs and PNGs";
+                console.log("Unable to run, not an image file. Only JPEGs and PNGs");
+                return
             }
-            console.log("Run Tesseract")
+            console.log("Run Tesseract");
 
             Tesseract.recognize(
                 currentSelectedFile,
-                'eng', { logger: m => console.log(m) }
-            ).then(({ data: { text } }) => {
-                var data = {
-                    value: text,
-                    valid: valid
-                }
-                JFCustomWidget.sendData(data);
-                //fillConditionValue(data)
-                console.log(text);
-                //Tesseract.terminate();
-                // var contentArea = document.getElementById('document-content');
-                // contentArea.innerHTML = result.text;
-            })
+                'eng', { logger: m => console.log(m) })
+                .then(({ data: { text } }) => {
+                    var data = {
+                        value: text,
+                        valid: valid
+                    }
+                    JFCustomWidget.sendData(data);
+                    console.log(text);
+                })
+                .then(function (result) {
+                    contentArea.innerHTML = "Done :)";
+                    console.log(result);
+                })
+                .catch(function (err) {
+                    contentArea.innerHTML = "Failed :(";
+                    console.error(err);
+                });
+            return
         }
-
-        // function fillConditionValue(data) {
-        //     // var inputValue = data.value || '';
-        //     //input.val(inputValue.split(","));
-        //     // inputValue = inputValue.split(",")
-        //     JFCustomWidget.hideWidgetError();
-        //     // console.log(inputValue[0])
-        //     // console.log(inputValue[1])
-        //     // jotFormDisplayName = JFCustomWidget.getWidgetSetting("displayName");
-
-        //     // callNSFASCheck(inputValue[0], jotFormDisplayName);
-        //     console.log(data.value)
-        //     JFCustomWidget.sendData(data);
-        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -103,9 +89,6 @@
                 }
                 console.log(data2)
                 JFCustomWidget.sendSubmit(data2);
-
-                // console.log(jotFormStudentName)
-                // console.log(jotFormDisplayName)
             });
         });
 
