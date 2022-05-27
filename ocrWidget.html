@@ -22,6 +22,7 @@
     <input type="file" id="input">
     <button id="readButton" onclick="readImage()">Read</button>
     <p id="imageResult"></p>
+    <progress id="progressbar" min="0" max="1" value="0" />
     <script type="text/javascript">
 
         //Global values
@@ -58,18 +59,16 @@
 
             Tesseract.recognize(
                 currentSelectedFile,
-                'eng', { logger: m => console.log(m) })
+                'eng', { logger: m => { console.log(m); document.getElementById('progressbar').value = m.progress; } })
                 .then(({ data: { text } }) => {
+                    contentArea.innerHTML = "Done :)";
+
                     var data = {
                         value: text,
                         valid: valid
                     }
                     JFCustomWidget.sendData(data);
                     console.log(text);
-                })
-                .then(function (result) {
-                    contentArea.innerHTML = "Done :)";
-                    console.log(result);
                 })
                 .catch(function (err) {
                     contentArea.innerHTML = "Failed :(";
