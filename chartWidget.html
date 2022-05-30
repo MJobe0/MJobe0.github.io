@@ -108,10 +108,10 @@
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
-            var fields = ["data1", "data2"]
+            var fields = ["Data1", "data2", "q3_data1"]
             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                 console.log(res)
-                        });
+            });
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var data2 = {
