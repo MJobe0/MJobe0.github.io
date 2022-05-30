@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script> -->
+</head>
+<style>
+</style>
+
+<body>
+    <span id="labelText"></span>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <canvas id="myChart" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
+    <script>
+        const data0 = JFCustomWidget.getFieldsValueByName("Data0");
+        const data1 = JJFCustomWidget.getFieldsValueByName("Data1");
+        const data2 = JFCustomWidget.getFieldsValueByName("Data2");
+        const data3 = JFCustomWidget.getFieldsValueByName("Data3");
+        const data4 = JFCustomWidget.getFieldsValueByName("Data4");
+        const data5 = JFCustomWidget.getFieldsValueByName("Data5");
+        const data6 = JFCustomWidget.getFieldsValueByName("Data6");
+
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+        ];
+
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Try hiding me',
+                data: [65, 59, 80, 81, 26, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+            }]
+        };
+
+        //config
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                transitions: {
+                    show: {
+                        animations: {
+                            x: {
+                                from: 0
+                            },
+                            y: {
+                                from: 0
+                            }
+                        }
+                    },
+                    hide: {
+                        animations: {
+                            x: {
+                                to: 0
+                            },
+                            y: {
+                                to: 0
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        //render the chart using our configuration:
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("ready message arrived from JotForm", msg);
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var data2 = {
+                    value: "",
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
