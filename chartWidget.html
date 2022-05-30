@@ -24,7 +24,10 @@
     </div>
     <canvas id="myChart" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
     <script>
-        const data1 = JFCustomWidget?.getFieldsValueByName("q3_data1");
+        const dataTest1 = JFCustomWidget?.getFieldsValueByName("input_3");
+        const dataTest2 = JFCustomWidget?.getFieldsValueById("input_3");
+        const dataTest3 = JFCustomWidget?.getFieldsValueByName("data1");
+        const dataTest4 = JFCustomWidget?.getFieldsValueById("#input_3");
         const data2 = JFCustomWidget?.getFieldsValueByName("Data1");
         const data3 = JFCustomWidget?.getFieldsValueByName("Data2");
         const data4 = JFCustomWidget?.getFieldsValueByName("Data3");
@@ -32,13 +35,10 @@
         const data6 = JFCustomWidget?.getFieldsValueByName("Data5");
         const data7 = JFCustomWidget?.getFieldsValueByName("Data6");
 
-        console.log("data1 = ", data1);
-        console.log("data2 = ", data2);
-        console.log("data3 = ", data3);
-        console.log("data4 = ", data4);
-        console.log("data5 = ", data5);
-        console.log("data6 = ", data6);
-        console.log("data7 = ", data7);
+        console.log("dataTest1 = ", dataTest1);
+        console.log("dataTest2 = ", dataTest2);
+        console.log("dataTest3 = ", dataTest3);
+        console.log("dataTest4 = ", dataTest4);
 
 
         const labels = [
