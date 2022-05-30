@@ -26,8 +26,16 @@
     <script>
         const dataTest1 = JFCustomWidget?.getFieldsValueByName("input_3");
         const dataTest2 = JFCustomWidget?.getFieldsValueById("input_3");
-        const dataTest3 = JFCustomWidget?.getFieldsValueByName("data1");
-        const dataTest4 = JFCustomWidget?.getFieldsValueById("#input_3");
+        const dataTest3 = JFCustomWidget?.getFieldsValueByName("data1", function (msg) {
+
+            // console.log(jotFormStudentName)
+            // console.log(jotFormDisplayName)
+        });
+        const dataTest4 = JFCustomWidget?.getFieldsValueByName("input_3", function (msg) {
+
+            // console.log(jotFormStudentName)
+            // console.log(jotFormDisplayName)
+        });
         const data2 = JFCustomWidget?.getFieldsValueByName("Data1");
         const data3 = JFCustomWidget?.getFieldsValueByName("Data2");
         const data4 = JFCustomWidget?.getFieldsValueByName("Data3");
