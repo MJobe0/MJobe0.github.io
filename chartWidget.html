@@ -6,13 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
-    </script> -->
+    </script>
 </head>
 <style>
 </style>
@@ -24,13 +24,22 @@
     </div>
     <canvas id="myChart" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
     <script>
-        const data0 = JFCustomWidget.getFieldsValueByName("Data0");
-        const data1 = JJFCustomWidget.getFieldsValueByName("Data1");
-        const data2 = JFCustomWidget.getFieldsValueByName("Data2");
-        const data3 = JFCustomWidget.getFieldsValueByName("Data3");
-        const data4 = JFCustomWidget.getFieldsValueByName("Data4");
-        const data5 = JFCustomWidget.getFieldsValueByName("Data5");
-        const data6 = JFCustomWidget.getFieldsValueByName("Data6");
+        const data1 = JFCustomWidget?.getFieldsValueByName("Data0");
+        const data2 = JFCustomWidget?.getFieldsValueByName("Data1");
+        const data3 = JFCustomWidget?.getFieldsValueByName("Data2");
+        const data4 = JFCustomWidget?.getFieldsValueByName("Data3");
+        const data5 = JFCustomWidget?.getFieldsValueByName("Data4");
+        const data6 = JFCustomWidget?.getFieldsValueByName("Data5");
+        const data7 = JFCustomWidget?.getFieldsValueByName("Data6");
+
+        console.log("data1 = ", data1);
+        console.log("data2 = ", data2);
+        console.log("data3 = ", data3);
+        console.log("data4 = ", data4);
+        console.log("data5 = ", data5);
+        console.log("data6 = ", data6);
+        console.log("data7 = ", data7);
+
 
         const labels = [
             'January',
