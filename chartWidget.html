@@ -24,18 +24,7 @@
     </div>
     <canvas id="myChart" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
     <script>
-        const dataTest1 = JFCustomWidget?.getFieldsValueByName("input_3");
-        const dataTest2 = JFCustomWidget?.getFieldsValueById("input_3");
-        const dataTest3 = JFCustomWidget?.getFieldsValueByName("data1", function (msg) {
-
-            // console.log(jotFormStudentName)
-            // console.log(jotFormDisplayName)
-        });
-        const dataTest4 = JFCustomWidget?.getFieldsValueByName("input_3", function (msg) {
-
-            // console.log(jotFormStudentName)
-            // console.log(jotFormDisplayName)
-        });
+        var chartData = [];
 
         //console.log(JFCustomWidget);
         console.log("dataTest1 = ", dataTest1);
@@ -57,7 +46,7 @@
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: 'Try hiding me',
-                data: [65, 59, 80, 81, 26, 55, 40],
+                data: chartData,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
             }]
@@ -102,9 +91,11 @@
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
-            var fields = ["Data1", "data2", "q3_data1", "#input_3", "input_3", "label_3", "Data 1", "Data 0", "Data_0", "data1", "3"]
+            var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"]
             JFCustomWidget.getFieldsValueById(fields, function (res) {
                 console.log("res by ID=", res)
+                console.log([...res.value])
+
             });
 
             JFCustomWidget.getFieldsValueByName(fields, function (res) {
