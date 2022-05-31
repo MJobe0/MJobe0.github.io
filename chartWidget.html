@@ -88,6 +88,7 @@
             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                 console.log("res by Name=", res)
                 res.data.forEach(resItem => {
+                    chartData.push(resItem?.value ?? 0)
                     console.log(resItem.value);
                 });
             });
