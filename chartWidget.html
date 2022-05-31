@@ -85,16 +85,11 @@
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
             var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"]
-            JFCustomWidget.getFieldsValueById(fields, function (res) {
-                console.log("res by ID=", res)
+            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                console.log("res by Name=", res)
                 res.forEach(resItem => {
                     console.log(resItem.value);
                 });
-
-            });
-
-            JFCustomWidget.getFieldsValueByName(fields, function (res) {
-                console.log("res by Name=", res)
             });
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
