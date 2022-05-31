@@ -87,7 +87,10 @@
             var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"]
             JFCustomWidget.getFieldsValueById(fields, function (res) {
                 console.log("res by ID=", res)
-                console.log([...res.value])
+                res.forEach(function (resItem) {
+                    var x = resItem.value;
+                    console.log(x);
+                });
 
             });
 
