@@ -47,6 +47,10 @@
             });
         });
 
+        function getChartData() {
+            return chartData ?? [];
+        }
+
         const labels = [
             'January',
             'February',
@@ -55,12 +59,12 @@
             'May',
             'June',
         ];
-        console.log(chartData)
-        var data = {
+
+        const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: '2021',
-                data: chartData,
+                data: getChartData(),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
             }]
