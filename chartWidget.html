@@ -45,14 +45,8 @@
                 console.log(data2)
                 JFCustomWidget.sendSubmit(data2);
             });
-        });
 
-        function getChartData() {
-            console.log("chart data =", chartData)
-            return chartData ?? [];
-        }
-
-        const labels = [
+            const labels = [
             'January',
             'February',
             'March',
@@ -106,6 +100,12 @@
             document.getElementById('myChart'),
             config
         );
+        });
+
+        function getChartData() {
+            console.log("chart data =", chartData)
+            return chartData ?? [];
+        }
     </script>
 </body>
 
