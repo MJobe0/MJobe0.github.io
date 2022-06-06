@@ -45,6 +45,11 @@
                 console.log(data2)
                 JFCustomWidget.sendSubmit(data2);
             });
+            //render the chart using our configuration:
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
             myChart.update();
         });
 
@@ -102,12 +107,6 @@
                 }
             }
         };
-
-        //render the chart using our configuration:
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
     </script>
 </body>
 
