@@ -45,6 +45,12 @@
                 console.log(data2)
                 JFCustomWidget.sendSubmit(data2);
             });
+
+            //render the chart using our configuration:
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
         });
 
         function getChartData() {
@@ -65,7 +71,7 @@
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: '2021',
-                data: chartData ?? [2,7],
+                data: chartData ?? [2, 7],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
             }]
@@ -100,12 +106,6 @@
                 }
             }
         };
-
-        //render the chart using our configuration:
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
     </script>
 </body>
 
