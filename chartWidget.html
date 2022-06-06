@@ -45,10 +45,12 @@
                 console.log(data2)
                 JFCustomWidget.sendSubmit(data2);
             });
+            myChart.update();
         });
 
         function getChartData() {
             console.log("chart data =", chartData)
+            myChart.update();
             return chartData ?? [];
         }
 
@@ -65,7 +67,7 @@
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
                 label: '2021',
-                data: [...chartData],
+                data: getChartData(),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
             }]
