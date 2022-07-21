@@ -60,9 +60,10 @@
                 if (currEmployedTo != null && currEmployedFrom != null) {
                     console.log("all good")
                     console.log(getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)))
+                    //add coomments to array
 
                 }
-                
+
             }
 
             // for (let i = 0; i < currentRowLength; i++) {
@@ -90,6 +91,20 @@
             //     // initialValue
             // ),[];
         }
+
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("ready message arrived from JotForm", msg);
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var data2 = {
+                    value: "",
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
+            });
+        });
     </script>
 </head>
 
