@@ -24,7 +24,7 @@
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
-            var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"];
+            var fields = ["#input_5"];
             JFCustomWidget.setFieldsValueById(fields, function (res) {
                 console.log("res by Name=", res)
                 // res.data.forEach(resItem => {
@@ -42,16 +42,16 @@
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var data2 = {
-                    value: "",
+                    value: getFormData(),
                     valid: true
                 }
-                console.log(data2)
+                console.log(data2);
                 JFCustomWidget.sendSubmit(data2);
             });
         });
 
         function maxYear() {
-            const maxYearForDates = new Date().getFullYear() - 1;
+            const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
             //input.setAttribute("min", maxYearForDates);
             return maxYearForDates + "-01" + "-01"
@@ -171,9 +171,9 @@
             //var formData = $("form").serializeArray()
             //console.log(formData)
 
-            var test = document.getElementsByName("employedFrom[]")[0].value
-            var test1 = document.getElementsByName("employedFrom[]")[1].value
-            var test2 = document.getElementsByName("employedFrom[]").length
+            // var test = document.getElementsByName("employedFrom[]")[0].value
+            // var test1 = document.getElementsByName("employedFrom[]")[1].value
+            // var test2 = document.getElementsByName("employedFrom[]").length
 
             // console.log(test)
             // console.log(test1)
@@ -190,9 +190,13 @@
                     console.log("all good")
                     if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
                         console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
+                        document.getElementById("textArea").innerHTML = "The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in"
+                        return "Yes"
+                    }
+                    else {
+                        return "No"
                     }
                     //add coomments to array
-
                 }
 
             }
@@ -270,6 +274,7 @@
             </tr>
         </table>
     </form>
+    <p id="textArea"></p>
 </body>
 
 </html>
