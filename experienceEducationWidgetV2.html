@@ -1,0 +1,260 @@
+<html>
+
+<head>
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        //var $j = jQuery.noConflict();
+
+        // $(function () {
+        //     $("educationExperienceList[]").datepicker();
+        // });
+
+
+        function maxYear() {
+            const maxYearForDates = new Date().getFullYear() - 1;
+            console.log(maxYearForDates + "-01" + "-01")
+            //input.setAttribute("min", maxYearForDates);
+            return maxYearForDates + "-01" + "-01"
+        }
+
+        const currMaxYear = maxYear();
+
+        // document.getElementsByName("employedFrom[]").onchange = function () {
+        //     var input = document.getElementsByName("employedFrom[]");
+        //     input.setAttribute("min", maxYear());
+        // }
+
+        // document.getElementsByName("employedTo[]").onchange = function () {
+        //     var input = document.getElementsByName("employedTo[]");
+        //     input.setAttribute("min", maxYear());
+        // }
+
+        //const maxDate = new Date(maxYear() + "-01" + "-01")
+        //let dtElem = document.getElementsByName('employedFrom[]');
+
+        //dtElem.max = new Date (new Date().toISOString().split("T")[0])
+        //console.log(dtElem.max = maxYear() + "-01" + "-01")
+        //console.log(dtElem)
+        // document.getElementsByName('employedFrom[]').min = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
+        // function maxYear() {
+        //     document.getElementById("col2").min = "2020-01-01";
+        //     //return new Date().getFullYear() - 1;
+        //     return
+        // }
+
+        function addRow() {
+            var table = document.getElementById("emptbl");
+            // GET TOTAL NUMBER OF ROWS 
+            var x = table.rows.length;
+            var id = "tbl" + x;
+            var row = table.insertRow(x);
+            row.id = id;
+            var rowNumberCell = row.insertCell(0);
+            var typeOfActivityCell = row.insertCell(1);
+            var nameOfEmployerCell = row.insertCell(2);
+            var employedFromCell = row.insertCell(3);
+            var employedToCell = row.insertCell(4);
+            var numberOfHoursWorkedCell = row.insertCell(5);
+            var detailsOfPositionHeldCell = row.insertCell(6);
+            var reasonForLeavingCell = row.insertCell(7);
+            var deleteRowCell = row.insertCell(8);
+            rowNumberCell.outerHTML = `<th> ${x}</th>`;
+            typeOfActivityCell.innerHTML = `<select name="typeOfActivity[]" id="dept">
+                        <option value="0">Select Type of activity</option>
+                        <option value="1">Employed</option>
+                        <option value="2">Traveling</option>
+                        <option value="3">Unemployed</option>
+                        <option value="4">Studying</option>
+                        <option value="5">Other</option>
+                    </select>`;
+            nameOfEmployerCell.innerHTML = `<input type="text" name="nameOfEmployer[]" value="" />`;
+            employedFromCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} value="" />`;
+            employedToCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} value="" />`;
+            numberOfHoursWorkedCell.innerHTML = `<input type="text" name="numberOfHoursWorked[]" value="" />`;
+            detailsOfPositionHeldCell.innerHTML = `<input type="text" name="detailsOfPositionHeld[]" value="" />`;
+            reasonForLeavingCell.innerHTML = `<input type="text" name="reasonForLeaving[]" value="" />`
+            // deleteRowCell.innerHTML = `<input type="button" class="btn btn-block btn-default" id="addrow" onclick="deleteRow(\''+id+'\')" value="Delete" />`;
+
+
+
+            // var table = document.getElementById("emptbl");
+            // var rowCount = table.rows.length;
+            // var cellCount = table.rows[0].cells.length;
+            // var row = table.insertRow(rowCount);
+            // for (var i = 0; i <= cellCount; i++) {
+            //     var cell = "cell" + i;
+            //     cell = row.insertCell(i);
+            //     var copycel = document.getElementById("col" + i).innerHTML;
+            //     cell.innerHTML = copycel;
+            // }
+        }
+
+        // function deleteRow(id) {
+        //         var table = document.getElementById('emptbl');
+        //         var rowCount = table.rows.length;
+        //         console.log(id)
+        //         if (id === "0"){
+        //             console.log("can't remove the first row")
+        //             return
+        //         }
+        //         else if (rowCount > "2") {
+        //             var row = table.deleteRow(id);
+        //             //rowCount--;
+        //         }
+        //         else {
+        //             console.log("There should be atleast one row");
+        //         }
+        // }
+
+        function deleteRows() {
+            var table = document.getElementById('emptbl');
+            var rowCount = table.rows.length;
+            if (rowCount > "2") {
+                var row = table.deleteRow(rowCount - 1);
+                rowCount--;
+            }
+            else {
+                alert("There should be atleast one row");
+            }
+        }
+
+        function getMonthDifference(startDate, endDate) {
+            return (
+                endDate.getMonth() -
+                startDate.getMonth() +
+                12 * (endDate.getFullYear() - startDate.getFullYear())
+            );
+        }
+
+        function getFormData() {
+            //var formData = $("form").serializeArray()
+            //console.log(formData)
+
+            var test = document.getElementsByName("employedFrom[]")[0].value
+            var test1 = document.getElementsByName("employedFrom[]")[1].value
+            var test2 = document.getElementsByName("employedFrom[]").length
+
+            // console.log(test)
+            // console.log(test1)
+            // console.log(test2)
+
+            const currentRowLength = test2
+
+            for (let i = 0; i < currentRowLength; i++) {
+                let currEmployedTo = document.getElementsByName("employedTo[]")[i].value
+                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1].value;
+                console.log("EmpTo", currEmployedTo)
+                console.log("EmpFrom", currEmployedFrom)
+                if (currEmployedTo != null && currEmployedFrom != null) {
+                    console.log("all good")
+                    console.log(getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)))
+                    //add coomments to array
+
+                }
+
+            }
+
+            // for (let i = 0; i < currentRowLength; i++) {
+            //     let currEmployedFrom = document.getElementsByName("employedFrom[]")[i++].value;
+            //     let currEmployedTo = document.getElementsByName("employedTo[]")[i].value
+            //     console.log(getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)))
+            // }
+
+            // formData.reduce(
+            //     (previousValue, currentValue) => {
+            //         //console.log(typeof previousValue === "Object" ? Object?.values(previousValue) : "")
+            //         //console.log( Object?.values(currentValue) ?? [])
+            //         console.log("Prev", previousValue)
+            //         console.log("Curr", currentValue)
+            //         return console.log("fine")
+            //         // const arr1 = Object?.values(previousValue) ?? "";
+            //         // const arr2 = Object?.values(currentValue) ?? "";
+            //         // if (arr1[0] === "employedFrom[]" && arr2[0] === "employedFrom[]") {
+            //         //     console.log(arr1[1])
+            //         //     console.log(arr2[1])
+            //         //     //console.log(getMonthDifference(previousValue.value, currentValue.value))
+            //         // }
+            //     }
+            //     // previousValue + currentValue,
+            //     // initialValue
+            // ),[];
+        }
+
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("ready message arrived from JotForm", msg);
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var data2 = {
+                    value: "",
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form id="educationExperienceList[]" name="educationExperienceList" action="#">
+        <table id="emptbl">
+            <tr>
+                Key fields
+                <th>#</th>
+                <th>Type of activity</th>
+                <th>Name of employer</th>
+                <th>Employed from</th>
+                <th>Employed to</th>
+                <th>Number of hours worked</th>
+                <th>Details of position held</th>
+                <th>Reason for leaving</th>
+                <th> </th>
+                <!-- <th>Provide as reference</th> -->
+            </tr>
+            <!-- <tr>
+                <td id="col0">
+                    <select name="typeOfActivity[]" id="dept">
+                        <option value="0">Select Type of activity</option>
+                        <option value="1">Employed</option>
+                        <option value="2">Traveling</option>
+                        <option value="3">Unemployed</option>
+                        <option value="4">Studying</option>
+                        <option value="5">Other</option>
+                    </select>
+                </td>
+                    <td id="col1"><input type="text" name="nameOfEmployer[]" value="" /></td>
+                <td id="col2"><input type="date" name="employedFrom[]" value="" /></td>
+                <td id="col3"><input type="date" name="employedTo[]" value="" /></td>
+                <td id="col4"><input type="text" name="numberOfHoursWorked[]" value="" /></td>
+                <td id="col5"><input type="text" name="detailsOfPositionHeld[]" value="" /></td>
+                <td id="col6"><textarea name="reasonForLeaving[]" value=""></textarea></td>
+                <td id="col6"><input type="text" name="reasonForLeaving[]" value="" /></td>
+                <td id="col7"><input type="checkbox" name="provideAsReference[]" value="" /></td>
+            </tr> -->
+        </table>
+        <table>
+            <tr>
+                <td><input type="button" value="Add Row" onclick="addRow()" /></td>
+                <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td>
+                <td><input type="button" value="Submit" onclick="getFormData()" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
+
+<!--
+    Todo
+    - Compare dates
+    - Disable fields based on selection
+    - Make fields mandotory if empty
+    - Change date format to MM/YYYY
+    - Remove entry next to every row
+    - Add jotform scripts
+    - Check ref are in the last 3 year, min of 2
+-->
