@@ -25,7 +25,7 @@
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
             var fields = ["#input_5"];
-            JFCustomWidget.setFieldsValueById(fields, function (res) {
+            JFCustomWidget.setFieldsValueById(fields, function (res) { // or storeToField
                 console.log("res by Name=", res)
                 // res.data.forEach(resItem => {
                 //     chartData.push(parseFloat(resItem?.value) ?? 0)
@@ -43,7 +43,7 @@
             JFCustomWidget.subscribe("submit", function (msg) {
                 var data2 = getFormData();
                 console.log(data2);
-                JFCustomWidget.sendSubmit(data2);
+                JFCustomWidget.sendData(data2);
             });
         });
 
