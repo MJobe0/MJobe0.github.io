@@ -21,7 +21,7 @@
         //var $j = jQuery.noConflict();
         console.log(JFCustomWidget)
 
-        function maxYear() {
+        function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
             //input.setAttribute("min", maxYearForDates);
@@ -216,12 +216,12 @@
             //         console.log(resItem.value);
             //     });
             // });
-            //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                var data2 = getFormData();
-                console.log(data2);
-                JFCustomWidget.sendSubmit(data2);
-            });
+        });
+        //subscribe to submit
+        JFCustomWidget.subscribe("submit", function (msg) {
+            var data2 = getFormData();
+            console.log(data2);
+            JFCustomWidget.sendSubmit(data2);
         });
     </script>
 </head>
