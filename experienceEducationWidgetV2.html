@@ -179,7 +179,7 @@
             // console.log(test1)
             // console.log(test2)
 
-            const currentRowLength = test2
+            const currentRowLength = document.getElementsByName("employedFrom[]")?.length
 
             for (let i = 0; i < currentRowLength; i++) {
                 let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
