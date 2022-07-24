@@ -5,12 +5,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <script type="text/javascript">
         //var $j = jQuery.noConflict();
 
-        // $(function () {
-        //     $("educationExperienceList[]").datepicker();
-        // });
-
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("ready message arrived from JotForm", msg);
+            var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"];
+            // JFCustomWidget.getFieldsValueByName(fields, function (res) {
+            //     console.log("res by Name=", res)
+            //     res.data.forEach(resItem => {
+            //         chartData.push(parseFloat(resItem?.value) ?? 0)
+            //         console.log(resItem.value);
+            //     });
+            // });
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var data2 = {
+                    value: "",
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
+            });
+            myChart.update();
+        });
 
         function maxYear() {
             const maxYearForDates = new Date().getFullYear() - 1;
@@ -144,13 +169,15 @@
             const currentRowLength = test2
 
             for (let i = 0; i < currentRowLength; i++) {
-                let currEmployedTo = document.getElementsByName("employedTo[]")[i].value
-                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1].value;
+                let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
+                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
                 console.log("EmpTo", currEmployedTo)
                 console.log("EmpFrom", currEmployedFrom)
                 if (currEmployedTo != null && currEmployedFrom != null) {
                     console.log("all good")
-                    console.log(getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)))
+                    if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
+                        console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
+                    }
                     //add coomments to array
 
                 }
@@ -182,20 +209,6 @@
             //     // initialValue
             // ),[];
         }
-
-        //subscrive to ready
-        JFCustomWidget.subscribe("ready", function (msg) {
-            console.log("ready message arrived from JotForm", msg);
-            //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                var data2 = {
-                    value: "",
-                    valid: true
-                }
-                console.log(data2)
-                JFCustomWidget.sendSubmit(data2);
-            });
-        });
     </script>
 </head>
 
