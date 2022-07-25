@@ -30,30 +30,6 @@
 
         const currMaxYear = maxYear();
 
-        // document.getElementsByName("employedFrom[]").onchange = function () {
-        //     var input = document.getElementsByName("employedFrom[]");
-        //     input.setAttribute("min", maxYear());
-        // }
-
-        // document.getElementsByName("employedTo[]").onchange = function () {
-        //     var input = document.getElementsByName("employedTo[]");
-        //     input.setAttribute("min", maxYear());
-        // }
-
-        //const maxDate = new Date(maxYear() + "-01" + "-01")
-        //let dtElem = document.getElementsByName('employedFrom[]');
-
-        //dtElem.max = new Date (new Date().toISOString().split("T")[0])
-        //console.log(dtElem.max = maxYear() + "-01" + "-01")
-        //console.log(dtElem)
-        // document.getElementsByName('employedFrom[]').min = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-
-        // function maxYear() {
-        //     document.getElementById("col2").min = "2020-01-01";
-        //     //return new Date().getFullYear() - 1;
-        //     return
-        // }
-
         function addRow() {
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
@@ -169,40 +145,15 @@
                     }
                     //add coomments to array
                 }
-
             }
-
-            // for (let i = 0; i < currentRowLength; i++) {
-            //     let currEmployedFrom = document.getElementsByName("employedFrom[]")[i++].value;
-            //     let currEmployedTo = document.getElementsByName("employedTo[]")[i].value
-            //     console.log(getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)))
-            // }
-
-            // formData.reduce(
-            //     (previousValue, currentValue) => {
-            //         //console.log(typeof previousValue === "Object" ? Object?.values(previousValue) : "")
-            //         //console.log( Object?.values(currentValue) ?? [])
-            //         console.log("Prev", previousValue)
-            //         console.log("Curr", currentValue)
-            //         return console.log("fine")
-            //         // const arr1 = Object?.values(previousValue) ?? "";
-            //         // const arr2 = Object?.values(currentValue) ?? "";
-            //         // if (arr1[0] === "employedFrom[]" && arr2[0] === "employedFrom[]") {
-            //         //     console.log(arr1[1])
-            //         //     console.log(arr2[1])
-            //         //     //console.log(getMonthDifference(previousValue.value, currentValue.value))
-            //         // }
-            //     }
-            //     // previousValue + currentValue,
-            //     // initialValue
-            // ),[];
         }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
             var fields = ["#input_5"];
-            JFCustomWidget.setFieldsValueById(fields, function (res) { // or storeToField
+            console.log("here")
+            JFCustomWidget.setFieldsValueById("#input_5", function (res) { // or storeToField
                 console.log("res by Name=", res)
                 res = "test"
                 // res.data.forEach(resItem => {
