@@ -222,6 +222,8 @@
             var data2 = getFormData();
             console.log(data2);
             JFCustomWidget.sendData(data2);
+            JFCustomWidget.sendSubmit(data2);
+
         });
     </script>
 </head>
@@ -278,7 +280,6 @@
 
 <!--
     Todo
-    - Compare dates
     - Disable fields based on selection
     - Make fields mandotory if empty
     - Change date format to MM/YYYY
