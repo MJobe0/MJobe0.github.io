@@ -152,7 +152,7 @@
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
             var fields = ["#input_9", "9"];
-            console.log(JFCustomWidget.setFieldsValueById(fields, "Test"))
+            console.log(JFCustomWidget.setFieldsValueById("9", "Test"))
             JFCustomWidget.setFieldsValueById(fields, "Test")
             // { // or storeToField
             //     console.log("res by Name=", res)
@@ -178,7 +178,7 @@
 
         JFCustomWidget.sendData(data2);
         JFCustomWidget.sendSubmit(data2);
-        
+
     </script>
 </head>
 
