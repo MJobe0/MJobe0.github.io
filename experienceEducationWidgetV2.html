@@ -21,6 +21,8 @@
         //var $j = jQuery.noConflict();
         console.log(JFCustomWidget)
 
+        var data2 = {};
+
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
@@ -138,10 +140,12 @@
                     if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
                         console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
                         document.getElementById("textArea").innerHTML = "The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in the field below"
-                        return { value: "Yes", valid: false };
+                        data2 = { value: "Yes", valid: false }
+                        return;
                     }
                     else {
-                        return { value: "No", valid: true };
+                        data2 = { value: "Yes", valid: false }
+                        return;
                     }
                     //add coomments to array
                 }
@@ -172,7 +176,7 @@
         });
         //subscribe to submit
         JFCustomWidget.subscribe("submit", function (msg) {
-            var data2 = getFormData();
+           getFormData();
             console.log(data2);
         });
 
