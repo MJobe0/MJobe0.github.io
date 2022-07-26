@@ -148,19 +148,35 @@
             }
         }
 
+        function getCompanyNames() {
+            const currentRowLength = document.getElementsByName("nameOfEmployer[]")?.length
+            let arr = []
+            for (let i = 0; i < currentRowLength; i++) {
+                let currNameOfEmployer = document.getElementsByName("nameOfEmployer")[i]?.value; //check undefinded
+                console.log("nameEm", currNameOfEmployer)
+                if (currNameOfEmployer != null && i < 6) {
+                    arr.push(currNameOfEmployer);
+                }
+            }
+            return arr;
+        }
+
+        function setCompanyNames() {
+            let currNames = getCompanyNames();
+            let questionIds = ["11", "12", "13", "14", "15", "16"];
+            let fillArr = []
+            for (let i = 0; i < questionIds.length; i++) {
+                fillArr.push({
+                    id: questionIds[i],
+                    value: currNames[i]
+                })
+            }
+            JFCustomWidget.setFieldsValueById(fillArr);
+        }
+
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
-            var fields = ["#input_5"];
-            console.log("here")
-            JFCustomWidget.setFieldsValueById("#input_9", "test" , function (res) { // or storeToField
-                console.log("res by Name=", res)
-                res = "test"
-                // res.data.forEach(resItem => {
-                //     chartData.push(parseFloat(resItem?.value) ?? 0)
-                //     console.log(resItem.value);
-                // });
-            });
             // JFCustomWidget.getFieldsValueByName(fields, function (res) {
             //     console.log("res by Name=", res)
             //     res.data.forEach(resItem => {
@@ -173,6 +189,7 @@
         JFCustomWidget.subscribe("submit", function (msg) {
             var data2 = getFormData();
             console.log(data2);
+            setCompanyNames();
             JFCustomWidget.sendData(data2);
             JFCustomWidget.sendSubmit(data2);
         });
