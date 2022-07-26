@@ -19,7 +19,7 @@
     </style>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
-        console.log(JFCustomWidget.getWidgetSetting("Company Field 1"))
+        console.log(JFCustomWidget.getWidgetSetting("companyField1"))
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
@@ -177,24 +177,44 @@
             JFCustomWidget.setFieldsValueById(fillArr);
         }
 
+        function fillConditionValue(data) {
+            JFCustomWidget.hideWidgetError();
+
+            jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
+            console.log(jotFormCompanyField1)
+            //callNSFASCheck(inputValue[0], jotFormDisplayName);
+
+            var data = {
+                value: "No",
+                valid: valid
+            }
+
+            //console.log(data.value)
+            JFCustomWidget.sendData(data);
+        }
+
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
-            // JFCustomWidget.getFieldsValueByName(fields, function (res) {
-            //     console.log("res by Name=", res)
-            //     res.data.forEach(resItem => {
-            //         chartData.push(parseFloat(resItem?.value) ?? 0)
-            //         console.log(resItem.value);
-            //     });
-            // });
-        });
-        //subscribe to submit
-        JFCustomWidget.subscribe("submit", function (msg) {
-            var data2 = getFormData();
-            console.log(data2);
-            setCompanyNames();
-            JFCustomWidget.sendData(data2);
-            JFCustomWidget.sendSubmit(data2);
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var data2 = getFormData();
+                console.log(data2);
+                setCompanyNames();
+                JFCustomWidget.sendData(data2);
+                JFCustomWidget.sendSubmit(data2);
+
+                // var data2 = {
+                //     value: "",
+                //     valid: true
+                // }
+                // console.log(data2)
+
+                JFCustomWidget.sendSubmit(data2);
+            });
+
+            JFCustomWidget.subscribe('populate', fillConditionValue);
+
         });
     </script>
 </head>
