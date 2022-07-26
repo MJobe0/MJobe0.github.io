@@ -20,6 +20,7 @@
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
         console.log(JFCustomWidget.getWidgetSetting(["companyField1"]))
+        console.log(JFCustomWidget.getWidgetSetting("companyField1"))
         console.log(JFCustomWidget.getWidgetSetting("Company Field 1"))
         console.log(JFCustomWidget.getWidgetSetting("CompanyField1"))
         console.log(JFCustomWidget.getWidgetSetting(0))
@@ -199,6 +200,12 @@
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
+            
+            console.log(JFCustomWidget.getWidgetSetting(["companyField1"]))
+            console.log(JFCustomWidget.getWidgetSetting("companyField1"))
+            console.log(JFCustomWidget.getWidgetSetting("Company Field 1"))
+            console.log(JFCustomWidget.getWidgetSetting("CompanyField1"))
+            console.log(JFCustomWidget.getWidgetSetting(0))
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var data2 = getFormData();
