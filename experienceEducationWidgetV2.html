@@ -152,7 +152,7 @@
             const currentRowLength = document.getElementsByName("nameOfEmployer[]")?.length
             let arr = []
             for (let i = 0; i < currentRowLength; i++) {
-                let currNameOfEmployer = document.getElementsByName("nameOfEmployer")[i]?.value; //check undefinded
+                let currNameOfEmployer = document.getElementsByName("nameOfEmployer[]")[i]?.value; //check undefinded
                 console.log("nameEm", currNameOfEmployer)
                 if (currNameOfEmployer != null && i < 6) {
                     arr.push(currNameOfEmployer);
