@@ -177,21 +177,21 @@
             JFCustomWidget.setFieldsValueById(fillArr);
         }
 
-        function fillConditionValue(data) {
-            JFCustomWidget.hideWidgetError();
+        // function fillConditionValue(data) {
+        //     JFCustomWidget.hideWidgetError();
 
-            jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
-            console.log(jotFormCompanyField1)
-            //callNSFASCheck(inputValue[0], jotFormDisplayName);
+        //     jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
+        //     console.log(jotFormCompanyField1)
+        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-            var data = {
-                value: "No",
-                valid: valid
-            }
+        //     var data = {
+        //         value: "No",
+        //         valid: valid
+        //     }
 
-            //console.log(data.value)
-            JFCustomWidget.sendData(data);
-        }
+        //     //console.log(data.value)
+        //     JFCustomWidget.sendData(data);
+        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -213,7 +213,7 @@
                 JFCustomWidget.sendSubmit(data2);
             });
 
-            JFCustomWidget.subscribe('populate', fillConditionValue);
+            //JFCustomWidget.subscribe('populate', fillConditionValue);
 
         });
     </script>
