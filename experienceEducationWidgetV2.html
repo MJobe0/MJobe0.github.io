@@ -19,7 +19,6 @@
     </style>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
-        console.log(companyField1)
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
@@ -164,13 +163,13 @@
             return arr;
         }
 
-        function setCompanyNames() {
+        function setCompanyNames(fieldIds) {
             let currNames = getCompanyNames();
-            let questionIds = ["11", "12", "13", "14", "15", "16"];
+            //let fieldIds = ["11", "12", "13", "14", "15", "16"];
             let fillArr = []
-            for (let i = 0; i < questionIds.length; i++) {
+            for (let i = 0; i < fieldIds.length; i++) {
                 fillArr.push({
-                    id: questionIds[i],
+                    id: fieldIds[i],
                     value: currNames[i]
                 })
             }
@@ -205,12 +204,14 @@
             var companyField5 = JFCustomWidget.getWidgetSetting("companyField5");
             var companyField6 = JFCustomWidget.getWidgetSetting("companyField6");
 
+
             console.log(companyField2)
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
+                var fieldIds = [companyField1, companyField2, companyField3, companyField4, companyField5, companyField6];
                 var data2 = getFormData();
                 console.log(data2);
-                setCompanyNames();
+                setCompanyNames(fieldIds);
                 JFCustomWidget.sendData(data2);
                 JFCustomWidget.sendSubmit(data2);
 
