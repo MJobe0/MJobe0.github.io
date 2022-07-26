@@ -19,9 +19,7 @@
     </style>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
-        console.log(JFCustomWidget.getWidgetSetting("companyField1"))
-        console.log(JFCustomWidget.getWidgetSetting("Company Field 1"))
-        console.log(JFCustomWidget.getWidgetSetting("CompanyField1"))
+        console.log(companyField1)
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
@@ -199,19 +197,17 @@
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
 
+            var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            var companyField1 = JFCustomWidget.getWidgetSetting("companyField1");
+            var companyField2 = JFCustomWidget.getWidgetSetting("companyField2");
+            var companyField3 = JFCustomWidget.getWidgetSetting("companyField3");
+            var companyField4 = JFCustomWidget.getWidgetSetting("companyField4");
+            var companyField5 = JFCustomWidget.getWidgetSetting("companyField5");
+            var companyField6 = JFCustomWidget.getWidgetSetting("companyField6");
+
+            console.log(companyField2)
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
-
-                var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-                var companyField1 = JFCustomWidget.getWidgetSetting("companyField1");
-                var companyField2 = JFCustomWidget.getWidgetSetting("companyField2");
-                var companyField3 = JFCustomWidget.getWidgetSetting("companyField3");
-                var companyField4 = JFCustomWidget.getWidgetSetting("companyField4");
-                var companyField5 = JFCustomWidget.getWidgetSetting("companyField5");
-                var companyField6 = JFCustomWidget.getWidgetSetting("companyField6");
-
-                console.log(companyField2)
-                
                 var data2 = getFormData();
                 console.log(data2);
                 setCompanyNames();
@@ -228,7 +224,6 @@
             });
 
             //JFCustomWidget.subscribe('populate', fillConditionValue);
-
         });
     </script>
 </head>
