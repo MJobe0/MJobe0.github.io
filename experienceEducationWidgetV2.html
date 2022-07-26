@@ -126,9 +126,9 @@
             // console.log(test1)
             // console.log(test2)
 
-            const currentRowLength = document.getElementsByName("employedFrom[]")?.length
+            const currRowLength = document.getElementsByName("employedFrom[]")?.length
 
-            for (let i = 0; i < currentRowLength; i++) {
+            for (let i = 0; i < currRowLength; i++) {
                 let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
                 let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
                 console.log("EmpTo", currEmployedTo)
@@ -149,15 +149,17 @@
         }
 
         function getCompanyNames() {
-            const currentRowLength = document.getElementsByName("nameOfEmployer[]")?.length
+            const currRowLength = document.getElementsByName("nameOfEmployer[]")?.length
             let arr = []
-            for (let i = 0; i < currentRowLength; i++) {
+            for (let i = 0; i < currRowLength; i++) {
                 let currNameOfEmployer = document.getElementsByName("nameOfEmployer[]")[i]?.value; //check undefinded
+                let currActType = document.getElementsByName("typeOfActivity[]")[i]?.value; //check undefinded
                 console.log("nameEm", currNameOfEmployer)
-                if (currNameOfEmployer != null && i < 6) {
+                if (currNameOfEmployer != null && currActType === "Employed" && arr.length < 6) {
                     arr.push(currNameOfEmployer);
                 }
             }
+            console.log("arr length = ", arr.length)
             return arr;
         }
 
