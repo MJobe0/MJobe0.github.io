@@ -22,7 +22,7 @@
         console.log(JFCustomWidget)
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-            const maxYearForDates = new Date().getFullYear() - 5;
+            const maxYearForDates = new Date().getFullYear() - 3;
             console.log(maxYearForDates + "-01" + "-01")
             //input.setAttribute("min", maxYearForDates);
             return maxYearForDates + "-01" + "-01"
@@ -175,7 +175,6 @@
             console.log(data2);
             JFCustomWidget.sendData(data2);
             JFCustomWidget.sendSubmit(data2);
-
         });
     </script>
 </head>
@@ -234,7 +233,6 @@
     Todo
     - Disable fields based on selection
     - Make fields mandotory if empty
-    - Change date format to MM/YYYY
     - Remove entry next to every row
     - Add jotform scripts
     - Check ref are in the last 3 year, min of 2
