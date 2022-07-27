@@ -13,6 +13,8 @@
     </script>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
+        var widgetParm = JFCustomWidget.getWidgetSettings();
+        console.log(widgetParm)
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
