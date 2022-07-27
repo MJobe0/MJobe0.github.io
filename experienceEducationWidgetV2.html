@@ -13,8 +13,8 @@
     </script>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
-        var widgetParm = JFCustomWidget.getWidgetSettings();
-        console.log(widgetParm)
+        JFCustomWidget.requestFrameResize({width: 1000, height:1000});
+        console.log(JFCustomWidget.getWidgetSettings())
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
@@ -32,12 +32,12 @@
             var id = "tbl" + x;
             var row = table.insertRow(x);
             row.id = id;
-            var rowNumberCell = row.insertCell(0);//
-            var typeOfActivityCell = row.insertCell(1);//
-            var companyCell = row.insertCell(2);//
-            var institutionCell = row.insertCell(3);//
-            var startDateCell = row.insertCell(4);//
-            var endDateCell = row.insertCell(5);//
+            var rowNumberCell = row.insertCell(0);
+            var typeOfActivityCell = row.insertCell(1);
+            var companyCell = row.insertCell(2);
+            var institutionCell = row.insertCell(3);
+            var startDateCell = row.insertCell(4);
+            var endDateCell = row.insertCell(5);
             var positionHeldCell = row.insertCell(6);
             var resultsCell = row.insertCell(7);
             var commentsCell = row.insertCell(8);
