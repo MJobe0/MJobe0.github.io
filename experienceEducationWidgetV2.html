@@ -11,25 +11,8 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
-    <style>
-        .emptbl {
-            max-height: 150px;
-            overflow: auto;
-        }
-    </style>
     <script type="text/javascript">
         //var $j = jQuery.noConflict();
-
-        $(".row_drag").sortable({
-            delay: 100,
-            stop: function () {
-                var selectedRow = new Array();
-                $('.row_drag>tr').each(function () {
-                    selectedRow.push($(this).attr("id"));
-                });
-                alert(selectedRow);
-            }
-        });
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             const maxYearForDates = new Date().getFullYear() - 3;
@@ -182,7 +165,7 @@
             for (let i = 0; i < fieldIds.length; i++) {
                 fillArr.push({
                     id: fieldIds[i],
-                    value: currNames[i] ? currNames[i] === undefined : ""
+                    value: currNames[i] ?? ""
                 })
             }
             JFCustomWidget.setFieldsValueById(fillArr);
