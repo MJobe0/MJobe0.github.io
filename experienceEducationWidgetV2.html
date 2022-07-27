@@ -280,13 +280,12 @@
 
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
-            console.log(widgetParm)
+            console.log(widgetParm["companyField1"])
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
-                var fieldIds = [companyField1, companyField2, companyField3, companyField4, companyField5, companyField6];
                 var data2 = getFormData();
                 console.log(data2);
-                setCompanyNames(fieldIds);
+                setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                 JFCustomWidget.sendData(data2);
                 JFCustomWidget.sendSubmit(data2);
 
