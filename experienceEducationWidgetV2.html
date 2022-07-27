@@ -278,8 +278,9 @@
             var companyField5 = JFCustomWidget.getWidgetSetting("companyField5");
             var companyField6 = JFCustomWidget.getWidgetSetting("companyField6");
 
+            var widgetParm = JFCustomWidget.getWidgetSettings();
 
-            console.log("comp 5 ", companyField5)
+            console.log(widgetParm)
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var fieldIds = [companyField1, companyField2, companyField3, companyField4, companyField5, companyField6];
