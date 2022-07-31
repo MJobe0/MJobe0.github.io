@@ -141,6 +141,10 @@
             for (let i = 0; i < currRowLength; i++) {
                 let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
                 let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
+                let dateDiffRes = {
+                    id: "8",
+                    value: ""
+                }
                 console.log("EmpTo", currEmployedTo)
                 console.log("EmpFrom", currEmployedFrom)
                 if (currEmployedTo != null && currEmployedFrom != null) {
@@ -149,9 +153,13 @@
                         console.log("1 month data diff")
                         console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
                         document.getElementById("textArea").innerHTML = "The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in the field below"
+                        dateDiffRes.value = "Yes";
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
                         return { value: "Yes", valid: false };
                     }
                     else {
+                        dateDiffRes.value = "No";
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
                         return { value: "No", valid: true };
                     }
                     //add coomments to array
