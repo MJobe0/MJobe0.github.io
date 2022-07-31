@@ -157,7 +157,7 @@
                         document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
-                        console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
+                        // console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
                         document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
