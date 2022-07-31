@@ -146,6 +146,7 @@
                 if (currEmployedTo != null && currEmployedFrom != null) {
                     console.log("all good")
                     if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
+                        console.log("1 month data diff")
                         console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
                         document.getElementById("textArea").innerHTML = "The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in the field below"
                         return { value: "Yes", valid: false };
@@ -248,7 +249,6 @@
                     document.getElementById(resultsId).disabled = false;
                     document.getElementById(positionHeldId).disabled = false;
             }
-
         }
 
         // function fillConditionValue(data) {
@@ -360,9 +360,6 @@
 
 <!--
     Todo
-    - Disable fields based on selection
-    - Sort table on start and end date
     - Make fields mandotory if empty
     - Remove entry next to every row
-    - Check ref are in the last 3 year, min of 2
 -->
