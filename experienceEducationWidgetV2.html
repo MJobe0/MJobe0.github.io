@@ -139,6 +139,10 @@
             const currRowLength = document.getElementsByName("employedFrom[]")?.length
 
             for (let i = 0; i < currRowLength; i++) {
+                document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
+                document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
+                document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
+                document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
                 let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
                 let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
                 let dateDiffRes = {
@@ -150,14 +154,19 @@
                 if (currEmployedTo != null && currEmployedFrom != null) {
                     console.log("all good")
                     if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
+                        document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
+                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
                         console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
-                        document.getElementById("textArea").innerHTML = "The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in the field below"
+                        document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         return { value: "Yes", valid: false };
                     }
                     else {
+                        document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
+                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                        document.getElementById("textArea").innerHTML = ""
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         return { value: "No", valid: true };
@@ -357,7 +366,7 @@
             <tr>
                 <td><input type="button" value="Add Row" onclick="addRow()" /></td>
                 <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td>
-                <!-- <td><input type="button" value="Submit" onclick="getFormData()" /></td> -->
+                <td><input type="button" value="Check Dates" onclick="getFormData()" /></td>
             </tr>
         </table>
     </form>
