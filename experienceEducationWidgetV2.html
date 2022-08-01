@@ -305,10 +305,10 @@
             console.log("ready message arrived from JotForm", msg);
 
             var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
+            var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
-            console.log(widgetParm["companyField1"])
+            console.log(JFCustomWidget)
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var data2 = getFormData();
