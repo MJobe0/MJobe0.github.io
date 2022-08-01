@@ -308,6 +308,13 @@
             var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
+            JFCustomWidget.getFieldsValueById(storageField, function (res) {
+                console.log("res by Name=", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+
             console.log(JFCustomWidget)
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
