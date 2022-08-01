@@ -166,6 +166,7 @@
                         document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        JFCustomWidget.sendData({value: "Yes"});
                         return { value: "Yes", valid: false };
                     }
                     else {
@@ -174,6 +175,7 @@
                         document.getElementById("textArea").innerHTML = ""
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        JFCustomWidget.sendData({value: "No"});
                         return { value: "No", valid: true };
                     }
                     //add coomments to array
@@ -303,7 +305,7 @@
             console.log("ready message arrived from JotForm", msg);
 
             var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-
+            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
             console.log(widgetParm["companyField1"])
@@ -312,8 +314,7 @@
                 var data2 = getFormData();
                 console.log(data2);
                 setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                JFCustomWidget.sendData(data2);
-                JFCustomWidget.sendSubmit(data2);
+                // JFCustomWidget.sendData(data2);
 
                 // var data2 = {
                 //     value: "",
@@ -385,8 +386,7 @@
 
 <!--
     Todo
-    - Make fields mandotory if empty
     - Remove entry next to every row
     - Send widget data to field and retrive widget data, if full history is true
-    - Set date font color if mismatch 
+    - Resize widget on Add Row click
 -->
