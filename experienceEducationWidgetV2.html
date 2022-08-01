@@ -4,6 +4,9 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+
+<body>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -166,7 +169,7 @@
                         document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        JFCustomWidget.sendData({value: "Yes"});
+                        JFCustomWidget.sendData({ value: "Yes" });
                         return { value: "Yes", valid: false };
                     }
                     else {
@@ -175,7 +178,7 @@
                         document.getElementById("textArea").innerHTML = ""
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        JFCustomWidget.sendData({value: "No"});
+                        JFCustomWidget.sendData({ value: "No" });
                         return { value: "No", valid: true };
                     }
                     //add coomments to array
@@ -308,7 +311,7 @@
             var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
-            JFCustomWidget.getFieldsValueById(storageField, function (res) {
+            JFCustomWidget.getFieldsValueById([storageField], function (res) {
                 console.log("res by Name=", res)
                 res.data.forEach(resItem => {
                     console.log(resItem.value);
@@ -335,15 +338,12 @@
             //JFCustomWidget.subscribe('populate', fillConditionValue);
         });
     </script>
-</head>
-
-<body>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
                 <tr>
                     <h2>Please select the type of activity</h2>
-                    <th>  </th>
+                    <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
                     <th>Institution</th>
