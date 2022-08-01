@@ -19,6 +19,9 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
+        var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+        console.log(fullWorkHistory)
+
         $(document).ready(function () {
             // $(".rowNumberColumn").hover(function () {
             //     $(this).css('cursor', 'pointer');
@@ -286,80 +289,62 @@
             }
         }
 
-        function fillConditionValue(data) {
-            JFCustomWidget.hideWidgetError();
-            var storageField2 = JFCustomWidget.getWidgetSetting("storageField");
+        // function fillConditionValue(data) {
+        //     JFCustomWidget.hideWidgetError();
 
+        //     jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
+        //     console.log(jotFormCompanyField1)
+        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-            // jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
-            // console.log(jotFormCompanyField1)
-            // //callNSFASCheck(inputValue[0], jotFormDisplayName);
+        //     var data = {
+        //         value: "No",
+        //         valid: valid
+        //     }
 
-            // var data = {
-            //     value: "No",
-            //     valid: valid
-            // }
-
-            // //console.log(data.value)
-            // JFCustomWidget.sendData(data);
-
-            JFCustomWidget.getFieldsValueById([storageField2], function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                });
-            });
-
-            JFCustomWidget.getFieldsValueByName(["Storage"], function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                });
-            });
-        }
+        //     //console.log(data.value)
+        //     JFCustomWidget.sendData(data);
+        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
-            addRow();
+            // addRow();
             console.log("ready message arrived from JotForm", msg);
 
-            var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            var storageField = JFCustomWidget.getWidgetSetting("storageField");
+            // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
-            JFCustomWidget.getFieldsValueById([storageField], function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                });
-            });
-
-            JFCustomWidget.getFieldsValueByName(["Storage"], function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                });
-            });
 
             console.log(JFCustomWidget)
             //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                var data2 = getFormData();
-                console.log(data2);
-                setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                // JFCustomWidget.sendData(data2);
-
-                // var data2 = {
-                //     value: "",
-                //     valid: true
-                // }
-                // console.log(data2)
-
-                JFCustomWidget.sendSubmit(data2);
-            });
-
-            JFCustomWidget.subscribe('populate', fillConditionValue);
         });
+
+        var storageField = JFCustomWidget.getWidgetSetting("storageField");
+
+        JFCustomWidget.getFieldsValueById([storageField], function (res) {
+            console.log("res by Name=", res)
+            res.data.forEach(resItem => {
+                console.log(resItem.value);
+            });
+        });
+
+        JFCustomWidget.subscribe("submit", function (msg) {
+            var widgetParm = JFCustomWidget.getWidgetSettings();
+            var data2 = getFormData();
+            console.log(data2);
+            setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+            // JFCustomWidget.sendData(data2);
+
+            // var data2 = {
+            //     value: "",
+            //     valid: true
+            // }
+            // console.log(data2)
+
+            JFCustomWidget.sendSubmit(data2);
+        });
+
+            //JFCustomWidget.subscribe('populate', fillConditionValue);
     </script>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
