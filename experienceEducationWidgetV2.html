@@ -286,21 +286,37 @@
             }
         }
 
-        // function fillConditionValue(data) {
-        //     JFCustomWidget.hideWidgetError();
+        function fillConditionValue(data) {
+            JFCustomWidget.hideWidgetError();
+            var storageField2 = JFCustomWidget.getWidgetSetting("storageField");
 
-        //     jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
-        //     console.log(jotFormCompanyField1)
-        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-        //     var data = {
-        //         value: "No",
-        //         valid: valid
-        //     }
+            // jotFormCompanyField1 = JFCustomWidget.getWidgetSetting("companyField1");
+            // console.log(jotFormCompanyField1)
+            // //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-        //     //console.log(data.value)
-        //     JFCustomWidget.sendData(data);
-        // }
+            // var data = {
+            //     value: "No",
+            //     valid: valid
+            // }
+
+            // //console.log(data.value)
+            // JFCustomWidget.sendData(data);
+
+            JFCustomWidget.getFieldsValueById([storageField2], function (res) {
+                console.log("res by Name=", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+
+            JFCustomWidget.getFieldsValueByName(["Storage"], function (res) {
+                console.log("res by Name=", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+        }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -312,6 +328,13 @@
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
             JFCustomWidget.getFieldsValueById([storageField], function (res) {
+                console.log("res by Name=", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+
+            JFCustomWidget.getFieldsValueByName(["Storage"], function (res) {
                 console.log("res by Name=", res)
                 res.data.forEach(resItem => {
                     console.log(resItem.value);
@@ -335,7 +358,7 @@
                 JFCustomWidget.sendSubmit(data2);
             });
 
-            //JFCustomWidget.subscribe('populate', fillConditionValue);
+            JFCustomWidget.subscribe('populate', fillConditionValue);
         });
     </script>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
