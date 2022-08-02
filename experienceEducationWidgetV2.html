@@ -20,7 +20,7 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
-        var widgetHeight = 150;
+        var widgetHeight = 200;
 
         var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
         console.log(fullWorkHistory)
@@ -126,6 +126,7 @@
                 var row = table.deleteRow(id);
                 resizeFrame(false);
                 getFormData();
+                return
                 //rowCount--;
             }
         }
