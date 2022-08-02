@@ -206,12 +206,12 @@
                         console.log("1 month data diff")
                         // console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
                         document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
-                        if (document.getElementById("textArea").innerHTML === "") {
-                            resizeFrame(false);
-                        }
-                        else {
-                            resizeFrame(true);
-                        }
+                        // if (document.getElementById("textArea").innerHTML === "") {
+                        //     resizeFrame(false);
+                        // }
+                        // else {
+                        //     resizeFrame(true);
+                        // }
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         JFCustomWidget.sendData({ value: "Yes" });
@@ -221,12 +221,12 @@
                         document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
                         document.getElementById("textArea").innerHTML = ""
-                        if (document.getElementById("textArea").innerHTML === "") {
-                            resizeFrame(false);
-                        }
-                        else {
-                            resizeFrame(true);
-                        }
+                        // if (document.getElementById("textArea").innerHTML === "") {
+                        //     resizeFrame(false);
+                        // }
+                        // else {
+                        //     resizeFrame(true);
+                        // }
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         JFCustomWidget.sendData({ value: "No" });
@@ -424,6 +424,7 @@
 
             //JFCustomWidget.subscribe('populate', fillConditionValue);
     </script>
+    <p id="textArea"></p>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
@@ -472,7 +473,6 @@
             </tr>
         </table>
     </form>
-    <p id="textArea"></p>
 </body>
 
 </html>
