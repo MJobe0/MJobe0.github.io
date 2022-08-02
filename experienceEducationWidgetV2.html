@@ -67,7 +67,7 @@
             var startDateCell = row.insertCell(4);
             var endDateCell = row.insertCell(5);
             var positionHeldCell = row.insertCell(6);
-            gradeBandCell = row.insertCell(7)
+            var gradeBandCell = row.insertCell(7)
             var resultsCell = row.insertCell(8);
             var commentsCell = row.insertCell(9);
             var deleteRowCell = row.insertCell(10);
@@ -118,8 +118,8 @@
             var table = document.getElementById('emptbl');
             var rowCount = table.rows.length;
             console.log(id)
-            if (id === "0") {
-                console.log("can't remove the first row")
+            if (rowCount === "1") {
+                console.log("There should be atleast one row");
                 return
             }
             else if (rowCount > "2") {
@@ -127,9 +127,6 @@
                 resizeFrame(false);
                 getFormData();
                 //rowCount--;
-            }
-            else {
-                console.log("There should be atleast one row");
             }
         }
 
