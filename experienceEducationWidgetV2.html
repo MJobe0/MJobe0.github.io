@@ -215,6 +215,8 @@
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         JFCustomWidget.sendData({ value: "Yes" });
+                        console.log("here")
+                        return
                         //return { value: "Yes", valid: false };
                     }
                     else {
@@ -230,6 +232,7 @@
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         JFCustomWidget.sendData({ value: "No" });
+                        return
                         //return { value: "No", valid: true };
                     }
                     //add coomments to array
