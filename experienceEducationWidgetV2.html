@@ -100,8 +100,18 @@
             //     var copycel = document.getElementById("col" + i).innerHTML;
             //     cell.innerHTML = copycel;
             // }
-            JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 50 })
-            widgetHeight = widgetHeight + 50;
+            resizeFrame(true);
+        }
+
+        function resizeFrame(increaseFrame) {
+            if (increaseFrame) {
+                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 50 })
+                widgetHeight = widgetHeight + 50
+            }
+            else {
+                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 50 })
+                widgetHeight = widgetHeight + 50
+            }
         }
 
         function deleteRow(id) {
@@ -114,8 +124,7 @@
             }
             else if (rowCount > "2") {
                 var row = table.deleteRow(id);
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 50 })
-                widgetHeight = widgetHeight - 50;
+                resizeFrame(false);
                 getFormData();
                 //rowCount--;
             }
@@ -178,8 +187,6 @@
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
                         // console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
-                        JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 50 })
-                        widgetHeight = widgetHeight + 50;
                         document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below"
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
@@ -189,8 +196,6 @@
                     else {
                         document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                        JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 50 })
-                        widgetHeight = widgetHeight - 50;
                         document.getElementById("textArea").innerHTML = ""
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
@@ -199,6 +204,12 @@
                     }
                     //add coomments to array
                 }
+            }
+            if (document.getElementById("textArea").innerHTML === "") {
+                resizeFrame(false);
+            }
+            else {
+                resizeFrame(true);
             }
         }
 
