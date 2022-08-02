@@ -114,6 +114,26 @@
             }
         }
 
+        // function deleteRow(id) {
+        //     var table = document.getElementById('emptbl');
+        //     var rowCount = table.rows.length;
+        //     console.log(id)
+        //     if (id === "0") {
+        //         console.log("can't remove the first row")
+        //         return
+        //     }
+        //     else if (rowCount > "2") {
+        //         var row = table.deleteRow(id);
+        //         resizeFrame(false);
+        //         getFormData();
+        //         //rowCount--;
+        //     }
+        //     else {
+        //         console.log("There should be atleast one row");
+        //     }
+        // }
+
+
         function deleteRow(id) {
             var table = document.getElementById('emptbl');
             var rowCount = table.rows.length;
@@ -214,12 +234,6 @@
                     }
                     //add coomments to array
                 }
-            }
-            if (document.getElementById("textArea").innerHTML === "") {
-                resizeFrame(false);
-            }
-            else {
-                resizeFrame(true);
             }
         }
 
