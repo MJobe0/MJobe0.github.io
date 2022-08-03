@@ -185,6 +185,8 @@
 
             const currRowLength = document.getElementsByName("employedFrom[]")?.length
 
+            var numOfIncorrectDates = 0
+
             for (let i = 0; i < currRowLength; i++) {
                 let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
                 let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
@@ -195,17 +197,16 @@
                 console.log("EmpTo", currEmployedTo)
                 console.log("EmpFrom", currEmployedFrom)
                 if (currEmployedTo != null && currEmployedFrom != null) {
-                    // document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                    // document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
-                    // document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
-                    // document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                    document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
+                    document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
+                    document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
+                    document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
                     console.log("all good")
                     if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
                         document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
                         // console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
-                        document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
                         console.log("Here")
                         // if (document.getElementById("textArea").innerHTML === "") {
                         //     resizeFrame(false);
@@ -215,14 +216,13 @@
                         // }
                         dateDiffRes.value = "Yes";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        JFCustomWidget.sendData({ value: "Yes" });
                         console.log("here")
+                        numOfIncorrectDates = numOfIncorrectDates + 1
                         //return { value: "Yes", valid: false };
                     }
                     else {
                         document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
                         document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                        document.getElementById("textArea").innerHTML = "";
                         // if (document.getElementById("textArea").innerHTML === "") {
                         //     resizeFrame(false);
                         // }
@@ -231,11 +231,19 @@
                         // }
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        JFCustomWidget.sendData({ value: "No" });
+                        numOfIncorrectDates = numOfIncorrectDates - 1
                         //return { value: "No", valid: true };
                     }
                     //add coomments to array
                 }
+            }
+            if (numOfIncorrectDates >= 1) {
+                document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
+                JFCustomWidget.sendData({ value: "Yes" });
+            }
+            else {
+                document.getElementById("textArea").innerHTML = "";
+                JFCustomWidget.sendData({ value: "No" });
             }
         }
 
