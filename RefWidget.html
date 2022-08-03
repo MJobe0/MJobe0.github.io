@@ -17,36 +17,19 @@
 
 <body>
     <span id="labelText"></span>
-    <h1>Loading.....</h1>
+    <!-- <h1>Loading.....</h1> -->
     <script type="text/javascript">
-        // function checkRefresh() {
-        //     console.log(window.parent.document.getElementById('input_145_0').checked)
-        //     if (window.parent.document.getElementById('input_145_0').checked) {
-        //         return false;
-        //     }
-        //     else {
-        //         return true;
-        //     }
-        // };
-
-        // function isRefresh() {
-        //     var isRefresh = checkRefresh();
-        //     if (isRefresh) {
-        //         return window.top.location.href = "https://nwu.jotform.com/220324795702959";
-        //     }
-        // }
-
-        // //setTimeout(isRefresh(), 60000);
-
 
         var valid = true;
         var value;
-        var jotFormStudentName;
-        var jotFormDisplayName;
+        var apikey;
+        var submissionId;
+        var controlFieldToUpdate;
+        var validateRefNumber;
         var callFinished = false;
 
         //determining valid is important
-        function callNSFASCheck(studentId, displayName) {
+        function callControlForm(apikey, subId) {
             if (callFinished === false) {
                 console.log("https://mwr.nwu.ac.za/msmigrate/migrate/othercheck?nwunumber=" + studentId + "&displayname=" + displayName)
                 jQuery.ajax({
@@ -54,7 +37,7 @@
                     url: "https://mwr.nwu.ac.za/msmigrate/migrate/othercheck?nwunumber=" + studentId + "&displayname=" + displayName,
                     method: "GET",
                     async: false,
-                    timeout:60000,
+                    timeout: 60000,
                     success: function (response) {
                         console.log(response);
                         //add result.info to array [1] and return it
@@ -81,51 +64,21 @@
             }
         }
 
-        function callResidentPlacement(studentId, displayName) {
-            console.log("https://mwr.nwu.ac.za/msmigrate/migrate/placecheck?nwunumber=" + studentId + "&displayname=" + displayName)
-            jQuery.ajax({
-                //url: "https://mwr.nwu.ac.za/msmigrate/migrate/placecheck?nwunumber=10600485&displayname=WERQ",
-                url: "https://mwr.nwu.ac.za/msmigrate/migrate/placecheck?nwunumber=" + studentId + "&displayname=" + displayName,
-                method: "GET",
-                async: false,
-                timeout: 60000,
-                success: function (response) {
-                    console.log(response);
-                    if (response.result === "NOTPLACED" && response.errorcode === "Success") {
-                        console.log("Pass");
-                        valid = true;
-                        value = "Valid student and all checks passed";
-                        callFinished = true;
-                        return
-                    }
-                    else {
-                        console.log("Fail");
-                        valid = true;
-                        value = "Valid student but failed Resident Placement check";
-                        callFinished = true;
-                        return
-                    }
-                },
-                error: function (response) {
-                    console.log(response);
-                    valid = true;
-                    value = "Resident Placement Check failed";
-                    callFinished = true;
-                    return
-                }
-            })
-        }
-
         function fillConditionValue(data) {
-            var inputValue = data.value || '';
-            //input.val(inputValue.split(","));
-            inputValue = inputValue.split(",")
+            console.log(data)
+            // var inputValue = data.value || '';
+            // //input.val(inputValue.split(","));
+            // inputValue = inputValue.split(",")
             JFCustomWidget.hideWidgetError();
             // console.log(inputValue[0])
             // console.log(inputValue[1])
-            jotFormDisplayName = JFCustomWidget.getWidgetSetting("displayName");
+            apikey = JFCustomWidget.getWidgetSetting("apiKey");
+            submissionId = JFCustomWidget.getWidgetSetting("subId");
+            controlFieldToUpdate = JFCustomWidget.getWidgetSetting("controlFieldToUpdate");
+            validateRefNumber = JFCustomWidget.getWidgetSetting("validateRefNumber");
 
-            callNSFASCheck(inputValue[0], jotFormDisplayName);
+
+            callControlForm(apikey, submissionId);
 
             var data = {
                 value: value,
