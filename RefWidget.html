@@ -53,38 +53,40 @@
         }
 
         //determining valid is important
-        function callControlForm(apikey, subId) {
+        function callControlForm(apikey, subId, fieldId) {
             if (callFinished === false) {
-                console.log("https://mwr.nwu.ac.za/msmigrate/migrate/othercheck?nwunumber=" + studentId + "&displayname=" + displayName)
-                // jQuery.ajax({
-                //     //url: "https://mwr.nwu.ac.za/msmigrate/migrate/othercheck?nwunumber=10600485&displayname=WERQ",
-                //     url: "https://mwr.nwu.ac.za/msmigrate/migrate/othercheck?nwunumber=" + studentId + "&displayname=" + displayName,
-                //     method: "GET",
-                //     async: false,
-                //     timeout: 60000,
-                //     success: function (response) {
-                //         console.log(response);
-                //         //add result.info to array [1] and return it
-                //         if (response.result === "YES" && response.errorcode === "Success") {
-                //             console.log("Pass");
-                //             callResidentPlacement(studentId, displayName)
-                //         }
-                //         else {
-                //             console.log("Fail");
-                //             valid = true;
-                //             value = "Not a valid student";
-                //             callFinished = true;
-                //             return
-                //         }
-                //     },
-                //     error: function (response) {
-                //         console.log(response);
-                //         valid = true;
-                //         value = "NSFAS Check failed";
-                //         callFinished = true;
-                //         return
-                //     }
-                // })
+                jQuery.ajax({
+                    url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey,
+                    method: "POST",
+                    body: { fieldId: "Response Received" },
+                    async: false,
+                    timeout: 60000,
+                    success: function (response) {
+                        console.log(response);
+                        //add result.info to array [1] and return it
+                        if (response.result === "YES" && response.errorcode === "Success") {
+                            console.log("Pass");
+                            valid = true;
+                            value = "Call Failed";
+                            callFinished = true;
+                            return
+                        }
+                        else {
+                            console.log("Fail");
+                            valid = true;
+                            value = "Call Failed";
+                            callFinished = true;
+                            return
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        valid = true;
+                        value = "Error";
+                        callFinished = true;
+                        return
+                    }
+                })
             }
         }
 
@@ -105,11 +107,11 @@
             var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
 
             JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-            console.log("res by Name=", res)
-            res.data.forEach(resItem => {
-                console.log(resItem.value);
-            });
-        }); // set refNumber and submissionId
+                console.log("res by Name=", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            }); // set refNumber and submissionId
 
             console.log(apiKey);
             console.log(submissionId);
