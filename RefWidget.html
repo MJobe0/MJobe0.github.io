@@ -28,6 +28,30 @@
         var validateRefNumber;
         var callFinished = false;
 
+        function checkFieldToUpdate(refNumber) {
+            switch (refNumber) {
+                case "1":
+                    return fieldArr[0]
+                    break;
+                case "2":
+                    return fieldArr[1]
+                    break;
+                case "3":
+                    return fieldArr[2]
+                    break;
+                case "4":
+                    return fieldArr[3]
+                    break;
+                case "5":
+                    return fieldArr[4]
+                    break;
+                case "6":
+                    return fieldArr[5]
+                    break;
+                default:
+            }
+        }
+
         //determining valid is important
         function callControlForm(apikey, subId) {
             if (callFinished === false) {
@@ -72,17 +96,28 @@
             JFCustomWidget.hideWidgetError();
             // console.log(inputValue[0])
             // console.log(inputValue[1])
-            apikey = JFCustomWidget.getWidgetSetting("apiKey");
-            submissionId = JFCustomWidget.getWidgetSetting("subId");
-            controlFieldToUpdate = JFCustomWidget.getWidgetSetting("controlFieldToUpdate");
-            validateRefNumber = JFCustomWidget.getWidgetSetting("validateRefNumber");
+            apiKey = JFCustomWidget.getWidgetSetting("apiKey");
+            fieldToUpdate = JFCustomWidget.getWidgetSetting("fieldToUpdate");
 
-            console.log(apikey);
+            var submissionIdParam = JFCustomWidget.getWidgetSetting("subId");
+            var refNumberParam = JFCustomWidget.getWidgetSetting("refNumber");
+
+            var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
+
+            JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
+            console.log("res by Name=", res)
+            res.data.forEach(resItem => {
+                console.log(resItem.value);
+            });
+        }); // set refNumber and submissionId
+
+            console.log(apiKey);
             console.log(submissionId);
-            console.log(controlFieldToUpdate);
-            console.log(validateRefNumber);
+            console.log(fieldToUpdate);
+            console.log(refNumber);
+            console.log(fieldArr);
 
-            callControlForm(apikey, submissionId);
+            // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber));
 
             var data = {
                 value: value,
