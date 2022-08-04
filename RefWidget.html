@@ -54,6 +54,7 @@
 
         //determining valid is important
         function callControlForm(apikey, subId, fieldId) {
+            console.log(fieldId)
             if (callFinished === false) {
                 jQuery.ajax({
                     url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey,
