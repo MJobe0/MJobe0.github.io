@@ -28,7 +28,7 @@
         var validateRefNumber;
         var callFinished = false;
 
-        function checkFieldToUpdate(refNumber) {
+        function checkFieldToUpdate(refNumber, fieldArr) {
             switch (refNumber) {
                 case "1":
                     return fieldArr[0]
@@ -92,12 +92,7 @@
 
         function fillConditionValue() {
             console.log(data)
-            // var inputValue = data.value || '';
-            // //input.val(inputValue.split(","));
-            // inputValue = inputValue.split(",")
             JFCustomWidget.hideWidgetError();
-            // console.log(inputValue[0])
-            // console.log(inputValue[1])
             apiKey = JFCustomWidget.getWidgetSetting("apiKey");
             fieldToUpdate = JFCustomWidget.getWidgetSetting("fieldToUpdate");
 
@@ -113,6 +108,7 @@
                 // res.data.forEach(resItem => {
                 //     console.log(resItem.value);
                 // });
+                callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
             }); // set refNumber and submissionId
 
             console.log(apiKey);
@@ -120,7 +116,7 @@
             console.log(fieldToUpdate);
             console.log(fieldArr);
 
-            // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber));
+            // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
 
             var data = {
                 value: value,
