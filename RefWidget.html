@@ -90,7 +90,7 @@
             }
         }
 
-        function fillConditionValue(data) {
+        function fillConditionValue() {
             console.log(data)
             // var inputValue = data.value || '';
             // //input.val(inputValue.split(","));
@@ -135,6 +135,7 @@
             console.log("ready message arrived from JotForm", msg);
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
+                fillConditionValue();
                 var data2 = {
                     value: "",
                     valid: true
@@ -146,7 +147,7 @@
                 // console.log(jotFormDisplayName)
             });
 
-            JFCustomWidget.subscribe('populate', fillConditionValue);
+            // JFCustomWidget.subscribe('populate', fillConditionValue);
 
         });
     </script>
