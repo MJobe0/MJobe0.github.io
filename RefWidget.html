@@ -57,9 +57,9 @@
             console.log(fieldId)
             if (callFinished === false) {
                 jQuery.ajax({
-                    url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey,
+                    url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
                     method: "POST",
-                    body: { fieldId: "Response Received" },
+                    // body: { fieldId: "Response Received" },
                     async: false,
                     timeout: 60000,
                     success: function (response) {
