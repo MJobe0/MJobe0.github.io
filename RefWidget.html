@@ -54,49 +54,40 @@
 
         //determining valid is important
         function callControlForm(apikey, subId, fieldId) {
-            console.log(fieldId)
+            console.log(typeof fieldId)
             if (callFinished === false) {
-                fetch("https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received", {
-                    method: 'POST',
-                }).then(function (response) {
-                    console.log(response.json())
-                    valid = true;
-                    value = "Call passed";
-                    callFinished = true;
-                    return
-                }).catch(error => console.error('Error:', error));
-                //     jQuery.ajax({
-                //         url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
-                //         method: "POST",
-                //         // body: { fieldId: "Response Received" },
-                //         async: false,
-                //         timeout: 60000,
-                //         success: function (response) {
-                //             console.log(response);
-                //             //add result.info to array [1] and return it
-                //             if (response.result === "YES" && response.errorcode === "Success") {
-                //                 console.log("Pass");
-                //                 valid = true;
-                //                 value = "Call passed";
-                //                 callFinished = true;
-                //                 return
-                //             }
-                //             else {
-                //                 console.log("Fail");
-                //                 valid = true;
-                //                 value = "Call failed";
-                //                 callFinished = true;
-                //                 return
-                //             }
-                //         },
-                //         error: function (response) {
-                //             console.log(response);
-                //             valid = true;
-                //             value = "Error";
-                //             callFinished = true;
-                //             return
-                //         }
-                //     })
+                jQuery.ajax({
+                    url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
+                    method: "POST",
+                    // body: { fieldId: "Response Received" },
+                    async: false,
+                    timeout: 60000,
+                    success: function (response) {
+                        console.log(response);
+                        //add result.info to array [1] and return it
+                        if (response.result === "YES" && response.errorcode === "Success") {
+                            console.log("Pass");
+                            valid = true;
+                            value = "Call passed";
+                            callFinished = true;
+                            return
+                        }
+                        else {
+                            console.log("Fail");
+                            valid = true;
+                            value = "Call failed";
+                            callFinished = true;
+                            return
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        valid = true;
+                        value = "Error";
+                        callFinished = true;
+                        return
+                    }
+                })
             }
         }
 
