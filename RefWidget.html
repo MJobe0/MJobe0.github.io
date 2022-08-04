@@ -96,66 +96,67 @@
                     }
                 })
             }
+        }
 
-            function fillConditionValue() {
-                JFCustomWidget.hideWidgetError();
+        function fillConditionValue() {
+            JFCustomWidget.hideWidgetError();
 
-                apiKey = JFCustomWidget.getWidgetSetting("apiKey");
-                fieldToUpdate = JFCustomWidget.getWidgetSetting("fieldToUpdate");
+            apiKey = JFCustomWidget.getWidgetSetting("apiKey");
+            fieldToUpdate = JFCustomWidget.getWidgetSetting("fieldToUpdate");
 
-                var submissionIdParam = JFCustomWidget.getWidgetSetting("subId");
-                var refNumberParam = JFCustomWidget.getWidgetSetting("refNumber");
+            var submissionIdParam = JFCustomWidget.getWidgetSetting("subId");
+            var refNumberParam = JFCustomWidget.getWidgetSetting("refNumber");
 
-                var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
+            var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
 
-                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-                    console.log("res by Name=", res)
-                    submissionId = res.data[0].value
-                    refNumber = res.data[1].value
-                    // res.data.forEach(resItem => {
-                    //     console.log(resItem.value);
-                    // });
-                    callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
-                }); // set refNumber and submissionId
+            JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
+                console.log("res by Name=", res)
+                submissionId = res.data[0].value
+                refNumber = res.data[1].value
+                // res.data.forEach(resItem => {
+                //     console.log(resItem.value);
+                // });
+                callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
+            }); // set refNumber and submissionId
 
-                console.log(apiKey);
-                console.log(submissionId);
-                console.log(fieldToUpdate);
-                console.log(fieldArr);
+            console.log(apiKey);
+            console.log(submissionId);
+            console.log(fieldToUpdate);
+            console.log(fieldArr);
 
-                // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
+            // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
 
-                var data = {
-                    value: value,
-                    valid: valid
-                }
-
-                //console.log(data.value)
-                // console.log(refNumber);
-
-                JFCustomWidget.sendData(data);
+            var data = {
+                value: value,
+                valid: valid
             }
 
-            //subscrive to ready
-            JFCustomWidget.subscribe("ready", function (msg) {
-                console.log("ready message arrived from JotForm", msg);
-                //subscribe to submit
-                JFCustomWidget.subscribe("submit", function (msg) {
-                    fillConditionValue();
-                    var data2 = {
-                        value: "",
-                        valid: true
-                    }
-                    console.log(data2)
-                    JFCustomWidget.sendSubmit(data2);
+            //console.log(data.value)
+            // console.log(refNumber);
 
-                    // console.log(jotFormStudentName)
-                    // console.log(jotFormDisplayName)
-                });
+            JFCustomWidget.sendData(data);
+        }
 
-                // JFCustomWidget.subscribe('populate', fillConditionValue);
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("ready message arrived from JotForm", msg);
+            //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                fillConditionValue();
+                var data2 = {
+                    value: "",
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
 
+                // console.log(jotFormStudentName)
+                // console.log(jotFormDisplayName)
             });
+
+            // JFCustomWidget.subscribe('populate', fillConditionValue);
+
+        });
     </script>
 </body>
 
