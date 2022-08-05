@@ -3,6 +3,7 @@
 
 <head>
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://js.jotform.com/JotForm.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
         (function () {
@@ -54,48 +55,63 @@
 
         //determining valid is important
         function callControlForm(apikey, subId, fieldId) {
-            console.log(typeof fieldId)
-            console.log("https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received")
-            if (callFinished === false) {
-                jQuery.ajax({
-                    url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
-                    method: "POST",
-                    //  data: { "submission[67]": "Response Received" },
-                    // body: { fieldId: "Response Received" },
-                    async: true,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json'
-                    },
-                    dataType: 'jsonp',
-                    timeout: 60000,
-                    success: function (response) {
-                        console.log(response);
-                        //add result.info to array [1] and return it
-                        if (response.result === "YES" && response.errorcode === "Success") {
-                            console.log("Pass");
-                            valid = true;
-                            value = "Call passed";
-                            callFinished = true;
-                            return
-                        }
-                        else {
-                            console.log("Fail");
-                            valid = true;
-                            value = "Call failed";
-                            callFinished = true;
-                            return
-                        }
-                    },
-                    error: function (response) {
-                        console.log(response);
-                        valid = true;
-                        value = "Error";
-                        callFinished = true;
-                        return
-                    }
-                })
-            }
+            console.log(JF);
+            console.log(JF.editSubmission)
+
+            // submission = new Object();
+            // submission['1'] = 'New answer';
+            // submission['new'] = '1'; //Mark as new
+            // submission['flag'] = '1'; //Mark as flagged
+
+            // JF.editSubmission(sid, submission, function (response) {
+            //     /**
+            //      successful response including changed submission data
+            //      .
+            //      */
+            //     document.write(response.submissionID);
+            // })
+            // console.log(typeof fieldId)
+            // console.log("https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received")
+            // if (callFinished === false) {
+            //     jQuery.ajax({
+            //         url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
+            //         method: "POST",
+            //         //  data: { "submission[67]": "Response Received" },
+            //         // body: { fieldId: "Response Received" },
+            //         async: true,
+            //         headers: {
+            //             'Access-Control-Allow-Origin': '*',
+            //             'Content-Type': 'application/json'
+            //         },
+            //         dataType: 'jsonp',
+            //         timeout: 60000,
+            //         success: function (response) {
+            //             console.log(response);
+            //             //add result.info to array [1] and return it
+            //             if (response.result === "YES" && response.errorcode === "Success") {
+            //                 console.log("Pass");
+            //                 valid = true;
+            //                 value = "Call passed";
+            //                 callFinished = true;
+            //                 return
+            //             }
+            //             else {
+            //                 console.log("Fail");
+            //                 valid = true;
+            //                 value = "Call failed";
+            //                 callFinished = true;
+            //                 return
+            //             }
+            //         },
+            //         error: function (response) {
+            //             console.log(response);
+            //             valid = true;
+            //             value = "Error";
+            //             callFinished = true;
+            //             return
+            //         }
+            //     })
+            // }
         }
 
         function fillConditionValue() {
