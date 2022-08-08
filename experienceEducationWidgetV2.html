@@ -21,6 +21,7 @@
         // console.log(JFCustomWidget.getWidgetSettings())
 
         var widgetHeight = 200;
+        var fullWorkHistory
 
         $(document).ready(function () {
             // $(".rowNumberColumn").hover(function () {
@@ -42,8 +43,7 @@
         });
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-            var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            console.log("max = ",fullWorkHistory)
+            console.log("max = ", fullWorkHistory)
 
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
@@ -406,6 +406,8 @@
             console.log(JFCustomWidget)
             //subscribe to submit
         });
+        
+        fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
         var storageField = JFCustomWidget.getWidgetSetting("storageField");
 
