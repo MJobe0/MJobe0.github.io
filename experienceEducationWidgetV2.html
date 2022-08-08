@@ -406,9 +406,9 @@
             console.log(fillArr)
         }
 
-        function getStoredData (){
-            
-        }
+        // function getStoredData() {
+
+        // }
         //onchange="modFields(id, this.name)"
         // <option value="1">Employed</option>
         //                 <option value="2">Traveling</option>
@@ -511,24 +511,24 @@
             }
         }
 
-        function fillConditionValue(data) {
-            JFCustomWidget.hideWidgetError();
+        // function fillConditionValue(data) {
+        //     JFCustomWidget.hideWidgetError();
 
-            storedData = JFCustomWidget.getWidgetSetting("storageField");
-            fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            console.log("Full his = ", fullWorkHistory)
-            console.log("Stored data = ", storedData)
+        //     storedData = JFCustomWidget.getWidgetSetting("storageField");
+        //     fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+        //     console.log("Full his = ", fullWorkHistory)
+        //     console.log("Stored data = ", storedData)
 
-            //callNSFASCheck(inputValue[0], jotFormDisplayName);
+        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-            // var data = {
-            //     value: "No",
-            //     valid: valid
-            // }
+        //     // var data = {
+        //     //     value: "No",
+        //     //     valid: valid
+        //     // }
 
-            // //console.log(data.value)
-            // JFCustomWidget.sendData(data);
-        }
+        //     // //console.log(data.value)
+        //     // JFCustomWidget.sendData(data);
+        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -538,6 +538,11 @@
             // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
             // var storageField = JFCustomWidget.getWidgetSetting("storageField");
             var widgetParm = JFCustomWidget.getWidgetSettings();
+
+            storedData = JFCustomWidget.getWidgetSetting("storageField");
+            fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            console.log("Full his = ", fullWorkHistory)
+            console.log("Stored data = ", storedData)
 
 
             console.log(JFCustomWidget)
@@ -569,7 +574,7 @@
             JFCustomWidget.sendSubmit(data2);
         });
 
-            JFCustomWidget.subscribe('populate', fillConditionValue);
+            // JFCustomWidget.subscribe('populate', fillConditionValue);
     </script>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
@@ -587,7 +592,7 @@
                     <th>Results</th>
                     <th>Comments</th>
                     <th> </th>
-                     <!-- <th>Provide as reference</th> -->
+                    <!-- <th>Provide as reference</th> -->
                 </tr>
                 <!-- <tr>
                 <td id="col0">
