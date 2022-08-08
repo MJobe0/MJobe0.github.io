@@ -201,7 +201,7 @@
             var resultsCell = row.insertCell(8);
             var commentsCell = row.insertCell(9);
             var deleteRowCell = row.insertCell(10);
-            rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+            rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
             typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" id="typeOfActivity${x}">
                         <option value="0">Select Type of activity</option>
                         <option value="1">Employed</option>
@@ -239,8 +239,8 @@
                 widgetHeight = widgetHeight + 200
             }
             else {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 200 })
-                widgetHeight = widgetHeight - 200
+                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 150 })
+                widgetHeight = widgetHeight - 150
             }
         }
 
