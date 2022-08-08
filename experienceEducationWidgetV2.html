@@ -14,6 +14,136 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
+    <style>
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        table caption {
+            font-size: 1.5em;
+            margin: .5em 0 .75em;
+        }
+
+        table tr {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: .35em;
+        }
+
+        */ table th,
+        table td {
+            padding: .625em;
+            text-align: center;
+        }
+
+        table th {
+            font-size: .85em;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        /* @media screen and (max-width: 600px) { */
+        table {
+            border: 0;
+            max-width: 500px;
+        }
+
+        table caption {
+            font-size: 1.3em;
+        }
+
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+        }
+
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+
+        table td::before {
+            /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        table td:last-child {
+            border-bottom: 0;
+        }
+
+        /*
+		Label the data
+    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+		*/
+
+        td:nth-of-type(1):before {
+            content: "Select a type of activity";
+        }
+
+        td:nth-of-type(2):before {
+            content: "Company";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Institution";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Start Date";
+        }
+
+        td:nth-of-type(5):before {
+            content: "End Date";
+        }
+
+        td:nth-of-type(6):before {
+            content: "Position Held";
+        }
+
+        td:nth-of-type(7):before {
+            content: "Grade Band";
+        }
+
+        td:nth-of-type(8):before {
+            content: "Results";
+        }
+
+        td:nth-of-type(9):before {
+            content: "Comments";
+        }
+
+        td:nth-of-type(10):before {
+            content: " ";
+        }
+
+        /* } */
+    </style>
+    <!-- <th ></th> -->
     <script type="text/javascript">
         //https://github.com/canunaldi/widget/blob/master/widget.html
         //var $j = jQuery.noConflict();
@@ -71,7 +201,7 @@
             var resultsCell = row.insertCell(8);
             var commentsCell = row.insertCell(9);
             var deleteRowCell = row.insertCell(10);
-            rowNumberCell.outerHTML = `<th name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+            rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
             typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" id="typeOfActivity${x}">
                         <option value="0">Select Type of activity</option>
                         <option value="1">Employed</option>
@@ -87,7 +217,7 @@
             positionHeldCell.innerHTML = `<input type="text" name="positionHeld[]" value="" id="positionHeld${x}" />`;
             gradeBandCell.innerHTML = `<input type="text" name="gradeBand[]" value="" id="gradeBand${x}" />`;
             resultsCell.innerHTML = `<input type="text" name="results[]" value="" id="results${x}" />`;
-            commentsCell.innerHTML = `<input type="text" name="comments[]" value="" id="comments${x}" />`;
+            commentsCell.innerHTML = `<textarea type="text" name="comments[]" value="" id="comments${x}" />`;
             deleteRowCell.innerHTML = `<input type="button" id="deleteRow${x}" onclick="deleteRow(${x})" value="Delete" />`;
 
             // var table = document.getElementById("emptbl");
@@ -406,7 +536,7 @@
             console.log(JFCustomWidget)
             //subscribe to submit
         });
-        
+
         fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
         var storageField = JFCustomWidget.getWidgetSetting("storageField");
@@ -440,8 +570,8 @@
         <table id="emptbl">
             <tbody>
                 <tr>
-                    <h2>Please select the type of activity</h2>
-                    <th> </th>
+                    <h2>Click the Add Row button to add an Education or Experience</h2>
+                    <!-- <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
                     <th>Institution</th>
@@ -451,7 +581,7 @@
                     <th>Grade Band</th>
                     <th>Results</th>
                     <th>Comments</th>
-                    <th> </th>
+                    <th> </th> -->
                     <!-- <th>Provide as reference</th> -->
                 </tr>
                 <!-- <tr>
@@ -478,7 +608,8 @@
         </table>
         <table>
             <tr>
-                <td><input type="button" value="Add Row" onclick="addRow()" /></td> <span>
+                <input type="button" value="Add Row" onclick="addRow()" />
+                <span>
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
