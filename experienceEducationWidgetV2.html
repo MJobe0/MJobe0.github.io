@@ -150,7 +150,7 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
-        var widgetHeight = 200;
+        var widgetHeight = 500;
         var fullWorkHistory
 
         $(document).ready(function () {
@@ -235,12 +235,12 @@
 
         function resizeFrame(increaseFrame) {
             if (increaseFrame) {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 50 })
-                widgetHeight = widgetHeight + 50
+                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 200 })
+                widgetHeight = widgetHeight + 200
             }
             else {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 50 })
-                widgetHeight = widgetHeight - 50
+                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 200 })
+                widgetHeight = widgetHeight - 200
             }
         }
 
