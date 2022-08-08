@@ -43,7 +43,7 @@
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            console.log(fullWorkHistory)
+            console.log("max = ",fullWorkHistory)
 
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
@@ -492,4 +492,6 @@
     Todo
     - Send widget data to field and retrive widget data, if full history is true
     - Set max year based on full history
+    - Make fields manditory
+    - Allow only one add Row at a time
 -->
