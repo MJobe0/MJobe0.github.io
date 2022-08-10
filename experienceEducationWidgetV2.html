@@ -16,7 +16,7 @@
         })();
     </script>
     <style>
-        table {
+        /* table {
             border: 1px solid #ccc;
             border-collapse: collapse;
             margin: 0;
@@ -36,7 +36,7 @@
             padding: .35em;
         }
 
-        */ table th,
+         table th,
         table td {
             padding: .625em;
             text-align: center;
@@ -46,103 +46,135 @@
             font-size: .85em;
             letter-spacing: .1em;
             text-transform: uppercase;
-        }
+        } */
 
-        /* @media screen and (max-width: 600px) { */
-        table {
-            border: 0;
-            max-width: 500px;
-        }
+        @media screen and (max-width: 600px) {
+            table {
+                border: 1px solid #ccc;
+                border-collapse: collapse;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                table-layout: fixed;
+            }
 
-        table caption {
-            font-size: 1.3em;
-        }
+            table caption {
+                font-size: 1.5em;
+                margin: .5em 0 .75em;
+            }
 
-        table thead {
-            border: none;
-            clip: rect(0 0 0 0);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            width: 1px;
-        }
+            table tr {
+                background-color: #f8f8f8;
+                border: 1px solid #ddd;
+                padding: .35em;
+            }
 
-        table tr {
-            border-bottom: 3px solid #ddd;
-            display: block;
-            margin-bottom: .625em;
-        }
+            table th,
+            table td {
+                padding: .625em;
+                text-align: center;
+            }
 
-        table td {
-            border-bottom: 1px solid #ddd;
-            display: block;
-            font-size: .8em;
-            text-align: right;
-        }
+            table th {
+                font-size: .85em;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+            }
 
-        table td::before {
-            /*
+            table {
+                border: 0;
+                max-width: 500px;
+            }
+
+            table caption {
+                font-size: 1.3em;
+            }
+
+            table thead {
+                border: none;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            table tr {
+                border-bottom: 3px solid #ddd;
+                display: block;
+                margin-bottom: .625em;
+            }
+
+            table td {
+                border-bottom: 1px solid #ddd;
+                display: block;
+                font-size: .8em;
+                text-align: right;
+            }
+
+            table td::before {
+                /*
     * aria-label has no advantage, it won't be read inside a table
     content: attr(aria-label);
     */
-            content: attr(data-label);
-            float: left;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
 
-        table td:last-child {
-            border-bottom: 0;
-        }
+            table td:last-child {
+                border-bottom: 0;
+            }
 
-        /*
+            /*
 		Label the data
     You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
 		*/
 
-        td:nth-of-type(1):before {
-            content: "Select a type of activity";
-        }
+            td:nth-of-type(1):before {
+                content: "Select a type of activity";
+            }
 
-        td:nth-of-type(2):before {
-            content: "Company";
-        }
+            td:nth-of-type(2):before {
+                content: "Company";
+            }
 
-        td:nth-of-type(3):before {
-            content: "Institution";
-        }
+            td:nth-of-type(3):before {
+                content: "Institution";
+            }
 
-        td:nth-of-type(4):before {
-            content: "Start Date";
-        }
+            td:nth-of-type(4):before {
+                content: "Start Date";
+            }
 
-        td:nth-of-type(5):before {
-            content: "End Date";
-        }
+            td:nth-of-type(5):before {
+                content: "End Date";
+            }
 
-        td:nth-of-type(6):before {
-            content: "Position Held";
-        }
+            td:nth-of-type(6):before {
+                content: "Position Held";
+            }
 
-        td:nth-of-type(7):before {
-            content: "Grade Band";
-        }
+            td:nth-of-type(7):before {
+                content: "Grade Band";
+            }
 
-        td:nth-of-type(8):before {
-            content: "Results";
-        }
+            td:nth-of-type(8):before {
+                content: "Results";
+            }
 
-        td:nth-of-type(9):before {
-            content: "Comments";
-        }
+            td:nth-of-type(9):before {
+                content: "Comments";
+            }
 
-        td:nth-of-type(10):before {
-            content: " ";
-        }
+            td:nth-of-type(10):before {
+                content: " ";
+            }
 
-        /* } */
+        }
     </style>
     <script type="text/javascript">
         //https://github.com/canunaldi/widget/blob/master/widget.html
