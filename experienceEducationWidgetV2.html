@@ -59,23 +59,66 @@
         var storedData;
 
         $(document).ready(function () {
+            //Do some stuff
             // $(".rowNumberColumn").hover(function () {
             //     $(this).css('cursor', 'pointer');
             // }, function () {
             //     $(this).css('cursor', 'auto');
             // });
-            $("tbody").sortable({
-                update: function (event, ui) {
-                    // var ordering = $(this).sortable('toArray').toString();
-                    // alert(ordering);
-                    getFormData();
-                },
-                cursor: "move",
-                items: "> tr:not(:first)",
-                appendTo: "parent",
-                helper: "clone"
-            }).disableSelection();
+            $("tbody").on('click touchstart', function () {
+                console.log("here")
+                $("tbody").sortable({
+                    update: function (event, ui) {
+                        // var ordering = $(this).sortable('toArray').toString();
+                        // alert(ordering);
+                        getFormData();
+                    },
+                    cursor: "move",
+                    items: "> tr:not(:first)",
+                    appendTo: "parent",
+                    helper: "clone"
+                }).disableSelection();
+            })
         });
+
+        // $(document).ready(function () {
+        //     // $(".rowNumberColumn").hover(function () {
+        //     //     $(this).css('cursor', 'pointer');
+        //     // }, function () {
+        //     //     $(this).css('cursor', 'auto');
+        //     // });
+        //     $("tbody").sortable({
+        //         update: function (event, ui) {
+        //             // var ordering = $(this).sortable('toArray').toString();
+        //             // alert(ordering);
+        //             getFormData();
+        //         },
+        //         cursor: "move",
+        //         items: "> tr:not(:first)",
+        //         appendTo: "parent",
+        //         helper: "clone"
+        //     }).disableSelection();
+        // });
+
+        // $(function () {
+        //     function log(str) {
+        //         $("#log").prepend("<p>" + str + "</p>");
+        //     }
+        //     $("tbody").draggable({
+        //         cursor: 'move',
+        //         // handle: ".ui-drag-handle",
+        //         start: function () {
+        //             log("Drag Start");
+        //         },
+        //         stop: function () {
+        //             log("Drag Stop");
+        //         }
+        //     });
+
+        //     $("tbody").click(function () {
+        //         log("Handler for .click() called.");
+        //     });
+        // });
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
             console.log("max = ", fullWorkHistory)
