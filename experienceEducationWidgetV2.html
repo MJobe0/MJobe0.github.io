@@ -123,7 +123,7 @@
         // });
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-            console.log("max = ", fullWorkHistory)
+            console.log("max = ", setMaxYear())
 
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
@@ -361,10 +361,10 @@
             var isFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
             console.log("is full his = ", isFullWorkHistory)
             if (isFullWorkHistory === "No") {
-                fullWorkHistory = 5;
+                return 5;
             }
             else {
-                fullWorkHistory = 10;
+                return 10;
             }
         }
 
