@@ -59,24 +59,28 @@
         var storedData;
         var widgetParm;
 
-        // function fillConditionValue(data) {
-        //     JFCustomWidget.hideWidgetError();
+        function fillConditionValue(data) {
+            JFCustomWidget.hideWidgetError();
 
-        //     storedData = JFCustomWidget.getWidgetSetting("storageField");
-        //     fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-        //     console.log("Full his = ", fullWorkHistory)
-        //     console.log("Stored data = ", storedData)
+            var test1 = JFCustomWidget.getWidgetSettings();
 
-        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
+            console.log("test1 = ", test1)
 
-        //     // var data = {
-        //     //     value: "No",
-        //     //     valid: valid
-        //     // }
+            // storedData = JFCustomWidget.getWidgetSetting("storageField");
+            // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            // console.log("Full his = ", fullWorkHistory)
+            // console.log("Stored data = ", storedData)
 
-        //     // //console.log(data.value)
-        //     // JFCustomWidget.sendData(data);
-        // }
+            //callNSFASCheck(inputValue[0], jotFormDisplayName);
+
+            // var data = {
+            //     value: "No",
+            //     valid: valid
+            // }
+
+            // //console.log(data.value)
+            // JFCustomWidget.sendData(data);
+        }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -108,9 +112,6 @@
             });
         });
 
-       var test1 = JFCustomWidget.getWidgetSettings();
-       console.log(test1)
-
         JFCustomWidget.subscribe("submit", function (msg) {
             var widgetParm = JFCustomWidget.getWidgetSettings();
             var data2 = getFormData();
@@ -127,7 +128,7 @@
             JFCustomWidget.sendSubmit(data2);
         });
 
-        // JFCustomWidget.subscribe('populate', fillConditionValue);
+        JFCustomWidget.subscribe('populate', fillConditionValue);
 
         $(document).ready(function () {
             //Do some stuff
