@@ -357,6 +357,15 @@
             console.log(fillArr)
         }
 
+        function setMaxYear(isFullWorkHistory) {
+            if (isFullWorkHistory === "No") {
+                fullWorkHistory = 5;
+            }
+            else {
+                fullWorkHistory = 10;
+            }
+        }
+
         // function getStoredData() {
 
         // }
@@ -491,12 +500,13 @@
             var widgetParm = JFCustomWidget.getWidgetSettings();
 
             storedData = JFCustomWidget.getWidgetSetting("storageField");
-            fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            console.log("Full his = ", fullWorkHistory)
+            var fWHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            console.log("Full his = ", fWHistory)
             console.log("Stored data = ", storedData)
 
             //Call function to check stored data
             //Call function to set max year
+            setMaxYear(fWHistory)
 
             console.log(JFCustomWidget)
             //subscribe to submit
