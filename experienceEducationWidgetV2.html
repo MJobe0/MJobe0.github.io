@@ -65,10 +65,10 @@
             // }, function () {
             //     $(this).css('cursor', 'auto');
             // });
-            $("tbody").on('click touchmove', function () {
-                event.preventDefault();
-                console.log(event)
-                console.log("here")
+            // $("tbody").on('click touchmove', function () {
+            //     event.preventDefault();
+            //     console.log(event)
+            //     console.log("here")
                 $("tbody").sortable({
                     update: function (event, ui) {
                         // var ordering = $(this).sortable('toArray').toString();
@@ -80,7 +80,7 @@
                     appendTo: "parent",
                     helper: "clone"
                 }).disableSelection();
-            })
+           // })
         });
 
         // $(document).ready(function () {
