@@ -358,9 +358,8 @@
         }
 
         function setMaxYear() {
-            var isFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            console.log("is full his = ", isFullWorkHistory)
-            if (isFullWorkHistory === "No") {
+            console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
+            if (JFCustomWidget.getWidgetSetting("fullWorkHistory") === "No") {
                 return 5;
             }
             else {
