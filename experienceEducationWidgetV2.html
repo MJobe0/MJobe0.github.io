@@ -57,6 +57,7 @@
         var widgetHeight = 500;
         var fullWorkHistory;
         var storedData;
+        var widgetParm;
 
         // function fillConditionValue(data) {
         //     JFCustomWidget.hideWidgetError();
@@ -84,7 +85,7 @@
 
             // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
             // var storageField = JFCustomWidget.getWidgetSetting("storageField");
-            var widgetParm = JFCustomWidget.getWidgetSettings();
+            widgetParm = JFCustomWidget.getWidgetSettings();
 
             storedData = JFCustomWidget.getWidgetSetting("storageField");
             console.log("Stored data = ", storedData)
