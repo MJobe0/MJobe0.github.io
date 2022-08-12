@@ -58,6 +58,75 @@
         var fullWorkHistory;
         var storedData;
 
+        // function fillConditionValue(data) {
+        //     JFCustomWidget.hideWidgetError();
+
+        //     storedData = JFCustomWidget.getWidgetSetting("storageField");
+        //     fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+        //     console.log("Full his = ", fullWorkHistory)
+        //     console.log("Stored data = ", storedData)
+
+        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
+
+        //     // var data = {
+        //     //     value: "No",
+        //     //     valid: valid
+        //     // }
+
+        //     // //console.log(data.value)
+        //     // JFCustomWidget.sendData(data);
+        // }
+
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            // addRow();
+            console.log("ready message arrived from JotForm", msg);
+
+            // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
+            var widgetParm = JFCustomWidget.getWidgetSettings();
+
+            storedData = JFCustomWidget.getWidgetSetting("storageField");
+            console.log("Stored data = ", storedData)
+
+            // var fWHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            // console.log("Full his = ", fWHistory)
+
+            //Call function to check stored data
+            //Call function to set max year
+            // setMaxYear(fWHistory)
+
+            console.log(JFCustomWidget)
+            //subscribe to submit
+        });
+
+        var storageField = JFCustomWidget.getWidgetSetting("storageField");
+
+        JFCustomWidget.getFieldsValueById([storageField], function (res) {
+            console.log("res by Name=", res)
+            res.data.forEach(resItem => {
+                console.log(resItem.value);
+            });
+        });
+
+        JFCustomWidget.subscribe("submit", function (msg) {
+            var widgetParm = JFCustomWidget.getWidgetSettings();
+            var data2 = getFormData();
+            console.log(data2);
+            setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+            // JFCustomWidget.sendData(data2);
+
+            // var data2 = {
+            //     value: "",
+            //     valid: true
+            // }
+            // console.log(data2)
+
+            JFCustomWidget.sendSubmit(data2);
+        });
+
+        // JFCustomWidget.subscribe('populate', fillConditionValue);
+
         $(document).ready(function () {
             //Do some stuff
             // $(".rowNumberColumn").hover(function () {
@@ -69,18 +138,18 @@
             //     event.preventDefault();
             //     console.log(event)
             //     console.log("here")
-                $("tbody").sortable({
-                    update: function (event, ui) {
-                        // var ordering = $(this).sortable('toArray').toString();
-                        // alert(ordering);
-                        getFormData();
-                    },
-                    cursor: "move",
-                    items: "> tr:not(:first)",
-                    appendTo: "parent",
-                    helper: "clone"
-                }).disableSelection();
-           // })
+            $("tbody").sortable({
+                update: function (event, ui) {
+                    // var ordering = $(this).sortable('toArray').toString();
+                    // alert(ordering);
+                    getFormData();
+                },
+                cursor: "move",
+                items: "> tr:not(:first)",
+                appendTo: "parent",
+                helper: "clone"
+            }).disableSelection();
+            // })
         });
 
         // $(document).ready(function () {
@@ -472,75 +541,6 @@
                     document.getElementById(positionHeldId).disabled = false;
             }
         }
-
-        // function fillConditionValue(data) {
-        //     JFCustomWidget.hideWidgetError();
-
-        //     storedData = JFCustomWidget.getWidgetSetting("storageField");
-        //     fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-        //     console.log("Full his = ", fullWorkHistory)
-        //     console.log("Stored data = ", storedData)
-
-        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
-
-        //     // var data = {
-        //     //     value: "No",
-        //     //     valid: valid
-        //     // }
-
-        //     // //console.log(data.value)
-        //     // JFCustomWidget.sendData(data);
-        // }
-
-        //subscrive to ready
-        JFCustomWidget.subscribe("ready", function (msg) {
-            // addRow();
-            console.log("ready message arrived from JotForm", msg);
-
-            // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
-            var widgetParm = JFCustomWidget.getWidgetSettings();
-
-            storedData = JFCustomWidget.getWidgetSetting("storageField");
-            console.log("Stored data = ", storedData)
-
-            // var fWHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // console.log("Full his = ", fWHistory)
-
-            //Call function to check stored data
-            //Call function to set max year
-            // setMaxYear(fWHistory)
-
-            console.log(JFCustomWidget)
-            //subscribe to submit
-        });
-
-        var storageField = JFCustomWidget.getWidgetSetting("storageField");
-
-        JFCustomWidget.getFieldsValueById([storageField], function (res) {
-            console.log("res by Name=", res)
-            res.data.forEach(resItem => {
-                console.log(resItem.value);
-            });
-        });
-
-        JFCustomWidget.subscribe("submit", function (msg) {
-            var widgetParm = JFCustomWidget.getWidgetSettings();
-            var data2 = getFormData();
-            console.log(data2);
-            setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-            // JFCustomWidget.sendData(data2);
-
-            // var data2 = {
-            //     value: "",
-            //     valid: true
-            // }
-            // console.log(data2)
-
-            JFCustomWidget.sendSubmit(data2);
-        });
-
-            // JFCustomWidget.subscribe('populate', fillConditionValue);
     </script>
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
