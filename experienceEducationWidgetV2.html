@@ -97,24 +97,26 @@
             // setMaxYear(fWHistory)
 
             console.log(JFCustomWidget)
+
             //subscribe to submit
+            JFCustomWidget.subscribe("submit", function (msg) {
+                var widgetParm = JFCustomWidget.getWidgetSettings();
+                var data2 = getFormData();
+                console.log(data2);
+                setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                // JFCustomWidget.sendData(data2);
+
+                // var data2 = {
+                //     value: "",
+                //     valid: true
+                // }
+                // console.log(data2)
+
+                JFCustomWidget.sendSubmit(data2);
+            });
         });
 
-        JFCustomWidget.subscribe("submit", function (msg) {
-            var widgetParm = JFCustomWidget.getWidgetSettings();
-            var data2 = getFormData();
-            console.log(data2);
-            setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-            // JFCustomWidget.sendData(data2);
 
-            // var data2 = {
-            //     value: "",
-            //     valid: true
-            // }
-            // console.log(data2)
-
-            JFCustomWidget.sendSubmit(data2);
-        });
 
         $(document).ready(function () {
             storedData = JFCustomWidget.getWidgetSetting("storageField");
