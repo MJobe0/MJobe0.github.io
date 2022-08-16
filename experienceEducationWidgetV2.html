@@ -59,28 +59,35 @@
         var widgetParm;
         var storageTest = []
 
-        // function fillConditionValue(data) {
-        //     JFCustomWidget.hideWidgetError();
+        function fillConditionValue(data) {
+            JFCustomWidget.hideWidgetError();
 
-        //     var test1 = JFCustomWidget.getWidgetSettings();
+            storedData = JFCustomWidget.getWidgetSetting("storageField");
+            console.log("Stored data = ", storedData)
 
-        //     console.log("test1 = ", test1)
+            JFCustomWidget.getFieldsValueById([storedData], function (res) {
+                console.log("res by Name= ", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                    storageTest.push(resItem.value)
+                });
+            });
 
-        //     // storedData = JFCustomWidget.getWidgetSetting("storageField");
-        //     // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-        //     // console.log("Full his = ", fullWorkHistory)
-        //     // console.log("Stored data = ", storedData)
+            // storedData = JFCustomWidget.getWidgetSetting("storageField");
+            // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            // console.log("Full his = ", fullWorkHistory)
+            // console.log("Stored data = ", storedData)
 
-        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
+            //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-        //     // var data = {
-        //     //     value: "No",
-        //     //     valid: valid
-        //     // }
+            // var data = {
+            //     value: "No",
+            //     valid: valid
+            // }
 
-        //     // //console.log(data.value)
-        //     // JFCustomWidget.sendData(data);
-        // }
+            // //console.log(data.value)
+            // JFCustomWidget.sendData(data);
+        }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -96,16 +103,6 @@
             //Call function to check stored data
             //Call function to set max year
             // setMaxYear(fWHistory)
-            storedData = JFCustomWidget.getWidgetSetting("storageField");
-            console.log("Stored data = ", storedData)
-
-            JFCustomWidget.getFieldsValueById([storedData], function (res) {
-                console.log("res by Name= ", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                    storageTest.push(resItem.value)
-                });
-            });
 
             console.log(JFCustomWidget)
 
@@ -127,7 +124,7 @@
             });
         });
 
-        // JFCustomWidget.subscribe('populate', fillConditionValue);
+        JFCustomWidget.subscribe('populate', fillConditionValue);
 
         // $(document).ready(function () {
         //     //Do some stuff
