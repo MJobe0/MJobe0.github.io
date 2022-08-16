@@ -88,15 +88,6 @@
 
             // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
             // var storageField = JFCustomWidget.getWidgetSetting("storageField");
-            storedData = JFCustomWidget.getWidgetSetting("storageField");
-            console.log("Stored data = ", storedData)
-
-            JFCustomWidget.getFieldsValueById([storedData], function (res) {
-                console.log("res by Name= ", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                });
-            });
 
             // var fWHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
             // console.log("Full his = ", fWHistory)
@@ -124,6 +115,19 @@
 
             JFCustomWidget.sendSubmit(data2);
         });
+
+        $(document).ready(function () {
+            storedData = JFCustomWidget.getWidgetSetting("storageField");
+            console.log("Stored data = ", storedData)
+
+            JFCustomWidget.getFieldsValueById([storedData], function (res) {
+                console.log("res by Name= ", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+
+        })
 
         // JFCustomWidget.subscribe('populate', fillConditionValue);
 
