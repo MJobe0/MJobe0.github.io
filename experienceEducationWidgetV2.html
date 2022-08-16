@@ -4,7 +4,6 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src=”http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js”></script>
 </head>
 
 <body>
@@ -59,28 +58,28 @@
         var storedData;
         var widgetParm;
 
-        function fillConditionValue(data) {
-            JFCustomWidget.hideWidgetError();
+        // function fillConditionValue(data) {
+        //     JFCustomWidget.hideWidgetError();
 
-            var test1 = JFCustomWidget.getWidgetSettings();
+        //     var test1 = JFCustomWidget.getWidgetSettings();
 
-            console.log("test1 = ", test1)
+        //     console.log("test1 = ", test1)
 
-            // storedData = JFCustomWidget.getWidgetSetting("storageField");
-            // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // console.log("Full his = ", fullWorkHistory)
-            // console.log("Stored data = ", storedData)
+        //     // storedData = JFCustomWidget.getWidgetSetting("storageField");
+        //     // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+        //     // console.log("Full his = ", fullWorkHistory)
+        //     // console.log("Stored data = ", storedData)
 
-            //callNSFASCheck(inputValue[0], jotFormDisplayName);
+        //     //callNSFASCheck(inputValue[0], jotFormDisplayName);
 
-            // var data = {
-            //     value: "No",
-            //     valid: valid
-            // }
+        //     // var data = {
+        //     //     value: "No",
+        //     //     valid: valid
+        //     // }
 
-            // //console.log(data.value)
-            // JFCustomWidget.sendData(data);
-        }
+        //     // //console.log(data.value)
+        //     // JFCustomWidget.sendData(data);
+        // }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
@@ -128,32 +127,32 @@
             JFCustomWidget.sendSubmit(data2);
         });
 
-        JFCustomWidget.subscribe('populate', fillConditionValue);
+        // JFCustomWidget.subscribe('populate', fillConditionValue);
 
-        $(document).ready(function () {
-            //Do some stuff
-            // $(".rowNumberColumn").hover(function () {
-            //     $(this).css('cursor', 'pointer');
-            // }, function () {
-            //     $(this).css('cursor', 'auto');
-            // });
-            // $("tbody").on('click touchmove', function () {
-            //     event.preventDefault();
-            //     console.log(event)
-            //     console.log("here")
-            $("tbody").sortable({
-                update: function (event, ui) {
-                    // var ordering = $(this).sortable('toArray').toString();
-                    // alert(ordering);
-                    getFormData();
-                },
-                cursor: "move",
-                items: "> tr:not(:first)",
-                appendTo: "parent",
-                helper: "clone"
-            }).disableSelection();
-            // })
-        });
+        // $(document).ready(function () {
+        //     //Do some stuff
+        //     // $(".rowNumberColumn").hover(function () {
+        //     //     $(this).css('cursor', 'pointer');
+        //     // }, function () {
+        //     //     $(this).css('cursor', 'auto');
+        //     // });
+        //     // $("tbody").on('click touchmove', function () {
+        //     //     event.preventDefault();
+        //     //     console.log(event)
+        //     //     console.log("here")
+        //     $("tbody").sortable({
+        //         update: function (event, ui) {
+        //             // var ordering = $(this).sortable('toArray').toString();
+        //             // alert(ordering);
+        //             getFormData();
+        //         },
+        //         cursor: "move",
+        //         items: "> tr:not(:first)",
+        //         appendTo: "parent",
+        //         helper: "clone"
+        //     }).disableSelection();
+        //     // })
+        // });
 
         // $(document).ready(function () {
         //     // $(".rowNumberColumn").hover(function () {
@@ -212,18 +211,22 @@
             var id = "tbl" + x;
             var row = table.insertRow(x);
             row.id = id;
-            var rowNumberCell = row.insertCell(0);
-            var typeOfActivityCell = row.insertCell(1);
-            var companyCell = row.insertCell(2);
-            var institutionCell = row.insertCell(3);
-            var startDateCell = row.insertCell(4);
-            var endDateCell = row.insertCell(5);
-            var positionHeldCell = row.insertCell(6);
-            var gradeBandCell = row.insertCell(7)
-            var resultsCell = row.insertCell(8);
-            var commentsCell = row.insertCell(9);
-            var deleteRowCell = row.insertCell(10);
-            rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+            // var rowNumberCell = row.insertCell(0);
+            var upCell = row.insertCell(0);
+            var downCell = row.insertCell(1);
+            var typeOfActivityCell = row.insertCell(2);
+            var companyCell = row.insertCell(3);
+            var institutionCell = row.insertCell(4);
+            var startDateCell = row.insertCell(5);
+            var endDateCell = row.insertCell(6);
+            var positionHeldCell = row.insertCell(7);
+            var gradeBandCell = row.insertCell(8)
+            var resultsCell = row.insertCell(9);
+            var commentsCell = row.insertCell(10);
+            var deleteRowCell = row.insertCell(11);
+            // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+            upCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/>`;
+            downCell.innerHTML = `<input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
             typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" id="typeOfActivity${x}" required>
                         <option value="0">Select Type of activity</option>
                         <option value="1">Employed</option>
@@ -301,6 +304,31 @@
                 return
                 //rowCount--;
             }
+        }
+
+        function moveRowUp(tblRow) {
+            // $("tblHeading").prev(tblRow )
+            const prevRow = $(tblRow).prev()[0].id
+            console.log(prevRow)
+            if (prevRow === "tblHeading") {
+                console.log("here");
+                return;
+            }
+            console.log($(tblRow).prev()[0])
+            $(tblRow).prev().before($(tblRow));
+            getFormData();
+            return
+        }
+
+        function moveRowDown(tblRow) {
+            const nextRow = $(tblRow).next();
+            if (nextRow.length === 0) {
+                console.log("length ", nextRow.length);
+                return;
+            }
+            $(tblRow).next().after($(tblRow));
+            getFormData();
+            return;
         }
 
         // function deleteRows() {
@@ -548,9 +576,11 @@
     <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
-                <tr>
+                <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
-                    <!-- <th> </th>
+                    <!-- <th> </th> -->
+                    <th> </th>
+                    <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
                     <th>Institution</th>
@@ -560,7 +590,7 @@
                     <th>Grade Band</th>
                     <th>Results</th>
                     <th>Comments</th>
-                    <th> </th> -->
+                    <th> </th>
                 </tr>
                 <!-- <tr>
                 <td id="col0">
