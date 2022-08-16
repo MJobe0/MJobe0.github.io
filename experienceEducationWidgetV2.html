@@ -212,21 +212,19 @@
             var row = table.insertRow(x);
             row.id = id;
             // var rowNumberCell = row.insertCell(0);
-            var upCell = row.insertCell(0);
-            var downCell = row.insertCell(1);
-            var typeOfActivityCell = row.insertCell(2);
-            var companyCell = row.insertCell(3);
-            var institutionCell = row.insertCell(4);
-            var startDateCell = row.insertCell(5);
-            var endDateCell = row.insertCell(6);
-            var positionHeldCell = row.insertCell(7);
-            var gradeBandCell = row.insertCell(8)
-            var resultsCell = row.insertCell(9);
-            var commentsCell = row.insertCell(10);
-            var deleteRowCell = row.insertCell(11);
+            var moveButtonsCell = row.insertCell(0);
+            var typeOfActivityCell = row.insertCell(1);
+            var companyCell = row.insertCell(2);
+            var institutionCell = row.insertCell(3);
+            var startDateCell = row.insertCell(4);
+            var endDateCell = row.insertCell(5);
+            var positionHeldCell = row.insertCell(6);
+            var gradeBandCell = row.insertCell(7)
+            var resultsCell = row.insertCell(8);
+            var commentsCell = row.insertCell(9);
+            var deleteRowCell = row.insertCell(10);
             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-            upCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/>`;
-            downCell.innerHTML = `<input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
+            moveButtonsCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/> <input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
             typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" id="typeOfActivity${x}" required>
                         <option value="0">Select Type of activity</option>
                         <option value="1">Employed</option>
