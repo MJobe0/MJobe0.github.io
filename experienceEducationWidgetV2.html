@@ -111,6 +111,8 @@
             });
         });
 
+        console.log("storage = ", storageField)
+
         JFCustomWidget.subscribe("submit", function (msg) {
             var widgetParm = JFCustomWidget.getWidgetSettings();
             var data2 = getFormData();
