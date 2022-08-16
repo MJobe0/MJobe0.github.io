@@ -93,6 +93,8 @@
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
+            JFCustomWidget.subscribe('populate', fillConditionValue);
+
             // addRow();
             console.log("ready message arrived from JotForm", msg);
 
@@ -125,8 +127,6 @@
                 JFCustomWidget.sendSubmit(data2);
             });
         });
-
-        JFCustomWidget.subscribe('populate', fillConditionValue);
 
         // $(document).ready(function () {
         //     //Do some stuff
