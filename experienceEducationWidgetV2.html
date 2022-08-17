@@ -448,7 +448,8 @@
         }
 
         function storeTableData(fieldToFill) {
-            let formData = new FormData("educationExperienceList[]");
+            const form = document.getElementById('educationExperienceList[]');
+            let formData = new FormData(form);
             console.log(formData)
 
             const tblData = $('form').serializeArray();
