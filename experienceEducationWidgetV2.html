@@ -449,7 +449,7 @@
 
         function storeTableData(fieldToFill) {
             const tblData = $('form').serialize();
-            JFCustomWidget.setFieldsValueById({ id: fieldToFill, value: tblData });
+            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: tblData }]);
             console.log(tblData)
         }
 
