@@ -93,7 +93,7 @@
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
-            
+
             JFCustomWidget.subscribe('populate', fillConditionValue);
 
             // addRow();
@@ -114,9 +114,16 @@
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
                 var widgetParm = JFCustomWidget.getWidgetSettings();
-                var data2 = getFormData();
+                var data2 = validateDates();
                 console.log(data2);
                 setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                storeTableData();
+
+                // Store data to field
+                //
+
+
+
                 // JFCustomWidget.sendData(data2);
 
                 // var data2 = {
@@ -144,7 +151,7 @@
         //         update: function (event, ui) {
         //             // var ordering = $(this).sortable('toArray').toString();
         //             // alert(ordering);
-        //             getFormData();
+        //             validateDates();
         //         },
         //         cursor: "move",
         //         items: "> tr:not(:first)",
@@ -164,7 +171,7 @@
         //         update: function (event, ui) {
         //             // var ordering = $(this).sortable('toArray').toString();
         //             // alert(ordering);
-        //             getFormData();
+        //             validateDates();
         //         },
         //         cursor: "move",
         //         items: "> tr:not(:first)",
@@ -235,8 +242,8 @@
                     </select>`;
             companyCell.innerHTML = `<input type="text" name="nameOfEmployer[]" value="" id="nameOfEmployer${x}" required />`;
             institutionCell.innerHTML = `<input type="text" name="institution[]" value="" id="institution${x}" />`;
-            startDateCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} onchange="getFormData()" value="" id="employedFrom${x}" required />`;
-            endDateCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} onchange="getFormData()" value="" id="employedTo${x}" required />`;
+            startDateCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedFrom${x}" required />`;
+            endDateCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedTo${x}" required />`;
             positionHeldCell.innerHTML = `<input type="text" name="positionHeld[]" value="" id="positionHeld${x}" required />`;
             gradeBandCell.innerHTML = `<input type="text" name="gradeBand[]" value="" id="gradeBand${x}" required />`;
             resultsCell.innerHTML = `<input type="text" name="results[]" value="" id="results${x}" required />`;
@@ -278,7 +285,7 @@
         //     else if (rowCount > "2") {
         //         var row = table.deleteRow(id);
         //         resizeFrame(false);
-        //         getFormData();
+        //         validateDates();
         //         //rowCount--;
         //     }
         //     else {
@@ -298,7 +305,7 @@
             else if (rowCount > "2") {
                 var row = table.deleteRow(id);
                 resizeFrame(false);
-                getFormData();
+                validateDates();
                 return
                 //rowCount--;
             }
@@ -314,7 +321,7 @@
             }
             console.log($(tblRow).prev()[0])
             $(tblRow).prev().before($(tblRow));
-            getFormData();
+            validateDates();
             return
         }
 
@@ -325,7 +332,7 @@
                 return;
             }
             $(tblRow).next().after($(tblRow));
-            getFormData();
+            validateDates();
             return;
         }
 
@@ -349,7 +356,7 @@
             );
         }
 
-        function getFormData() {
+        function validateDates() {
             //var formData = $("form").serializeArray()
             //console.log(formData)
 
@@ -440,6 +447,11 @@
             }
             console.log("arr length = ", arr.length)
             return arr;
+        }
+
+        function storeTableData() {
+            const tblData = $('educationExperienceList[]').serializeArray();
+            console.log(tblData)
         }
 
         function setCompanyNames(fieldIds) {
@@ -619,7 +631,7 @@
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <!-- <td><input type="button" value="Check Dates" onclick="getFormData()" /></td> -->
+                <!-- <td><input type="button" value="Check Dates" onclick="validateDates()" /></td> -->
             </tr>
         </table>
     </form>
