@@ -117,12 +117,8 @@
                 var data2 = validateDates();
                 console.log(data2);
                 setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                storeTableData();
 
-                // Store data to field
-                //
-
-
+                storeTableData(widgetParm["storageField"]);
 
                 // JFCustomWidget.sendData(data2);
 
@@ -449,8 +445,9 @@
             return arr;
         }
 
-        function storeTableData() {
-            const tblData = $('educationExperienceList[]').serializeArray();
+        function storeTableData(fieldToFill) {
+            const tblData = $('form').serialize();
+            JFCustomWidget.setFieldsValueById({ id: fieldToFill, value: tblData });
             console.log(tblData)
         }
 
