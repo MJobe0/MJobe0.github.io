@@ -209,7 +209,8 @@
 
         const currMaxYear = maxYear();
 
-        function addRow() {
+        function addRow(isPop, popData) {
+            console.log(popData)
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
@@ -230,7 +231,7 @@
             var deleteRowCell = row.insertCell(10);
             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
             moveButtonsCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/> <input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
-            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" id="typeOfActivity${x}" required>
+            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" value="" id="typeOfActivity${x}" required>
                         <option value="0">Select Type of activity</option>
                         <option value="1">Employed</option>
                         <option value="2">Traveling</option>
@@ -247,6 +248,22 @@
             resultsCell.innerHTML = `<input type="text" name="results[]" value="" id="results${x}" required />`;
             commentsCell.innerHTML = `<textarea type="text" name="comments[]" value="" id="comments${x}" required />`;
             deleteRowCell.innerHTML = `<input type="button" id="deleteRow${x}" onclick="deleteRow(${x})" value="Delete"/>`;
+
+            //set values
+            if (isPop) {
+                document.getElementById(`typeOfActivity${x}`).value = popData["typeOfActivity[]"] ?? "";
+                modFields(x, popData["typeOfActivity[]"] ?? "");
+                document.getElementById(`nameOfEmployer${x}`).value = popData["nameOfEmployer[]"] ?? "";
+                document.getElementById(`institution${x}`).value = popData["institution[]"] ?? "";
+                document.getElementById(`employedFrom${x}`).value = popData["employedFrom[]"] ?? "";
+                document.getElementById(`employedTo${x}`).value = popData["employedTo[]"] ?? "";
+                document.getElementById(`positionHeld${x}`).value = popData["positionHeld[]"] ?? "";
+                document.getElementById(`gradeBand${x}`).value = popData["gradeBand[]"] ?? "";
+                document.getElementById(`results${x}`).value = popData["results[]"] ?? "";
+                document.getElementById(`comments${x}`).value = popData["comments[]"] ?? ""
+            }
+
+
 
             // var table = document.getElementById("emptbl");
             // var rowCount = table.rows.length;
@@ -450,21 +467,43 @@
         function storeTableData(fieldToFill) {
             var tblData = $('tr').map(function () {
                 var obj = {};
-                $(this).find('input, select').each(function () {
+                $(this).find('input, select, textarea').each(function () {
                     obj[this.name] = $(this).val();
                 });
                 return obj;
             }).get();
             console.log(tblData);
-            // console.log(JSON.stringify(data));
-            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: tblData }]);
+            // console.log(JSON.stringify(tblData));
+            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
         }
 
-        function restoreTableData(form, formArray) {
-            formArray.forEach(function (pair) {
-                var selector = `input[name="${pair.name}"], textarea[name="${pair.name}"]`
-                var input = $(form).find(selector)
-                input.val(pair.value);
+        var obj = [{
+            "": "Delete",
+            "typeOfActivity[]": "1",
+            "nameOfEmployer[]": "erfr",
+            "institution[]": "",
+            "employedFrom[]": "",
+            "employedTo[]": "",
+            "positionHeld[]": "erfe",
+            "gradeBand[]": "",
+            "results[]": "",
+            "comments[]": "erverv"
+        }, {
+            "": "Delete",
+            "typeOfActivity[]": "3",
+            "nameOfEmployer[]": "njhnb",
+            "institution[]": "",
+            "employedFrom[]": "",
+            "employedTo[]": "",
+            "positionHeld[]": "iujn",
+            "gradeBand[]": "",
+            "results[]": "",
+            "comments[]": "iujniujn"
+        }]
+        function restoreTableData(dataObj) {
+            dataObj.forEach(function (obj) {
+                console.log(obj)
+                addRow(true, obj)
             })
         }
 
@@ -644,7 +683,7 @@
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <td><input type="button" value="Check" onclick="storeTableData()" /></td>
+                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
             </tr>
         </table>
     </form>
