@@ -62,8 +62,9 @@
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
             console.log(data)
-
-            restoreTableData(JSON.parse(data.value))
+            if (data.value !== "") {
+                restoreTableData(JSON.parse(data.value))
+            }
 
             // storedData = JFCustomWidget.getWidgetSetting("storageField");
             // console.log("Stored data = ", storedData)
