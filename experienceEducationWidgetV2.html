@@ -448,6 +448,9 @@
         }
 
         function storeTableData(fieldToFill) {
+            let formData = new FormData("educationExperienceList[]");
+            console.log(formData)
+
             const tblData = $('form').serializeArray();
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: tblData }]);
             console.log(tblData)
