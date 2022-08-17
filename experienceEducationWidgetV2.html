@@ -61,17 +61,18 @@
 
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
+            console.log(data)
 
-            storedData = JFCustomWidget.getWidgetSetting("storageField");
-            console.log("Stored data = ", storedData)
+            // storedData = JFCustomWidget.getWidgetSetting("storageField");
+            // console.log("Stored data = ", storedData)
 
-            JFCustomWidget.getFieldsValueById([storedData], function (res) {
-                console.log("res by Name= ", res)
-                res.data.forEach(resItem => {
-                    console.log(resItem.value);
-                    storageTest.push(resItem.value)
-                });
-            });
+            // JFCustomWidget.getFieldsValueById([storedData], function (res) {
+            //     console.log("res by Name= ", res)
+            //     res.data.forEach(resItem => {
+            //         console.log(resItem.value);
+            //         storageTest.push(resItem.value)
+            //     });
+            // });
 
             // storedData = JFCustomWidget.getWidgetSetting("storageField");
             // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
@@ -116,7 +117,9 @@
                 var widgetParm = JFCustomWidget.getWidgetSettings();
                 var data2 = validateDates();
                 console.log(data2);
-                setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                if (widgetParm["fullWorkHistory"] === "No") {
+                    setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                }
 
                 console.log(widgetParm["storageField"])
 
