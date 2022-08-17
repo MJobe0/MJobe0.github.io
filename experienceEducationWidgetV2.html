@@ -119,7 +119,7 @@
                 setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
 
                 console.log(widgetParm["storageField"])
-                
+
                 storeTableData(widgetParm["storageField"]);
 
                 // JFCustomWidget.sendData(data2);
@@ -448,9 +448,17 @@
         }
 
         function storeTableData(fieldToFill) {
-            const tblData = $('form').serialize();
+            const tblData = $('form').serializeArray();
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: tblData }]);
             console.log(tblData)
+        }
+
+        function restoreTableData(form, formArray) {
+            formArray.forEach(function (pair) {
+                var selector = `input[name="${pair.name}"], textarea[name="${pair.name}"]`
+                var input = $(form).find(selector)
+                input.val(pair.value);
+            })
         }
 
         function setCompanyNames(fieldIds) {
