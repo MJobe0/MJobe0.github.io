@@ -205,8 +205,6 @@
         // });
 
         function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-            console.log("max = ", setMaxYear())
-
             const maxYearForDates = new Date().getFullYear() - 5;
             console.log(maxYearForDates + "-01" + "-01")
             //input.setAttribute("min", maxYearForDates);
@@ -508,16 +506,16 @@
             console.log(fillArr)
         }
 
-        function setMaxYear() {
-            console.log(widgetParm)
-            console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
-            if (JFCustomWidget.getWidgetSetting("fullWorkHistory") === "No") {
-                return 5;
-            }
-            else {
-                return 10;
-            }
-        }
+        // function setMaxYear() {
+        //     console.log(widgetParm)
+        //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
+        //     if (JFCustomWidget.getWidgetSetting("fullWorkHistory") === "No") {
+        //         return 5;
+        //     }
+        //     else {
+        //         return 10;
+        //     }
+        // }
 
         // function getStoredData() {
 
@@ -681,8 +679,5 @@
 
 <!--
     Todo
-    - Send widget data to field and retrive widget data, if full history is true
-    - Set max year based on full history
-    - Allow only one add Row at a time
-    - Set frame resizing value based on width length
+
 -->
