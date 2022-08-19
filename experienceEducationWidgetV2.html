@@ -505,7 +505,9 @@
             JFCustomWidget.setFieldsValueById(fillArr);
             console.log(fillArr)
         }
-
+        function test() {
+            console.log(document)
+        }
         // function setMaxYear() {
         //     console.log(widgetParm)
         //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
@@ -622,8 +624,8 @@
             }
         }
     </script>
-    <form id="educationExperienceList[]" name="educationExperienceList" action="#">
-        <table style="overflow: auto; height: 100%;" id="emptbl">
+    <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
+        <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
@@ -669,7 +671,7 @@
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
+                <td><input type="button" value="Test" onclick="test()" /></td>
             </tr>
         </table>
     </form>
