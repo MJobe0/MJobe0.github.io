@@ -59,20 +59,26 @@
         var widgetParm;
         var storageTest = []
 
-        console.log("currOrientation", window.orientation);
+        // Listen for orientation changes
+        window.addEventListener("orientationchange", function () {
+            // Announce the new orientation number
+            alert(window.orientation);
+        }, false);
 
-        window.matchMedia('(orientation: portrait)').addListener(function (m) {
-            console.log(m)
-            console.log("Screen Change to Portrait");
-            resizeFrame();
-        });
+        // console.log("currOrientation", window.orientation);
+
+        // window.matchMedia('(orientation: portrait)').addListener(function (m) {
+        //     console.log(m)
+        //     console.log("Screen Change to Portrait");
+        //     resizeFrame();
+        // });
 
 
-        window.matchMedia('(orientation: landscape)').addListener(function (m) {
-            console.log(m)
-            console.log("Screen Change to Landscape");
-            resizeFrame();
-        });
+        // window.matchMedia('(orientation: landscape)').addListener(function (m) {
+        //     console.log(m)
+        //     console.log("Screen Change to Landscape");
+        //     resizeFrame();
+        // });
 
         // window.matchMedia('(orientation: auto)').addListener(function (m) {
         //     if (m.matches) {
