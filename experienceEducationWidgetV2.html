@@ -59,12 +59,19 @@
         var widgetParm;
         var storageTest = []
 
-        console.log("Screen = ", screen)
-        screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
+        // console.log("Screen = ", screen)
+        // screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
 
         // screen.orientation.addEventListener('change', function (e) { ... })
 
+        var portrait = window.matchMedia('(orientation: portrait)')
 
+        portrait.addEventListener("change", () => {
+            this.test0001();
+        });
+        function test0001() {
+            console.log("WORKS!")
+        }
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
         //     // Announce the new orientation number
@@ -133,8 +140,6 @@
         JFCustomWidget.subscribe("ready", function (msg) {
 
             JFCustomWidget.subscribe('populate', fillConditionValue);
-
-            screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
 
             // addRow();
             console.log("ready message arrived from JotForm", msg);
