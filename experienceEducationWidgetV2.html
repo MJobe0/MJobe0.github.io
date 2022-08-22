@@ -59,7 +59,7 @@
         var widgetParm;
         var storageTest = []
 
-        screen.matchMedia('(orientation: portrait)').addListener(function (m) {
+        window.matchMedia('(orientation: portrait)').addListener(function (m) {
             if (m.matches) {
                 console.log("Screen Change to Portrait")
                 resizeFrame();
@@ -67,7 +67,7 @@
         });
 
 
-        screen.matchMedia('(orientation: landscape)').addListener(function (m) {
+        window.matchMedia('(orientation: landscape)').addListener(function (m) {
             if (m.matches) {
                 console.log("Screen Change to Landscape")
                 resizeFrame();
