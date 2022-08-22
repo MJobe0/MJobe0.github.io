@@ -60,7 +60,7 @@
         var storageTest = []
 
         console.log("Screen = ", screen)
-        screen.orientation.addEventListener('change', function (e) { console.log("Changed") })
+        screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
 
         // screen.orientation.addEventListener('change', function (e) { ... })
 
