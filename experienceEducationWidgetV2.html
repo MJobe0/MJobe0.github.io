@@ -59,11 +59,6 @@
         var widgetParm;
         var storageTest = []
 
-        // console.log("Screen = ", screen)
-        // screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
-
-        // screen.orientation.addEventListener('change', function (e) { ... })
-
         var portrait = window.matchMedia('(orientation: portrait)')
 
         portrait.addEventListener("change", () => {
@@ -80,11 +75,11 @@
 
         // console.log("currOrientation", window.orientation);
 
-        // window.matchMedia('(orientation: portrait)').addListener(function (m) {
-        //     console.log(m)
-        //     console.log("Screen Change to Portrait");
-        //     resizeFrame();
-        // });
+        window.matchMedia('(orientation: portrait)').addListener(function (m) {
+            console.log(m)
+            console.log("Screen Change to Portrait");
+            this.resizeFrame();
+        });
 
 
         // window.matchMedia('(orientation: landscape)').addListener(function (m) {
