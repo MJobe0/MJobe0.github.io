@@ -140,13 +140,10 @@
             });
         });
 
-        $(document).ready(function () {
-            addEventListener('orientationchange', (event) => {
-                console.log("Screen change");
-                resizeFrame();
-            });
+        $(window).on("orientationchange", function (event) {
+            console.log("Screen change")
+            resizeFrame();
         });
-
         // $(document).ready(function () {
         //     //Do some stuff
         //     // $(".rowNumberColumn").hover(function () {
