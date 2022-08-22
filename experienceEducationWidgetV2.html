@@ -59,6 +59,11 @@
         var widgetParm;
         var storageTest = []
 
+        window.matchMedia('(orientation: portrait)').addListener(function (m) {
+            console.log("Screen Change")
+            resizeFrame();
+        });
+
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
             console.log(data)
@@ -140,10 +145,10 @@
             });
         });
 
-        $(window).on("orientationchange", function (event) {
-            console.log("Screen change")
-            resizeFrame();
-        });
+        // $(window).on("orientationchange", function (event) {
+        //     console.log("Screen change")
+        //     resizeFrame();
+        // });
         // $(document).ready(function () {
         //     //Do some stuff
         //     // $(".rowNumberColumn").hover(function () {
