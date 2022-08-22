@@ -70,6 +70,7 @@
         window.matchMedia('(orientation: landscape)').addListener(function (m) {
             if (m.matches) {
                 console.log("Screen Change to Landscape")
+                resizeFrame();
             }
         });
 
