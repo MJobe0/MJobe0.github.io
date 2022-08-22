@@ -60,8 +60,13 @@
         var storageTest = []
 
         window.matchMedia('(orientation: portrait)').addListener(function (m) {
-            console.log("Screen Change")
-            resizeFrame();
+            if (m.matches) {
+                console.log("Screen Change to Portrait")
+                resizeFrame();
+            } else {
+                console.log("Screen Change to Landscape")
+                resizeFrame();
+            }
         });
 
         function fillConditionValue(data) {
