@@ -13,7 +13,7 @@
     </script>
 </head>
 
-<body style="overflow: auto;">
+<body>
     <style>
         /* table {
             border: 1px solid #ccc;
@@ -279,18 +279,20 @@
             //     var copycel = document.getElementById("col" + i).innerHTML;
             //     cell.innerHTML = copycel;
             // }
-            // resizeFrame(true);
+            resizeFrame(true);
         }
 
         function resizeFrame(increaseFrame) {
-            if (increaseFrame) {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
-                widgetHeight = widgetHeight + 600
-            }
-            else {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 600 })
-                widgetHeight = widgetHeight - 600
-            }
+            var currHeight = $("form").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
+            // if (increaseFrame) {
+            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
+            //     widgetHeight = widgetHeight + 600
+            // }
+            // else {
+            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 600 })
+            //     widgetHeight = widgetHeight - 600
+            // }
         }
 
         // function deleteRow(id) {
@@ -323,7 +325,7 @@
             }
             else if (rowCount > "2") {
                 var row = table.deleteRow(id);
-                // resizeFrame(false);
+                resizeFrame(false);
                 validateDates();
                 return
                 //rowCount--;
