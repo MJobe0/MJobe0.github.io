@@ -60,7 +60,8 @@
         var storageTest = []
 
         // screen.orientation.addEventListener('change', function (e) { ... })
-        screen.orientation.onchange = function (e) { console.log("Changed 1") }
+        window.screen.orientation.onchange = function (e) { console.log("Changed 1") }
+        
 
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
