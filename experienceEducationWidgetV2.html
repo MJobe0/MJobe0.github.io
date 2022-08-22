@@ -58,35 +58,37 @@
         var storedData;
         var widgetParm;
         var storageTest = []
+        $(document).ready(function () {
+            let portrait = window.matchMedia("(orientation: portrait)");
+            let landscape = window.matchMedia("(orientation: landscape)");
 
-        let portrait = window.matchMedia("(orientation: portrait)");
-        let landscape = window.matchMedia("(orientation: landscape)");
+
+            portrait.addEventListener("change", function (e) {
+                if (e.matches) {
+                    console.log("port", e)
+                    resizeFrame();
+                    return
+                } else {
+                    console.log("lan", e)
+                    resizeFrame();
+                    return
+                }
+            })
 
 
-        portrait.addEventListener("change", function (e) {
-            console.log("change port")
-            resizeFrame();
-            // if (e.matches) {
-            //     console.log("port")
+            // landscape.addEventListener("change", function (e) {
+            //     console.log("change lan")
             //     resizeFrame();
-            // } else {
-            //     console.log("lan")
-            //     resizeFrame();
-            // }
-        })
+            //     // if (e.matches) {
+            //     //     console.log("port")
+            //     //     resizeFrame();
+            //     // } else {
+            //     //     console.log("lan")
+            //     //     resizeFrame();
+            //     // }
+            // })
+        });
 
-   
-        landscape.addEventListener("change", function (e) {
-            console.log("change lan")
-            resizeFrame();
-            // if (e.matches) {
-            //     console.log("port")
-            //     resizeFrame();
-            // } else {
-            //     console.log("lan")
-            //     resizeFrame();
-            // }
-        })
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
         //     // Announce the new orientation number
