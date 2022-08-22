@@ -59,6 +59,9 @@
         var widgetParm;
         var storageTest = []
 
+        addEventListener('orientationchange', (event) => { resizeFrame()});
+
+
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
             console.log(data)
@@ -279,10 +282,10 @@
             //     var copycel = document.getElementById("col" + i).innerHTML;
             //     cell.innerHTML = copycel;
             // }
-            resizeFrame(true);
+            resizeFrame();
         }
 
-        function resizeFrame(increaseFrame) {
+        function resizeFrame() {
             const currHeight = $("form").height();
             JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
             // if (increaseFrame) {
@@ -325,7 +328,7 @@
             }
             else if (rowCount > "2") {
                 var row = table.deleteRow(id);
-                resizeFrame(false);
+                resizeFrame();
                 validateDates();
                 return
                 //rowCount--;
