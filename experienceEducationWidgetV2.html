@@ -134,6 +134,8 @@
 
             JFCustomWidget.subscribe('populate', fillConditionValue);
 
+            screen.orientation.addEventListener('change', function (e) {resizeFrame(); console.log("Changed") })
+
             // addRow();
             console.log("ready message arrived from JotForm", msg);
 
