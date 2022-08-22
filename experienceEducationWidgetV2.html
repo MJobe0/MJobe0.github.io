@@ -76,6 +76,13 @@
             }
         });
 
+        window.matchMedia('(orientation: auto)').addListener(function (m) {
+            if (m.matches) {
+                console.log("Screen Change to Landscape")
+                resizeFrame();
+            }
+        });
+
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
             console.log(data)
