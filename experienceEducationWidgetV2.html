@@ -62,13 +62,15 @@
         let portrait = window.matchMedia("(orientation: portrait)");
 
         portrait.addEventListener("change", function (e) {
-            if (e.matches) {
-                console.log("port")
-                resizeFrame();
-            } else {
-                console.log("lan")
-                resizeFrame();
-            }
+            console.log("change")
+            resizeFrame();
+            // if (e.matches) {
+            //     console.log("port")
+            //     resizeFrame();
+            // } else {
+            //     console.log("lan")
+            //     resizeFrame();
+            // }
         })
 
         // // Listen for orientation changes
