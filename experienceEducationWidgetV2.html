@@ -506,7 +506,8 @@
             console.log(fillArr)
         }
         function test() {
-            console.log(document)
+            var height = $("form").height();
+            console.log(height);
         }
         // function setMaxYear() {
         //     console.log(widgetParm)
@@ -624,7 +625,7 @@
             }
         }
     </script>
-    <form id="educationExperienceList[]" name="educationExperienceList" action="#">
+    <form style="overflow: auto;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
