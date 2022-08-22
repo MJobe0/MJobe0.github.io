@@ -283,7 +283,7 @@
         }
 
         function resizeFrame(increaseFrame) {
-            var currHeight = $("form").height();
+            const currHeight = $("form").height();
             JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
             // if (increaseFrame) {
             //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
