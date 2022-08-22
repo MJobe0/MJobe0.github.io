@@ -61,7 +61,7 @@
 
         $(document).ready(function () {
             console.log("Screen = ", screen)
-        window.screen.orientation.onchange = function (e) { console.log("Changed 1") }
+        screen.onchange = function (e) { console.log("Changed 1") }
          });
 
         // screen.orientation.addEventListener('change', function (e) { ... })
