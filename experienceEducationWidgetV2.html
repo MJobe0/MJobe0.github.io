@@ -59,9 +59,9 @@
         var widgetParm;
         var storageTest = []
 
-        window.orientation.addEventListener('change', function () {
-            console.log('Current orientation is ' + screen.orientation.type);
-        });
+        // screen.orientation.addEventListener('change', function (e) { ... })
+        screen.orientation.onchange = function (e) { console.log("Changed 1") }
+
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
         //     // Announce the new orientation number
