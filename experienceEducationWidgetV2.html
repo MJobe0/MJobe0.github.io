@@ -59,7 +59,10 @@
         var widgetParm;
         var storageTest = []
 
-        addEventListener('orientationchange', (event) => { resizeFrame()});
+        addEventListener('orientationchange', (event) => {
+            console.log("Screen change");
+            resizeFrame();
+        });
 
 
         function fillConditionValue(data) {
