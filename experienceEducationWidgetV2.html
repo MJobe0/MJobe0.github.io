@@ -60,9 +60,11 @@
         var storageTest = []
 
         let portrait = window.matchMedia("(orientation: portrait)");
+        let landscape = window.matchMedia("(orientation: landscape)");
+
 
         portrait.addEventListener("change", function (e) {
-            console.log("change")
+            console.log("change port")
             resizeFrame();
             // if (e.matches) {
             //     console.log("port")
@@ -73,10 +75,18 @@
             // }
         })
 
-        screen.orientation.addEventListener("change", function (e) {
-            console.log("Changed screen")
-        });
-
+   
+        landscape.addEventListener("change", function (e) {
+            console.log("change lan")
+            resizeFrame();
+            // if (e.matches) {
+            //     console.log("port")
+            //     resizeFrame();
+            // } else {
+            //     console.log("lan")
+            //     resizeFrame();
+            // }
+        })
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
         //     // Announce the new orientation number
