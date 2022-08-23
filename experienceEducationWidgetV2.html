@@ -199,55 +199,23 @@
         var widgetParm;
         var storageTest = []
 
-        // Create a condition that targets viewports at least 768px wide
-        const mediaQuery = window.matchMedia('(min-width: 768px)')
+        // Create a condition that targets viewports at least 800px wide
+        const mediaQuery = window.matchMedia('(min-width: 800px)')
 
         function handleTabletChange(e) {
-            // Check if the media query is true
             if (e.matches) {
-                // Then log the following message to the console
-                console.log('Media Query Matched!')
+                console.log('Matched!')
                 resizeFrame();
             }
             else {
-                console.log("Media Query Doesnt Match!")
+                console.log("Doesn't Match!")
                 resizeFrame();
             }
         }
 
-        // Register event listener
         mediaQuery.addListener(handleTabletChange)
 
-        // Initial check
         handleTabletChange(mediaQuery)
-
-        // // Listen for orientation changes
-        // window.addEventListener("orientationchange", function () {
-        //     // Announce the new orientation number
-        //     alert(window.orientation);
-        // }, false);
-
-        // console.log("currOrientation", window.orientation);
-
-        // window.matchMedia('(orientation: portrait)').addListener(function (m) {
-        //     console.log(m)
-        //     console.log("Screen Change to Portrait");
-        //     this.resizeFrame();
-        // });
-
-
-        // window.matchMedia('(orientation: landscape)').addListener(function (m) {
-        //     console.log(m)
-        //     console.log("Screen Change to Landscape");
-        //     resizeFrame();
-        // });
-
-        // window.matchMedia('(orientation: auto)').addListener(function (m) {
-        //     if (m.matches) {
-        //         console.log("Screen Change to Landscape")
-        //         resizeFrame();
-        //     }
-        // });
 
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
