@@ -59,11 +59,10 @@
 
             /* Hide table headers (but not display: none;, for accessibility) */
             table th {
-                height: 1px;
-                width: 1px;
                 position: absolute;
+                top: -9999px;
+                left: -9999px;
                 overflow: hidden;
-                top: -10px;
             }
 
             table caption {
