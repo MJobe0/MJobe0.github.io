@@ -336,8 +336,8 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("body").height();
-            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
+            const currHeight = $("form").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
             // if (increaseFrame) {
             //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
             //     widgetHeight = widgetHeight + 600
@@ -560,10 +560,9 @@
             JFCustomWidget.setFieldsValueById(fillArr);
             console.log(fillArr)
         }
-        
         function test() {
-            var height = $("body").height();
-            console.log(height);
+            var height = $("form").height();
+            console.log(height + 10);
         }
         // function setMaxYear() {
         //     console.log(widgetParm)
