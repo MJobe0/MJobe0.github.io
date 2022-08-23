@@ -58,18 +58,23 @@
         var storedData;
         var widgetParm;
         var storageTest = []
+        // Create a condition that targets viewports at least 768px wide
+        const mediaQuery = window.matchMedia('(min-width: 768px)')
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var portrait = window.matchMedia('(orientation: portrait)');
-
-            portrait.addEventListener("change", () => {
-                test0001();
-            });
-        });
-
-        function test0001() {
-            console.log("WORKS!");
+        function handleTabletChange(e) {
+            // Check if the media query is true
+            if (e.matches) {
+                // Then log the following message to the console
+                console.log('Media Query Matched!')
+            }
         }
+
+        // Register event listener
+        mediaQuery.addListener(handleTabletChange)
+
+        // Initial check
+        handleTabletChange(mediaQuery)
+
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
         //     // Announce the new orientation number
