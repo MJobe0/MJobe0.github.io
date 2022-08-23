@@ -58,7 +58,7 @@
         var storedData;
         var widgetParm;
         var storageTest = []
-        
+
         // Create a condition that targets viewports at least 768px wide
         const mediaQuery = window.matchMedia('(min-width: 768px)')
 
@@ -336,7 +336,7 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("form").height();
+            const currHeight = $("body").height();
             JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
             // if (increaseFrame) {
             //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
@@ -561,7 +561,7 @@
             console.log(fillArr)
         }
         function test() {
-            var height = $("form").height();
+            var height = $("body").height();
             console.log(height);
         }
         // function setMaxYear() {
