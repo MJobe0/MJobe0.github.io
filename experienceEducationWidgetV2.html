@@ -59,13 +59,16 @@
         var widgetParm;
         var storageTest = []
 
-        var portrait = window.matchMedia('(orientation: portrait)')
+        document.addEventListener('DOMContentLoaded', function () {
+            var portrait = window.matchMedia('(orientation: portrait)');
 
-        portrait.addEventListener("change", () => {
-            this.test0001();
+            portrait.addEventListener("change", () => {
+                this.test0001();
+            });
         });
+
         function test0001() {
-            console.log("WORKS!")
+            console.log("WORKS!");
         }
         // // Listen for orientation changes
         // window.addEventListener("orientationchange", function () {
