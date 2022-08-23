@@ -111,6 +111,9 @@
 
         function fillConditionValue(data) {
             JFCustomWidget.hideWidgetError();
+
+            //If equal to full work history extract two values from data object else do the if statement below
+
             console.log(data)
             if (data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
