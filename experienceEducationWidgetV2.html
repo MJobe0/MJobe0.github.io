@@ -219,7 +219,7 @@
             JFCustomWidget.hideWidgetError();
 
             const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            
+
             console.log(currFullWorkHistory)
 
             if (currFullWorkHistory === "Yes" && data.value !== "") {
@@ -317,6 +317,10 @@
                 // JFCustomWidget.sendSubmit(data2);
             });
         });
+
+        $(document).ready(function () {
+            console.log(JFCustomWidget)
+        })
 
         // $(window).on("orientationchange", function (event) {
         //     console.log("Screen change")
@@ -850,12 +854,12 @@
         </table>
         <table>
             <tr>
-                <input type="submit" value="Add Row" onclick="addRow()" />
+                <button onclick="addRow()">Add Row</button>
                 <span>
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <!-- <td><input type="button" value="Test" onclick="test()" /></td> -->
+                <td><input type="button" value="Test" onclick="test()" /></td>
             </tr>
         </table>
     </form>
