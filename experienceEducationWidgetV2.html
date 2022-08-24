@@ -219,13 +219,14 @@
             JFCustomWidget.hideWidgetError();
 
             const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            
             console.log(currFullWorkHistory)
 
             if (currFullWorkHistory === "Yes" && data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
 
                 JFCustomWidget.getFieldsValueById(["25"], function (res) {
-                    console.log("res by Name= ", res)
+                    console.log("res by Name= ", res.data.value)
                     res.data.forEach(resItem => {
                         console.log(resItem.value);
                     });
@@ -266,11 +267,16 @@
             // //console.log(data.value)
             // JFCustomWidget.sendData(data);
         }
+        function test(data) {
+            console.log(data)
+        }
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
 
             JFCustomWidget.subscribe('populate', fillConditionValue);
+
+            JFCustomWidget.subscribe('save', test);
 
             // addRow();
             console.log("ready message arrived from JotForm", msg);
