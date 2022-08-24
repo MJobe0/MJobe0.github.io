@@ -192,11 +192,7 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
-        var widgetHeight = 500;
-        var fullWorkHistory;
-        var storedData;
-        var widgetParm;
-        var storageTest = []
+        var schoolLeavingAge = "14/03/2012";
 
         // Create a condition that targets viewports at least 800px wide
         const mediaQuery = window.matchMedia('(min-width: 800px)')
@@ -217,11 +213,26 @@
         handleTabletChange(mediaQuery)
 
         function fillConditionValue(data) {
+            console.log(schoolLeavingAge)
+
             JFCustomWidget.hideWidgetError();
+
+            const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            console.log(currFullWorkHistory)
+
+            if (currFullWorkHistory === "Yes" && data.value !== "") {
+                var inputValue = data.value ?? '';
+                //input.val(inputValue.split(","));
+                inputValue = inputValue.split(",")
+
+                console.log(inputValue)
+
+            }
 
             //If equal to full work history extract two values from data object else do the if statement below
 
             console.log(data)
+
             if (data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
             }
@@ -251,8 +262,6 @@
 
             // //console.log(data.value)
             // JFCustomWidget.sendData(data);
-            console.log(storageTest)
-
         }
 
         //subscrive to ready
@@ -277,7 +286,7 @@
 
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
-                var widgetParm = JFCustomWidget.getWidgetSettings();
+                const widgetParm = JFCustomWidget.getWidgetSettings();
                 var data2 = validateDates();
                 console.log(data2);
                 if (widgetParm["fullWorkHistory"] === "No") {
