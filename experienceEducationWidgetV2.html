@@ -213,6 +213,14 @@
         handleTabletChange(mediaQuery)
 
         function fillConditionValue(data) {
+
+            JFCustomWidget.getFieldsValueById(["#year_25"], function (res) {
+                console.log("res by Name= ", res)
+                res.data.forEach(resItem => {
+                    console.log(resItem.value);
+                });
+            });
+
             console.log(schoolLeavingAge)
 
             JFCustomWidget.hideWidgetError();
@@ -221,21 +229,16 @@
             console.log(currFullWorkHistory)
 
             if (currFullWorkHistory === "Yes" && data.value !== "") {
-                var inputValue = data.value ?? '';
-                //input.val(inputValue.split(","));
-                inputValue = inputValue.split(",")
-
-                console.log(inputValue)
-
+                restoreTableData(JSON.parse(data.value))
             }
 
             //If equal to full work history extract two values from data object else do the if statement below
 
             console.log(data)
 
-            if (data.value !== "") {
-                restoreTableData(JSON.parse(data.value))
-            }
+            // if (data.value !== "") {
+            //     restoreTableData(JSON.parse(data.value))
+            // }
 
             // storedData = JFCustomWidget.getWidgetSetting("storageField");
             // console.log("Stored data = ", storedData)
