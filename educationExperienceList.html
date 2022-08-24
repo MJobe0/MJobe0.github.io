@@ -1,6 +1,7 @@
-<html>
+<html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -46,6 +47,144 @@
             letter-spacing: .1em;
             text-transform: uppercase;
         } */
+        @media screen and (max-width: 800px) {
+            table {
+                border: 1px solid #ccc;
+                border-collapse: collapse;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            /* Hide table headers (but not display: none;, for accessibility) */
+            table th {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+                overflow: hidden;
+            }
+
+            table caption {
+                font-size: 1.5em;
+                margin: .5em 0 .75em;
+            }
+
+            table tr {
+                background-color: #f8f8f8;
+                border: 1px solid #ddd;
+                padding: .35em;
+            }
+
+            table th,
+            table td {
+                padding: .625em;
+                text-align: center;
+            }
+
+            table th {
+                font-size: .85em;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+            }
+
+            table {
+                border: 0;
+                max-width: 500px;
+            }
+
+            table caption {
+                font-size: 1.3em;
+            }
+
+            table thead {
+                border: none;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            table tr {
+                border-bottom: 3px solid #ddd;
+                display: block;
+                margin-bottom: .625em;
+            }
+
+            table td {
+                border-bottom: 1px solid #ddd;
+                display: block;
+                font-size: .8em;
+                text-align: right;
+            }
+
+            table td::before {
+                /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            table td:last-child {
+                border-bottom: 0;
+            }
+
+            /*
+		Label the data
+    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
+		*/
+
+            td:nth-of-type(1):before {
+                content: " ";
+            }
+
+            td:nth-of-type(2):before {
+                content: "Select a type of activity";
+            }
+
+            td:nth-of-type(3):before {
+                content: "Company";
+            }
+
+            td:nth-of-type(4):before {
+                content: "Institution";
+            }
+
+            td:nth-of-type(5):before {
+                content: "Start Date";
+            }
+
+            td:nth-of-type(6):before {
+                content: "End Date";
+            }
+
+            td:nth-of-type(7):before {
+                content: "Position Held";
+            }
+
+            td:nth-of-type(8):before {
+                content: "Grade Band";
+            }
+
+            td:nth-of-type(9):before {
+                content: "Results";
+            }
+
+            td:nth-of-type(10):before {
+                content: "Comments";
+            }
+
+            td:nth-of-type(11):before {
+                content: " ";
+            }
+        }
     </style>
     <script type="text/javascript">
         //https://github.com/canunaldi/widget/blob/master/widget.html
@@ -53,18 +192,54 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
-        var widgetHeight = 500;
-        var fullWorkHistory;
-        var storedData;
-        var widgetParm;
-        var storageTest = []
+        var schoolLeavingAge = "14/03/2012";
+
+        // Create a condition that targets viewports at least 800px wide
+        const mediaQuery = window.matchMedia('(min-width: 800px)')
+
+        function handleTabletChange(e) {
+            if (e.matches) {
+                console.log('Matched!')
+                resizeFrame();
+            }
+            else {
+                console.log("Doesn't Match!")
+                resizeFrame();
+            }
+        }
+
+        mediaQuery.addListener(handleTabletChange)
+
+        handleTabletChange(mediaQuery)
 
         function fillConditionValue(data) {
+
+            console.log(schoolLeavingAge)
+
             JFCustomWidget.hideWidgetError();
-            console.log(data)
-            if (data.value !== "") {
+
+            const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+            
+            console.log(currFullWorkHistory)
+
+            if (currFullWorkHistory === "Yes" && data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
+
+                JFCustomWidget.getFieldsValueById(["11"], function (res) {
+                    console.log("res by Name= ", res.data.value)
+                    res.data.forEach(resItem => {
+                        console.log(resItem.value);
+                    });
+                });
             }
+
+            //If equal to full work history extract two values from data object else do the if statement below
+
+            console.log(data)
+
+            // if (data.value !== "") {
+            //     restoreTableData(JSON.parse(data.value))
+            // }
 
             // storedData = JFCustomWidget.getWidgetSetting("storageField");
             // console.log("Stored data = ", storedData)
@@ -91,8 +266,6 @@
 
             // //console.log(data.value)
             // JFCustomWidget.sendData(data);
-            console.log(storageTest)
-
         }
 
         //subscrive to ready
@@ -117,7 +290,7 @@
 
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
-                var widgetParm = JFCustomWidget.getWidgetSettings();
+                const widgetParm = JFCustomWidget.getWidgetSettings();
                 var data2 = validateDates();
                 console.log(data2);
                 if (widgetParm["fullWorkHistory"] === "No") {
@@ -140,6 +313,10 @@
             });
         });
 
+        // $(window).on("orientationchange", function (event) {
+        //     console.log("Screen change")
+        //     resizeFrame();
+        // });
         // $(document).ready(function () {
         //     //Do some stuff
         //     // $(".rowNumberColumn").hover(function () {
@@ -214,7 +391,6 @@
         const currMaxYear = maxYear();
 
         function addRow(isPop, popData) {
-            console.log(popData)
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
@@ -279,18 +455,20 @@
             //     var copycel = document.getElementById("col" + i).innerHTML;
             //     cell.innerHTML = copycel;
             // }
-            resizeFrame(true);
+            resizeFrame();
         }
 
-        function resizeFrame(increaseFrame) {
-            if (increaseFrame) {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
-                widgetHeight = widgetHeight + 600
-            }
-            else {
-                JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 600 })
-                widgetHeight = widgetHeight - 600
-            }
+        function resizeFrame() {
+            const currHeight = $("form").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+            // if (increaseFrame) {
+            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
+            //     widgetHeight = widgetHeight + 600
+            // }
+            // else {
+            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 600 })
+            //     widgetHeight = widgetHeight - 600
+            // }
         }
 
         // function deleteRow(id) {
@@ -323,7 +501,7 @@
             }
             else if (rowCount > "2") {
                 var row = table.deleteRow(id);
-                resizeFrame(false);
+                resizeFrame();
                 validateDates();
                 return
                 //rowCount--;
@@ -483,15 +661,15 @@
 
         }
 
-        var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
-        function restoreTableData(dataObj) {
-            dataObj.forEach(function (obj) {
-                if (Object.keys(obj).length !== 0) {
-                    console.log(obj)
-                    addRow(true, obj)
-                }
-            })
-        }
+        // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
+        // function restoreTableData(dataObj) {
+        //     dataObj.forEach(function (obj) {
+        //         if (Object.keys(obj).length !== 0) {
+        //             console.log(obj)
+        //             addRow(true, obj)
+        //         }
+        //     })
+        // }
 
         function setCompanyNames(fieldIds) {
             let currNames = getCompanyNames();
@@ -505,7 +683,10 @@
             JFCustomWidget.setFieldsValueById(fillArr);
             console.log(fillArr)
         }
-
+        // function test() {
+        //     var height = $("form").height();
+        //     console.log(height + 10);
+        // }
         // function setMaxYear() {
         //     console.log(widgetParm)
         //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
