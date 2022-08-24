@@ -268,14 +268,23 @@
             // JFCustomWidget.sendData(data);
         }
 
-         var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
+        var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
+            const currStorage = JFCustomWidget.getWidgetSetting("storageField");
+
 
             //JFCustomWidget.subscribe('populate', fillConditionValue);
 
-            restoreTableData(testObj)
+            restoreTableData(testObj);
+
+            JFCustomWidget.getFieldsValueById([currStorage], function (res) {
+                console.log("res by Name= ", res.data.value)
+                // res.data.forEach(resItem => {
+                //     console.log(resItem.value);
+                // });
+            });
 
             // addRow();
             console.log("ready message arrived from JotForm", msg);
@@ -670,7 +679,7 @@
         }
 
         // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
-        
+
         function restoreTableData(dataObj) {
             dataObj.forEach(function (obj) {
                 if (Object.keys(obj).length !== 0) {
@@ -692,10 +701,12 @@
             JFCustomWidget.setFieldsValueById(fillArr);
             console.log(fillArr)
         }
-        function test() {
-            var height = $("form").height();
-            console.log(height + 10);
-        }
+
+        // function test() {
+        //     var height = $("form").height();
+        //     console.log(height + 10);
+        // }
+
         // function setMaxYear() {
         //     console.log(widgetParm)
         //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
