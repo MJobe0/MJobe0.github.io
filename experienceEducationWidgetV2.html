@@ -267,16 +267,15 @@
             // //console.log(data.value)
             // JFCustomWidget.sendData(data);
         }
-        function test(data) {
-            console.log(data)
-        }
+
+         var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
 
-            JFCustomWidget.subscribe('populate', fillConditionValue);
+            //JFCustomWidget.subscribe('populate', fillConditionValue);
 
-            JFCustomWidget.subscribe('save', test);
+            restoreTableData(testObj)
 
             // addRow();
             console.log("ready message arrived from JotForm", msg);
