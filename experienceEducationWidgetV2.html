@@ -670,14 +670,15 @@
         }
 
         // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
-        // function restoreTableData(dataObj) {
-        //     dataObj.forEach(function (obj) {
-        //         if (Object.keys(obj).length !== 0) {
-        //             console.log(obj)
-        //             addRow(true, obj)
-        //         }
-        //     })
-        // }
+        
+        function restoreTableData(dataObj) {
+            dataObj.forEach(function (obj) {
+                if (Object.keys(obj).length !== 0) {
+                    console.log(obj)
+                    addRow(true, obj)
+                }
+            })
+        }
 
         function setCompanyNames(fieldIds) {
             let currNames = getCompanyNames();
