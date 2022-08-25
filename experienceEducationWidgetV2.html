@@ -226,10 +226,7 @@
                 restoreTableData(JSON.parse(data.value))
 
                 JFCustomWidget.getFieldsValueById(["25"], function (res) {
-                    console.log("res by Name= ", res.data.value)
-                    res.data.forEach(resItem => {
-                        console.log(resItem.value);
-                    });
+                    console.log("res by Name= ", res.data[0].value);
                 });
             }
 
@@ -275,7 +272,7 @@
             const currStorage = JFCustomWidget.getWidgetSetting("storageField");
 
 
-            //JFCustomWidget.subscribe('populate', fillConditionValue);
+            JFCustomWidget.subscribe('populate', fillConditionValue);
 
             restoreTableData(testObj);
 
