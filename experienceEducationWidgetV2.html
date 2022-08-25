@@ -327,7 +327,12 @@
         });
 
         $(document).ready(function () {
-            console.log(JFCustomWidget)
+            JFCustomWidget.getFieldsValueById(["#input_18", "input_18", "18"], function (res) {
+                console.log("res by Name= ", res)
+                // res.data.forEach(resItem => {
+                //     console.log(resItem.value);
+                // });
+            });
         })
 
         // $(window).on("orientationchange", function (event) {
@@ -408,15 +413,6 @@
         const currMaxYear = maxYear();
 
         function addRow(isPop, popData) {
-
-            JFCustomWidget.getFieldsValueById(["#input_18", "input_18", "18"], function (res) {
-                console.log("res 2 by Name= ", res)
-                // res.data.forEach(resItem => {
-                //     console.log(resItem.value);
-                // });
-            });
-
-
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
