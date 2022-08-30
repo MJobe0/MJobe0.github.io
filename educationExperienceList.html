@@ -197,7 +197,7 @@
         // Create a condition that targets viewports at least 800px wide
         const mediaQuery = window.matchMedia('(min-width: 800px)')
 
-        function handleTabletChange(e) {
+        function handleScreenChange(e) {
             if (e.matches) {
                 console.log('Matched!')
                 resizeFrame();
@@ -208,9 +208,9 @@
             }
         }
 
-        mediaQuery.addListener(handleTabletChange)
+        mediaQuery.addListener(handleScreenChange)
 
-        handleTabletChange(mediaQuery)
+        handleScreenChange(mediaQuery)
 
         function fillConditionValue(data) {
 
@@ -219,17 +219,14 @@
             JFCustomWidget.hideWidgetError();
 
             const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            
+
             console.log(currFullWorkHistory)
 
             if (currFullWorkHistory === "Yes" && data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
 
                 JFCustomWidget.getFieldsValueById(["11"], function (res) {
-                    console.log("res by Name= ", res.data.value)
-                    res.data.forEach(resItem => {
-                        console.log(resItem.value);
-                    });
+                    console.log("res by Name= ", res.data[0].value);
                 });
             }
 
@@ -662,6 +659,7 @@
         }
 
         // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
+
         function restoreTableData(dataObj) {
             dataObj.forEach(function (obj) {
                 if (Object.keys(obj).length !== 0) {
@@ -683,10 +681,12 @@
             JFCustomWidget.setFieldsValueById(fillArr);
             console.log(fillArr)
         }
+
         // function test() {
         //     var height = $("form").height();
         //     console.log(height + 10);
         // }
+
         // function setMaxYear() {
         //     console.log(widgetParm)
         //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
