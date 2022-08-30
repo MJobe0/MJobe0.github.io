@@ -225,7 +225,7 @@
             if (currFullWorkHistory === "Yes" && data.value !== "") {
                 restoreTableData(JSON.parse(data.value))
 
-                JFCustomWidget.getFieldsValueById(["25"], function (res) {
+                JFCustomWidget.getFieldsValueById(["11"], function (res) {
                     console.log("res by Name= ", res.data[0].value);
                 });
             }
@@ -265,23 +265,12 @@
             // JFCustomWidget.sendData(data);
         }
 
-        var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
+        //var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
-            const currStorage = JFCustomWidget.getWidgetSetting("storageField");
-
 
             JFCustomWidget.subscribe('populate', fillConditionValue);
-
-            restoreTableData(testObj);
-
-            JFCustomWidget.getFieldsValueById(["#input_18", "input_18", "18"], function (res) {
-                console.log("res by Name= ", res)
-                // res.data.forEach(resItem => {
-                //     console.log(resItem.value);
-                // });
-            });
 
             // addRow();
             console.log("ready message arrived from JotForm", msg);
@@ -322,15 +311,6 @@
                 // JFCustomWidget.sendSubmit(data2);
             });
         });
-
-        $(document).ready(function () {
-            JFCustomWidget.getFieldsValueById(["#input_18", "input_18", "18"], function (res) {
-                console.log("res by Name= ", res)
-                // res.data.forEach(resItem => {
-                //     console.log(resItem.value);
-                // });
-            });
-        })
 
         // $(window).on("orientationchange", function (event) {
         //     console.log("Screen change")
@@ -760,7 +740,7 @@
 
                     document.getElementById(nameOfEmployerId).disabled = false;
                     document.getElementById(institutionId).disabled = true;
-                    document.getElementById(gradeBandId).disabled = true;
+                    document.getElementById(gradeBandId).disabled = false;
                     document.getElementById(resultsId).disabled = true;
                     document.getElementById(positionHeldId).disabled = false;
                     break;
@@ -825,7 +805,7 @@
             }
         }
     </script>
-    <form style="overflow: scroll;" id="educationExperienceList[]" name="educationExperienceList" action="#">
+    <form style="overflow:scroll;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
@@ -838,7 +818,7 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Position Held</th>
-                    <th>Grade Band</th>
+                    <th>Grade/Band</th>
                     <th>Results</th>
                     <th>Comments</th>
                     <th> </th>
@@ -872,7 +852,7 @@
                     <p id="textArea"></p>
                 </span>
                 <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <td><input type="button" value="Test" onclick="test()" /></td>
+                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
             </tr>
         </table>
     </form>
