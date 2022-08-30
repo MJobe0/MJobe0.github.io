@@ -197,7 +197,7 @@
         // Create a condition that targets viewports at least 800px wide
         const mediaQuery = window.matchMedia('(min-width: 800px)')
 
-        function handleTabletChange(e) {
+        function handleScreenChange(e) {
             if (e.matches) {
                 console.log('Matched!')
                 resizeFrame();
@@ -208,9 +208,9 @@
             }
         }
 
-        mediaQuery.addListener(handleTabletChange)
+        mediaQuery.addListener(handleScreenChange)
 
-        handleTabletChange(mediaQuery)
+        handleScreenChange(mediaQuery)
 
         function fillConditionValue(data) {
 
