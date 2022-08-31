@@ -192,7 +192,7 @@
         // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
         // console.log(JFCustomWidget.getWidgetSettings())
 
-        var schoolLeavingAge = "14/03/2012";
+        var schoolLeavingAge;
 
         // Create a condition that targets viewports at least 800px wide
         const mediaQuery = window.matchMedia('(min-width: 800px)')
@@ -214,9 +214,9 @@
 
         function fillConditionValue(data) {
 
-            console.log(schoolLeavingAge)
-
             JFCustomWidget.hideWidgetError();
+
+            var tbl = document.getElementById("emptbl");
 
             const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
@@ -227,7 +227,11 @@
 
                 JFCustomWidget.getFieldsValueById(["11"], function (res) {
                     console.log("res by Name= ", res.data[0].value);
+                    //schoolLeavingAge = res.data[0].value;
                 });
+            }
+            else if (tbl.rows.length === 0 && data.value !== "") {
+                restoreTableData(JSON.parse(data.value));
             }
 
             //If equal to full work history extract two values from data object else do the if statement below
@@ -390,6 +394,9 @@
         const currMaxYear = maxYear();
 
         function addRow(isPop, popData) {
+            if ($('input:invalid').length >= 1) {
+                return
+            }
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
@@ -410,8 +417,8 @@
             var deleteRowCell = row.insertCell(10);
             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
             moveButtonsCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/> <input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
-            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" value="" id="typeOfActivity${x}" required>
-                        <option value="0">Select Type of activity</option>
+            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" value="0" id="typeOfActivity${x}" required >
+                        <option value="">Select Type of activity</option>
                         <option value="1">Employed</option>
                         <option value="2">Traveling</option>
                         <option value="3">Unemployed</option>
@@ -493,12 +500,11 @@
         function deleteRow(id) {
             var table = document.getElementById('emptbl');
             var rowCount = table.rows.length;
-            console.log(id)
-            if (rowCount === "1") {
+            if (rowCount === 1) {
                 console.log("There should be atleast one row");
                 return
             }
-            else if (rowCount > "2") {
+            else if (rowCount > 2) {
                 var row = table.deleteRow(id);
                 resizeFrame();
                 validateDates();
@@ -656,8 +662,7 @@
             console.log(tblData);
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            JFCustomWidget.sendSubmit({ valid: true, value: JSON.stringify(tblData) });
-
+            JFCustomWidget.sendSubmit({ valid: true, value: tblData });
         }
 
         // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
