@@ -659,8 +659,54 @@
                 });
                 return obj;
             }).get();
-            var tblData2 = $('#emptbl').html()
-            console.log(tblData2);
+            var tblData2 = $('tr').map(function () {
+                var obj2 = {};
+                $(this).find('input, select, textarea').each(function () {
+                    console.log(this)
+                    switch (this.name) {
+                        case "typeOfActivity[]":
+                            obj2["Type of Activity"] = $(this).val();
+
+                            break;
+                        case "nameOfEmployer[]":
+                            obj2["Name of Employer"] = $(this).val();
+
+                            break;
+                        case "institution[]":
+                            obj2["Institution"] = $(this).val();
+
+                            break;
+                        case "employedFrom[]":
+                            obj2["Start Date"] = $(this).val();
+
+                            break;
+                        case "employedTo[]":
+                            obj2["End Date"] = $(this).val();
+
+                            break;
+                        case "positionHeld[]":
+                            obj2["Position Held"] = $(this).val();
+
+                            break;
+                        case "gradeBand[]":
+                            obj2["Grade/Band"] = $(this).val();
+
+                            break;
+                        case "results[]":
+                            obj2["Results"] = $(this).val();
+
+                            break;
+                        case "comments[]":
+                            obj2["Comments"] = $(this).val();
+
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                return obj2;
+            }).get();
+            console.log(tblData);
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             JFCustomWidget.sendSubmit({ valid: true, value: tblData2 });
