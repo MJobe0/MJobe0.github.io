@@ -662,7 +662,8 @@
             console.log(tblData);
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            var formData = new FormData(document.querySelector('form'))
+            var formData = $("form").serializeArray()
+            console.log(formData)
             JFCustomWidget.sendSubmit({ valid: true, value: formData });
         }
 
