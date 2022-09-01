@@ -659,18 +659,9 @@
                 });
                 return obj;
             }).get();
-            var tblData2 = $('tr').map(function () {
-                var obj2 = {};
-                $(this).find('input, select, textarea').each(function () {
-                    console.log(this)
-                    obj2[this.name] = $(this).val();
-                });
-                return obj2;
-            }).get();
-            console.log(tblData2);
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            JFCustomWidget.sendSubmit({ valid: true, value: tblData2 });
+            JFCustomWidget.sendSubmit({ valid: true, value: validateDates() });
         }
 
         // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
