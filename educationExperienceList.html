@@ -191,7 +191,6 @@
     <script type="text/javascript">
 
         var numOfIncorrectDates = 0
-        var currFullWorkHistory
 
         //Global functions
         function modFields(rowNumber, activityType) {
@@ -423,6 +422,9 @@
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
 
+                const currMaxYear = maxYear();
+
+
                 //mobile
                 // $('#listContainer').css('overflow-x', 'auto');
 
@@ -437,10 +439,17 @@
                     if (params["fullWorkHistory"] === "Yes") {
                         JFCustomWidget.getFieldsValueById(["11"], function (res) {
                             console.log("res by Name= ", res.data[0].value);
+                            const strDate = res.data[0].value;
 
-                            yearOfBirth = (new Date(res.data[0].value)).getFullYear();
-                            console.log("Year Of Birth = ", yearOfBirth)
-                                ;
+                            const [day, month, year] = strDate.split('/');
+                            console.log(month);
+                            console.log(day);
+                            console.log(year);
+                            const correctDateFormat = new Date(+year, +month - 1, +day);
+                            console.log(correctDateFormat);
+
+                            yearOfBirth = (new Date(correctDateFormat)).getFullYear();
+                            console.log("Year Of Birth = ", yearOfBirth);
                         });
                     }
                     // Create a condition that targets viewports at least 800px wide
@@ -466,6 +475,7 @@
                     });
 
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
+                    $("input[type=date]").attr("min", currMaxYear);
 
                 }
 
@@ -473,19 +483,20 @@
 
                 // }
 
-                function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
+                function maxYear() {
+                    var maxYearForDates;
                     if (params["fullWorkHistory"] === "Yes") {
-                        const maxYearForDates = yearOfBirth + 18;
+                        maxYearForDates = yearOfBirth + 18;
                     }
                     else {
-                        const maxYearForDates = new Date().getFullYear() - 5;
+                        maxYearForDates = new Date().getFullYear() - 5;
                     }
                     console.log(maxYearForDates + "-01" + "-01")
                     //input.setAttribute("min", maxYearForDates);
                     return maxYearForDates + "-01" + "-01"
                 }
 
-                const currMaxYear = maxYear();
+                // const currMaxYear = maxYear();
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
