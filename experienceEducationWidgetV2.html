@@ -205,7 +205,7 @@
                 // $('#listContainer').css('overflow-x', 'auto');
 
                 function init() {
-                    $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
+                    // $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
 
                     restoreTableData(formData.value)
 
@@ -702,12 +702,12 @@
         // }
 
     </script>
-    <!-- <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
+    <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
-                    <th> </th>
+                    <!-- <th> </th> -->
                     <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
@@ -720,7 +720,7 @@
                     <th>Comments</th>
                     <th> </th>
                 </tr>
-                <tr>
+                <!-- <tr>
                 <td id="col0">
                     <select name="typeOfActivity[]" id="dept">
                         <option value="0">Select Type of activity</option>
@@ -739,7 +739,7 @@
                 <td id="col6"><textarea name="reasonForLeaving[]" value=""></textarea></td>
                 <td id="col6"><input type="text" name="reasonForLeaving[]" value="" /></td>
                 <td id="col7"><input type="checkbox" name="provideAsReference[]" value="" /></td>
-            </tr>
+            </tr> -->
             </tbody>
         </table>
         <table>
@@ -748,11 +748,11 @@
                 <span>
                     <p id="textArea"></p>
                 </span>
-                 <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td>
-                <td><input type="button" value="Check" onclick="test()" /></td>
+                <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
+                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
             </tr>
         </table>
-    </form> -->
+    </form>
 </body>
 
 </html>
