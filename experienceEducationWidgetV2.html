@@ -340,6 +340,14 @@
             }
         }
 
+        function getMonthDifference(startDate, endDate) {
+            return (
+                endDate.getMonth() -
+                startDate.getMonth() +
+                12 * (endDate.getFullYear() - startDate.getFullYear())
+            );
+        }
+
         function deleteRow(id) {
             var table = document.getElementById('emptbl');
             var rowCount = table.rows.length;
@@ -399,6 +407,7 @@
                 this.getData = getData;
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
+                this.restoreTableData = restoreTableData;
 
                 //mobile
                 // $('#listContainer').css('overflow-x', 'auto');
@@ -508,14 +517,6 @@
                     JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
-                function getMonthDifference(startDate, endDate) {
-                    return (
-                        endDate.getMonth() -
-                        startDate.getMonth() +
-                        12 * (endDate.getFullYear() - startDate.getFullYear())
-                    );
-                }
-
                 function getCompanyNames() {
                     const currRowLength = document.getElementsByName("Name of Employer")?.length
                     let arr = []
@@ -559,12 +560,6 @@
                     JFCustomWidget.setFieldsValueById(fillArr);
                     console.log(fillArr)
                 }
-
-                function test() {
-                    var value1 = $('#Test01').attr('data-widget', 'e7ce64589c330d6bb7bf8c25').html();
-                    console.log(value1)
-                }
-
             }
 
             JFCustomWidget.subscribe('ready', function (data) {
