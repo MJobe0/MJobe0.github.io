@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -314,7 +316,7 @@
                         console.log("1 month data diff")
 
                         dateDiffRes[0].value = "Yes";
-                        console.log("Invalid dates = ",dateDiffRes)
+                        console.log("Invalid dates = ", dateDiffRes)
 
                         JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         console.log("here")
@@ -325,7 +327,7 @@
                         document.getElementsByName("End Date")[i].style = "background-color: none;"
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes[0].value = "No";
-                        console.log("Valid dates = ",dateDiffRes)
+                        console.log("Valid dates = ", dateDiffRes)
                         JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
