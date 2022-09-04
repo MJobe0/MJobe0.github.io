@@ -276,6 +276,19 @@
             }
         }
 
+        function getData(fieldToFill) {
+            var tblData = $('tr').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    obj[this.name] = $(this).val();
+                });
+                return obj;
+            }).get();
+            // console.log(JSON.stringify(tblData));
+            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
+            return { valid: true, value: JSON.stringify(tblData) };
+        }
+
         function validateDates() {
             const currRowLength = document.getElementsByName("employedFrom[]")?.length
 
@@ -370,7 +383,7 @@
             validateDates();
             return;
         }
-        
+
         $(function () {
             function EducationExperienceList(containerId, formData, params) {
 
@@ -392,7 +405,7 @@
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
 
-                    restoreTableData(formData.value)
+                    restoreTableData(JSON.parse(formData.value))
 
                     // Create a condition that targets viewports at least 800px wide
                     const mediaQuery = window.matchMedia('(min-width: 800px)')
@@ -519,18 +532,7 @@
                     return arr;
                 }
 
-                function getData(fieldToFill) {
-                    var tblData = $('tr').map(function () {
-                        var obj = {};
-                        $(this).find('input, select, textarea').each(function () {
-                            obj[this.name] = $(this).val();
-                        });
-                        return obj;
-                    }).get();
-                    // console.log(JSON.stringify(tblData));
-                    JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-                    return { valid: true, value: JSON.stringify(tblData) };
-                }
+
 
                 // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
 
