@@ -226,6 +226,9 @@
                     mediaQuery.addListener(handleScreenChange)
 
                     handleScreenChange(mediaQuery)
+                    $('#addRowButton').on('click', function (event) {
+                        addRow();
+                    });
                 }
 
                 function buildHTML() {
@@ -744,7 +747,7 @@
         </table>
         <table>
             <tr>
-                <button onclick="addRow()">Add Row</button>
+                <button id="addRowButton">Add Row</button>
                 <span>
                     <p id="textArea"></p>
                 </span>
