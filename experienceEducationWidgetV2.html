@@ -279,7 +279,7 @@
             var tblData = $('tr').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
-                    console.log(obj[this.name] = $(this).val())
+                    console.log($(this).val())
                     obj[this.name] = $(this).val();
                 });
                 return obj;
