@@ -276,7 +276,7 @@
         }
 
         function getData(fieldToFill) {
-            var tblData = $('tr').not(':first').not(':last').map(function () {
+            var tblData = $('tr, p').not(':first').not(':last').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
@@ -334,11 +334,11 @@
             console.log(numOfIncorrectDates)
             if (numOfIncorrectDates >= 1) {
                 document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                JFCustomWidget.sendData({ value: "Yes" });
+                // JFCustomWidget.sendData({ value: "Yes" });
             }
             else {
                 document.getElementById("textArea").innerHTML = "";
-                JFCustomWidget.sendData({ value: "No" });
+                // JFCustomWidget.sendData({ value: "No" });
             }
         }
 
