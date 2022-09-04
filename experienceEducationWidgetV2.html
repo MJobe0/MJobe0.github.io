@@ -468,12 +468,13 @@
 
                 // }
 
-                function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
+                function maxYear() {
+                    var maxYearForDates;
                     if (params["fullWorkHistory"] === "Yes") {
-                        const maxYearForDates = yearOfBirth + 18;
+                        maxYearForDates = yearOfBirth + 18;
                     }
                     else {
-                        const maxYearForDates = new Date().getFullYear() - 5;
+                        maxYearForDates = new Date().getFullYear() - 5;
                     }
                     console.log(maxYearForDates + "-01" + "-01")
                     //input.setAttribute("min", maxYearForDates);
