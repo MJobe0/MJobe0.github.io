@@ -458,6 +458,8 @@
 
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
 
+                    const currMaxYear = maxYear();
+
                 }
 
                 // function makeWidgetRequiredOrNot() {
@@ -475,8 +477,6 @@
                     //input.setAttribute("min", maxYearForDates);
                     return maxYearForDates + "-01" + "-01"
                 }
-
-                const currMaxYear = maxYear();
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
