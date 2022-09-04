@@ -570,6 +570,17 @@
                     console.log(fillArr)
                 }
 
+
+            }
+
+            JFCustomWidget.subscribe('ready', function (data) {
+                // console.log('Education Experience List ready', data);
+                var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
+                widget.init();
+                widget.resizeFrame();
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
                 function fillConditionValue(data) {
                     JFCustomWidget.hideWidgetError();
 
@@ -580,19 +591,10 @@
                     console.log(currFullWorkHistory)
 
                     if (currFullWorkHistory === "Yes" && data.value !== "") {
-                        restoreTableData(JSON.parse(data.value));
+                        widget.fillConditionValue(JSON.parse(data.value));
                     }
                     JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
-            }
-
-            JFCustomWidget.subscribe('ready', function (data) {
-                // console.log('Education Experience List ready', data);
-                var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
-                widget.init();
-                widget.resizeFrame();
-
-                JFCustomWidget.subscribe('populate', widget.fillConditionValue);
 
                 console.log(JFCustomWidget)
 
