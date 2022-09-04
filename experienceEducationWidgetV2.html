@@ -276,7 +276,7 @@
         }
 
         function getData(fieldToFill) {
-            var tblData = $('tr').map(function () {
+            var tblData = $('tr').not(':first').not(':last').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
@@ -410,6 +410,7 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
+                this.fillConditionValue = fillConditionValue;
 
                 //mobile
                 // $('#listContainer').css('overflow-x', 'auto');
@@ -565,6 +566,21 @@
                     JFCustomWidget.setFieldsValueById(fillArr);
                     console.log(fillArr)
                 }
+
+                function fillConditionValue(data) {
+                    JFCustomWidget.hideWidgetError();
+
+                    var tbl = document.getElementById("emptbl");
+
+                    const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+
+                    console.log(currFullWorkHistory)
+
+                    if (currFullWorkHistory === "Yes" && data.value !== "") {
+                        restoreTableData(JSON.parse(data.value));
+                    }
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
+                }
             }
 
             JFCustomWidget.subscribe('ready', function (data) {
@@ -572,6 +588,9 @@
                 var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
                 widget.init();
                 widget.resizeFrame();
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
                 console.log(JFCustomWidget)
 
                 JFCustomWidget.subscribe('submit', function () {
@@ -588,32 +607,6 @@
 
             });
         })
-        // function fillConditionValue(data) {
-
-        //     JFCustomWidget.hideWidgetError();
-
-        //     var tbl = document.getElementById("emptbl");
-
-        //     const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-
-        //     console.log(currFullWorkHistory)
-
-        //     if (currFullWorkHistory === "Yes" && data.value !== "") {
-        //         restoreTableData(JSON.parse(data.value))
-
-        //         JFCustomWidget.getFieldsValueById(["11"], function (res) {
-        //             console.log("res by Name= ", res.data[0].value);
-        //             //schoolLeavingAge = res.data[0].value;
-        //         });
-        //     }
-        //     else if (tbl.rows.length === 0 && data.value !== "") {
-        //         restoreTableData(JSON.parse(data.value));
-        //     }
-
-        //     //If equal to full work history extract two values from data object else do the if statement below
-
-        //     console.log(data)
-        // }
 
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
@@ -621,7 +614,6 @@
             <tbody>
                 <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
-                    <!-- <th> </th> -->
                     <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
@@ -642,8 +634,6 @@
                 <span>
                     <p id="textArea"></p>
                 </span>
-                <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
             </tr>
         </table>
     </form>
