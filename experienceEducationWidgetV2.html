@@ -405,7 +405,9 @@
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
 
-                    restoreTableData(JSON.parse(formData.value))
+                    if (formData.value !== undefined) {
+                        restoreTableData(JSON.parse(formData.value))
+                    }
 
                     // Create a condition that targets viewports at least 800px wide
                     const mediaQuery = window.matchMedia('(min-width: 800px)')
