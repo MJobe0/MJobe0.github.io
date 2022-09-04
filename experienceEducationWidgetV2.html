@@ -187,6 +187,9 @@
         }
     </style>
     <script type="text/javascript">
+
+        var numOfIncorrectDates = 0
+
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
@@ -289,8 +292,6 @@
         function validateDates() {
             const currRowLength = document.getElementsByName("Start Date")?.length
 
-            var numOfIncorrectDates = 0
-
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
@@ -332,11 +333,11 @@
             console.log(numOfIncorrectDates)
             if (numOfIncorrectDates >= 1) {
                 document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                JFCustomWidget.sendData(getData(fieldToStoreData));
+                JFCustomWidget.sendData({ value: "Yes" });
             }
             else {
                 document.getElementById("textArea").innerHTML = "";
-                JFCustomWidget.sendData(getData(fieldToStoreData));
+                JFCustomWidget.sendData({ value: "Yes" });
             }
         }
 
@@ -442,6 +443,9 @@
                     $('#addRowButton').on('click', function (event) {
                         addRow();
                     });
+
+                    $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
+
                 }
 
                 // function makeWidgetRequiredOrNot() {
@@ -567,6 +571,7 @@
                 var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
                 widget.init();
                 widget.resizeFrame();
+                console.log(JFCustomWidget)
 
                 JFCustomWidget.subscribe('submit', function () {
                     const widgetParm = JFCustomWidget.getWidgetSettings();
