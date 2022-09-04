@@ -296,10 +296,10 @@
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
-                let dateDiffRes = {
-                    id: "8",
+                let dateDiffRes = [{
+                    name: "widgetValidator",
                     value: ""
-                }
+                }]
                 console.log("EmpTo", currEndDate)
                 console.log("EmpFrom", currStartDate)
                 if (currEndDate != null && currStartDate != null) {
@@ -315,8 +315,8 @@
 
                         console.log("Here")
 
-                        dateDiffRes.value = "Yes";
-                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        dateDiffRes[0].value = "Yes";
+                        JFCustomWidget.setFieldsValueByName(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
                         //return { value: "Yes", valid: false };
@@ -324,8 +324,8 @@
                     else {
                         document.getElementsByName("End Date")[i].style = "background-color: none;"
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
-                        dateDiffRes.value = "No";
-                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        dateDiffRes[0].value = "No";
+                        JFCustomWidget.setFieldsValueByName(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
                     //add coomments to array
