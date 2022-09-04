@@ -404,7 +404,6 @@
 
                 var yearOfBirth;
                 var fieldToStoreData = params["storageField"];
-                var maxYearForDates;
 
                 /**
                * Exposed
@@ -414,6 +413,9 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
+
+                const currMaxYear = maxYear();
+
 
                 //mobile
                 // $('#listContainer').css('overflow-x', 'auto');
@@ -458,8 +460,7 @@
                     });
 
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
-
-                    const currMaxYear = maxYear();
+                    $("input[type=date]").attr("min", currMaxYear);
 
                 }
 
@@ -469,15 +470,17 @@
 
                 function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
                     if (params["fullWorkHistory"] === "Yes") {
-                        maxYearForDates = yearOfBirth + 18;
+                        const maxYearForDates = yearOfBirth + 18;
                     }
                     else {
-                        maxYearForDates = new Date().getFullYear() - 5;
+                        const maxYearForDates = new Date().getFullYear() - 5;
                     }
                     console.log(maxYearForDates + "-01" + "-01")
                     //input.setAttribute("min", maxYearForDates);
                     return maxYearForDates + "-01" + "-01"
                 }
+
+                // const currMaxYear = maxYear();
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
