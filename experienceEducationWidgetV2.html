@@ -316,7 +316,7 @@
                         console.log("Here")
 
                         dateDiffRes[0].value = "Yes";
-                        JFCustomWidget.setFieldsValueByName(dateDiffRes);
+                        JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
                         //return { value: "Yes", valid: false };
@@ -325,7 +325,7 @@
                         document.getElementsByName("End Date")[i].style = "background-color: none;"
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes[0].value = "No";
-                        JFCustomWidget.setFieldsValueByName(dateDiffRes);
+                        JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
                     //add coomments to array
