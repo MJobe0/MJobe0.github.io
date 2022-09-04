@@ -190,7 +190,6 @@
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
-            console.log(document.getElementsByName("institution[]")[0].disabled)
 
             //rowNumber = rowNumber - 1;
             const nameOfEmployerId = "nameOfEmployer" + rowNumber;
@@ -199,8 +198,6 @@
             const gradeBandId = "gradeBand" + rowNumber;
             const resultsId = "results" + rowNumber;
 
-            // console.log(rowNumber ? rowNumber === 0 : 1)
-            //console.log(document.getElementsByName("institution[]")[rowNumber ? rowNumber === 0 : 1].disabled)
             switch (activityType) {
                 case "1":
                     document.getElementById(nameOfEmployerId).value = "";
@@ -290,28 +287,28 @@
         }
 
         function validateDates() {
-            const currRowLength = document.getElementsByName("employedFrom[]")?.length
+            const currRowLength = document.getElementsByName("Start Date")?.length
 
             var numOfIncorrectDates = 0
 
             for (let i = 0; i < currRowLength; i++) {
-                let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
-                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
+                let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
+                let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
                 let dateDiffRes = {
                     id: "8",
                     value: ""
                 }
-                console.log("EmpTo", currEmployedTo)
-                console.log("EmpFrom", currEmployedFrom)
-                if (currEmployedTo != null && currEmployedFrom != null) {
-                    document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                    document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
-                    document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
-                    document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                console.log("EmpTo", currEndDate)
+                console.log("EmpFrom", currStartDate)
+                if (currEndDate != null && currStartDate != null) {
+                    document.getElementsByName("End Date")[i].style = "background-color: none;"
+                    document.getElementsByName("End Date")[i + 1].style = "background-color: none;"
+                    document.getElementsByName("Start Date")[i].style = "background-color: none;"
+                    document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                     console.log("all good")
-                    if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
-                        document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
-                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
+                    if (getMonthDifference(new Date(currEndDate), new Date(currStartDate)) >= 1) {
+                        document.getElementsByName("End Date")[i].style = "background-color: red;"
+                        document.getElementsByName("Start Date")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
 
                         console.log("Here")
@@ -323,8 +320,8 @@
                         //return { value: "Yes", valid: false };
                     }
                     else {
-                        document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                        document.getElementsByName("End Date")[i].style = "background-color: none;"
+                        document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1
@@ -469,7 +466,7 @@
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                     moveButtonsCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/> <input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
-                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" value="0" id="typeOfActivity${x}" required >
+                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="1">Employed</option>
                         <option value="2">Traveling</option>
@@ -477,28 +474,28 @@
                         <option value="4">Studying</option>
                         <option value="5">Other</option>
                     </select>`;
-                    companyCell.innerHTML = `<input type="text" name="nameOfEmployer[]" value="" id="nameOfEmployer${x}" required />`;
-                    institutionCell.innerHTML = `<input type="text" name="institution[]" value="" id="institution${x}" />`;
-                    startDateCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedFrom${x}" required />`;
-                    endDateCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedTo${x}" required />`;
-                    positionHeldCell.innerHTML = `<input type="text" name="positionHeld[]" value="" id="positionHeld${x}" required />`;
-                    gradeBandCell.innerHTML = `<input type="text" name="gradeBand[]" value="" id="gradeBand${x}" required />`;
-                    resultsCell.innerHTML = `<input type="text" name="results[]" value="" id="results${x}" required />`;
-                    commentsCell.innerHTML = `<textarea type="text" name="comments[]" value="" id="comments${x}" required />`;
-                    deleteRowCell.innerHTML = `<input type="button" id="deleteRow${x}" onclick="deleteRow(${x})" value="Delete"/>`;
+                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                    institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
+                    startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
+                    endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
+                    positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
+                    gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
+                    resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
+                    commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                    deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                     //set values
                     if (isPop) {
-                        document.getElementById(`typeOfActivity${x}`).value = popData["typeOfActivity[]"] ?? "";
-                        modFields(x, popData["typeOfActivity[]"] ?? "");
-                        document.getElementById(`nameOfEmployer${x}`).value = popData["nameOfEmployer[]"] ?? "";
-                        document.getElementById(`institution${x}`).value = popData["institution[]"] ?? "";
-                        document.getElementById(`employedFrom${x}`).value = popData["employedFrom[]"] ?? "";
-                        document.getElementById(`employedTo${x}`).value = popData["employedTo[]"] ?? "";
-                        document.getElementById(`positionHeld${x}`).value = popData["positionHeld[]"] ?? "";
-                        document.getElementById(`gradeBand${x}`).value = popData["gradeBand[]"] ?? "";
-                        document.getElementById(`results${x}`).value = popData["results[]"] ?? "";
-                        document.getElementById(`comments${x}`).value = popData["comments[]"] ?? ""
+                        document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
+                        modFields(x, popData["Type of Activity"] ?? "");
+                        document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
+                        document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
+                        document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
+                        document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
+                        document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
+                        document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
+                        document.getElementById(`results${x}`).value = popData["Results"] ?? "";
+                        document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
                     }
 
                     resizeFrame();
@@ -519,11 +516,11 @@
                 }
 
                 function getCompanyNames() {
-                    const currRowLength = document.getElementsByName("nameOfEmployer[]")?.length
+                    const currRowLength = document.getElementsByName("Name of Employer")?.length
                     let arr = []
                     for (let i = 0; i < currRowLength; i++) {
-                        let currNameOfEmployer = document.getElementsByName("nameOfEmployer[]")[i]?.value; //check undefinded
-                        let currActType = document.getElementsByName("typeOfActivity[]")[i]?.value; //check undefinded
+                        let currNameOfEmployer = document.getElementsByName("Name of Employer")[i]?.value; //check undefinded
+                        let currActType = document.getElementsByName("Type of Activity")[i]?.value; //check undefinded
                         console.log("Em", currActType)
                         console.log("nameEm", currNameOfEmployer)
                         if (currNameOfEmployer != null && currActType === "1" && arr.length < 6) {
@@ -533,10 +530,6 @@
                     console.log("arr length = ", arr.length)
                     return arr;
                 }
-
-
-
-                // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
 
                 function restoreTableData(dataObj) {
                     try {
@@ -654,26 +647,6 @@
                     <th>Comments</th>
                     <th> </th>
                 </tr>
-                <!-- <tr>
-                <td id="col0">
-                    <select name="typeOfActivity[]" id="dept">
-                        <option value="0">Select Type of activity</option>
-                        <option value="1">Employed</option>
-                        <option value="2">Traveling</option>
-                        <option value="3">Unemployed</option>
-                        <option value="4">Studying</option>
-                        <option value="5">Other</option>
-                    </select>
-                </td>
-                    <td id="col1"><input type="text" name="nameOfEmployer[]" value="" /></td>
-                <td id="col2"><input type="date" name="employedFrom[]" value="" /></td>
-                <td id="col3"><input type="date" name="employedTo[]" value="" /></td>
-                <td id="col4"><input type="text" name="numberOfHoursWorked[]" value="" /></td>
-                <td id="col5"><input type="text" name="detailsOfPositionHeld[]" value="" /></td>
-                <td id="col6"><textarea name="reasonForLeaving[]" value=""></textarea></td>
-                <td id="col6"><input type="text" name="reasonForLeaving[]" value="" /></td>
-                <td id="col7"><input type="checkbox" name="provideAsReference[]" value="" /></td>
-            </tr> -->
             </tbody>
         </table>
         <table>
