@@ -591,7 +591,12 @@
                     console.log(currFullWorkHistory)
 
                     if (currFullWorkHistory === "Yes" && data.value !== "") {
-                        widget.fillConditionValue(JSON.parse(data.value));
+                        widget.restoreTableData(JSON.parse(data.value));
+                        
+                        JFCustomWidget.getFieldsValueById(["31"], function (res) {
+                            console.log("res by Name= ", res.data[0].value);
+                            //schoolLeavingAge = res.data[0].value;
+                        });
                     }
                     JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
