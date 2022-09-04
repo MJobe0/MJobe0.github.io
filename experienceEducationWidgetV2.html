@@ -297,7 +297,7 @@
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
                 let dateDiffRes = [{
-                    lable: "Widget Validator",
+                    lable: "widgetValidator",
                     value: ""
                 }]
                 console.log("EmpTo", currEndDate)
@@ -313,9 +313,9 @@
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: red;"
                         console.log("1 month data diff")
 
-                        console.log("Here")
-
                         dateDiffRes[0].value = "Yes";
+                        console.log("Invalid dates = ",dateDiffRes)
+
                         JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
@@ -325,6 +325,7 @@
                         document.getElementsByName("End Date")[i].style = "background-color: none;"
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes[0].value = "No";
+                        console.log("Valid dates = ",dateDiffRes)
                         JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
