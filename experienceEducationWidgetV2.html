@@ -431,10 +431,17 @@
                     if (params["fullWorkHistory"] === "Yes") {
                         JFCustomWidget.getFieldsValueById(["31"], function (res) {
                             console.log("res by Name= ", res.data[0].value);
+                            const strDate = res.data[0].value;
 
-                            yearOfBirth = (new Date(res.data[0].value)).getFullYear();
-                            console.log("Year Of Birth = ", yearOfBirth)
-                                ;
+                            const [day, month, year] = strDate.split('/');
+                            console.log(month);
+                            console.log(day);
+                            console.log(year);
+                            const correctDateFormat = new Date(+year, +month - 1, +day);
+                            console.log(correctDateFormat);
+
+                            yearOfBirth = (new Date(correctDateFormat)).getFullYear();
+                            console.log("Year Of Birth = ", yearOfBirth);
                         });
                     }
                     // Create a condition that targets viewports at least 800px wide
