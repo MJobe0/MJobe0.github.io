@@ -276,7 +276,7 @@
         }
 
         function getData(fieldToFill) {
-            var tblData = $('tr, p').not(':first').not(':last').map(function () {
+            var tblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
@@ -326,7 +326,7 @@
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes.value = "No";
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        numOfIncorrectDates = numOfIncorrectDates - 1
+                        numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
                     //add coomments to array
                 }
@@ -465,37 +465,29 @@
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
-                        if (!JFCustomWidget.isWidgetRequired()) {
-                            JFCustomWidget.makeWidgetRequired();
-                            JFCustomWidget.showWidgetError(JFCustomWidget.texts = "Please make sure all fields are filled in")
-                        }
                         return
-                    } else {
-                        if (JFCustomWidget.isWidgetRequired()) {
-                            JFCustomWidget.makeWidgetNotRequired();
-                            JFCustomWidget.hideWidgetError();
-                        }
-                        var table = document.getElementById("emptbl");
-                        // GET TOTAL NUMBER OF ROWS 
-                        var x = table.rows.length;
-                        var id = "tbl" + x;
-                        var row = table.insertRow(x);
-                        row.id = id;
-                        // var rowNumberCell = row.insertCell(0);
-                        var moveButtonsCell = row.insertCell(0);
-                        var typeOfActivityCell = row.insertCell(1);
-                        var companyCell = row.insertCell(2);
-                        var institutionCell = row.insertCell(3);
-                        var startDateCell = row.insertCell(4);
-                        var endDateCell = row.insertCell(5);
-                        var positionHeldCell = row.insertCell(6);
-                        var gradeBandCell = row.insertCell(7)
-                        var resultsCell = row.insertCell(8);
-                        var commentsCell = row.insertCell(9);
-                        var deleteRowCell = row.insertCell(10);
-                        // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                        moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${x})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${x})">Down</button>`;
-                        typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                    }
+                    var table = document.getElementById("emptbl");
+                    // GET TOTAL NUMBER OF ROWS 
+                    var x = table.rows.length;
+                    var id = "tbl" + x;
+                    var row = table.insertRow(x);
+                    row.id = id;
+                    // var rowNumberCell = row.insertCell(0);
+                    var moveButtonsCell = row.insertCell(0);
+                    var typeOfActivityCell = row.insertCell(1);
+                    var companyCell = row.insertCell(2);
+                    var institutionCell = row.insertCell(3);
+                    var startDateCell = row.insertCell(4);
+                    var endDateCell = row.insertCell(5);
+                    var positionHeldCell = row.insertCell(6);
+                    var gradeBandCell = row.insertCell(7)
+                    var resultsCell = row.insertCell(8);
+                    var commentsCell = row.insertCell(9);
+                    var deleteRowCell = row.insertCell(10);
+                    // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${x})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${x})">Down</button>`;
+                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
                         <option value="Traveling">Traveling</option>
@@ -503,33 +495,32 @@
                         <option value="Studying">Studying</option>
                         <option value="Other">Other</option>
                     </select>`;
-                        companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
-                        institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
-                        startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
-                        endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
-                        positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
-                        gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
-                        resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
-                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
-                        deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
+                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                    institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
+                    startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
+                    endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
+                    positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
+                    gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
+                    resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
+                    commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                    deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
-                        //set values
-                        if (isPop) {
-                            document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
-                            modFields(x, popData["Type of Activity"] ?? "");
-                            document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
-                            document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
-                            document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
-                            document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
-                            document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
-                            document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
-                            document.getElementById(`results${x}`).value = popData["Results"] ?? "";
-                            document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
-                        }
-
-                        resizeFrame();
-                        JFCustomWidget.sendData(getData(fieldToStoreData));
+                    //set values
+                    if (isPop) {
+                        document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
+                        modFields(x, popData["Type of Activity"] ?? "");
+                        document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
+                        document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
+                        document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
+                        document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
+                        document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
+                        document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
+                        document.getElementById(`results${x}`).value = popData["Results"] ?? "";
+                        document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
                     }
+
+                    resizeFrame();
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
                 function getCompanyNames() {
@@ -598,7 +589,7 @@
                 widget.init();
                 widget.resizeFrame();
 
-                JFCustomWidget.subscribe('populate', fillConditionValue);
+                JFCustomWidget.subscribe('populate', widget.fillConditionValue);
 
                 console.log(JFCustomWidget)
 
