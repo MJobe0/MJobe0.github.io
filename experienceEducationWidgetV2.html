@@ -276,6 +276,101 @@
             }
         }
 
+        function validateDates() {
+            const currRowLength = document.getElementsByName("employedFrom[]")?.length
+
+            var numOfIncorrectDates = 0
+
+            for (let i = 0; i < currRowLength; i++) {
+                let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
+                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
+                let dateDiffRes = {
+                    id: "8",
+                    value: ""
+                }
+                console.log("EmpTo", currEmployedTo)
+                console.log("EmpFrom", currEmployedFrom)
+                if (currEmployedTo != null && currEmployedFrom != null) {
+                    document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
+                    document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
+                    document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
+                    document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                    console.log("all good")
+                    if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
+                        document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
+                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
+                        console.log("1 month data diff")
+
+                        console.log("Here")
+
+                        dateDiffRes.value = "Yes";
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        console.log("here")
+                        numOfIncorrectDates = numOfIncorrectDates + 1
+                        //return { value: "Yes", valid: false };
+                    }
+                    else {
+                        document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
+                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
+                        dateDiffRes.value = "No";
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        numOfIncorrectDates = numOfIncorrectDates - 1
+                    }
+                    //add coomments to array
+                }
+            }
+            console.log(numOfIncorrectDates)
+            if (numOfIncorrectDates >= 1) {
+                document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
+                JFCustomWidget.sendData(getData(params["storageField"]));
+            }
+            else {
+                document.getElementById("textArea").innerHTML = "";
+                JFCustomWidget.sendData(getData(params["storageField"]));
+            }
+        }
+
+        function deleteRow(id) {
+            var table = document.getElementById('emptbl');
+            var rowCount = table.rows.length;
+            if (rowCount === 1) {
+                console.log("There should be atleast one row");
+                return
+            }
+            else if (rowCount > 2) {
+                var row = table.deleteRow(id);
+                resizeFrame();
+                validateDates();
+                return
+                //rowCount--;
+            }
+        }
+
+        function moveRowUp(tblRow) {
+            // $("tblHeading").prev(tblRow )
+            const prevRow = $(tblRow).prev()[0].id
+            console.log(prevRow)
+            if (prevRow === "tblHeading") {
+                console.log("here");
+                return;
+            }
+            console.log($(tblRow).prev()[0])
+            $(tblRow).prev().before($(tblRow));
+            validateDates();
+            return
+        }
+
+        function moveRowDown(tblRow) {
+            const nextRow = $(tblRow).next();
+            if (nextRow.length === 0) {
+                console.log("length ", nextRow.length);
+                return;
+            }
+            $(tblRow).next().after($(tblRow));
+            validateDates();
+            return;
+        }
+        
         $(function () {
             function EducationExperienceList(containerId, formData, params) {
 
@@ -400,130 +495,12 @@
                     JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
                 }
 
-                function deleteRow(id) {
-                    var table = document.getElementById('emptbl');
-                    var rowCount = table.rows.length;
-                    if (rowCount === 1) {
-                        console.log("There should be atleast one row");
-                        return
-                    }
-                    else if (rowCount > 2) {
-                        var row = table.deleteRow(id);
-                        resizeFrame();
-                        validateDates();
-                        return
-                        //rowCount--;
-                    }
-                }
-
-                function moveRowUp(tblRow) {
-                    // $("tblHeading").prev(tblRow )
-                    const prevRow = $(tblRow).prev()[0].id
-                    console.log(prevRow)
-                    if (prevRow === "tblHeading") {
-                        console.log("here");
-                        return;
-                    }
-                    console.log($(tblRow).prev()[0])
-                    $(tblRow).prev().before($(tblRow));
-                    validateDates();
-                    return
-                }
-
-                function moveRowDown(tblRow) {
-                    const nextRow = $(tblRow).next();
-                    if (nextRow.length === 0) {
-                        console.log("length ", nextRow.length);
-                        return;
-                    }
-                    $(tblRow).next().after($(tblRow));
-                    validateDates();
-                    return;
-                }
-
-                // function deleteRows() {
-                //     var table = document.getElementById('emptbl');
-                //     var rowCount = table.rows.length;
-                //     if (rowCount > "2") {
-                //         var row = table.deleteRow(rowCount - 1);
-                //         rowCount--;
-                //     }
-                //     else {
-                //         alert("There should be atleast one row");
-                //     }
-                // }
-
                 function getMonthDifference(startDate, endDate) {
                     return (
                         endDate.getMonth() -
                         startDate.getMonth() +
                         12 * (endDate.getFullYear() - startDate.getFullYear())
                     );
-                }
-
-                function validateDates() {
-                    //var formData = $("form").serializeArray()
-                    //console.log(formData)
-
-                    // var test = document.getElementsByName("employedFrom[]")[0].value
-                    // var test1 = document.getElementsByName("employedFrom[]")[1].value
-                    // var test2 = document.getElementsByName("employedFrom[]").length
-
-                    // console.log(test)
-                    // console.log(test1)
-                    // console.log(test2)
-
-                    const currRowLength = document.getElementsByName("employedFrom[]")?.length
-
-                    var numOfIncorrectDates = 0
-
-                    for (let i = 0; i < currRowLength; i++) {
-                        let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
-                        let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
-                        let dateDiffRes = {
-                            id: "8",
-                            value: ""
-                        }
-                        console.log("EmpTo", currEmployedTo)
-                        console.log("EmpFrom", currEmployedFrom)
-                        if (currEmployedTo != null && currEmployedFrom != null) {
-                            document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                            document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
-                            document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
-                            document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                            console.log("all good")
-                            if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
-                                document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
-                                document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
-                                console.log("1 month data diff")
-
-                                console.log("Here")
-
-                                dateDiffRes.value = "Yes";
-                                JFCustomWidget.setFieldsValueById(dateDiffRes);
-                                console.log("here")
-                                numOfIncorrectDates = numOfIncorrectDates + 1
-                                //return { value: "Yes", valid: false };
-                            }
-                            else {
-                                document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                                document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                                dateDiffRes.value = "No";
-                                JFCustomWidget.setFieldsValueById(dateDiffRes);
-                                numOfIncorrectDates = numOfIncorrectDates - 1
-                            }
-                            //add coomments to array
-                        }
-                    }
-                    console.log(numOfIncorrectDates)
-                    if (numOfIncorrectDates >= 1) {
-                        document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                        JFCustomWidget.sendData(getData(params["storageField"]));
-                    }
-                    else {
-                        document.getElementById("textArea").innerHTML = "";
-                        JFCustomWidget.sendData(getData(params["storageField"]));
-                    }
                 }
 
                 function getCompanyNames() {
