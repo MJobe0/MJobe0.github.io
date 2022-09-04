@@ -299,7 +299,7 @@
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
                 let dateDiffRes = [{
-                    label: "Widget Validator",
+                    id: "29",
                     value: ""
                 }]
                 console.log("EmpTo", currEndDate)
@@ -318,7 +318,7 @@
                         dateDiffRes[0].value = "Yes";
                         console.log("Invalid dates = ", dateDiffRes)
 
-                        JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
                         //return { value: "Yes", valid: false };
@@ -328,7 +328,7 @@
                         document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
                         dateDiffRes[0].value = "No";
                         console.log("Valid dates = ", dateDiffRes)
-                        JFCustomWidget.setFieldsValueByLabel(dateDiffRes);
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
                     }
                     //add coomments to array
