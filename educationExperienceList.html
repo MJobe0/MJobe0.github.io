@@ -191,6 +191,7 @@
     <script type="text/javascript">
 
         var numOfIncorrectDates = 0
+        var currFullWorkHistory
 
         //Global functions
         function modFields(rowNumber, activityType) {
@@ -298,10 +299,18 @@
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
-                let dateDiffRes = [{
-                    id: "29",
-                    value: ""
-                }]
+                if (currFullWorkHistory === "Yes") {
+                    let dateDiffRes = [{
+                        id: "215",
+                        value: ""
+                    }]
+                }
+                else {
+                    let dateDiffRes = [{
+                        id: "439",
+                        value: ""
+                    }]
+                }
                 console.log("EmpTo", currEndDate)
                 console.log("EmpFrom", currStartDate)
                 if (currEndDate != null && currStartDate != null) {
@@ -426,7 +435,7 @@
                         restoreTableData(JSON.parse(formData.value))
                     }
                     if (params["fullWorkHistory"] === "Yes") {
-                        JFCustomWidget.getFieldsValueById(["31"], function (res) {
+                        JFCustomWidget.getFieldsValueById(["11"], function (res) {
                             console.log("res by Name= ", res.data[0].value);
 
                             yearOfBirth = (new Date(res.data[0].value)).getFullYear();
@@ -596,7 +605,7 @@
 
                     var tbl = document.getElementById("emptbl");
 
-                    const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+                    currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
                     console.log(currFullWorkHistory)
 
