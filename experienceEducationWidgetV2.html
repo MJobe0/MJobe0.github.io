@@ -332,11 +332,11 @@
             console.log(numOfIncorrectDates)
             if (numOfIncorrectDates >= 1) {
                 document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                JFCustomWidget.sendData(getData(params["storageField"]));
+                JFCustomWidget.sendData(getData(fieldToStoreData));
             }
             else {
                 document.getElementById("textArea").innerHTML = "";
-                JFCustomWidget.sendData(getData(params["storageField"]));
+                JFCustomWidget.sendData(getData(fieldToStoreData));
             }
         }
 
@@ -381,10 +381,16 @@
             return;
         }
 
+        function resizeFrame() {
+            const currHeight = $("form").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+        }
+
         $(function () {
             function EducationExperienceList(containerId, formData, params) {
 
                 var schoolLeavingAge;
+                var fieldToStoreData = params["storageField"];
 
                 /**
                * Exposed
@@ -499,12 +505,7 @@
                     }
 
                     resizeFrame();
-                    JFCustomWidget.sendData(getData(params["storageField"]));
-                }
-
-                function resizeFrame() {
-                    const currHeight = $("form").height();
-                    JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
                 function getMonthDifference(startDate, endDate) {
@@ -564,17 +565,6 @@
                     console.log(value1)
                 }
 
-                // function setMaxYear() {
-                //     console.log(widgetParm)
-                //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
-                //     if (JFCustomWidget.getWidgetSetting("fullWorkHistory") === "No") {
-                //         return 5;
-                //     }
-                //     else {
-                //         return 10;
-                //     }
-                // }
-
             }
 
             JFCustomWidget.subscribe('ready', function (data) {
@@ -585,15 +575,11 @@
 
                 JFCustomWidget.subscribe('submit', function () {
                     const widgetParm = JFCustomWidget.getWidgetSettings();
-                    var data2 = validateDates();
-                    console.log(data2);
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                     }
 
-                    console.log(widgetParm["storageField"])
-
-                    // getData(widgetParm["storageField"]);
+                    console.log(widgetParm["storageField"]);
 
                     // send the data
                     JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
