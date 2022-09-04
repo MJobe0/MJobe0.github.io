@@ -402,7 +402,7 @@
         $(function () {
             function EducationExperienceList(containerId, formData, params) {
 
-                var dateOfBirth;
+                var yearOfBirth;
                 var fieldToStoreData = params["storageField"];
 
                 /**
@@ -429,7 +429,9 @@
                         JFCustomWidget.getFieldsValueById(["31"], function (res) {
                             console.log("res by Name= ", res.data[0].value);
 
-                            //dateOfBirth = res.data[0].value;
+                            yearOfBirth = (new Date(res.data[0].value)).getFullYear();
+                            console.log("Year Of Birth = ", yearOfBirth)
+                                ;
                         });
                     }
                     // Create a condition that targets viewports at least 800px wide
@@ -463,7 +465,12 @@
                 // }
 
                 function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-                    const maxYearForDates = new Date().getFullYear() - 5;
+                    if (params["fullWorkHistory"] === "Yes") {
+                        const maxYearForDates = yearOfBirth + 18;
+                    }
+                    else {
+                        const maxYearForDates = new Date().getFullYear() - 5;
+                    }
                     console.log(maxYearForDates + "-01" + "-01")
                     //input.setAttribute("min", maxYearForDates);
                     return maxYearForDates + "-01" + "-01"
