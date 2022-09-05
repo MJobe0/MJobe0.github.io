@@ -476,6 +476,15 @@
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
                     $("input[type=date]").attr("min", currMaxYear);
 
+                    $(".up,.down").click(function () {
+                        var row = $(this).parents("tr:first");
+                        if ($(this).is(".up")) {
+                            row.insertBefore(row.prev());
+                        } else {
+                            row.insertAfter(row.next());
+                        }
+                    });
+
                 }
 
                 // function makeWidgetRequiredOrNot() {
@@ -520,7 +529,7 @@
                     var commentsCell = row.insertCell(9);
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
+                    moveButtonsCell.innerHTML = `<button id="upRow${x}" class="up" >Up</button> <button id="downRow${x}" class="down" >Down</button>`;
                     typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
