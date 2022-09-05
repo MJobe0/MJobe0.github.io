@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://js.jotform.com/JotForm.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,93 +29,72 @@
         var controlFieldToUpdate;
         var validateRefNumber;
         var callFinished = false;
+        var formType;
 
         function checkFieldToUpdate(refNumber, fieldArr) {
             switch (refNumber) {
                 case "1":
-                    return fieldArr[0]
+                    return "submission[" + fieldArr[0] + "]"
                     break;
                 case "2":
-                    return fieldArr[1]
+                    return "submission[" + fieldArr[1] + "]"
                     break;
                 case "3":
-                    return fieldArr[2]
+                    return "submission[" + fieldArr[2] + "]"
                     break;
                 case "4":
-                    return fieldArr[3]
+                    return "submission[" + fieldArr[3] + "]"
                     break;
                 case "5":
-                    return fieldArr[4]
+                    return "submission[" + fieldArr[4] + "]"
                     break;
                 case "6":
-                    return fieldArr[5]
+                    return "submission[" + fieldArr[5] + "]"
                     break;
                 default:
             }
         }
 
         //determining valid is important
-        function callControlForm(apikey, subId, fieldId) {
-            console.log(JF);
-            console.log(JF.editSubmission)
-
-            // submission = new Object();
-            // submission['1'] = 'New answer';
-            // submission['new'] = '1'; //Mark as new
-            // submission['flag'] = '1'; //Mark as flagged
-
-            // JF.editSubmission(sid, submission, function (response) {
-            //     /**
-            //      successful response including changed submission data
-            //      .
-            //      */
-            //     document.write(response.submissionID);
-            // })
-            // console.log(typeof fieldId)
-            // console.log("https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received")
-            // if (callFinished === false) {
-            //     jQuery.ajax({
-            //         url: "https://acaciumgroup.jotform.com/API/submission/" + subId + "?apiKey=" + apikey + "&submission[" + fieldId + "]=" + "Response Received",
-            //         method: "POST",
-            //         //  data: { "submission[67]": "Response Received" },
-            //         // body: { fieldId: "Response Received" },
-            //         async: true,
-            //         headers: {
-            //             'Access-Control-Allow-Origin': '*',
-            //             'Content-Type': 'application/json'
-            //         },
-            //         dataType: 'jsonp',
-            //         timeout: 60000,
-            //         success: function (response) {
-            //             console.log(response);
-            //             //add result.info to array [1] and return it
-            //             if (response.result === "YES" && response.errorcode === "Success") {
-            //                 console.log("Pass");
-            //                 valid = true;
-            //                 value = "Call passed";
-            //                 callFinished = true;
-            //                 return
-            //             }
-            //             else {
-            //                 console.log("Fail");
-            //                 valid = true;
-            //                 value = "Call failed";
-            //                 callFinished = true;
-            //                 return
-            //             }
-            //         },
-            //         error: function (response) {
-            //             console.log(response);
-            //             valid = true;
-            //             value = "Error";
-            //             callFinished = true;
-            //             return
-            //         }
-            //     })
-            // }
+        function callControlForm(apiKey, submissionId, fieldToUpdate) {
+            console.log("https://acaciumgroup.jotform.com/API/submission/" + "5363645105018373797" + "?apiKey=" + "a5784737f77304292214f0c7e15c1b15")
+            //https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e
+            jQuery.ajax({
+                //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
+                url: "https://acaciumgroup.jotform.com/API/submission/5353342735242077708?apiKey=92ab5d0b21d75c34bda08a2f234a64a3",
+                method: "POST",
+                data: { "submission[67]": "Response Received" },
+                timeout: 60000,
+                success: function (response) {
+                    console.log(response);
+                    //add result.info to array [1] and return it
+                    if (response.result === "YES" && response.errorcode === "Success") {
+                        console.log("Pass");
+                        valid = true;
+                        value = "Call passed";
+                        callFinished = true;
+                        return
+                    }
+                    else {
+                        console.log("Fail");
+                        valid = true;
+                        value = "Call failed";
+                        callFinished = true;
+                        return
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    valid = true;
+                    value = "Error";
+                    callFinished = true;
+                    return
+                }
+            })
         }
 
-        function fillConditionValue() {
+        function makeApiCall() {
+            //Check form type: Ref, Application
             JFCustomWidget.hideWidgetError();
 
             apiKey = JFCustomWidget.getWidgetSetting("apiKey");
@@ -125,20 +105,47 @@
 
             var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
 
-            JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-                console.log("res by Name=", res)
-                submissionId = res.data[0].value
-                refNumber = res.data[1].value
-                // res.data.forEach(resItem => {
-                //     console.log(resItem.value);
-                // });
-                callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
-            }); // set refNumber and submissionId
+            if (formType === "Ref") {
+                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
+                    console.log("res by Name=", res)
+                    submissionId = res.data[0].value
+                    refNumber = res.data[1].value
+                    // res.data.forEach(resItem => {
+                    //     console.log(resItem.value);
+                    // });
+                    dataToSend = {
+                        // checkFieldToUpdate(refNumber, fieldArr):"Response Received"
+                    }
+                    callControlForm(apiKey, submissionId, dataToSend);
+                }); // set refNumber and submissionId
 
-            console.log(apiKey);
-            console.log(submissionId);
-            console.log(fieldToUpdate);
-            console.log(fieldArr);
+                console.log(apiKey);
+                console.log(submissionId);
+                console.log(fieldToUpdate);
+                console.log(fieldArr);
+            }
+            else if (formType === "App Pulse") {
+                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
+                    console.log("res by Name=", res)
+                    submissionId = res.data[0].value
+                    refNumber = res.data[1].value
+                    dataToSend = {
+
+                    }
+                    callControlForm(apiKey, submissionId, dataToSend);
+                });
+            }
+            else if (formType === "App TCS") {
+                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
+                    console.log("res by Name=", res)
+                    submissionId = res.data[0].value
+                    refNumber = res.data[1].value
+                    dataToSend = {
+
+                    }
+                    callControlForm(apiKey, submissionId, dataToSend);
+                });
+            }
 
             // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
 
@@ -153,12 +160,18 @@
             JFCustomWidget.sendData(data);
         }
 
+        function fillConditionValue(data) {
+            JFCustomWidget.hideWidgetError();
+
+            formType = data.value
+            return
+        }
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("ready message arrived from JotForm", msg);
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
-                fillConditionValue();
+                makeApiCall();
                 var data2 = {
                     value: "",
                     valid: true
@@ -170,7 +183,7 @@
                 // console.log(jotFormDisplayName)
             });
 
-            // JFCustomWidget.subscribe('populate', fillConditionValue);
+            JFCustomWidget.subscribe('populate', fillConditionValue);
 
         });
     </script>
