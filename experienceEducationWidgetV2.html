@@ -383,9 +383,9 @@
             const prevRow = $(tblRow).prev()[0].id
             console.log(prevRow)
             if (prevRow !== "tblHeading") {
-                console.log($(tblRow).prev()[0])
+                // console.log($(tblRow).prev()[0])
                 $(tblRow).prev().before($(tblRow));
-                validateDates();
+                // validateDates();
             }
         }
 
@@ -521,7 +521,7 @@
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                     moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
-                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
                         <option value="Traveling">Traveling</option>
@@ -529,14 +529,14 @@
                         <option value="Studying">Studying</option>
                         <option value="Other">Other</option>
                     </select>`;
-                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" />`;
                     institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
-                    startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
-                    endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
-                    positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
-                    gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
-                    resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
-                    commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                    startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}"  />`;
+                    endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}"  />`;
+                    positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}"  />`;
+                    gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}"  />`;
+                    resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}"  />`;
+                    commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}"  />`;
                     deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                     //set values
