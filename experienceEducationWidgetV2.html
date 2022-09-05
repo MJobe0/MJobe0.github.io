@@ -379,21 +379,18 @@
         }
 
         function moveRowUp(tblRow) {
-            console.log("tble row move up= ",tblRow)
+            console.log("tble row move up= ", tblRow)
             const prevRow = $(tblRow).prev()[0].id
             console.log(prevRow)
-            if (prevRow === "tblHeading") {
-                console.log("here");
-                return;
+            if (prevRow !== "tblHeading") {
+                console.log($(tblRow).prev()[0])
+                $(tblRow).prev().before($(tblRow));
+                validateDates();
             }
-            console.log($(tblRow).prev()[0])
-            $(tblRow).prev().before($(tblRow));
-            validateDates();
-            return
         }
 
         function moveRowDown(tblRow) {
-            console.log("tble row move down= ",tblRow)
+            console.log("tble row move down= ", tblRow)
             const nextRow = $(tblRow).next();
             if (nextRow.length === 0) {
                 console.log("length ", nextRow.length);
