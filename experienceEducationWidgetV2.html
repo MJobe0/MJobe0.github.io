@@ -530,7 +530,7 @@
                     var commentsCell = row.insertCell(9);
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
+                    moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
                     typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
@@ -547,7 +547,7 @@
                     gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
                     resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
                     commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
-                    deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
+                    deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                     //set values
                     if (isPop) {
@@ -672,7 +672,7 @@
                 </tr>
             </tbody>
         </table>
-        <button id="addRowButton">Add Row</button>
+        <button type="button" id="addRowButton">Add Row</button>
         <span>
             <p id="textArea"></p>
         </span>
