@@ -192,7 +192,7 @@
 
         var numOfIncorrectDates = 0;
         var currFullWorkHistory = "No";
-        
+
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
@@ -299,10 +299,18 @@
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
-                let dateDiffRes = [{
-                    id: "29",
-                    value: ""
-                }]
+                if (currFullWorkHistory === "Yes") {
+                    var dateDiffRes = [{
+                        id: "215",
+                        value: ""
+                    }]
+                }
+                else {
+                    var dateDiffRes = [{
+                        id: "439",
+                        value: ""
+                    }]
+                }
                 console.log("EmpTo", currEndDate)
                 console.log("EmpFrom", currStartDate)
                 if (currEndDate != null && currStartDate != null) {
