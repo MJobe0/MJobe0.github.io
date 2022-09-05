@@ -476,7 +476,7 @@
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
                     $("input[type=date]").attr("min", currMaxYear);
 
-                    $(".up,.down").click(function () {
+                    $(".up,.down").on('click', function (event) {
                         var row = $(this).parents("tr:first");
                         if ($(this).is(".up")) {
                             row.insertBefore(row.prev());
