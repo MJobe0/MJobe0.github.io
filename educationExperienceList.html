@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -187,315 +189,177 @@
         }
     </style>
     <script type="text/javascript">
-        //https://github.com/canunaldi/widget/blob/master/widget.html
-        //var $j = jQuery.noConflict();
-        // JFCustomWidget.requestFrameResize({width: 1000, height:1000});
-        // console.log(JFCustomWidget.getWidgetSettings())
 
-        var schoolLeavingAge;
+        var numOfIncorrectDates = 0
 
-        // Create a condition that targets viewports at least 800px wide
-        const mediaQuery = window.matchMedia('(min-width: 800px)')
+        //Global functions
+        function modFields(rowNumber, activityType) {
+            console.log(activityType)
 
-        function handleScreenChange(e) {
-            if (e.matches) {
-                console.log('Matched!')
-                resizeFrame();
+            //rowNumber = rowNumber - 1;
+            const nameOfEmployerId = "nameOfEmployer" + rowNumber;
+            const institutionId = "institution" + rowNumber;
+            const positionHeldId = "positionHeld" + rowNumber;
+            const gradeBandId = "gradeBand" + rowNumber;
+            const resultsId = "results" + rowNumber;
+            switch (activityType) {
+                case "Employed":
+                    document.getElementById(nameOfEmployerId).value = "";
+                    document.getElementById(institutionId).value = "";
+                    document.getElementById(gradeBandId).value = "";
+                    document.getElementById(resultsId).value = "";
+                    document.getElementById(positionHeldId).value = "";
+
+                    document.getElementById(nameOfEmployerId).disabled = false;
+                    document.getElementById(institutionId).disabled = true;
+                    document.getElementById(gradeBandId).disabled = false;
+                    document.getElementById(resultsId).disabled = true;
+                    document.getElementById(positionHeldId).disabled = false;
+                    break;
+                case "Traveling":
+                    document.getElementById(nameOfEmployerId).value = "";
+                    document.getElementById(institutionId).value = "";
+                    document.getElementById(gradeBandId).value = "";
+                    document.getElementById(resultsId).value = "";
+                    document.getElementById(positionHeldId).value = "";
+
+                    document.getElementById(nameOfEmployerId).disabled = true;
+                    document.getElementById(institutionId).disabled = true;
+                    document.getElementById(gradeBandId).disabled = true;
+                    document.getElementById(resultsId).disabled = true;
+                    document.getElementById(positionHeldId).disabled = true;
+                    break;
+                case "Unemployed":
+                    document.getElementById(nameOfEmployerId).value = "";
+                    document.getElementById(institutionId).value = "";
+                    document.getElementById(gradeBandId).value = "";
+                    document.getElementById(resultsId).value = "";
+                    document.getElementById(positionHeldId).value = "";
+
+                    document.getElementById(nameOfEmployerId).disabled = true;
+                    document.getElementById(institutionId).disabled = true;
+                    document.getElementById(gradeBandId).disabled = true;
+                    document.getElementById(resultsId).disabled = true;
+                    document.getElementById(positionHeldId).disabled = true;
+                    break;
+                case "Studying":
+                    document.getElementById(nameOfEmployerId).value = "";
+                    document.getElementById(institutionId).value = "";
+                    document.getElementById(gradeBandId).value = "";
+                    document.getElementById(resultsId).value = "";
+                    document.getElementById(positionHeldId).value = "";
+
+                    document.getElementById(nameOfEmployerId).disabled = true;
+                    document.getElementById(institutionId).disabled = false;
+                    document.getElementById(gradeBandId).disabled = false;
+                    document.getElementById(resultsId).disabled = false;
+                    document.getElementById(positionHeldId).disabled = true;
+                    break;
+                case "Other":
+                    document.getElementById(nameOfEmployerId).value = "";
+                    document.getElementById(institutionId).value = "";
+                    document.getElementById(gradeBandId).value = "";
+                    document.getElementById(resultsId).value = "";
+                    document.getElementById(positionHeldId).value = "";
+
+                    document.getElementById(nameOfEmployerId).disabled = true;
+                    document.getElementById(institutionId).disabled = true;
+                    document.getElementById(gradeBandId).disabled = true;
+                    document.getElementById(resultsId).disabled = true;
+                    document.getElementById(positionHeldId).disabled = true;
+                    break;
+                default:
+                    document.getElementById(nameOfEmployerId).disabled = false;
+                    document.getElementById(institutionId).disabled = false;
+                    document.getElementById(gradeBandId).disabled = false;
+                    document.getElementById(resultsId).disabled = false;
+                    document.getElementById(positionHeldId).disabled = false;
+            }
+        }
+
+        function getData(fieldToFill) {
+            var tblData = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
+                    }
+                });
+                return obj;
+            }).get();
+            // console.log(JSON.stringify(tblData));
+            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
+            return { valid: true, value: JSON.stringify(tblData) };
+        }
+
+        function validateDates() {
+            const currRowLength = document.getElementsByName("Start Date")?.length
+
+            for (let i = 0; i < currRowLength; i++) {
+                let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
+                let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
+                if (currFullWorkHistory === "Yes") {
+                    let dateDiffRes = [{
+                        id: "215",
+                        value: ""
+                    }]
+                }
+                else {
+                    let dateDiffRes = [{
+                        id: "439",
+                        value: ""
+                    }]
+                }
+                console.log("EmpTo", currEndDate)
+                console.log("EmpFrom", currStartDate)
+                if (currEndDate != null && currStartDate != null) {
+                    document.getElementsByName("End Date")[i].style = "background-color: none;"
+                    document.getElementsByName("End Date")[i + 1].style = "background-color: none;"
+                    document.getElementsByName("Start Date")[i].style = "background-color: none;"
+                    document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
+                    console.log("all good")
+                    if (getMonthDifference(new Date(currEndDate), new Date(currStartDate)) >= 1) {
+                        document.getElementsByName("End Date")[i].style = "background-color: red;"
+                        document.getElementsByName("Start Date")[i + 1].style = "background-color: red;"
+                        console.log("1 month data diff")
+
+                        dateDiffRes[0].value = "Yes";
+                        console.log("Invalid dates = ", dateDiffRes)
+
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        console.log("here")
+                        numOfIncorrectDates = numOfIncorrectDates + 1
+                        //return { value: "Yes", valid: false };
+                    }
+                    else {
+                        document.getElementsByName("End Date")[i].style = "background-color: none;"
+                        document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
+                        dateDiffRes[0].value = "No";
+                        console.log("Valid dates = ", dateDiffRes)
+                        JFCustomWidget.setFieldsValueById(dateDiffRes);
+                        numOfIncorrectDates = numOfIncorrectDates - 1;
+                    }
+                    //add coomments to array
+                }
+            }
+            console.log(numOfIncorrectDates)
+            if (numOfIncorrectDates >= 1) {
+                document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
+                // JFCustomWidget.sendData({ value: "Yes" });
             }
             else {
-                console.log("Doesn't Match!")
-                resizeFrame();
+                document.getElementById("textArea").innerHTML = "";
+                // JFCustomWidget.sendData({ value: "No" });
             }
         }
 
-        mediaQuery.addListener(handleScreenChange)
-
-        handleScreenChange(mediaQuery)
-
-        function fillConditionValue(data) {
-
-            JFCustomWidget.hideWidgetError();
-
-            var tbl = document.getElementById("emptbl");
-
-            const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-
-            console.log(currFullWorkHistory)
-
-            if (currFullWorkHistory === "Yes" && data.value !== "") {
-                restoreTableData(JSON.parse(data.value))
-
-                JFCustomWidget.getFieldsValueById(["11"], function (res) {
-                    console.log("res by Name= ", res.data[0].value);
-                    //schoolLeavingAge = res.data[0].value;
-                });
-            }
-            else if (tbl.rows.length === 0 && data.value !== "") {
-                restoreTableData(JSON.parse(data.value));
-            }
-
-            //If equal to full work history extract two values from data object else do the if statement below
-
-            console.log(data)
-
-            // if (data.value !== "") {
-            //     restoreTableData(JSON.parse(data.value))
-            // }
-
-            // storedData = JFCustomWidget.getWidgetSetting("storageField");
-            // console.log("Stored data = ", storedData)
-
-            // JFCustomWidget.getFieldsValueById([storedData], function (res) {
-            //     console.log("res by Name= ", res)
-            //     res.data.forEach(resItem => {
-            //         console.log(resItem.value);
-            //         storageTest.push(resItem.value)
-            //     });
-            // });
-
-            // storedData = JFCustomWidget.getWidgetSetting("storageField");
-            // fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // console.log("Full his = ", fullWorkHistory)
-            // console.log("Stored data = ", storedData)
-
-            //callNSFASCheck(inputValue[0], jotFormDisplayName);
-
-            // var data = {
-            //     value: "No",
-            //     valid: valid
-            // }
-
-            // //console.log(data.value)
-            // JFCustomWidget.sendData(data);
+        function getMonthDifference(startDate, endDate) {
+            return (
+                endDate.getMonth() -
+                startDate.getMonth() +
+                12 * (endDate.getFullYear() - startDate.getFullYear())
+            );
         }
-
-        //var testObj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
-
-        //subscrive to ready
-        JFCustomWidget.subscribe("ready", function (msg) {
-
-            JFCustomWidget.subscribe('populate', fillConditionValue);
-
-            // addRow();
-            console.log("ready message arrived from JotForm", msg);
-
-            // var fullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // var storageField = JFCustomWidget.getWidgetSetting("storageField");
-
-            // var fWHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-            // console.log("Full his = ", fWHistory)
-
-            //Call function to check stored data
-            //Call function to set max year
-            // setMaxYear(fWHistory)
-
-            console.log(JFCustomWidget)
-
-            //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                const widgetParm = JFCustomWidget.getWidgetSettings();
-                var data2 = validateDates();
-                console.log(data2);
-                if (widgetParm["fullWorkHistory"] === "No") {
-                    setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                }
-
-                console.log(widgetParm["storageField"])
-
-                storeTableData(widgetParm["storageField"]);
-
-                // JFCustomWidget.sendData(data2);
-
-                // var data2 = {
-                //     value: "",
-                //     valid: true
-                // }
-                // console.log(data2)
-
-                // JFCustomWidget.sendSubmit(data2);
-            });
-        });
-
-        // $(window).on("orientationchange", function (event) {
-        //     console.log("Screen change")
-        //     resizeFrame();
-        // });
-        // $(document).ready(function () {
-        //     //Do some stuff
-        //     // $(".rowNumberColumn").hover(function () {
-        //     //     $(this).css('cursor', 'pointer');
-        //     // }, function () {
-        //     //     $(this).css('cursor', 'auto');
-        //     // });
-        //     // $("tbody").on('click touchmove', function () {
-        //     //     event.preventDefault();
-        //     //     console.log(event)
-        //     //     console.log("here")
-        //     $("tbody").sortable({
-        //         update: function (event, ui) {
-        //             // var ordering = $(this).sortable('toArray').toString();
-        //             // alert(ordering);
-        //             validateDates();
-        //         },
-        //         cursor: "move",
-        //         items: "> tr:not(:first)",
-        //         appendTo: "parent",
-        //         helper: "clone"
-        //     }).disableSelection();
-        //     // })
-        // });
-
-        // $(document).ready(function () {
-        //     // $(".rowNumberColumn").hover(function () {
-        //     //     $(this).css('cursor', 'pointer');
-        //     // }, function () {
-        //     //     $(this).css('cursor', 'auto');
-        //     // });
-        //     $("tbody").sortable({
-        //         update: function (event, ui) {
-        //             // var ordering = $(this).sortable('toArray').toString();
-        //             // alert(ordering);
-        //             validateDates();
-        //         },
-        //         cursor: "move",
-        //         items: "> tr:not(:first)",
-        //         appendTo: "parent",
-        //         helper: "clone"
-        //     }).disableSelection();
-        // });
-
-        // $(function () {
-        //     function log(str) {
-        //         $("#log").prepend("<p>" + str + "</p>");
-        //     }
-        //     $("tbody").draggable({
-        //         cursor: 'move',
-        //         // handle: ".ui-drag-handle",
-        //         start: function () {
-        //             log("Drag Start");
-        //         },
-        //         stop: function () {
-        //             log("Drag Stop");
-        //         }
-        //     });
-
-        //     $("tbody").click(function () {
-        //         log("Handler for .click() called.");
-        //     });
-        // });
-
-        function maxYear() { //JFCustomWidget.getWidgetSetting('county_label');
-            const maxYearForDates = new Date().getFullYear() - 5;
-            console.log(maxYearForDates + "-01" + "-01")
-            //input.setAttribute("min", maxYearForDates);
-            return maxYearForDates + "-01" + "-01"
-        }
-
-        const currMaxYear = maxYear();
-
-        function addRow(isPop, popData) {
-            if ($('input:invalid').length >= 1) {
-                return
-            }
-            var table = document.getElementById("emptbl");
-            // GET TOTAL NUMBER OF ROWS 
-            var x = table.rows.length;
-            var id = "tbl" + x;
-            var row = table.insertRow(x);
-            row.id = id;
-            // var rowNumberCell = row.insertCell(0);
-            var moveButtonsCell = row.insertCell(0);
-            var typeOfActivityCell = row.insertCell(1);
-            var companyCell = row.insertCell(2);
-            var institutionCell = row.insertCell(3);
-            var startDateCell = row.insertCell(4);
-            var endDateCell = row.insertCell(5);
-            var positionHeldCell = row.insertCell(6);
-            var gradeBandCell = row.insertCell(7)
-            var resultsCell = row.insertCell(8);
-            var commentsCell = row.insertCell(9);
-            var deleteRowCell = row.insertCell(10);
-            // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-            moveButtonsCell.innerHTML = `<input type="button" id="upRow${x}" onclick="moveRowUp(${id})" value="Up"/> <input type="button" id="downRow${x}" onclick="moveRowDown(${id})" value="Down"/>`;
-            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="typeOfActivity[]" value="0" id="typeOfActivity${x}" required >
-                        <option value="">Select Type of activity</option>
-                        <option value="1">Employed</option>
-                        <option value="2">Traveling</option>
-                        <option value="3">Unemployed</option>
-                        <option value="4">Studying</option>
-                        <option value="5">Other</option>
-                    </select>`;
-            companyCell.innerHTML = `<input type="text" name="nameOfEmployer[]" value="" id="nameOfEmployer${x}" required />`;
-            institutionCell.innerHTML = `<input type="text" name="institution[]" value="" id="institution${x}" />`;
-            startDateCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedFrom${x}" required />`;
-            endDateCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} onchange="validateDates()" value="" id="employedTo${x}" required />`;
-            positionHeldCell.innerHTML = `<input type="text" name="positionHeld[]" value="" id="positionHeld${x}" required />`;
-            gradeBandCell.innerHTML = `<input type="text" name="gradeBand[]" value="" id="gradeBand${x}" required />`;
-            resultsCell.innerHTML = `<input type="text" name="results[]" value="" id="results${x}" required />`;
-            commentsCell.innerHTML = `<textarea type="text" name="comments[]" value="" id="comments${x}" required />`;
-            deleteRowCell.innerHTML = `<input type="button" id="deleteRow${x}" onclick="deleteRow(${x})" value="Delete"/>`;
-
-            //set values
-            if (isPop) {
-                document.getElementById(`typeOfActivity${x}`).value = popData["typeOfActivity[]"] ?? "";
-                modFields(x, popData["typeOfActivity[]"] ?? "");
-                document.getElementById(`nameOfEmployer${x}`).value = popData["nameOfEmployer[]"] ?? "";
-                document.getElementById(`institution${x}`).value = popData["institution[]"] ?? "";
-                document.getElementById(`employedFrom${x}`).value = popData["employedFrom[]"] ?? "";
-                document.getElementById(`employedTo${x}`).value = popData["employedTo[]"] ?? "";
-                document.getElementById(`positionHeld${x}`).value = popData["positionHeld[]"] ?? "";
-                document.getElementById(`gradeBand${x}`).value = popData["gradeBand[]"] ?? "";
-                document.getElementById(`results${x}`).value = popData["results[]"] ?? "";
-                document.getElementById(`comments${x}`).value = popData["comments[]"] ?? ""
-            }
-
-
-
-            // var table = document.getElementById("emptbl");
-            // var rowCount = table.rows.length;
-            // var cellCount = table.rows[0].cells.length;
-            // var row = table.insertRow(rowCount);
-            // for (var i = 0; i <= cellCount; i++) {
-            //     var cell = "cell" + i;
-            //     cell = row.insertCell(i);
-            //     var copycel = document.getElementById("col" + i).innerHTML;
-            //     cell.innerHTML = copycel;
-            // }
-            resizeFrame();
-        }
-
-        function resizeFrame() {
-            const currHeight = $("form").height();
-            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
-            // if (increaseFrame) {
-            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight + 600 })
-            //     widgetHeight = widgetHeight + 600
-            // }
-            // else {
-            //     JFCustomWidget.requestFrameResize({ width: 1000, height: widgetHeight - 600 })
-            //     widgetHeight = widgetHeight - 600
-            // }
-        }
-
-        // function deleteRow(id) {
-        //     var table = document.getElementById('emptbl');
-        //     var rowCount = table.rows.length;
-        //     console.log(id)
-        //     if (id === "0") {
-        //         console.log("can't remove the first row")
-        //         return
-        //     }
-        //     else if (rowCount > "2") {
-        //         var row = table.deleteRow(id);
-        //         resizeFrame(false);
-        //         validateDates();
-        //         //rowCount--;
-        //     }
-        //     else {
-        //         console.log("There should be atleast one row");
-        //     }
-        // }
-
 
         function deleteRow(id) {
             var table = document.getElementById('emptbl');
@@ -538,284 +402,253 @@
             return;
         }
 
-        // function deleteRows() {
-        //     var table = document.getElementById('emptbl');
-        //     var rowCount = table.rows.length;
-        //     if (rowCount > "2") {
-        //         var row = table.deleteRow(rowCount - 1);
-        //         rowCount--;
-        //     }
-        //     else {
-        //         alert("There should be atleast one row");
-        //     }
-        // }
-
-        function getMonthDifference(startDate, endDate) {
-            return (
-                endDate.getMonth() -
-                startDate.getMonth() +
-                12 * (endDate.getFullYear() - startDate.getFullYear())
-            );
+        function resizeFrame() {
+            const currHeight = $("form").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
         }
 
-        function validateDates() {
-            //var formData = $("form").serializeArray()
-            //console.log(formData)
+        $(function () {
+            function EducationExperienceList(containerId, formData, params) {
 
-            // var test = document.getElementsByName("employedFrom[]")[0].value
-            // var test1 = document.getElementsByName("employedFrom[]")[1].value
-            // var test2 = document.getElementsByName("employedFrom[]").length
+                var yearOfBirth;
+                var fieldToStoreData = params["storageField"];
 
-            // console.log(test)
-            // console.log(test1)
-            // console.log(test2)
+                /**
+               * Exposed
+               */
+                this.init = init;
+                this.getData = getData;
+                this.setCompanyNames = setCompanyNames;
+                this.resizeFrame = resizeFrame;
+                this.restoreTableData = restoreTableData;
 
-            const currRowLength = document.getElementsByName("employedFrom[]")?.length
+                const currMaxYear = maxYear();
 
-            var numOfIncorrectDates = 0
 
-            for (let i = 0; i < currRowLength; i++) {
-                let currEmployedTo = document.getElementsByName("employedTo[]")[i]?.value; //check undefinded
-                let currEmployedFrom = document.getElementsByName("employedFrom[]")[i + 1]?.value; //check undefinded
-                let dateDiffRes = {
-                    id: "8",
-                    value: ""
+                //mobile
+                // $('#listContainer').css('overflow-x', 'auto');
+
+                function init() {
+                    // $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
+                    console.log("form Data = ", formData)
+                    console.log("form data value = ", formData.value)
+
+                    if (formData.value !== undefined) {
+                        restoreTableData(JSON.parse(formData.value))
+                    }
+                    if (params["fullWorkHistory"] === "Yes") {
+                        JFCustomWidget.getFieldsValueById(["11"], function (res) {
+                            console.log("res by Name= ", res.data[0].value);
+                            const strDate = res.data[0].value;
+
+                            const [day, month, year] = strDate.split('/');
+                            console.log(month);
+                            console.log(day);
+                            console.log(year);
+                            const correctDateFormat = new Date(+year, +month - 1, +day);
+                            console.log(correctDateFormat);
+
+                            yearOfBirth = (new Date(correctDateFormat)).getFullYear();
+                            console.log("Year Of Birth = ", yearOfBirth);
+                        });
+                    }
+                    // Create a condition that targets viewports at least 800px wide
+                    const mediaQuery = window.matchMedia('(min-width: 800px)')
+
+                    function handleScreenChange(e) {
+                        if (e.matches) {
+                            console.log('Matched!')
+                            resizeFrame();
+                        }
+                        else {
+                            console.log("Doesn't Match!")
+                            resizeFrame();
+                        }
+                    }
+
+                    mediaQuery.addListener(handleScreenChange)
+
+                    handleScreenChange(mediaQuery)
+
+                    $('#addRowButton').on('click', function (event) {
+                        addRow();
+                    });
+
+                    $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
+                    $("input[type=date]").attr("min", currMaxYear);
+
                 }
-                console.log("EmpTo", currEmployedTo)
-                console.log("EmpFrom", currEmployedFrom)
-                if (currEmployedTo != null && currEmployedFrom != null) {
-                    document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                    document.getElementsByName("employedTo[]")[i + 1].style = "background-color: none;"
-                    document.getElementsByName("employedFrom[]")[i].style = "background-color: none;"
-                    document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                    console.log("all good")
-                    if (getMonthDifference(new Date(currEmployedTo), new Date(currEmployedFrom)) >= 1) {
-                        document.getElementsByName("employedTo[]")[i].style = "background-color: red;"
-                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: red;"
-                        console.log("1 month data diff")
-                        // console.log("The following fields" + " Employed To in row " + [i === 0 ? 1 : i + 1] + " and Employed From in row " + [i + 2] + " contain a gap greater then 1 month please mention why in")
-                        console.log("Here")
-                        // if (document.getElementById("textArea").innerHTML === "") {
-                        //     resizeFrame(false);
-                        // }
-                        // else {
-                        //     resizeFrame(true);
-                        // }
-                        dateDiffRes.value = "Yes";
-                        JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        console.log("here")
-                        numOfIncorrectDates = numOfIncorrectDates + 1
-                        //return { value: "Yes", valid: false };
+
+                // function makeWidgetRequiredOrNot() {
+
+                // }
+
+                function maxYear() {
+                    var maxYearForDates;
+                    if (params["fullWorkHistory"] === "Yes") {
+                        maxYearForDates = yearOfBirth + 18;
                     }
                     else {
-                        document.getElementsByName("employedTo[]")[i].style = "background-color: none;"
-                        document.getElementsByName("employedFrom[]")[i + 1].style = "background-color: none;"
-                        // if (document.getElementById("textArea").innerHTML === "") {
-                        //     resizeFrame(false);
-                        // }
-                        // else {
-                        //     resizeFrame(true);
-                        // }
-                        dateDiffRes.value = "No";
-                        JFCustomWidget.setFieldsValueById(dateDiffRes);
-                        numOfIncorrectDates = numOfIncorrectDates - 1
-                        //return { value: "No", valid: true };
+                        maxYearForDates = new Date().getFullYear() - 5;
                     }
-                    //add coomments to array
+                    console.log(maxYearForDates + "-01" + "-01")
+                    //input.setAttribute("min", maxYearForDates);
+                    return maxYearForDates + "-01" + "-01"
+                }
+
+                // const currMaxYear = maxYear();
+
+                function addRow(isPop, popData) {
+                    if ($('input:invalid').length >= 1) {
+                        return
+                    }
+                    var table = document.getElementById("emptbl");
+                    // GET TOTAL NUMBER OF ROWS 
+                    var x = table.rows.length;
+                    var id = "tbl" + x;
+                    var row = table.insertRow(x);
+                    row.id = id;
+                    // var rowNumberCell = row.insertCell(0);
+                    var moveButtonsCell = row.insertCell(0);
+                    var typeOfActivityCell = row.insertCell(1);
+                    var companyCell = row.insertCell(2);
+                    var institutionCell = row.insertCell(3);
+                    var startDateCell = row.insertCell(4);
+                    var endDateCell = row.insertCell(5);
+                    var positionHeldCell = row.insertCell(6);
+                    var gradeBandCell = row.insertCell(7)
+                    var resultsCell = row.insertCell(8);
+                    var commentsCell = row.insertCell(9);
+                    var deleteRowCell = row.insertCell(10);
+                    // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${x})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${x})">Down</button>`;
+                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                        <option value="">Select Type of activity</option>
+                        <option value="Employed">Employed</option>
+                        <option value="Traveling">Traveling</option>
+                        <option value="Unemployed">Unemployed</option>
+                        <option value="Studying">Studying</option>
+                        <option value="Other">Other</option>
+                    </select>`;
+                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                    institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
+                    startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
+                    endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
+                    positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
+                    gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
+                    resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
+                    commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                    deleteRowCell.innerHTML = `<button id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
+
+                    //set values
+                    if (isPop) {
+                        document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
+                        modFields(x, popData["Type of Activity"] ?? "");
+                        document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
+                        document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
+                        document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
+                        document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
+                        document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
+                        document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
+                        document.getElementById(`results${x}`).value = popData["Results"] ?? "";
+                        document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
+                    }
+
+                    resizeFrame();
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
+                }
+
+                function getCompanyNames() {
+                    const currRowLength = document.getElementsByName("Name of Employer")?.length
+                    let arr = []
+                    for (let i = 0; i < currRowLength; i++) {
+                        let currNameOfEmployer = document.getElementsByName("Name of Employer")[i]?.value; //check undefinded
+                        let currActType = document.getElementsByName("Type of Activity")[i]?.value; //check undefinded
+                        console.log("Em", currActType)
+                        console.log("nameEm", currNameOfEmployer)
+                        if (currNameOfEmployer != null && currActType === "1" && arr.length < 6) {
+                            arr.push(currNameOfEmployer);
+                        }
+                    }
+                    console.log("arr length = ", arr.length)
+                    return arr;
+                }
+
+                function restoreTableData(dataObj) {
+                    try {
+                        dataObj.forEach(function (obj) {
+                            if (Object.keys(obj).length !== 0) {
+                                console.log(obj)
+                                addRow(true, obj)
+                            }
+                        })
+
+                    } catch (error) {
+                        console.log(error)
+                        return
+                    }
+                }
+
+                function setCompanyNames(fieldIds) {
+                    let currNames = getCompanyNames();
+                    let fillArr = []
+                    for (let i = 0; i < fieldIds.length; i++) {
+                        fillArr.push({
+                            id: fieldIds[i],
+                            value: currNames[i] ?? ""
+                        })
+                    }
+                    JFCustomWidget.setFieldsValueById(fillArr);
+                    console.log(fillArr)
                 }
             }
-            console.log(numOfIncorrectDates)
-            if (numOfIncorrectDates >= 1) {
-                document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                JFCustomWidget.sendData({ value: "Yes" });
-            }
-            else {
-                document.getElementById("textArea").innerHTML = "";
-                JFCustomWidget.sendData({ value: "No" });
-            }
-        }
 
-        function getCompanyNames() {
-            const currRowLength = document.getElementsByName("nameOfEmployer[]")?.length
-            let arr = []
-            for (let i = 0; i < currRowLength; i++) {
-                let currNameOfEmployer = document.getElementsByName("nameOfEmployer[]")[i]?.value; //check undefinded
-                let currActType = document.getElementsByName("typeOfActivity[]")[i]?.value; //check undefinded
-                console.log("Em", currActType)
-                console.log("nameEm", currNameOfEmployer)
-                if (currNameOfEmployer != null && currActType === "1" && arr.length < 6) {
-                    arr.push(currNameOfEmployer);
+            JFCustomWidget.subscribe('ready', function (data) {
+                // console.log('Education Experience List ready', data);
+                var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
+                widget.init();
+                widget.resizeFrame();
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    JFCustomWidget.hideWidgetError();
+
+                    var tbl = document.getElementById("emptbl");
+
+                    currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+
+                    console.log(currFullWorkHistory)
+
+                    if (currFullWorkHistory === "Yes" && data.value !== "") {
+                        widget.restoreTableData(JSON.parse(data.value));
+                    }
+                    // JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
-            }
-            console.log("arr length = ", arr.length)
-            return arr;
-        }
 
-        function storeTableData(fieldToFill) {
-            var tblData = $('tr').map(function () {
-                var obj = {};
-                $(this).find('input, select, textarea').each(function () {
-                    obj[this.name] = $(this).val();
+                console.log(JFCustomWidget)
+
+                JFCustomWidget.subscribe('submit', function () {
+                    const widgetParm = JFCustomWidget.getWidgetSettings();
+                    if (widgetParm["fullWorkHistory"] === "No") {
+                        widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                    }
+
+                    console.log(widgetParm["storageField"]);
+
+                    // send the data
+                    JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                 });
-                return obj;
-            }).get();
-            console.log(tblData);
-            // console.log(JSON.stringify(tblData));
-            JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            JFCustomWidget.sendSubmit({ valid: true, value: tblData });
-        }
 
-        // var obj = [{}, { "": "Delete", "typeOfActivity[]": "4", "nameOfEmployer[]": "", "institution[]": "kjnkj", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-09-02", "positionHeld[]": "", "gradeBand[]": "jknjk", "results[]": "jinikjn", "comments[]": "oknkjn" }, { "": "Delete", "typeOfActivity[]": "1", "nameOfEmployer[]": "kjnkjn", "institution[]": "", "employedFrom[]": "2022-08-04", "employedTo[]": "2022-08-27", "positionHeld[]": "jnkj", "gradeBand[]": "", "results[]": "", "comments[]": "kjnmkjn" }, {}]
+            });
+        })
 
-        function restoreTableData(dataObj) {
-            dataObj.forEach(function (obj) {
-                if (Object.keys(obj).length !== 0) {
-                    console.log(obj)
-                    addRow(true, obj)
-                }
-            })
-        }
-
-        function setCompanyNames(fieldIds) {
-            let currNames = getCompanyNames();
-            let fillArr = []
-            for (let i = 0; i < fieldIds.length; i++) {
-                fillArr.push({
-                    id: fieldIds[i],
-                    value: currNames[i] ?? ""
-                })
-            }
-            JFCustomWidget.setFieldsValueById(fillArr);
-            console.log(fillArr)
-        }
-
-        // function test() {
-        //     var height = $("form").height();
-        //     console.log(height + 10);
-        // }
-
-        // function setMaxYear() {
-        //     console.log(widgetParm)
-        //     console.log("is full his = ", JFCustomWidget.getWidgetSetting("fullWorkHistory"))
-        //     if (JFCustomWidget.getWidgetSetting("fullWorkHistory") === "No") {
-        //         return 5;
-        //     }
-        //     else {
-        //         return 10;
-        //     }
-        // }
-
-        // function getStoredData() {
-
-        // }
-        //onchange="modFields(id, this.name)"
-        // <option value="1">Employed</option>
-        //                 <option value="2">Traveling</option>
-        //                 <option value="3">Unemployed</option>
-        //                 <option value="4">Studying</option>
-        //                 <option value="5">Other</option>
-
-        // companyCell.innerHTML = `<input type="text" name="nameOfEmployer[]" value="" />`;
-        //     institutionCell.innerHTML = `<input type="text" name="institution[]" value="" />`;
-        //     startDateCell.innerHTML = `<input type="date" name="employedFrom[]" min=${currMaxYear} value="" />`;
-        //     endDateCell.innerHTML = `<input type="date" name="employedTo[]" min=${currMaxYear} value="" />`;
-        //     positionHeldCell.innerHTML = `<input type="text" name="positionHeld[]" value="" />`;
-        //     resultsCell.innerHTML = `<input type="text" name="results[]" value="" />`;
-        //     commentsCell.innerHTML = `<input type="text" name="comments[]" value="" />`;
-        function modFields(rowNumber, activityType) {
-            console.log(activityType)
-            console.log(document.getElementsByName("institution[]")[0].disabled)
-
-            //rowNumber = rowNumber - 1;
-            const nameOfEmployerId = "nameOfEmployer" + rowNumber;
-            const institutionId = "institution" + rowNumber;
-            const positionHeldId = "positionHeld" + rowNumber;
-            const gradeBandId = "gradeBand" + rowNumber;
-            const resultsId = "results" + rowNumber;
-
-            // console.log(rowNumber ? rowNumber === 0 : 1)
-            //console.log(document.getElementsByName("institution[]")[rowNumber ? rowNumber === 0 : 1].disabled)
-            switch (activityType) {
-                case "1":
-                    document.getElementById(nameOfEmployerId).value = "";
-                    document.getElementById(institutionId).value = "";
-                    document.getElementById(gradeBandId).value = "";
-                    document.getElementById(resultsId).value = "";
-                    document.getElementById(positionHeldId).value = "";
-
-                    document.getElementById(nameOfEmployerId).disabled = false;
-                    document.getElementById(institutionId).disabled = true;
-                    document.getElementById(gradeBandId).disabled = false;
-                    document.getElementById(resultsId).disabled = true;
-                    document.getElementById(positionHeldId).disabled = false;
-                    break;
-                case "2":
-                    document.getElementById(nameOfEmployerId).value = "";
-                    document.getElementById(institutionId).value = "";
-                    document.getElementById(gradeBandId).value = "";
-                    document.getElementById(resultsId).value = "";
-                    document.getElementById(positionHeldId).value = "";
-
-                    document.getElementById(nameOfEmployerId).disabled = true;
-                    document.getElementById(institutionId).disabled = true;
-                    document.getElementById(gradeBandId).disabled = true;
-                    document.getElementById(resultsId).disabled = true;
-                    document.getElementById(positionHeldId).disabled = true;
-                    break;
-                case "3":
-                    document.getElementById(nameOfEmployerId).value = "";
-                    document.getElementById(institutionId).value = "";
-                    document.getElementById(gradeBandId).value = "";
-                    document.getElementById(resultsId).value = "";
-                    document.getElementById(positionHeldId).value = "";
-
-                    document.getElementById(nameOfEmployerId).disabled = true;
-                    document.getElementById(institutionId).disabled = true;
-                    document.getElementById(gradeBandId).disabled = true;
-                    document.getElementById(resultsId).disabled = true;
-                    document.getElementById(positionHeldId).disabled = true;
-                    break;
-                case "4":
-                    document.getElementById(nameOfEmployerId).value = "";
-                    document.getElementById(institutionId).value = "";
-                    document.getElementById(gradeBandId).value = "";
-                    document.getElementById(resultsId).value = "";
-                    document.getElementById(positionHeldId).value = "";
-
-                    document.getElementById(nameOfEmployerId).disabled = true;
-                    document.getElementById(institutionId).disabled = false;
-                    document.getElementById(gradeBandId).disabled = false;
-                    document.getElementById(resultsId).disabled = false;
-                    document.getElementById(positionHeldId).disabled = true;
-                    break;
-                case "5":
-                    document.getElementById(nameOfEmployerId).value = "";
-                    document.getElementById(institutionId).value = "";
-                    document.getElementById(gradeBandId).value = "";
-                    document.getElementById(resultsId).value = "";
-                    document.getElementById(positionHeldId).value = "";
-
-                    document.getElementById(nameOfEmployerId).disabled = true;
-                    document.getElementById(institutionId).disabled = true;
-                    document.getElementById(gradeBandId).disabled = true;
-                    document.getElementById(resultsId).disabled = true;
-                    document.getElementById(positionHeldId).disabled = true;
-                    break;
-                default:
-                    document.getElementById(nameOfEmployerId).disabled = false;
-                    document.getElementById(institutionId).disabled = false;
-                    document.getElementById(gradeBandId).disabled = false;
-                    document.getElementById(resultsId).disabled = false;
-                    document.getElementById(positionHeldId).disabled = false;
-            }
-        }
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
-                    <!-- <th> </th> -->
                     <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
@@ -828,36 +661,14 @@
                     <th>Comments</th>
                     <th> </th>
                 </tr>
-                <!-- <tr>
-                <td id="col0">
-                    <select name="typeOfActivity[]" id="dept">
-                        <option value="0">Select Type of activity</option>
-                        <option value="1">Employed</option>
-                        <option value="2">Traveling</option>
-                        <option value="3">Unemployed</option>
-                        <option value="4">Studying</option>
-                        <option value="5">Other</option>
-                    </select>
-                </td>
-                    <td id="col1"><input type="text" name="nameOfEmployer[]" value="" /></td>
-                <td id="col2"><input type="date" name="employedFrom[]" value="" /></td>
-                <td id="col3"><input type="date" name="employedTo[]" value="" /></td>
-                <td id="col4"><input type="text" name="numberOfHoursWorked[]" value="" /></td>
-                <td id="col5"><input type="text" name="detailsOfPositionHeld[]" value="" /></td>
-                <td id="col6"><textarea name="reasonForLeaving[]" value=""></textarea></td>
-                <td id="col6"><input type="text" name="reasonForLeaving[]" value="" /></td>
-                <td id="col7"><input type="checkbox" name="provideAsReference[]" value="" /></td>
-            </tr> -->
             </tbody>
         </table>
         <table>
             <tr>
-                <button onclick="addRow()">Add Row</button>
+                <button id="addRowButton">Add Row</button>
                 <span>
                     <p id="textArea"></p>
                 </span>
-                <!-- <td><input type="button" value="Delete Row" onclick="deleteRows()" /></td> -->
-                <!-- <td><input type="button" value="Check" onclick="restoreTableData(obj)" /></td> -->
             </tr>
         </table>
     </form>
