@@ -383,8 +383,9 @@
             const prevRow = $(tblRow).prev()[0].id
             console.log(prevRow)
             if (prevRow !== "tblHeading") {
+                console.log("Move up button clicked")
                 // console.log($(tblRow).prev()[0])
-                $(tblRow).prev().before($(tblRow));
+                // $(tblRow).prev().before($(tblRow));
                 // validateDates();
             }
         }
@@ -529,7 +530,7 @@
                     var commentsCell = row.insertCell(9);
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                    moveButtonsCell.innerHTML = `<button id="upRow${x}" class="up" >Up</button> <button id="downRow${x}" class="down" >Down</button>`;
+                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
                     typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
@@ -539,7 +540,7 @@
                         <option value="Other">Other</option>
                     </select>`;
                     companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
-                    institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" />`;
+                    institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
                     startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
                     endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
                     positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
@@ -655,28 +656,26 @@
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
-                <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
-                <th> </th>
-                <th>Type of activity</th>
-                <th>Company</th>
-                <th>Institution</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Position Held</th>
-                <th>Grade/Band</th>
-                <th>Results</th>
-                <th>Comments</th>
-                <th> </th>
+                <tr>
+                    <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
+                    <th> </th>
+                    <th>Type of activity</th>
+                    <th>Company</th>
+                    <th>Institution</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Position Held</th>
+                    <th>Grade/Band</th>
+                    <th>Results</th>
+                    <th>Comments</th>
+                    <th> </th>
+                </tr>
             </tbody>
         </table>
-        <table>
-            <tr>
-                <button id="addRowButton">Add Row</button>
-                <span>
-                    <p id="textArea"></p>
-                </span>
-            </tr>
-        </table>
+        <button id="addRowButton">Add Row</button>
+        <span>
+            <p id="textArea"></p>
+        </span>
     </form>
 </body>
 
