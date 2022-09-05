@@ -522,7 +522,7 @@
                     var commentsCell = row.insertCell(9);
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${x})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${x})">Down</button>`;
+                    moveButtonsCell.innerHTML = `<button id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
                     typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
