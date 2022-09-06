@@ -561,12 +561,12 @@
                 }
 
                 function getCompanyNames() {
-                    const currRowLength = document.getElementsByClassName("nameOfEmployer[]")?.length
-                    console.log
+                    const currRowLength = document.getElementsByName("Name of Employer")?.length
+                    console.log("Employer by name = ",document.getElementsByName("Name of Employer"))
                     let arr = []
                     for (let i = 0; i < currRowLength; i++) {
-                        let currNameOfEmployer = document.getElementsByClassName("nameOfEmployer[]")[i]?.value; //check undefinded
-                        let currActType = document.getElementsByClassName("typeOfActivity[]")[i]?.value; //check undefinded
+                        let currNameOfEmployer = document.getElementsByName("Name of Employer")[i]?.value; //check undefinded
+                        let currActType = document.getElementsByName("Type of Activity")[i]?.value; //check undefinded
                         console.log("Em", currActType)
                         console.log("nameEm", currNameOfEmployer)
                         if (currNameOfEmployer != null && currActType === "1" && arr.length < 6) {
