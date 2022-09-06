@@ -379,19 +379,20 @@
         }
 
         function moveRowUp(tblRow) {
-            console.log("tble row move up= ", tblRow)
+            // $("tblHeading").prev(tblRow )
             const prevRow = $(tblRow).prev()[0].id
             console.log(prevRow)
-            if (prevRow !== "tblHeading") {
-                console.log("Move up button clicked")
-                // console.log($(tblRow).prev()[0])
-                // $(tblRow).prev().before($(tblRow));
-                // validateDates();
+            if (prevRow === "tblHeading") {
+                console.log("here");
+                return;
             }
+            console.log($(tblRow).prev()[0])
+            $(tblRow).prev().before($(tblRow));
+            validateDates();
+            return
         }
 
         function moveRowDown(tblRow) {
-            console.log("tble row move down= ", tblRow)
             const nextRow = $(tblRow).next();
             if (nextRow.length === 0) {
                 console.log("length ", nextRow.length);
@@ -477,15 +478,6 @@
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
                     $("input[type=date]").attr("min", currMaxYear);
 
-                    $(".up,.down").on('click', function (event) {
-                        var row = $(this).parents("tr:first");
-                        if ($(this).is(".up")) {
-                            row.insertBefore(row.prev());
-                        } else {
-                            row.insertAfter(row.next());
-                        }
-                    });
-
                 }
 
                 // function makeWidgetRequiredOrNot() {
@@ -506,6 +498,7 @@
                 }
 
                 // const currMaxYear = maxYear();
+
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
@@ -531,7 +524,7 @@
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                     moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
-                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                    typeOfActivityCell.innerHTML = `<select class="typeOfActivity[]" onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
                         <option value="Traveling">Traveling</option>
@@ -539,7 +532,7 @@
                         <option value="Studying">Studying</option>
                         <option value="Other">Other</option>
                     </select>`;
-                    companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                    companyCell.innerHTML = `<input type="text" class="nameOfEmployer[]" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
                     institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
                     startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
                     endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" required />`;
@@ -568,11 +561,12 @@
                 }
 
                 function getCompanyNames() {
-                    const currRowLength = document.getElementsByName("Name of Employer")?.length
+                    const currRowLength = document.getElementsByClassName("nameOfEmployer[]")?.length
+                    console.log
                     let arr = []
                     for (let i = 0; i < currRowLength; i++) {
-                        let currNameOfEmployer = document.getElementsByName("Name of Employer")[i]?.value; //check undefinded
-                        let currActType = document.getElementsByName("Type of Activity")[i]?.value; //check undefinded
+                        let currNameOfEmployer = document.getElementsByClassName("nameOfEmployer[]")[i]?.value; //check undefinded
+                        let currActType = document.getElementsByClassName("typeOfActivity[]")[i]?.value; //check undefinded
                         console.log("Em", currActType)
                         console.log("nameEm", currNameOfEmployer)
                         if (currNameOfEmployer != null && currActType === "1" && arr.length < 6) {
@@ -625,7 +619,7 @@
 
                     var tbl = document.getElementById("emptbl");
 
-                    const currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+                    currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
                     console.log(currFullWorkHistory)
 
@@ -656,7 +650,7 @@
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
         <table id="emptbl">
             <tbody>
-                <tr>
+                <tr id="tblHeading">
                     <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
                     <th> </th>
                     <th>Type of activity</th>
@@ -672,10 +666,14 @@
                 </tr>
             </tbody>
         </table>
-        <button type="button" id="addRowButton">Add Row</button>
-        <span>
-            <p id="textArea"></p>
-        </span>
+        <table>
+            <tr>
+                <button type="button" id="addRowButton">Add Row</button>
+                <span>
+                    <p id="textArea"></p>
+                </span>
+            </tr>
+        </table>
     </form>
 </body>
 
