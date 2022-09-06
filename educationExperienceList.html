@@ -347,9 +347,11 @@
             if (numOfIncorrectDates >= 1) {
                 document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
                 // JFCustomWidget.sendData({ value: "Yes" });
+                resizeFrame();
             }
             else {
                 document.getElementById("textArea").innerHTML = "";
+                resizeFrame();
                 // JFCustomWidget.sendData({ value: "No" });
             }
         }
