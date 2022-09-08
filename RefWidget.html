@@ -33,6 +33,7 @@
                 var originalSubmissionId;
 
                 function init() {
+                    console.log(formData)
                     originalSubmissionId = JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
                         return res.data[0].value;
                     });
