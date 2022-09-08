@@ -41,7 +41,6 @@
                     });
 
                     //Check if form data is equal to form IDs
-                    console.log(formData)
                     checkFormId(currFormID);
 
                     //Make API calls with fields to update
@@ -131,7 +130,7 @@
                             break;
                         case "222404538712047":
                             //Test remove later
-                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
+                            fields = ["q5_nmcPin", "q6_doYou", "q7_whatIs", "q8_widgetStorage"];
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                                 console.log("res value (Test form) = ", res.data)
                                 controlFieldsToUpdate = {
@@ -160,17 +159,16 @@
 
                 function fillConditionValue(data) {
                     JFCustomWidget.hideWidgetError();
-
                 }
 
+                JFCustomWidget.subscribe('submit', function () {
+                    widget.makeAPICall();
+
+                    // send the data
+                    // JFCustomWidget.sendSubmit();
+                });
+
                 // console.log(JFCustomWidget)
-            });
-
-            JFCustomWidget.subscribe('submit', function () {
-                widget.makeAPICall();
-
-                // send the data
-                // JFCustomWidget.sendSubmit();
             });
         })
 
