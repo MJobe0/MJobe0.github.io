@@ -54,11 +54,11 @@
 
                 }
 
-                function makeAPICall() {
-                    console.log(`https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`)
+                function makeAPICall(apiKey) {
+                    console.log(`https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
                     jQuery.ajax({
                         //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
-                        url: `https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`,
+                        url: `https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
                         method: "POST",
                         data: controlFieldsToUpdate,
                         timeout: 60000,
@@ -166,7 +166,8 @@
                 }
 
                 JFCustomWidget.subscribe('submit', function () {
-                    widget.makeAPICall();
+                    widgetParams = JFCustomWidget.getWidgetSettings()
+                    widget.makeAPICall(widgetParams["apiKey"]);
 
                     // send the data
                     // JFCustomWidget.sendSubmit();
