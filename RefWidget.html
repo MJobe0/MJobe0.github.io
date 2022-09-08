@@ -33,9 +33,11 @@
                 var originalSubmissionId;
 
                 function init() {
-                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["Original Submission"], function (res) {
+                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
                         return res.data[0].value;
                     });
+
+                    console.log(originalSubmissionId)
                     //Check if form data is equal to form IDs
                     checkFormId(currFormID);
 
@@ -77,6 +79,7 @@
                 }
 
                 function checkFormId(currFormID) {
+                    console.log(currFormID)
                     var fields = [];
                     /*
                     Control form:
