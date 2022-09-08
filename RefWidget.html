@@ -34,7 +34,7 @@
 
                 function init() {
                     console.log(formData)
-                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["originalsubmission"], function (res) {
+                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["q10_originalSubmission"], function (res) {
                         return res.data[0].value;
                     });
 
