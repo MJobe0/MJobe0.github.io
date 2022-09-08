@@ -2,10 +2,11 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
-    <script src="https://js.jotform.com/JotForm.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -14,178 +15,169 @@
         })();
     </script>
 </head>
-<style>
-</style>
 
 <body>
-    <span id="labelText"></span>
-    <!-- <h1>Loading.....</h1> -->
     <script type="text/javascript">
 
-        var valid = true;
-        var value;
-        var apikey;
-        var submissionId;
-        var controlFieldToUpdate;
-        var validateRefNumber;
-        var callFinished = false;
-        var formType;
+        $(function () {
+            function UpdateControlForm(containerId, formData, params) {
 
-        function checkFieldToUpdate(refNumber, fieldArr) {
-            switch (refNumber) {
-                case "1":
-                    return "submission[" + fieldArr[0] + "]"
-                    break;
-                case "2":
-                    return "submission[" + fieldArr[1] + "]"
-                    break;
-                case "3":
-                    return "submission[" + fieldArr[2] + "]"
-                    break;
-                case "4":
-                    return "submission[" + fieldArr[3] + "]"
-                    break;
-                case "5":
-                    return "submission[" + fieldArr[4] + "]"
-                    break;
-                case "6":
-                    return "submission[" + fieldArr[5] + "]"
-                    break;
-                default:
-            }
-        }
+                /**
+               * Exposed
+               */
+                this.init = init;
+                this.makeAPICall = makeAPICall;
 
-        //determining valid is important
-        function callControlForm(apiKey, submissionId, fieldToUpdate) {
-            console.log("https://acaciumgroup.jotform.com/API/submission/" + "5363645105018373797" + "?apiKey=" + "a5784737f77304292214f0c7e15c1b15")
-            //https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e
-            jQuery.ajax({
-                //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
-                url: "https://acaciumgroup.jotform.com/API/submission/5353342735242077708?apiKey=92ab5d0b21d75c34bda08a2f234a64a3",
-                method: "POST",
-                data: { "submission[67]": "Response Received" },
-                timeout: 60000,
-                success: function (response) {
-                    console.log(response);
-                    //add result.info to array [1] and return it
-                    if (response.result === "YES" && response.errorcode === "Success") {
-                        console.log("Pass");
-                        valid = true;
-                        value = "Call passed";
-                        callFinished = true;
-                        return
-                    }
-                    else {
-                        console.log("Fail");
-                        valid = true;
-                        value = "Call failed";
-                        callFinished = true;
-                        return
-                    }
-                },
-                error: function (response) {
-                    console.log(response);
-                    valid = true;
-                    value = "Error";
-                    callFinished = true;
-                    return
+                var currFormID = formData.formId;
+                var controlFieldsToUpdate;
+                var originalSubmissionId;
+
+                function init() {
+                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["Original Submission"], function (res) {
+                        return res.data[0].value;
+                    });
+                    //Check if form data is equal to form IDs
+                    checkFormId(currFormID);
+
+                    //Make API calls with fields to update
+
+                    //Ref form
+                    //TCS App form
+                    //Pulse App form
+
                 }
-            })
-        }
 
-        function makeApiCall() {
-            //Check form type: Ref, Application
-            JFCustomWidget.hideWidgetError();
+                function makeAPICall() {
+                    console.log(`https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`)
+                    jQuery.ajax({
+                        //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
+                        url: `https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`,
+                        method: "POST",
+                        data: controlFieldsToUpdate,
+                        timeout: 60000,
+                        success: function (response) {
+                            console.log(response);
+                            //add result.info to array [1] and return it
+                            if (response.result === "YES" && response.errorcode === "Success") {
+                                console.log("Pass");
+                                // callFinished = true;
+                                return
+                            }
+                            else {
+                                console.log("Failed");
+                                return
+                            }
+                        },
+                        error: function (response) {
+                            console.log(response);
+                            return
+                        }
+                    })
 
-            apiKey = JFCustomWidget.getWidgetSetting("apiKey");
-            fieldToUpdate = JFCustomWidget.getWidgetSetting("fieldToUpdate");
-
-            var submissionIdParam = JFCustomWidget.getWidgetSetting("subId");
-            var refNumberParam = JFCustomWidget.getWidgetSetting("refNumber");
-
-            var fieldArr = fieldToUpdate.split(","); //{"0":"67", "1":"68", "2":"72", "3":"127", "4":"136", "5":"145"}
-
-            if (formType === "Ref") {
-                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-                    console.log("res by Name=", res)
-                    submissionId = res.data[0].value
-                    refNumber = res.data[1].value
-                    // res.data.forEach(resItem => {
-                    //     console.log(resItem.value);
-                    // });
-                    dataToSend = {
-                        // checkFieldToUpdate(refNumber, fieldArr):"Response Received"
-                    }
-                    callControlForm(apiKey, submissionId, dataToSend);
-                }); // set refNumber and submissionId
-
-                console.log(apiKey);
-                console.log(submissionId);
-                console.log(fieldToUpdate);
-                console.log(fieldArr);
-            }
-            else if (formType === "App Pulse") {
-                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-                    console.log("res by Name=", res)
-                    submissionId = res.data[0].value
-                    refNumber = res.data[1].value
-                    dataToSend = {
-
-                    }
-                    callControlForm(apiKey, submissionId, dataToSend);
-                });
-            }
-            else if (formType === "App TCS") {
-                JFCustomWidget.getFieldsValueById([submissionIdParam, refNumberParam], function (res) {
-                    console.log("res by Name=", res)
-                    submissionId = res.data[0].value
-                    refNumber = res.data[1].value
-                    dataToSend = {
-
-                    }
-                    callControlForm(apiKey, submissionId, dataToSend);
-                });
-            }
-
-            // callControlForm(apiKey, submissionId, checkFieldToUpdate(refNumber, fieldArr));
-
-            var data = {
-                value: value,
-                valid: valid
-            }
-
-            //console.log(data.value)
-            // console.log(refNumber);
-
-            JFCustomWidget.sendData(data);
-        }
-
-        function fillConditionValue(data) {
-            JFCustomWidget.hideWidgetError();
-
-            formType = data.value
-            return
-        }
-        //subscrive to ready
-        JFCustomWidget.subscribe("ready", function (msg) {
-            console.log("ready message arrived from JotForm", msg);
-            //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                makeApiCall();
-                var data2 = {
-                    value: "",
-                    valid: true
                 }
-                console.log(data2)
-                JFCustomWidget.sendSubmit(data2);
 
-                // console.log(jotFormStudentName)
-                // console.log(jotFormDisplayName)
+                function checkFormId(currFormID) {
+                    var fields = [];
+                    /*
+                    Control form:
+                    78 = status,
+                    14 = NMC Pin,
+                    227 = On the DBS, 
+                    15 = DBS Pin,
+                    245 = Widget data
+                    */
+                    switch (currFormID) {
+                        case "221944213799868":
+                            //Pulse App
+                            fields = ["NMC PIN Card Number"
+                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
+                                , "What is your DBS PIN?"
+                                , "Widget Storage"];
+                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                                console.log("res value (Pulse App) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[78]": "Awaiting Review",
+                                    "submission[14]": res.data[0].value,
+                                    "submission[227]": res.data[1].value,
+                                    "submission[15]": res.data[2].value,
+                                    "submission[245]": res.data[3].value
+                                }
+                                // setTimeout(ProcessData(res), 500);
+                            });
+                            break;
+                        case "222023394876863":
+                            //TCS App
+                            fields = ["NMC PIN Card Number"
+                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
+                                , "What is your DBS PIN?"
+                                , "Widget Storage"];
+                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                                console.log("res value (TCS App) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[78]": "Awaiting Review",
+                                    "submission[14]": res.data[0].value,
+                                    "submission[227]": res.data[1].value,
+                                    "submission[15]": res.data[2].value,
+                                    "submission[245]": res.data[3].value
+                                }
+                                // setTimeout(ProcessData(res), 500);
+                            });
+                            break;
+                        case "221574004656352":
+                            //Pulse Ref
+                            break;
+                        case "222085492413857":
+                            //TCS Ref
+                            break;
+                        case "222404538712047":
+                            //Test remove later
+                            fields = ["NMC PIN Card Number"
+                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
+                                , "What is your DBS PIN?"
+                                , "Widget Storage"];
+                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                                console.log("res value (TCS App) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[78]": "Awaiting Review",
+                                    "submission[14]": res.data[0].value,
+                                    "submission[227]": res.data[1].value,
+                                    "submission[15]": res.data[2].value,
+                                    "submission[245]": res.data[3].value
+                                }
+                                // setTimeout(ProcessData(res), 500);
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+            }
+
+            JFCustomWidget.subscribe('ready', function (data) {
+                // console.log('Education Experience List ready', data);
+                var widget = new UpdateControlForm('Test01', data, JFCustomWidget.getWidgetSettings());
+                widget.init();
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    JFCustomWidget.hideWidgetError();
+
+                }
+
+                console.log(JFCustomWidget)
+
+                JFCustomWidget.subscribe('submit', function () {
+                    widget.makeAPICall();
+
+                    // send the data
+                    JFCustomWidget.sendSubmit();
+                });
+
             });
+        })
 
-            JFCustomWidget.subscribe('populate', fillConditionValue);
-
-        });
     </script>
 </body>
 
