@@ -36,6 +36,8 @@
                     console.log(formData)
                     console.log(params)
 
+                    console.log(JFCustomWidget.getWidgetSettings())
+
                     JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
                         console.log("originalSubmission = ", res.data[0].value)
                         originalSubmissionId = res.data[0].value;
