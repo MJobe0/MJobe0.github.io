@@ -34,12 +34,14 @@
 
                 function init() {
                     console.log(formData)
-                    originalSubmissionId = JFCustomWidget.getFieldsValueByName(["q10_originalSubmission", "originalSubmission", "originalsubmission", "Original Submission"], function (res) {
-                        console.log(res)
-                        return res.data[0].value;
+
+                    JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
+                        console.log("originalSubmission = ", res.data[0].value)
+                        originalSubmissionId = res.data[0].value;
                     });
 
                     //Check if form data is equal to form IDs
+                    console.log(formData)
                     checkFormId(currFormID);
 
                     //Make API calls with fields to update
@@ -93,10 +95,7 @@
                     switch (currFormID) {
                         case "221944213799868":
                             //Pulse App
-                            fields = ["NMC PIN Card Number"
-                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
-                                , "What is your DBS PIN?"
-                                , "Widget Storage"];
+                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                                 console.log("res value (Pulse App) = ", res.data)
                                 controlFieldsToUpdate = {
@@ -111,10 +110,7 @@
                             break;
                         case "222023394876863":
                             //TCS App
-                            fields = ["NMC PIN Card Number"
-                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
-                                , "What is your DBS PIN?"
-                                , "Widget Storage"];
+                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                                 console.log("res value (TCS App) = ", res.data)
                                 controlFieldsToUpdate = {
@@ -135,12 +131,9 @@
                             break;
                         case "222404538712047":
                             //Test remove later
-                            fields = ["NMC PIN Card Number"
-                                , "Do you have a current DBS that is signed up to the update service, that is; Enhanced, covers Child & Adult Workforce, where all names have been checked?"
-                                , "What is your DBS PIN?"
-                                , "Widget Storage"];
+                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
-                                console.log("res value (TCS App) = ", res.data)
+                                console.log("res value (Test form) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[78]": "Awaiting Review",
                                     "submission[14]": res.data[0].value,
@@ -170,15 +163,14 @@
 
                 }
 
-                console.log(JFCustomWidget)
+                // console.log(JFCustomWidget)
+            });
 
-                JFCustomWidget.subscribe('submit', function () {
-                    widget.makeAPICall();
+            JFCustomWidget.subscribe('submit', function () {
+                widget.makeAPICall();
 
-                    // send the data
-                    // JFCustomWidget.sendSubmit();
-                });
-
+                // send the data
+                // JFCustomWidget.sendSubmit();
             });
         })
 
