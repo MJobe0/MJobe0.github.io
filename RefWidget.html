@@ -31,6 +31,7 @@
                 var currFormID = formData["formID"];
                 var controlFieldsToUpdate;
                 var originalSubmissionId;
+                var refNumber;
 
                 function init() {
                     console.log(formData)
@@ -127,12 +128,24 @@
                             break;
                         case "221574004656352":
                             //Pulse Ref
+                            fields = [];
+                            JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
+                                console.log("refNumber = ", res.data[0].value)
+                                refNumber = res.data[0].value;
+                                checkRefToUpdate(refNumber, fields);
+                            });
                             break;
                         case "222085492413857":
                             //TCS Ref
+                            fields = [];
+                            JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
+                                console.log("refNumber = ", res.data[0].value)
+                                refNumber = res.data[0].value;
+                                checkRefToUpdate(refNumber, fields);
+                            });
+
                             break;
-                        case "222404538712047":
-                            //Test remove later
+                        case "222404538712047": //Test App remove later
                             // fields = ["q5_nmcPin", "q6_doYou", "q7_whatIs", "q8_widgetStorage"];
                             fields = ["5", "12", "7", "11"];
                             JFCustomWidget.getFieldsValueById(fields, function (res) {
@@ -147,6 +160,37 @@
                                 // setTimeout(ProcessData(res), 500);
                             });
                             break;
+                        default:
+                            break;
+                    }
+                }
+
+                function checkRefToUpdate(refNum, fieldsToGetValues) {
+                    switch (refNum) {
+                        case "1":
+                            controlFieldsToUpdate = {}
+                            break;
+                        case "2":
+                            controlFieldsToUpdate = {}
+
+                            break;
+                        case "3":
+                            controlFieldsToUpdate = {}
+
+                            break;
+                        case "4":
+                            controlFieldsToUpdate = {}
+
+                            break;
+                        case "5":
+                            controlFieldsToUpdate = {}
+
+                            break;
+                        case "6":
+                            controlFieldsToUpdate = {}
+
+                            break;
+
                         default:
                             break;
                     }
