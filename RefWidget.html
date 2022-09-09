@@ -97,8 +97,8 @@
                     switch (currFormID) {
                         case "221944213799868":
                             //Pulse App
-                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
-                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                            fields = ["91", "451", "302", "452"];
+                            JFCustomWidget.getFieldsValueById(fields, function (res) {
                                 console.log("res value (Pulse App) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[78]": "Awaiting Review",
@@ -112,7 +112,7 @@
                             break;
                         case "222023394876863":
                             //TCS App
-                            fields = ["nmcPin", "doYou", "whatIs", "widgetStorage"];
+                            fields = ["91", "452", "333", "453"];
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                                 console.log("res value (TCS App) = ", res.data)
                                 controlFieldsToUpdate = {
