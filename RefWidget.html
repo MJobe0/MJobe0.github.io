@@ -128,6 +128,8 @@
                             break;
                         case "221574004656352":
                             //Pulse Ref
+                            // fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "dateOf259[day]", "dateOf259[month]", "dateOf259[year]",
+                            //     "dateOf260[day]", "dateOf260[month]", "dateOf260[year]"];
                             fields = ["13", "16", "259", "260"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
@@ -137,6 +139,8 @@
                             break;
                         case "222085492413857":
                             //TCS Ref
+                            // fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "startDate282[day]", "startDate282[month]", "startDate282[year]",
+                            //     "endDate283[day]", "endDate283[month]", "endDate283[year]"];
                             fields = ["13", "16", "282", "283"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
@@ -160,12 +164,28 @@
                             });
                             break;
                         case "222514431776051": //Test Ref remove later
-                            fields = ["3", "6", "4", "5", "3[first]", "4[day]"];
+                            fields = ["q3_refereeName[first]", "q3_refereeName[last]", "q6_refereeEmail", "startDate[day]", "startDate[month]", "startDate[year]",
+                                "endDate[day]", "endDate[month]", "endDate[year]"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
-                                checkRefToUpdate(refNumber, fields);
+                                //checkRefToUpdate(refNumber, fields);
                             });
+                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                                console.log("res value (Ref 1) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //name
+                                    "submission[17][last]": res.data[1].value, //name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
+                                }
+                            })
                             break
                         default:
                             break;
@@ -175,7 +195,7 @@
                 function checkRefToUpdate(refNum, fieldsToGetValues) {
                     switch (refNum) {
                         case "1":
-                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 1) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[167]": "Response Received",
