@@ -171,6 +171,12 @@
                                 refNumber = res.data[0].value;
                                 //checkRefToUpdate(refNumber, fields);
                             });
+                            JFCustomWidget.getFieldsValueById(["first_3"], function (res) {
+                                console.log("res value first by id = ", res.data)
+                            })
+                            JFCustomWidget.getFieldsValueByName(["first_3"], function (res) {
+                                console.log("res value first by name = ", res.data)
+                            })
                             JFCustomWidget.getFieldsValueByName(fields, function (res) {
                                 console.log("res value (Ref 1) = ", res.data)
                                 controlFieldsToUpdate = {
