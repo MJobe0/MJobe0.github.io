@@ -128,7 +128,7 @@
                             break;
                         case "221574004656352":
                             //Pulse Ref
-                            fields = ["13","16","259","260"];
+                            fields = ["13", "16", "259", "260"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -137,13 +137,12 @@
                             break;
                         case "222085492413857":
                             //TCS Ref
-                            fields = ["13","16","282","283"];
+                            fields = ["13", "16", "282", "283"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
                                 checkRefToUpdate(refNumber, fields);
                             });
-
                             break;
                         case "222404538712047": //Test App remove later
                             // fields = ["q5_nmcPin", "q6_doYou", "q7_whatIs", "q8_widgetStorage"];
@@ -160,6 +159,14 @@
                                 // setTimeout(ProcessData(res), 500);
                             });
                             break;
+                        case "222514431776051": //Test Ref remove later
+                            fields = ["3", "6", "4", "5"];
+                            JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
+                                console.log("refNumber = ", res.data[0].value)
+                                refNumber = res.data[0].value;
+                                checkRefToUpdate(refNumber, fields);
+                            });
+                            break
                         default:
                             break;
                     }
