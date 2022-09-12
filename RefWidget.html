@@ -128,9 +128,9 @@
                             break;
                         case "221574004656352":
                             //Pulse Ref
-                            // fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "dateOf259[day]", "dateOf259[month]", "dateOf259[year]",
-                            //     "dateOf260[day]", "dateOf260[month]", "dateOf260[year]"];
-                            fields = ["13", "16", "259", "260"];
+                            fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "dateOf259[day]", "dateOf259[month]", "dateOf259[year]",
+                                "dateOf260[day]", "dateOf260[month]", "dateOf260[year]"];
+                            // fields = ["13", "16", "259", "260"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -139,9 +139,9 @@
                             break;
                         case "222085492413857":
                             //TCS Ref
-                            // fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "startDate282[day]", "startDate282[month]", "startDate282[year]",
-                            //     "endDate283[day]", "endDate283[month]", "endDate283[year]"];
-                            fields = ["13", "16", "282", "283"];
+                            fields = ["refereeName[first]", "refereeName[last]", "refereeEmail", "startDate282[day]", "startDate282[month]", "startDate282[year]",
+                                "endDate283[day]", "endDate283[month]", "endDate283[year]"];
+                            // fields = ["13", "16", "282", "283"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -165,33 +165,12 @@
                             break;
                         case "222514431776051": //Test Ref remove later
                             fields = ["refereeName[first]", "refereeName[last]", "q6_refereeEmail", "startDate[day]", "startDate[month]", "startDate[year]",
-                                "endDate[day]", "endDate[month]", "endDate[year]", "refereeName"];
+                                "endDate[day]", "endDate[month]", "endDate[year]"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
-                                //checkRefToUpdate(refNumber, fields);
+                                checkRefToUpdate(refNumber, fields);
                             });
-                            JFCustomWidget.getFieldsValueById(["first_3"], function (res) {
-                                console.log("res value first by id = ", res.data)
-                            })
-                            JFCustomWidget.getFieldsValueByName(["first_3"], function (res) {
-                                console.log("res value first by name = ", res.data)
-                            })
-                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
-                                console.log("res value (Ref 1) = ", res.data)
-                                controlFieldsToUpdate = {
-                                    "submission[167]": "Response Received",
-                                    "submission[17][first]": res.data[0].value, //name
-                                    "submission[17][last]": res.data[1].value, //name
-                                    "submission[18]": res.data[2].value, //email
-                                    "submission[228][day]": res.data[3].value, //start date day
-                                    "submission[228][month]": res.data[4].value, //start date month
-                                    "submission[228][year]": res.data[5].value, //start date year
-                                    "submission[229][day]": res.data[6].value, //end date day
-                                    "submission[229][month]": res.data[7].value, //end date month
-                                    "submission[229][year]": res.data[8].value //end date year
-                                }
-                            })
                             break
                         default:
                             break;
@@ -201,74 +180,104 @@
                 function checkRefToUpdate(refNum, fieldsToGetValues) {
                     switch (refNum) {
                         case "1":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 1) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[167]": "Response Received",
-                                    "submission[17]": res.data[0].value, //name
-                                    "submission[18]": res.data[1].value, //email
-                                    "submission[228]": res.data[2].value, //start date
-                                    "submission[229]": res.data[3].value //end date
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
                         case "2":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 2) = ", res.data)
                                 controlFieldsToUpdate = {
-                                    "submission[68]": "Response Received",
-                                    "submission[219]": res.data[0].value, //name
-                                    "submission[20]": res.data[1].value, //email
-                                    "submission[230]": res.data[2].value, //start date
-                                    "submission[231]": res.data[3].value //end date
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
                         case "3":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 3) = ", res.data)
                                 controlFieldsToUpdate = {
-                                    "submission[72]": "Response Received",
-                                    "submission[70]": res.data[0].value, //name
-                                    "submission[71]": res.data[1].value, //email
-                                    "submission[232]": res.data[2].value, //start date
-                                    "submission[233]": res.data[3].value //end date
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
                         case "4":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 4) = ", res.data)
                                 controlFieldsToUpdate = {
-                                    "submission[127]": "Response Received",
-                                    "submission[123]": res.data[0].value, //name
-                                    "submission[126]": res.data[1].value, //email
-                                    "submission[234]": res.data[2].value, //start date
-                                    "submission[235]": res.data[3].value //end date
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
                         case "5":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 5) = ", res.data)
                                 controlFieldsToUpdate = {
-                                    "submission[136]": "Response Received",
-                                    "submission[132]": res.data[0].value, //name
-                                    "submission[135]": res.data[1].value, //email
-                                    "submission[236]": res.data[2].value, //start date
-                                    "submission[237]": res.data[3].value //end date
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
                         case "6":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 6) = ", res.data)
                                 controlFieldsToUpdate = {
-                                    "submission[145]": "Response Received",
-                                    "submission[141]": res.data[0].value, //name
-                                    "submission[144]": res.data[1].value, //email
-                                    "submission[238]": res.data[2].value, //start date
-                                    "submission[239]": res.data[3].value //end date
+                                    "submission[167]": "Response Received",
+                                    "submission[17][first]": res.data[0].value, //first name
+                                    "submission[17][last]": res.data[1].value, //last name
+                                    "submission[18]": res.data[2].value, //email
+                                    "submission[228][day]": res.data[3].value, //start date day
+                                    "submission[228][month]": res.data[4].value, //start date month
+                                    "submission[228][year]": res.data[5].value, //start date year
+                                    "submission[229][day]": res.data[6].value, //end date day
+                                    "submission[229][month]": res.data[7].value, //end date month
+                                    "submission[229][year]": res.data[8].value //end date year
                                 }
                             })
                             break;
