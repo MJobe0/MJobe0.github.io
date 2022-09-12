@@ -160,7 +160,7 @@
                             });
                             break;
                         case "222514431776051": //Test Ref remove later
-                            fields = ["3", "6", "4", "5", "3:first", "4:day"];
+                            fields = ["3", "6", "4", "5", "3[first]", "4[day]"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -175,7 +175,7 @@
                 function checkRefToUpdate(refNum, fieldsToGetValues) {
                     switch (refNum) {
                         case "1":
-                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                            JFCustomWidget.getFieldsValueByName(fieldsToGetValues, function (res) {
                                 console.log("res value (Ref 1) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[167]": "Response Received",
