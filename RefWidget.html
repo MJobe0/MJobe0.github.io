@@ -128,7 +128,7 @@
                             break;
                         case "221574004656352":
                             //Pulse Ref
-                            fields = [];
+                            fields = ["13","16","259","260"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -137,7 +137,7 @@
                             break;
                         case "222085492413857":
                             //TCS Ref
-                            fields = [];
+                            fields = ["13","16","282","283"];
                             JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                                 console.log("refNumber = ", res.data[0].value)
                                 refNumber = res.data[0].value;
@@ -168,27 +168,76 @@
                 function checkRefToUpdate(refNum, fieldsToGetValues) {
                     switch (refNum) {
                         case "1":
-                            controlFieldsToUpdate = {}
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 1) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[167]": "Response Received",
+                                    "submission[17]": res.data[0].value, //name
+                                    "submission[18]": res.data[1].value, //email
+                                    "submission[228]": res.data[2].value, //start date
+                                    "submission[229]": res.data[3].value //end date
+                                }
+                            })
                             break;
                         case "2":
-                            controlFieldsToUpdate = {}
-
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 2) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[68]": "Response Received",
+                                    "submission[219]": res.data[0].value, //name
+                                    "submission[20]": res.data[1].value, //email
+                                    "submission[230]": res.data[2].value, //start date
+                                    "submission[231]": res.data[3].value //end date
+                                }
+                            })
                             break;
                         case "3":
-                            controlFieldsToUpdate = {}
-
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 3) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[72]": "Response Received",
+                                    "submission[70]": res.data[0].value, //name
+                                    "submission[71]": res.data[1].value, //email
+                                    "submission[232]": res.data[2].value, //start date
+                                    "submission[233]": res.data[3].value //end date
+                                }
+                            })
                             break;
                         case "4":
-                            controlFieldsToUpdate = {}
-
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 4) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[127]": "Response Received",
+                                    "submission[123]": res.data[0].value, //name
+                                    "submission[126]": res.data[1].value, //email
+                                    "submission[234]": res.data[2].value, //start date
+                                    "submission[235]": res.data[3].value //end date
+                                }
+                            })
                             break;
                         case "5":
-                            controlFieldsToUpdate = {}
-
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 5) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[136]": "Response Received",
+                                    "submission[132]": res.data[0].value, //name
+                                    "submission[135]": res.data[1].value, //email
+                                    "submission[236]": res.data[2].value, //start date
+                                    "submission[237]": res.data[3].value //end date
+                                }
+                            })
                             break;
                         case "6":
-                            controlFieldsToUpdate = {}
-
+                            JFCustomWidget.getFieldsValueById(fieldsToGetValues, function (res) {
+                                console.log("res value (Ref 6) = ", res.data)
+                                controlFieldsToUpdate = {
+                                    "submission[145]": "Response Received",
+                                    "submission[141]": res.data[0].value, //name
+                                    "submission[144]": res.data[1].value, //email
+                                    "submission[238]": res.data[2].value, //start date
+                                    "submission[239]": res.data[3].value //end date
+                                }
+                            })
                             break;
 
                         default:
