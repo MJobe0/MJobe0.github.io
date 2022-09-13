@@ -62,7 +62,7 @@
                         url: `https://acaciumgroup.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
                         method: "POST",
                         data: controlFieldsToUpdate,
-                        timeout: 10000,
+                        // timeout: 10000,
                         success: function (response) {
                             console.log(response);
                             //add result.info to array [1] and return it
