@@ -114,7 +114,7 @@
                         case "222023394876863":
                             //TCS App
                             fields = ["91", "452", "333", "453"];
-                            JFCustomWidget.getFieldsValueByName(fields, function (res) {
+                            JFCustomWidget.getFieldsValueById(fields, function (res) {
                                 console.log("res value (TCS App) = ", res.data)
                                 controlFieldsToUpdate = {
                                     "submission[78]": "Awaiting Review",
