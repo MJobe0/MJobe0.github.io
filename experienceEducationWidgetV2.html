@@ -424,7 +424,6 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
-                this.makeWidgetRequiredOrNot = makeWidgetRequiredOrNot
 
                 const currMaxYear = maxYear();
 
@@ -433,7 +432,6 @@
                 // $('#listContainer').css('overflow-x', 'auto');
 
                 function init() {
-                    makeWidgetRequiredOrNot();
                     // $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
@@ -479,32 +477,14 @@
                         addRow();
                     });
 
-                    $('input, select, textarea').on('change', function (event) {
-                        makeWidgetRequiredOrNot();
-                        JFCustomWidget.sendData(getData(fieldToStoreData))
-                    })
+                    $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
                     $("input[type=date]").attr("min", currMaxYear);
 
                 }
 
-                function makeWidgetRequiredOrNot() {
-                    console.log("here")
-                    //Validate years since school leaving age
-                    if (!JFCustomWidget.isWidgetRequired()) {
-                        if ($('input:invalid').length >= 1) {
-                            console.log(JFCustomWidget.isWidgetRequired())
-                            JFCustomWidget.makeWidgetRequired();
-                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                        }
-                        if (document.getElementById("emptbl").rows.length <= 1) {
-                            JFCustomWidget.makeWidgetRequired();
-                        }
-                        else {
-                            JFCustomWidget.makeWidgetNotRequired();
-                            JFCustomWidget.hideWidgetError();
-                        }
-                    }
-                }
+                // function makeWidgetRequiredOrNot() {
+
+                // }
 
                 function maxYear() {
                     var maxYearForDates;
@@ -524,7 +504,6 @@
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
-                        makeWidgetRequiredOrNot(); //May not be required
                         return
                     }
                     var table = document.getElementById("emptbl");
