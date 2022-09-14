@@ -597,10 +597,12 @@
                     let currNames = getCompanyNames();
                     let fillArr = []
                     for (let i = 0; i < fieldIds.length; i++) {
-                        fillArr.push({
-                            id: fieldIds[i],
-                            value: currNames[i] ?? ""
-                        })
+                        if (currNames[i] !== undefined && currNames[i] !== "") {
+                            fillArr.push({
+                                id: fieldIds[i],
+                                value: currNames[i]
+                            })
+                        }
                     }
                     JFCustomWidget.setFieldsValueById(fillArr);
                     console.log(fillArr)
