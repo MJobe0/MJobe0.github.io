@@ -424,6 +424,7 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
+                this.makeWidgetRequiredOrNot = makeWidgetRequiredOrNot
 
                 const currMaxYear = maxYear();
 
@@ -486,6 +487,7 @@
                 }
 
                 function makeWidgetRequiredOrNot() {
+                    console.log("here")
                     //Validate years since school leaving age
                     if (!JFCustomWidget.isWidgetRequired()) {
                         if ($('input:invalid').length >= 1) {
