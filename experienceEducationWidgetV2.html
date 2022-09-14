@@ -564,7 +564,7 @@
 
                 function getCompanyNames() {
                     const currRowLength = document.getElementsByName("Name of Employer")?.length
-                    console.log("Employer by name = ",document.getElementsByName("Name of Employer"))
+                    console.log("Employer by name = ", document.getElementsByName("Name of Employer"))
                     let arr = []
                     for (let i = 0; i < currRowLength; i++) {
                         let currNameOfEmployer = document.getElementsByName("Name of Employer")[i]?.value; //check undefinded
@@ -598,10 +598,12 @@
                     let currNames = getCompanyNames();
                     let fillArr = []
                     for (let i = 0; i < fieldIds.length; i++) {
-                        fillArr.push({
-                            id: fieldIds[i],
-                            value: currNames[i] ?? ""
-                        })
+                        if (currNames[i] !== undefined && currNames[i] !== "") {
+                            fillArr.push({
+                                id: fieldIds[i],
+                                value: currNames[i]
+                            })
+                        }
                     }
                     JFCustomWidget.setFieldsValueById(fillArr);
                     console.log(fillArr)
