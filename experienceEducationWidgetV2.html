@@ -489,13 +489,16 @@
                     //Validate years since school leaving age
                     if (!JFCustomWidget.isWidgetRequired()) {
                         if ($('input:invalid').length >= 1) {
+                            console.log(JFCustomWidget.isWidgetRequired())
                             JFCustomWidget.makeWidgetRequired();
+                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                         }
                         if (document.getElementById("emptbl").rows.length <= 1) {
                             JFCustomWidget.makeWidgetRequired();
                         }
                         else {
                             JFCustomWidget.makeWidgetNotRequired();
+                            JFCustomWidget.hideWidgetError();
                         }
                     }
                 }
@@ -517,7 +520,7 @@
 
 
                 function addRow(isPop, popData) {
-                    if ($('input:invalid').length >= 1 && isPop !== true) {
+                    if ($('input:invalid').length >= 1) {
                         makeWidgetRequiredOrNot(); //May not be required
                         return
                     }
