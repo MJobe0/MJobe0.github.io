@@ -13,11 +13,11 @@
     <script>
         //aa1473ed813357cb04ee2f2128ffd25e
         //api.jotform.com
-        //https://eu-api.jotform.com/form/222125485285053/submissions?apiKey=aa1473ed813357cb04ee2f2128ffd25e
+        //https://eu-api.jotform.com/form/222125485285053/submissions
 
         function callGetForm() {
             jQuery.ajax({
-                url: "https://eu-api.jotform.com/form/222125485285053/submissions?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
+                url: "https://eu-api.jotform.com/form/222125485285053/submissions",
                 method: "GET",
                 timeout: 60000,
                 success: function (response) {
@@ -50,11 +50,11 @@
 
 
         function callControlForm() {
-            console.log("https://acaciumgroup.jotform.com/API/form/222434431686860?apiKey=297ec735684f7bf7e69f2d5ecd06f70d")
+            console.log("https://acaciumgroup.jotform.com/API/form/222434431686860")
             //https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e
             jQuery.ajax({
                 //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
-                url: `https://acaciumgroup.jotform.com/API/workflow/submission/5390469858125628972/tasks?limit=50&filter={"status:ne":["COMPLETED","CANCELED"],"onlyAssignee":"1"}&apiKey=297ec735684f7bf7e69f2d5ecd06f70d`,
+                url: `https://acaciumgroup.jotform.com/API/workflow/submission/5390469858125628972/tasks?limit=50&filter={"status:ne":["COMPLETED","CANCELED"],"onlyAssignee":"1"}`,
                 method: "GET",
                 dataType: "jsonp",
                 // timeout: 60000,
@@ -76,11 +76,11 @@
 
         }
         function callControlForm2() {
-            console.log("https://acaciumgroup.jotform.com/API/form/222434431686860?apiKey=297ec735684f7bf7e69f2d5ecd06f70d")
-            //https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e
+            console.log("https://acaciumgroup.jotform.com/API/form/222434431686860")
+            //https://eu-api.jotform.com/submission/5353380933424302821
             jQuery.ajax({
-                //url: "https://eu-api.jotform.com/submission/5353380933424302821?apiKey=aa1473ed813357cb04ee2f2128ffd25e",
-                url: "https://eu-api.jotform.com/submission/5395001675315006911?apiKey=91e8a9acc9ae65d963140152710162b0",
+                //url: "https://eu-api.jotform.com/submission/5353380933424302821,
+                url: "https://eu-api.jotform.com/submission/5395001675315006911",
                 method: "POST",
                 // dataType: "json",
                 // data: {
@@ -133,7 +133,7 @@
     <button type="button" onclick="callControlForm()">
         Test1
     </button>
-    <button type="button" onclick="callControlForm2('249abd602084940240b0c0a492da7f75', '5354096835249051836', '67')">
+    <button type="button" onclick="callControlForm2('', '5354096835249051836', '67')">
         Test2
     </button>
 </body>
