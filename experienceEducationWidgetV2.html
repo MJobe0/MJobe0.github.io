@@ -307,7 +307,7 @@
             }).get();
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            return { valid: true, value: JSON.stringify(tblData) };
+            return { valid: true, value: tblData };
         }
 
         function validateDates() {
