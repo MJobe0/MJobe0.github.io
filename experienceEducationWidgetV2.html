@@ -193,23 +193,6 @@
         var numOfIncorrectDates = 0;
         var currFullWorkHistory = "No";
 
-        // function test01() {
-        //     /* var myHeaders = new Headers();
-        //     myHeaders.append("Cookie", "JOTFORM_SESSION=hq4hdr6luv1hoq99aeko1jrsv7");
-        //      */
-        //     var requestOptions = {
-        //         method: 'GET',
-        //         /*   headers: myHeaders,
-        //          */
-        //         redirect: 'manual'
-        //     };
-
-        //     fetch("https://eu-api.jotform.com/form/222544656431051/questions?apikey=", requestOptions)
-        //         .then(response => response.text())
-        //         .then(result => console.log(result))
-        //         .catch(error => console.log('error', error));
-        // }
-
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
@@ -307,7 +290,7 @@
             }).get();
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            return { valid: false, value: tblData };
+            return { valid: true, value: JSON.stringify(tblData) };
         }
 
         function validateDates() {
@@ -441,6 +424,7 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
+                this.makeWidgetRequiredOrNot = makeWidgetRequiredOrNot
 
                 const currMaxYear = maxYear();
 
@@ -449,6 +433,7 @@
                 // $('#listContainer').css('overflow-x', 'auto');
 
                 function init() {
+                    makeWidgetRequiredOrNot();
                     // $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
@@ -494,14 +479,32 @@
                         addRow();
                     });
 
-                    $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
+                    $('input, select, textarea').on('change', function (event) {
+                        makeWidgetRequiredOrNot();
+                        JFCustomWidget.sendData(getData(fieldToStoreData))
+                    })
                     $("input[type=date]").attr("min", currMaxYear);
 
                 }
 
-                // function makeWidgetRequiredOrNot() {
-
-                // }
+                function makeWidgetRequiredOrNot() {
+                    console.log("here")
+                    //Validate years since school leaving age
+                    if (!JFCustomWidget.isWidgetRequired()) {
+                        if ($('input:invalid').length >= 1) {
+                            console.log(JFCustomWidget.isWidgetRequired())
+                            JFCustomWidget.makeWidgetRequired();
+                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                        }
+                        if (document.getElementById("emptbl").rows.length <= 1) {
+                            JFCustomWidget.makeWidgetRequired();
+                        }
+                        else {
+                            JFCustomWidget.makeWidgetNotRequired();
+                            JFCustomWidget.hideWidgetError();
+                        }
+                    }
+                }
 
                 function maxYear() {
                     var maxYearForDates;
@@ -542,7 +545,7 @@
                     var commentsCell = row.insertCell(9);
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                    moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">Up</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">Down</button>`;
+                    moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
                     typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
@@ -666,11 +669,33 @@
 
             });
         })
-        function test01() {
-            JFCustomWidget.sendSubmit({value: "True", valid: true});
+
+        function makeWidgetRequiredOrNot2() {
+            console.log("here")
+            //Validate years since school leaving age
+            if (!JFCustomWidget.isWidgetRequired()) {
+                if ($('input:invalid').length >= 1) {
+                    console.log(JFCustomWidget.isWidgetRequired())
+                    JFCustomWidget.makeWidgetRequired();
+                    JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                }
+                if (document.getElementById("emptbl").rows.length <= 1) {
+                    JFCustomWidget.makeWidgetRequired();
+                }
+                else {
+                    JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                }
+            }
         }
+
+        function test01() {
+            JFCustomWidget.sendSubmit({ value: "True", valid: true });
+        }
+
         function test02() {
-            JFCustomWidget.sendSubmit({value: "False", valid: false});
+            makeWidgetRequiredOrNot2()
+            JFCustomWidget.sendSubmit({ value: "False", valid: false });
         }
 
     </script>
