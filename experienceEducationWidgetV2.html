@@ -678,6 +678,8 @@
                     console.log(JFCustomWidget.isWidgetRequired())
                     JFCustomWidget.makeWidgetRequired();
                     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                    JFCustomWidget.sendSubmit({ value: "False", valid: false });
+
                 }
                 if (document.getElementById("emptbl").rows.length <= 1) {
                     JFCustomWidget.makeWidgetRequired();
@@ -695,7 +697,6 @@
 
         function test02() {
             makeWidgetRequiredOrNot2()
-            JFCustomWidget.sendSubmit({ value: "False", valid: false });
         }
 
     </script>
