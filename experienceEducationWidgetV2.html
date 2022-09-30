@@ -696,7 +696,9 @@
         }
 
         function test02() {
-            makeWidgetRequiredOrNot2()
+            // makeWidgetRequiredOrNot2()
+            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+            JFCustomWidget.sendSubmit({ value: "False", valid: false });
         }
 
     </script>
