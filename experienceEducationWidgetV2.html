@@ -672,7 +672,7 @@
             });
         })
 
-        function validateDates() {
+        function validateWidget() {
             const currRowLength = document.getElementsByName("Start Date")?.length
             var storedDates = [];
 
@@ -711,7 +711,7 @@
         }
 
         function test02() {
-            validateDates()
+            validateWidget()
             // makeWidgetRequiredOrNot2()
             JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
             JFCustomWidget.sendSubmit({ value: "False", valid: false });
