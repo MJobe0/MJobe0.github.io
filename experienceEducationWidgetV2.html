@@ -674,15 +674,17 @@
 
         function validateWidget() {
             const currRowLength = document.getElementsByName("Start Date")?.length
-            var storedDates = [];
+            var dateDiffSum;
 
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                 let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
 
-                storedDates.push(currStartDate, currEndDate);
+                var diffDays = parseInt((currEndDate - currStartDate) / (1000 * 60 * 60 * 24), 10);
+
+                dateDiffSum = dateDiffSum + diffDays
             }
-            console.log("stored dates = ", storedDates)
+            console.log(dateDiffSum);
         }
 
         function makeWidgetRequiredOrNot2() {
