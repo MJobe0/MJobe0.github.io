@@ -524,6 +524,8 @@
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
+                        JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                        JFCustomWidget.sendSubmit({ valid: false });
                         return
                     }
                     var table = document.getElementById("emptbl");
@@ -670,6 +672,19 @@
             });
         })
 
+        function validateDates() {
+            const currRowLength = document.getElementsByName("Start Date")?.length
+            var storedDates = [];
+
+            for (let i = 0; i < currRowLength; i++) {
+                let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
+                let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
+
+                storedDates.push(currStartDate, currEndDate);
+            }
+            console.log("stored dates = ", storedDates)
+        }
+
         function makeWidgetRequiredOrNot2() {
             console.log("here")
             //Validate years since school leaving age
@@ -696,6 +711,7 @@
         }
 
         function test02() {
+            validateDates()
             // makeWidgetRequiredOrNot2()
             JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
             JFCustomWidget.sendSubmit({ value: "False", valid: false });
