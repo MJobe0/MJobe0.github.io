@@ -683,7 +683,7 @@
 
                 testArr.push(currStartDate, currEndDate)
 
-                var diffDays = parseInt((currEndDate - currStartDate) / (1000 * 60 * 60 * 24), 10);
+                var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
 
                 dateDiffSum = dateDiffSum + diffDays
             }
