@@ -676,6 +676,7 @@
             const currRowLength = document.getElementsByName("Start Date")?.length
             var dateDiffSum = 0;
             var testArr = [];
+            var totalYears;
 
             for (let i = 0; i < currRowLength; i++) {
                 let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
@@ -689,6 +690,7 @@
             }
             console.log(dateDiffSum);
             console.log("curr dates = ", testArr);
+            totalYears = Math.floor(dateDiffSum / 365)
         }
 
         function makeWidgetRequiredOrNot2() {
