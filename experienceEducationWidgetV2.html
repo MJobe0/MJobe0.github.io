@@ -442,7 +442,7 @@
                         restoreTableData(JSON.parse(formData.value))
                     }
                     if (params["fullWorkHistory"] === "Yes") {
-                        JFCustomWidget.getFieldsValueById(["31"], function (res) {
+                        JFCustomWidget.getFieldsValueById(["5"], function (res) {
                             console.log("res by Name= ", res.data[0].value);
                             const strDate = res.data[0].value;
 
@@ -658,9 +658,18 @@
                 console.log(JFCustomWidget)
 
                 JFCustomWidget.subscribe('submit', function () {
+                    console.log("year of birth ", yearOfBirth)
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
+                        validateWidget(5)
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+
+                    }
+                    else if (widgetParm["fullWorkHistory"] === "Yes") {
+                        validateWidget(10)
+                        //  JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid:);
+
                     }
 
                     console.log(widgetParm["storageField"]);
@@ -672,7 +681,7 @@
             });
         })
 
-        function validateWidget() {
+        function validateWidget(yearLimit) {
             const currRowLength = document.getElementsByName("Start Date")?.length
             var dateDiffSum = 0;
             var testArr = [];
@@ -691,6 +700,15 @@
             console.log(dateDiffSum);
             console.log("curr dates = ", testArr);
             totalYears = Math.floor(dateDiffSum / 365)
+
+            if (totalYears < yearLimit) {
+                JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
+                JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: false });
+            }
+            else {
+                JFCustomWidget.hideWidgetError();
+                JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: true });
+            }
         }
 
         function makeWidgetRequiredOrNot2() {
