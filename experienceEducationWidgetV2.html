@@ -658,17 +658,15 @@
                 console.log(JFCustomWidget)
 
                 JFCustomWidget.subscribe('submit', function () {
-                    console.log("year of birth ", yearOfBirth)
+                    // console.log("year of birth ", yearOfBirth)
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
-                        validateWidget(5)
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+                        JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid: validateWidget(5)});
 
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        validateWidget(10)
-                        //  JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid:);
+                         JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid: validateWidget(10)});
 
                     }
 
@@ -702,12 +700,14 @@
             totalYears = Math.floor(dateDiffSum / 365)
 
             if (totalYears < yearLimit) {
+                return false
                 JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
-                JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: false });
+                // JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: false });
             }
             else {
-                JFCustomWidget.hideWidgetError();
-                JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: true });
+                return true
+                // JFCustomWidget.hideWidgetError();
+                // JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: true });
             }
         }
 
