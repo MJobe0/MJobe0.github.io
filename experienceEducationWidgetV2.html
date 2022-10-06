@@ -590,7 +590,7 @@
                     var deleteRowCell = row.insertCell(10);
                     // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                     moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
-                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                    typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" >
                         <option value="">Select Type of activity</option>
                         <option value="Employed">Employed</option>
                         <option value="Traveling">Traveling</option>
