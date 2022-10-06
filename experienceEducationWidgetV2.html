@@ -675,38 +675,6 @@
                 }
             }
 
-            function validateWidget() {
-                const currRowLength = document.getElementsByName("Start Date")?.length
-                var dateDiffSum = 0;
-                var testArr = [];
-                var totalYears;
-
-                for (let i = 0; i < currRowLength; i++) {
-                    let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
-                    let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
-
-                    testArr.push(currStartDate, currEndDate)
-
-                    var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
-
-                    dateDiffSum = dateDiffSum + diffDays
-                }
-                console.log(dateDiffSum);
-                console.log("curr dates = ", testArr);
-                totalYears = Math.floor(dateDiffSum / 365)
-
-                if (totalYears < yearLimit) {
-                    JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + 5 + " years")
-                    JFCustomWidget.sendSubmit({ valid: false });
-                    return
-                }
-                else {
-                    JFCustomWidget.hideWidgetError();
-                    JFCustomWidget.sendSubmit({ valid: true });
-                    return
-                }
-            }
-
             JFCustomWidget.subscribe('ready', function (data) {
                 // console.log('Education Experience List ready', data);
                 var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
@@ -756,6 +724,37 @@
             });
         })
 
+        function validateWidget() {
+            const currRowLength = document.getElementsByName("Start Date")?.length
+            var dateDiffSum = 0;
+            var testArr = [];
+            var totalYears;
+
+            for (let i = 0; i < currRowLength; i++) {
+                let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
+                let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
+
+                testArr.push(currStartDate, currEndDate)
+
+                var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
+
+                dateDiffSum = dateDiffSum + diffDays
+            }
+            console.log(dateDiffSum);
+            console.log("curr dates = ", testArr);
+            totalYears = Math.floor(dateDiffSum / 365)
+
+            if (totalYears < yearLimit) {
+                JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + 5 + " years")
+                JFCustomWidget.sendSubmit({ valid: false });
+                return
+            }
+            else {
+                JFCustomWidget.hideWidgetError();
+                JFCustomWidget.sendSubmit({ valid: true });
+                return
+            }
+        }
         function test01() {
             JFCustomWidget.sendSubmit({ value: "True", valid: true });
         }
