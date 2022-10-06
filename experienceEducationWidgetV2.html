@@ -663,6 +663,8 @@
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid: validateWidget(5)});
+                        JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
+
 
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
@@ -701,7 +703,7 @@
 
             if (totalYears < yearLimit) {
                 return false
-                JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
+                // JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
                 // JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: false });
             }
             else {
