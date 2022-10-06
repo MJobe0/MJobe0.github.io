@@ -306,6 +306,7 @@
                     _data.valid = false;
                     message = "Please make sure you've listed all posts held in the last " + 5 + " years";
                     JFCustomWidget.showWidgetError(message);
+                    JFCustomWidget.sendSubmit({ valid: false, value: "" })
                     console.log(message)
                 }
                 else {
@@ -328,7 +329,7 @@
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             _data.value = JSON.stringify(tblData)
             console.log("_data = ", _data)
-            return _data
+            //return _data
         }
 
         function validateDates() {
@@ -701,7 +702,7 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
+                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
