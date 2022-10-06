@@ -562,7 +562,7 @@
 
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
-                        JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in2");
+                        JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
                         JFCustomWidget.sendSubmit({ valid: false });
                         return
                     }
@@ -675,6 +675,38 @@
                 }
             }
 
+            function validateWidget(yearLimit) {
+                const currRowLength = document.getElementsByName("Start Date")?.length
+                var dateDiffSum = 0;
+                var testArr = [];
+                var totalYears;
+
+                for (let i = 0; i < currRowLength; i++) {
+                    let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
+                    let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
+
+                    testArr.push(currStartDate, currEndDate)
+
+                    var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
+
+                    dateDiffSum = dateDiffSum + diffDays
+                }
+                console.log(dateDiffSum);
+                console.log("curr dates = ", testArr);
+                totalYears = Math.floor(dateDiffSum / 365)
+
+                if (totalYears < yearLimit) {
+                    JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
+                    JFCustomWidget.sendSubmit({ valid: false });
+                    return
+                }
+                else {
+                    JFCustomWidget.hideWidgetError();
+                    JFCustomWidget.sendSubmit({ valid: true });
+                    return
+                }
+            }
+
             JFCustomWidget.subscribe('ready', function (data) {
                 // console.log('Education Experience List ready', data);
                 var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
@@ -706,10 +738,13 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                        validateWidget(5);
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
+                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
+                        validateWidget(10);
+
                     }
 
                     console.log(widgetParm["storageField"]);
@@ -721,66 +756,12 @@
             });
         })
 
-        function validateWidget(yearLimit) {
-            const currRowLength = document.getElementsByName("Start Date")?.length
-            var dateDiffSum = 0;
-            var testArr = [];
-            var totalYears;
-
-            for (let i = 0; i < currRowLength; i++) {
-                let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
-                let currStartDate = document.getElementsByName("Start Date")[i]?.value; //check undefinded
-
-                testArr.push(currStartDate, currEndDate)
-
-                var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
-
-                dateDiffSum = dateDiffSum + diffDays
-            }
-            console.log(dateDiffSum);
-            console.log("curr dates = ", testArr);
-            totalYears = Math.floor(dateDiffSum / 365)
-
-            if (totalYears < yearLimit) {
-                return false
-                // JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + yearLimit + " years")
-                // JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: false });
-            }
-            else {
-                return true
-                // JFCustomWidget.hideWidgetError();
-                // JFCustomWidget.sendSubmit({ value: widget.getData(widgetParm["storageField"]), valid: true });
-            }
-        }
-
-        function makeWidgetRequiredOrNot2() {
-            console.log("here")
-            //Validate years since school leaving age
-            if (!JFCustomWidget.isWidgetRequired()) {
-                if ($('input:invalid').length >= 1) {
-                    console.log(JFCustomWidget.isWidgetRequired())
-                    JFCustomWidget.makeWidgetRequired();
-                    JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                    JFCustomWidget.sendSubmit({ value: "False", valid: false });
-
-                }
-                if (document.getElementById("emptbl").rows.length <= 1) {
-                    JFCustomWidget.makeWidgetRequired();
-                }
-                else {
-                    JFCustomWidget.makeWidgetNotRequired();
-                    JFCustomWidget.hideWidgetError();
-                }
-            }
-        }
-
         function test01() {
             JFCustomWidget.sendSubmit({ value: "True", valid: true });
         }
 
         function test02() {
             validateWidget()
-            // makeWidgetRequiredOrNot2()
             JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
             JFCustomWidget.sendSubmit({ value: "False", valid: false });
         }
