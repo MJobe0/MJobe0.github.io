@@ -278,7 +278,42 @@
             }
         }
 
-        function getData(fieldToFill) {
+        function getData(fieldToFill, fullHis) {
+            var _data = {
+                'valid': true,
+                'value': [],
+            };
+
+            var message = '';
+
+
+            if ($('input:invalid').length >= 1) {
+                _data.valid = false;
+                message = "Please make sure that all fields are correctly filled in"
+                JFCustomWidget.showWidgetError(message);
+                console.log(message)
+            }
+            else {
+                _data.valid = true;
+                JFCustomWidget.hideWidgetError();
+            }
+
+            if (fullHis === "Yes") {
+
+            }
+            if (fullHis === "No") {
+                if (validateWidget(5) === false) {
+                    _data.valid = false;
+                    message = "Please make sure you've listed all posts held in the last " + 5 + " years";
+                    JFCustomWidget.showWidgetError(message);
+                    console.log(message)
+                }
+                else {
+                    _data.valid = true;
+                    JFCustomWidget.hideWidgetError();
+                }
+            }
+
             var tblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
@@ -288,9 +323,12 @@
                 });
                 return obj;
             }).get();
+
             // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            return { valid: true, value: JSON.stringify(tblData) };
+            _data.value = JSON.stringify(tblData)
+            console.log("_data = ", _data)
+            return _data
         }
 
         function validateDates() {
@@ -641,7 +679,7 @@
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
-                    JFCustomWidget.hideWidgetError();
+                    // JFCustomWidget.hideWidgetError();
 
                     var tbl = document.getElementById("emptbl");
 
@@ -657,19 +695,16 @@
 
                 console.log(JFCustomWidget)
 
-                JFCustomWidget.subscribe('submit', function () {
+                JFCustomWidget.subscribe('submit', function (data6) {
+                    console.log(data6)
                     // console.log("year of birth ", yearOfBirth)
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid: validateWidget(5)});
-                        JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + 5 + " years")
-
-
+                        JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                         JFCustomWidget.sendSubmit({value: widget.getData(widgetParm["storageField"]), valid: validateWidget(10)});
-
+                        JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
                     }
 
                     console.log(widgetParm["storageField"]);
