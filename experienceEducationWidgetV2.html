@@ -514,6 +514,7 @@
                     handleScreenChange(mediaQuery)
 
                     $('#addRowButton').on('click', function (event) {
+                        console.log("test")
                         addRow();
                     });
 
@@ -521,11 +522,6 @@
                         console.log("test1")
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
-
-                    $('input[id^="nameOfEmployer"]').change(function () {
-                        alert('Text2 changed!');
-                    });
-
 
                     $("input[type=date]").attr("min", currMaxYear);
 
