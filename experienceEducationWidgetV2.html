@@ -536,7 +536,6 @@
                     $('[id^="nameOfEmployer"]').on('touchstart click', function (e) { e.stopPropagation(); e.preventDefault(); console.log(this); });
 
                     $("input[type=date]").attr("min", currMaxYear);
-
                 }
 
                 function maxYear() {
@@ -775,7 +774,7 @@
             console.log("curr dates = ", testArr);
             totalYears = Math.floor(dateDiffSum / 365)
 
-            if (totalYears < 5) {
+            if (totalYears < maxLimit) {
                 JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + maxLimit + " years")
                 JFCustomWidget.sendSubmit({ valid: false });
                 return false
