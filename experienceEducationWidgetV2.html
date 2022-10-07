@@ -500,6 +500,11 @@
 
                             yearOfBirth = (new Date(correctDateFormat)).getFullYear();
                             console.log("Year Of Birth = ", yearOfBirth);
+
+                            var schoolLeavingAge = yearOfBirth + 18
+                            var currYear = new Date().getFullYear();
+
+                            maxLimit = Math.abs(currYear - schoolLeavingAge);
                         });
                     }
                     // Create a condition that targets viewports at least 800px wide
@@ -672,10 +677,10 @@
                 widget.resizeFrame();
 
                 var currParams = JFCustomWidget.getWidgetSettings();
-                if(currParams.fullWorkHistory === "No" ) {
+                if (currParams.fullWorkHistory === "No") {
                     maxLimit = 5;
                 }
-                
+
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
