@@ -517,11 +517,11 @@
                         addRow();
                     });
 
-                    $('input, select, textarea').on('change', function (event) {
-                        console.log("test")
+                    $('input[id^="nameOfEmployer"]').on('input', function (event) {
+                        console.log("test1")
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
-                    
+
                     $("input[type=date]").attr("min", currMaxYear);
 
                 }
