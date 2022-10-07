@@ -198,6 +198,8 @@
             'value': [],
         };
 
+        var maxLimit;
+
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
@@ -464,7 +466,7 @@
                 this.setCompanyNames = setCompanyNames;
                 this.resizeFrame = resizeFrame;
                 this.restoreTableData = restoreTableData;
-                this.makeWidgetRequiredOrNot = makeWidgetRequiredOrNot
+                //  this.makeWidgetRequiredOrNot = makeWidgetRequiredOrNot
 
                 const currMaxYear = maxYear();
 
@@ -526,25 +528,6 @@
 
                     $("input[type=date]").attr("min", currMaxYear);
 
-                }
-
-                function makeWidgetRequiredOrNot() {
-                    console.log("here")
-                    //Validate years since school leaving age
-                    if (!JFCustomWidget.isWidgetRequired()) {
-                        if ($('input:invalid').length >= 1) {
-                            console.log(JFCustomWidget.isWidgetRequired())
-                            JFCustomWidget.makeWidgetRequired();
-                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                        }
-                        if (document.getElementById("emptbl").rows.length <= 1) {
-                            JFCustomWidget.makeWidgetRequired();
-                        }
-                        else {
-                            JFCustomWidget.makeWidgetNotRequired();
-                            JFCustomWidget.hideWidgetError();
-                        }
-                    }
                 }
 
                 function maxYear() {
@@ -709,12 +692,12 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        validateWidget(5);
+                        maxLimit = 5
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
-                        validateWidget(10);
+                        maxLimit = 10
 
                     }
 
@@ -726,6 +709,29 @@
 
             });
         })
+
+
+        function makeWidgetRequiredOrNot() {
+            console.log("here")
+            //Validate years since school leaving age
+            if (!JFCustomWidget.isWidgetRequired()) {
+                if ($('input:invalid').length >= 1) {
+                    console.log(JFCustomWidget.isWidgetRequired())
+                    JFCustomWidget.makeWidgetRequired();
+                    JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                    _data.valid = false
+                }
+                if (validateWidget() === false) {
+                    _data.valid = false
+                }
+                else {
+                    JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = true
+
+                }
+            }
+        }
 
         function validateWidget() {
             const currRowLength = document.getElementsByName("Start Date")?.length
@@ -748,14 +754,14 @@
             totalYears = Math.floor(dateDiffSum / 365)
 
             if (totalYears < 5) {
-                JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + 5 + " years")
+                JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + maxLimit + " years")
                 JFCustomWidget.sendSubmit({ valid: false });
-                return
+                return false
             }
             else {
                 JFCustomWidget.hideWidgetError();
                 JFCustomWidget.sendSubmit({ valid: true });
-                return
+                return true
             }
         }
 
