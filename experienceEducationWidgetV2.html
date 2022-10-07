@@ -193,6 +193,11 @@
         var numOfIncorrectDates = 0;
         var currFullWorkHistory = "No";
 
+        var _data = {
+            'valid': true,
+            'value': [],
+        };
+
         //Global functions
         function modFields(rowNumber, activityType) {
             console.log(activityType)
@@ -279,10 +284,6 @@
         }
 
         function getData(fieldToFill, fullHis) {
-            var _data = {
-                'valid': true,
-                'value': [],
-            };
 
             // var message = '';
 
@@ -757,6 +758,7 @@
                 return
             }
         }
+
         function test01() {
             JFCustomWidget.sendSubmit({ value: "True", valid: true });
         }
