@@ -673,7 +673,7 @@
 
                 var currParams = JFCustomWidget.getWidgetSettings();
                 console.log(currParams)
-                
+
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
@@ -721,32 +721,31 @@
         function makeWidgetRequiredOrNot() {
             console.log("here")
             //Validate years since school leaving age
-            if (!JFCustomWidget.isWidgetRequired()) {
-                if ($('input:invalid').length >= 1) {
-                    console.log(JFCustomWidget.isWidgetRequired())
-                    JFCustomWidget.makeWidgetRequired();
-                    JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                    _data.valid = false
-                    return
-                }
-                if (validateWidget() === false) {
-                    _data.valid = false
-                    JFCustomWidget.makeWidgetRequired();
-                    //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                    return
-                }
-                if (validateDates() === false) {
-                    _data.valid = false
-                    JFCustomWidget.makeWidgetRequired();
-                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
-                    return
-                }
-                else {
-                    JFCustomWidget.makeWidgetNotRequired();
-                    JFCustomWidget.hideWidgetError();
-                    _data.valid = true
-                    return
-                }
+
+            if ($('input:invalid').length >= 1) {
+                console.log(JFCustomWidget.isWidgetRequired())
+                //JFCustomWidget.makeWidgetRequired();
+                JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                _data.valid = false
+                return
+            }
+            if (validateWidget() === false) {
+                _data.valid = false
+                //JFCustomWidget.makeWidgetRequired();
+                //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                return
+            }
+            if (validateDates() === false) {
+                _data.valid = false
+               // JFCustomWidget.makeWidgetRequired();
+                JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
+                return
+            }
+            else {
+                JFCustomWidget.makeWidgetNotRequired();
+                JFCustomWidget.hideWidgetError();
+                _data.valid = true
+                return
             }
         }
 
