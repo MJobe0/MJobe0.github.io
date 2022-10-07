@@ -517,10 +517,15 @@
                         addRow();
                     });
 
-                    $("input[name$='Name of Employer']").on('click', function (event) {
+                    $('input[id^="nameOfEmployer"]').on('input', function (event) {
                         console.log("test1")
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
+
+                    $('input[id^="nameOfEmployer"]').change(function () {
+                        alert('Text2 changed!');
+                    });
+
 
                     $("input[type=date]").attr("min", currMaxYear);
 
