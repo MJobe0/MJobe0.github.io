@@ -372,7 +372,7 @@
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
-                        _data.valid = false
+                        _data.valid = true
                         return false
                         //return { value: "Yes", valid: false };
                     }
@@ -741,7 +741,7 @@
                 return
             }
             if (validateDates() === false) {
-                _data.valid = false
+                _data.valid = true
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
                 return
