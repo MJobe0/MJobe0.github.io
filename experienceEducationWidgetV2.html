@@ -372,6 +372,8 @@
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
+                        _data.valid = false
+                        return false
                         //return { value: "Yes", valid: false };
                     }
                     else {
@@ -381,21 +383,23 @@
                         console.log("Valid dates = ", dateDiffRes)
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
+                        _data.valid = true
+                        return true
                     }
                     //add coomments to array
                 }
             }
-            console.log(numOfIncorrectDates)
-            if (numOfIncorrectDates >= 1) {
-                document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                // JFCustomWidget.sendData({ value: "Yes" });
-                resizeFrame();
-            }
-            else {
-                document.getElementById("textArea").innerHTML = "";
-                resizeFrame();
-                // JFCustomWidget.sendData({ value: "No" });
-            }
+            // console.log(numOfIncorrectDates)
+            // if (numOfIncorrectDates >= 1) {
+            //     document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
+            //     // JFCustomWidget.sendData({ value: "Yes" });
+            //     resizeFrame();
+            // }
+            // else {
+            //     document.getElementById("textArea").innerHTML = "";
+            //     resizeFrame();
+            //     // JFCustomWidget.sendData({ value: "No" });
+            // }
         }
 
         function getMonthDifference(startDate, endDate) {
@@ -586,8 +590,8 @@
                     </select>`;
                         companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
                         institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
-                        startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates(); validateWidget();" value="" id="startDate${x}" required />`;
-                        endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates(); validateWidget();" value="" id="endDate${x}" />`;
+                        startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
+                        endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" />`;
                         positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
                         gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
                         resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
@@ -667,6 +671,9 @@
                 widget.init();
                 widget.resizeFrame();
 
+                var currParams = JFCustomWidget.getWidgetSettings();
+                console.log(currParams)
+                
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
@@ -693,7 +700,7 @@
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         maxLimit = 5
-                         JFCustomWidget.sendSubmit(_data);
+                        JFCustomWidget.sendSubmit(_data);
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         JFCustomWidget.sendSubmit(_data);
@@ -720,15 +727,25 @@
                     JFCustomWidget.makeWidgetRequired();
                     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                     _data.valid = false
+                    return
                 }
                 if (validateWidget() === false) {
                     _data.valid = false
+                    JFCustomWidget.makeWidgetRequired();
+                    //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                    return
+                }
+                if (validateDates() === false) {
+                    _data.valid = false
+                    JFCustomWidget.makeWidgetRequired();
+                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
+                    return
                 }
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
                     _data.valid = true
-
+                    return
                 }
             }
         }
