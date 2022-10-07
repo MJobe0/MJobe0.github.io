@@ -693,10 +693,10 @@
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         maxLimit = 5
-                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "No"));
+                         JFCustomWidget.sendSubmit(_data);
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"], "Yes"));
+                        JFCustomWidget.sendSubmit(_data);
                         maxLimit = 10
 
                     }
@@ -777,7 +777,7 @@
 
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
-        onchange="validateWidget()">
+        onchange="makeWidgetRequiredOrNot()">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
