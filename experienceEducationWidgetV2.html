@@ -672,8 +672,10 @@
                 widget.resizeFrame();
 
                 var currParams = JFCustomWidget.getWidgetSettings();
-                console.log(currParams)
-
+                if(currParams.fullWorkHistory === "No" ) {
+                    maxLimit = 5;
+                }
+                
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
@@ -699,13 +701,12 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        maxLimit = 5
+                        makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
+                        makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
-                        maxLimit = 10
-
                     }
 
                     console.log(widgetParm["storageField"]);
@@ -737,7 +738,7 @@
             }
             if (validateDates() === false) {
                 _data.valid = false
-               // JFCustomWidget.makeWidgetRequired();
+                // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
                 return
             }
