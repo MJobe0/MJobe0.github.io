@@ -514,14 +514,14 @@
                     handleScreenChange(mediaQuery)
 
                     $('#addRowButton').on('click', function (event) {
-                        console.log("test")
                         addRow();
                     });
 
                     $('input[id^="nameOfEmployer"]').on('input', function (event) {
-                        console.log("test1")
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
+
+                    $('[id^="nameOfEmployer"]').on('touchstart click', function(e){ e.stopPropagation(); e.preventDefault(); console.log(this); });
 
                     $("input[type=date]").attr("min", currMaxYear);
 
