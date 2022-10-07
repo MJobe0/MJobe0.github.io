@@ -518,9 +518,10 @@
                     });
 
                     $('input, select, textarea').on('change', function (event) {
-                        makeWidgetRequiredOrNot();
+                        console.log("test")
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
+                    
                     $("input[type=date]").attr("min", currMaxYear);
 
                 }
