@@ -521,7 +521,7 @@
                         JFCustomWidget.sendData(getData(fieldToStoreData))
                     })
 
-                    $('[id^="nameOfEmployer"]').on('touchstart click', function(e){ e.stopPropagation(); e.preventDefault(); console.log(this); });
+                    $('[id^="nameOfEmployer"]').on('touchstart click', function (e) { e.stopPropagation(); e.preventDefault(); console.log(this); });
 
                     $("input[type=date]").attr("min", currMaxYear);
 
@@ -768,7 +768,8 @@
         }
 
     </script>
-    <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
+    <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
+        onchange="validateWidget()">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
