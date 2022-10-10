@@ -302,6 +302,8 @@
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             _data.value = JSON.stringify(tblData)
             console.log("_data = ", _data)
+
+            JFCustomWidget.sendData(JSON.stringify(tblData));
             //return _data
         }
 
@@ -675,12 +677,10 @@
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
-                        JFCustomWidget.sendData(getData(widgetParm["storageField"]));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
-                        JFCustomWidget.sendData(getData(widgetParm["storageField"]));
                     }
 
                     console.log(widgetParm["storageField"]);
