@@ -705,11 +705,11 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        makeWidgetRequiredOrNot()
+                        //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        makeWidgetRequiredOrNot()
+                        //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
                     }
 
@@ -758,6 +758,7 @@
         function validateWidget() {
             const currRowLength = document.getElementsByName("Start Date")?.length
             var dateDiffSum = 0;
+            var diffDays = 0;
             var testArr = [];
             var totalYears;
 
@@ -767,7 +768,21 @@
 
                 testArr.push(currStartDate, currEndDate)
 
-                var diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
+                if (currEndDate === undefined || currEndDate === "") {
+                    var todaysDate = new Date();
+
+                    console.log("today's date = ", todaysDate)
+                    // var dd1 = String(today.getDate()).padStart(2, '0');
+                    // var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    // var yyyy1 = today.getFullYear();
+
+                    // today = dd1 + '/' + mm1 + '/' + yyyy1;
+                    diffDays = parseInt((todaysDate - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
+                    console.log("empty end date field")
+                }
+                else {
+                    diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
+                }
 
                 dateDiffSum = dateDiffSum + diffDays
             }
