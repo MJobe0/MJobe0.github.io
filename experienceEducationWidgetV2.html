@@ -522,7 +522,7 @@
 
 
                 function addRow(isPop, popData) {
-                    console.log("fieldToStoreData = ",fieldToStoreData)
+                    console.log("fieldToStoreData = ", fieldToStoreData)
                     if ($('input:invalid').length >= 1) {
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
                         JFCustomWidget.sendSubmit({ valid: false });
@@ -667,6 +667,7 @@
                 console.log(JFCustomWidget)
 
                 JFCustomWidget.subscribe('submit', function (data6) {
+                    getData(widgetParm["storageField"]);
                     console.log(data6)
                     // console.log("year of birth ", yearOfBirth)
                     const widgetParm = JFCustomWidget.getWidgetSettings();
@@ -674,10 +675,12 @@
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
+                        JFCustomWidget.sendData(getData(widgetParm["storageField"]));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         //makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(_data);
+                        JFCustomWidget.sendData(getData(widgetParm["storageField"]));
                     }
 
                     console.log(widgetParm["storageField"]);
