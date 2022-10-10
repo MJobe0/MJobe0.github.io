@@ -616,10 +616,9 @@
                             document.getElementById(`results${x}`).value = popData["Results"] ?? "";
                             document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
                         }
-
-                        resizeFrame();
-                        JFCustomWidget.sendData(getData(fieldToStoreData));
                     }
+                    resizeFrame();
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
                 function getCompanyNames() {
