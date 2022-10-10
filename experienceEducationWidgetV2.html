@@ -292,12 +292,13 @@
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
                         obj[this.name] = $(this).val();
+                        console.log("here")
                     }
                 });
                 return obj;
             }).get();
 
-            // console.log(JSON.stringify(tblData));
+            console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             _data.value = JSON.stringify(tblData)
             console.log("_data = ", _data)
