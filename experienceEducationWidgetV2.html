@@ -287,37 +287,6 @@
 
         function getData(fieldToFill, fullHis) {
 
-            // var message = '';
-
-
-            // if ($('input:invalid').length >= 1) {
-            //     _data.valid = false;
-            //     message = "Please make sure that all fields are correctly filled in"
-            //     JFCustomWidget.showWidgetError(message);
-            //     console.log(message)
-            // }
-            // else {
-            //     _data.valid = true;
-            //     JFCustomWidget.hideWidgetError();
-            // }
-
-            // if (fullHis === "Yes") {
-
-            // }
-            // if (fullHis === "No") {
-            //     if (validateWidget(5) === false) {
-            //         _data.valid = false;
-            //         message = "Please make sure you've listed all posts held in the last " + 5 + " years";
-            //         JFCustomWidget.showWidgetError(message);
-            //         JFCustomWidget.sendSubmit({ valid: false, value: "" })
-            //         console.log(message)
-            //     }
-            //     else {
-            //         _data.valid = true;
-            //         JFCustomWidget.hideWidgetError();
-            //     }
-            // }
-
             var tblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
@@ -527,14 +496,10 @@
 
                     $('#addRowButton').on('click', function (event) {
                         addRow();
-                        makeWidgetRequiredOrNot()
+                        makeWidgetRequiredOrNot();
                     });
 
-                    $('input[id^="nameOfEmployer"]').on('input', function (event) {
-                        JFCustomWidget.sendData(getData(fieldToStoreData))
-                    })
-
-                    $('[id^="nameOfEmployer"]').on('touchstart click', function (e) { e.stopPropagation(); e.preventDefault(); console.log(this); });
+                    $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
 
                     $("input[type=date]").attr("min", currMaxYear);
                 }
@@ -556,6 +521,7 @@
 
 
                 function addRow(isPop, popData) {
+                    console.log("fieldToStoreData = ",fieldToStoreData)
                     if ($('input:invalid').length >= 1) {
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
                         JFCustomWidget.sendSubmit({ valid: false });
