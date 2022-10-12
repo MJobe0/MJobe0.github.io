@@ -771,21 +771,28 @@
         }
 
         function test01() {
-            var tableData =[]
-            //traverse each row
-            $('#emptbl tr').each(function (index, tr) {
-                var cols = [];
-
-                //get td of each row and insert it into cols array
-                $(this).find('td').each(function (colIndex, c) {
-                    cols.push(c.textContent);
+            var tblData = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
+                        console.log("here")
+                    }
                 });
+                return obj;
+            }).get();
 
-                //insert this cols(full rows data) array into tableData array
-                tableData.push(cols);
+            const headers = Array.from(new Set(obj.reduce((acc, cur) =>
+                [...acc, ...Object.keys(cur)], [])));
+
+            const data5 = [headers];
+            const defaultValue = 'NA';
+
+            obj.forEach(item => {
+                data5.push(headers.reduce((acc, header) =>
+                    acc.push(item.hasOwnProperty(header) ? item[header] : defaultValue) && acc, []));
             });
-
-            console.log("tableData: ", tableData);
+            console.log("new format = ", data5);
         }
 
         function test02() {
