@@ -798,9 +798,17 @@
         }
 
         function test02() {
-            validateWidget()
-            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-            JFCustomWidget.sendSubmit({ value: "False", valid: false });
+            var retContent = [];
+            var retString = '';
+            $('tbody tr').each(function (idx, elem) {
+                var elemText = [];
+                $(elem).children('td').each(function (childIdx, childElem) {
+                    elemText.push($(childElem).text());
+                });
+                retContent.push(`(${elemText.join(',')})`);
+            });
+            retString = retContent.join(',\r\n');
+            console.log(retString);
         }
 
     </script>
