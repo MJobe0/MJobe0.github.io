@@ -782,13 +782,15 @@
                 return obj;
             }).get();
 
-            const headers = Array.from(new Set(obj.reduce((acc, cur) =>
+            console.log("old format = ", tblData);
+
+            const headers = Array.from(new Set(tblData.reduce((acc, cur) =>
                 [...acc, ...Object.keys(cur)], [])));
 
             const data5 = [headers];
             const defaultValue = 'NA';
 
-            obj.forEach(item => {
+            tblData.forEach(item => {
                 data5.push(headers.reduce((acc, header) =>
                     acc.push(item.hasOwnProperty(header) ? item[header] : defaultValue) && acc, []));
             });
