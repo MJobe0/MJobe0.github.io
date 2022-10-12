@@ -771,8 +771,20 @@
         }
 
         function test01() {
-           var currTableData = document.getElementById("emptbl").textContent;
-           console.log(currTableData);
+            //traverse each row
+            $('#emptbl tr').each(function (index, tr) {
+                var cols = [];
+
+                //get td of each row and insert it into cols array
+                $(this).find('td').each(function (colIndex, c) {
+                    cols.push(c.textContent);
+                });
+
+                //insert this cols(full rows data) array into tableData array
+                tableData.push(cols);
+            });
+
+            console.log("tableData: ", tableData);
         }
 
         function test02() {
