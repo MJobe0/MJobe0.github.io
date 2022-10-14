@@ -286,44 +286,21 @@
         }
 
         function getData(fieldToFill, fullHis) {
-
             var tblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
                         obj[this.name] = $(this).val();
-                        console.log("here")
                     }
                 });
                 return obj;
             }).get();
 
-            console.log(JSON.stringify(tblData));
+            // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             _data.value = JSON.stringify(tblData)
             console.log("_data = ", _data)
-
-            var tableInfo = tblData,
-                headers = Object.keys(tableInfo[0]),
-                tableInfoLen = tableInfo.length,
-                headersLen = headers.length;
-            var result = headers.join('\t');
-
-            for (var i = 0; i < tableInfoLen; i++) {
-                result += '\n';
-                for (var j = 0; j < headersLen; j++) {
-                    if (tableInfo[i][headers[j]] == '') {
-                        result += tableInfo[i][headers[j]] + '\t' + '\t';
-                    }
-                    else {
-                        result += tableInfo[i][headers[j]] + '\t';
-                    }
-                }
-            }
-
-            console.log(result);
-
-            return result
+            return _data
         }
 
         function validateDates() {
@@ -363,7 +340,7 @@
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
-                        _data.valid = true
+                        _data.valid = false
                         return false
                         //return { value: "Yes", valid: false };
                     }
@@ -541,9 +518,7 @@
 
                 // const currMaxYear = maxYear();
 
-
                 function addRow(isPop, popData) {
-                    console.log("fieldToStoreData = ", fieldToStoreData)
                     if ($('input:invalid').length >= 1) {
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
                         JFCustomWidget.sendSubmit({ valid: false });
@@ -583,8 +558,8 @@
                     </select>`;
                         companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
                         institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
-                        startDateCell.innerHTML = `<input type="date" name="Start Date" min=${currMaxYear} onchange="validateDates()" value="" id="startDate${x}" required />`;
-                        endDateCell.innerHTML = `<input type="date" name="End Date" min=${currMaxYear} onchange="validateDates()" value="" id="endDate${x}" />`;
+                        startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required />`;
+                        endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" />`;
                         positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
                         gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
                         resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
@@ -604,9 +579,10 @@
                             document.getElementById(`results${x}`).value = popData["Results"] ?? "";
                             document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
                         }
+
+                        resizeFrame();
+                        JFCustomWidget.sendData(getData(fieldToStoreData));
                     }
-                    resizeFrame();
-                    JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
                 function getCompanyNames() {
@@ -693,11 +669,11 @@
                     const widgetParm = JFCustomWidget.getWidgetSettings();
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        //makeWidgetRequiredOrNot()
+                        makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        //makeWidgetRequiredOrNot()
+                        makeWidgetRequiredOrNot()
                         JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                     }
 
@@ -715,6 +691,8 @@
             console.log("here")
             //Validate years since school leaving age
 
+            console.log($('input:invalid').length)
+
             if ($('input:invalid').length >= 1) {
                 console.log(JFCustomWidget.isWidgetRequired())
                 //JFCustomWidget.makeWidgetRequired();
@@ -729,8 +707,7 @@
                 return
             }
             if (validateDates() === false) {
-                JFCustomWidget.makeWidgetNotRequired();
-                _data.valid = true
+                _data.valid = false
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
                 return
@@ -759,14 +736,10 @@
                 if (currEndDate === undefined || currEndDate === "") {
                     var todaysDate = new Date();
 
-                    console.log("today's date = ", todaysDate)
-                    // var dd1 = String(today.getDate()).padStart(2, '0');
-                    // var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                    // var yyyy1 = today.getFullYear();
+                    console.log("today's date = ", todaysDate);
 
-                    // today = dd1 + '/' + mm1 + '/' + yyyy1;
                     diffDays = parseInt((todaysDate - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
-                    console.log("empty end date field")
+                    console.log("empty end date field");
                 }
                 else {
                     diffDays = parseInt((new Date(currEndDate) - new Date(currStartDate)) / (1000 * 60 * 60 * 24), 10);
@@ -790,46 +763,15 @@
             }
         }
 
-        function test01() {
-            var tblData = $('tr').not(':first').map(function () {
-                var obj = {};
-                $(this).find('input, select, textarea').each(function () {
-                    if (this.name !== "") {
-                        obj[this.name] = $(this).val();
-                        console.log("here")
-                    }
-                });
-                return obj;
-            }).get();
+        // function test01() {
+        //     JFCustomWidget.sendSubmit({ value: "True", valid: true });
+        // }
 
-            console.log("old format = ", tblData);
-
-            const headers = Array.from(new Set(tblData.reduce((acc, cur) =>
-                [...acc, ...Object.keys(cur)], [])));
-
-            const data5 = [headers];
-            const defaultValue = 'NA';
-
-            tblData.forEach(item => {
-                data5.push(headers.reduce((acc, header) =>
-                    acc.push(item.hasOwnProperty(header) ? item[header] : defaultValue) && acc, []));
-            });
-            console.log("new format = ", data5);
-        }
-
-        function test02() {
-            var retContent = [];
-            var retString = '';
-            $('tbody tr').each(function (idx, elem) {
-                var elemText = [];
-                $(elem).children('td').each(function (childIdx, childElem) {
-                    elemText.push($(childElem).text());
-                });
-                retContent.push(`(${elemText.join(',')})`);
-            });
-            retString = retContent.join(',\r\n');
-            console.log(retString);
-        }
+        // function test02() {
+        //     validateWidget()
+        //     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+        //     JFCustomWidget.sendSubmit({ value: "False", valid: false });
+        // }
 
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
@@ -855,9 +797,8 @@
         <table>
             <tr>
                 <button type="button" id="addRowButton">Add Row</button>
-                <button type="button" id="test1" onclick="test01()"> True </button>
-                <button type="button" id="test2" onclick="test02()"> False </button>
-
+                <!-- <button type="button" id="test1" onclick="test01()"> True </button>
+                <button type="button" id="test2" onclick="test02()"> False </button> -->
                 <span>
                     <p id="textArea"></p>
                 </span>
