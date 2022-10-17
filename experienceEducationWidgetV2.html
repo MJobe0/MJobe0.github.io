@@ -308,16 +308,16 @@
 
             var result = '';
             for (var k = 0; k < headers.length; k++) {
-                result += headers[k].padding(15) + '\t';
+                result += headers[k].padEnd(20) + '\t';
             }
             for (var i = 0; i < tableInfoLen; i++) {
                 result += '\n';
                 for (var j = 0; j < headersLen; j++) {
                     if (tableInfo[i][headers[j]] == '') {
-                        result += tableInfo[i][headers[j]].padding(15) + '\t';
+                        result += tableInfo[i][headers[j]].padEnd(20) + '\t';
                     }
                     else {
-                        result += tableInfo[i][headers[j]].padding(15) + '\t';
+                        result += tableInfo[i][headers[j]].padEnd(20) + '\t';
                     }
                 }
             }
