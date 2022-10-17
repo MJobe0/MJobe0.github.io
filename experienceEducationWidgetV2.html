@@ -785,9 +785,11 @@
             }
         }
 
-        // function test01() {
-        //     JFCustomWidget.sendSubmit({ value: "True", valid: true });
-        // }
+        function test01() {
+            JFCustomWidget.getFieldsValueById(["14"], function (res) {
+                console.log("res = ", res)
+            })
+        }
 
         // function test02() {
         //     validateWidget()
@@ -819,8 +821,8 @@
         <table>
             <tr>
                 <button type="button" id="addRowButton">Add Row</button>
-                <!-- <button type="button" id="test1" onclick="test01()"> True </button>
-                <button type="button" id="test2" onclick="test02()"> False </button> -->
+                <button type="button" id="test1" onclick="test01()"> True </button>
+                <!-- <button type="button" id="test2" onclick="test02()"> False </button> -->
                 <span>
                     <p id="textArea"></p>
                 </span>
