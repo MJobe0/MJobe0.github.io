@@ -300,11 +300,11 @@
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             // _data.value = JSON.stringify(tblData)
             // console.log("_data = ", _data)
-            var tableData = $('td').html();
+            var tableData = $('tr').html();
 
             console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(tableData));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(tableData))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
