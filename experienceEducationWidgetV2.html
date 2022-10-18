@@ -765,7 +765,7 @@
         }
 
         function test01() {
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', base64_encode('<a href="www.google.com">Google</a>'));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa('<a href="www.google.com">Google</a>'));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue)
         }
