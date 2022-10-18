@@ -296,36 +296,12 @@
                 return obj;
             }).get();
 
-            console.log(JSON.stringify(tblData));
+            // console.log(JSON.stringify(tblData));
             JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            // _data.value = JSON.stringify(tblData)
-            console.log("_data = ", _data);
+            _data.value = JSON.stringify(tblData)
+            console.log("_data = ", _data)
 
-            var tableInfo = tblData,
-                headers = Object.keys(tableInfo[0]),
-                tableInfoLen = tableInfo.length
-            headersLen = headers.length;
-
-            var result = '';
-            for (var k = 0; k < headers.length; k++) {
-                result += headers[k]?.padEnd(20) + '\t';
-            }
-            for (var i = 0; i < tableInfoLen; i++) {
-                result += '\n';
-                for (var j = 0; j < headersLen; j++) {
-                    if (tableInfo[i][headers[j]] == '') {
-                        result += tableInfo[i][headers[j]]?.padEnd(20) + '\t';
-                    }
-                    else {
-                        result += tableInfo[i][headers[j]]?.padEnd(20) + '\t';
-                    }
-                }
-            }
-
-            console.log(result);
-            _data.value = result
-
-            return _data;
+            return _data
         }
 
         function validateDates() {
@@ -789,9 +765,9 @@
         }
 
         function test01() {
-            JFCustomWidget.getFieldsValueById(["14"], function (res) {
-                console.log("res = ", res)
-            })
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', base64_encode('<a href="www.google.com">Google</a>'));
+            console.log("widgetUtils = ", JFCustomWidgetUtils)
+            console.log(widgetValue)
         }
 
         // function test02() {
