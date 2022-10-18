@@ -774,9 +774,13 @@
         }
 
         function test01() {
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa('<a href="www.google.com">Google</a>'));
-            console.log("widgetUtils = ", JFCustomWidgetUtils)
-            console.log(widgetValue)
+            var tableData1 = $('#emptbl').html();
+            console.log("tableData 1 as html = ", tableData1)
+
+            var tableData2 = document.getElementById('emptbl').outerHTML;
+            console.log("tableData 2 as html = ", tableData2)
+
+
         }
 
         // function test02() {
