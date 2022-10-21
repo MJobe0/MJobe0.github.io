@@ -33,8 +33,6 @@
         }
     </style>
     <script type="text/javascript">
-        var currTaskId;
-
         var bar = new ProgressBar.Line(container, {
             strokeWidth: 4,
             easing: 'easeInOut',
@@ -95,7 +93,7 @@
                         // dataType: "json",
                         success: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
-                            checkAnswers(responseData.content.answers[4].answer)
+                            checkAnswers(responseData.content.answers[5].answer)
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
