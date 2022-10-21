@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var currTaskId;
+
+        $(function () {
+            function getInfoWidget(containerId, formData, params) {
+
+                /**
+               * Exposed
+               */
+                this.init = init;
+                this.updateOriginalSubmission = updateOriginalSubmission;
+                this.markRefAsComplete = markRefAsComplete;
+
+                function init() {
+                    console.log(formData)
+                    console.log(params)
+
+                    console.log(JFCustomWidget.getWidgetSettings())
+
+                    JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
+                        console.log("originalSubmission = ", res.data[0].value)
+                        originalSubmissionId = res.data[0].value;
+                    });
+
+                    //Check if form data is equal to form IDs
+                    checkFormId(currFormID);
+                }
+
+                function getTaskId(approvalName) {
+                    console.log(`https://eu-api.jotform.com/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`)
+                    jQuery.ajax({
+                        url: `https://eu-api.jotform.com/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`,
+                        method: "GET",
+                        dataType: "jsonp",
+                        // data: {
+                        //     "apiKey": params["apiKey"]
+                        // },
+                        // timeout: 10000,
+                        success: function (responseData, textStatus, jqXHR) {
+                           console.log(responseData)
+                        },
+                        error: function (responseData, textStatus, jqXHR) {
+                            console.log(responseData);
+                            return
+                        }
+                    })
+                }
+            }
+
+            JFCustomWidget.subscribe('ready', function (data) {
+                var widget = new getInfoWidget('Test01', data, JFCustomWidget.getWidgetSettings());
+                widget.init();
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    JFCustomWidget.hideWidgetError();
+                }
+
+                JFCustomWidget.subscribe('submit', function () {
+                    widgetParams = JFCustomWidget.getWidgetSettings()
+                    widget.updateOriginalSubmission(widgetParams["apiKey"]);
+                    if (currTaskId !== undefined && currTaskId !== "") {
+                        widget.markRefAsComplete(currTaskId);
+                    }
+
+                    // send the data
+                    // JFCustomWidget.sendSubmit({value: "Control form updated", valid:true});
+                });
+            });
+        })
+
+    </script>
+</body>
+
+</html>
