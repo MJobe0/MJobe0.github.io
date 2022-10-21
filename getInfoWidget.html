@@ -38,10 +38,8 @@
                     JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
                         console.log("originalSubmission = ", res.data[0].value)
                         originalSubmissionId = res.data[0].value;
+                        getEternalInfo();
                     });
-
-                    //Check if form data is equal to form IDs
-                    getEternalInfo();
                 }
 
                 function getEternalInfo() {
@@ -55,7 +53,7 @@
                         // },
                         // timeout: 10000,
                         success: function (responseData, textStatus, jqXHR) {
-                           console.log(responseData)
+                            console.log(responseData)
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
