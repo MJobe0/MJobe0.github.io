@@ -92,20 +92,33 @@
                     jQuery.ajax({
                         url: `https://eu-api.jotform.com/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`,
                         method: "GET",
-                        dataType: "jsonp",
-                        // data: {
-                        //     "apiKey": params["apiKey"]
-                        // },
-                        // timeout: 10000,
+                        // dataType: "json",
                         success: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
-                            bar.animate(1);
+                            checkAnswers(content.answers[4].answer)
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
                             return
                         }
                     })
+                }
+            }
+
+            function checkAnswers(currAnswer) {
+                switch (currAnswer) {
+                    case "Awaiting Review":
+                        bar.animate(.25);
+                        break;
+                    case "In Progress":
+                        bar.animate(.50);
+                        break;
+                    case "Approved":
+                        bar.animate(1);
+                        break;
+
+                    default:
+                        break;
                 }
             }
 
