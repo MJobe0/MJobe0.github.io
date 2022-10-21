@@ -95,7 +95,7 @@
                         // dataType: "json",
                         success: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
-                            checkAnswers(content.answers[4].answer)
+                            checkAnswers(responseData.content.answers[4].answer)
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
