@@ -93,7 +93,11 @@
                         // dataType: "json",
                         success: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
-                            checkAnswers(responseData.content.answers[5].answer)
+                            checkAnswers(responseData.content.answers[5].answer);
+                            JFCustomWidget.setFieldsValueById([{
+                                id: "5",
+                                value: responseData.content.answers[6].answer
+                            }]);
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
