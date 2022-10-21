@@ -27,8 +27,7 @@
                * Exposed
                */
                 this.init = init;
-                this.updateOriginalSubmission = updateOriginalSubmission;
-                this.markRefAsComplete = markRefAsComplete;
+                this.getEternalInfo = getEternalInfo;
 
                 function init() {
                     console.log(formData)
@@ -42,10 +41,10 @@
                     });
 
                     //Check if form data is equal to form IDs
-                    checkFormId(currFormID);
+                    getEternalInfo();
                 }
 
-                function getTaskId(approvalName) {
+                function getEternalInfo() {
                     console.log(`https://eu-api.jotform.com/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`)
                     jQuery.ajax({
                         url: `https://eu-api.jotform.com/submission/${originalSubmissionId}?apiKey=${params["apiKey"]}`,
@@ -77,12 +76,6 @@
                 }
 
                 JFCustomWidget.subscribe('submit', function () {
-                    widgetParams = JFCustomWidget.getWidgetSettings()
-                    widget.updateOriginalSubmission(widgetParams["apiKey"]);
-                    if (currTaskId !== undefined && currTaskId !== "") {
-                        widget.markRefAsComplete(currTaskId);
-                    }
-
                     // send the data
                     // JFCustomWidget.sendSubmit({value: "Control form updated", valid:true});
                 });
