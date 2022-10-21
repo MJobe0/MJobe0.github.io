@@ -7,6 +7,12 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js"
+        integrity="sha512-EZhmSl/hiKyEHklogkakFnSYa5mWsLmTC4ZfvVzhqYNLPbXKAXsjUYRf2O9OlzQN33H0xBVfGSEIUeqt9astHQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.js"
+        integrity="sha512-1H+cM+oeza0TJglvGWQHdb6cW2gS2ptQE9s0wV24+OaTmr60hZdRgGDqfuEzlbrb7NyOHCsY21Y4/AoKFwmiug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -15,10 +21,48 @@
         })();
     </script>
 </head>
+<div id="container"></div>
 
 <body>
+    <style>
+        #container {
+            margin: 20px;
+            width: 400px;
+            height: 8px;
+            position: relative;
+        }
+    </style>
     <script type="text/javascript">
         var currTaskId;
+
+        var bar = new ProgressBar.Line(container, {
+            strokeWidth: 4,
+            easing: 'easeInOut',
+            duration: 1400,
+            color: '#FFEA82',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: { width: '100%', height: '100%' },
+            text: {
+                style: {
+                    // Text color.
+                    // Default: same as stroke color (options.color)
+                    color: '#999',
+                    position: 'absolute',
+                    right: '0',
+                    top: '30px',
+                    padding: 0,
+                    margin: 0,
+                    transform: null
+                },
+                autoStyleContainer: false
+            },
+            from: { color: '#FFEA82' },
+            to: { color: '#ED6A5A' },
+            step: (state, bar) => {
+                bar.setText(Math.round(bar.value() * 100) + ' %');
+            }
+        });
 
         $(function () {
             function getInfoWidget(containerId, formData, params) {
@@ -30,6 +74,7 @@
                 this.getEternalInfo = getEternalInfo;
 
                 function init() {
+
                     console.log(formData)
                     console.log(params)
 
@@ -53,7 +98,8 @@
                         // },
                         // timeout: 10000,
                         success: function (responseData, textStatus, jqXHR) {
-                            console.log(responseData)
+                            console.log(responseData);
+                            bar.animate(1);
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log(responseData);
