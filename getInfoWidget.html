@@ -58,7 +58,7 @@
             from: { color: '#FFEA82' },
             to: { color: '#ED6A5A' },
             step: (state, bar) => {
-                bar.setText(Math.round(bar.value() * 100) + ' %');
+                bar.setText(Math.round(bar.value() * 100) + ' % Complete');
             }
         });
 
@@ -111,12 +111,15 @@
                 switch (currAnswer) {
                     case "Awaiting Review":
                         bar.animate(.25);
+                        bar.setText(Math.round(bar.value() * 100) + ' % Complete' + "/n Currently: " + currAnswer);
                         break;
                     case "In Progress":
                         bar.animate(.50);
+                        bar.setText(Math.round(bar.value() * 100) + ' % Complete' + "/n Currently: " + currAnswer);
                         break;
                     case "Approved":
                         bar.animate(1);
+                        bar.setText(Math.round(bar.value() * 100) + ' % Complete' + "/n Currently: " + currAnswer);
                         break;
 
                     default:
