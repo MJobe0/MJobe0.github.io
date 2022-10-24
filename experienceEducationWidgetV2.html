@@ -286,19 +286,19 @@
         }
 
         function getData(fieldToFill, fullHis) {
-            // var tblData = $('tr').not(':first').map(function () {
-            //     var obj = {};
-            //     $(this).find('input, select, textarea').each(function () {
-            //         if (this.name !== "") {
-            //             obj[this.name] = $(this).val();
-            //         }
-            //     });
-            //     return obj;
-            // }).get();
+            var tblData = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
+                    }
+                });
+                return obj;
+            }).get();
 
             // // console.log(JSON.stringify(tblData));
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            // _data.value = JSON.stringify(tblData)
+            _data.value = JSON.stringify(tblData)
             // console.log("_data = ", _data)
             var tableData = $('form').html();
             
@@ -311,7 +311,7 @@
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
-            _data.value = widgetValue
+            // _data.value = widgetValue
 
             return _data
         }
