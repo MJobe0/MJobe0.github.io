@@ -300,9 +300,9 @@
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             // _data.value = JSON.stringify(tblData)
             // console.log("_data = ", _data)
-            var tableData = $('form').html();
+            var tableData = document.documentElement.innerHTML;
             
-            var test00001 = $('table').text();
+            var test00001 = $('form').text();
             console.log("form as text = ", test00001)
 
             console.log("tableData as html = ", tableData)
