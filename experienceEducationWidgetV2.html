@@ -796,7 +796,7 @@
                 var obj;
                 var newRow
                 $(this).find('input, select, textarea').each(function () {
-                    if (this.val() !== undefined) {
+                    if ($(this).val() !== undefined) {
                         obj += `<td>${$(this).val()}</td>`
                     }
                 });
