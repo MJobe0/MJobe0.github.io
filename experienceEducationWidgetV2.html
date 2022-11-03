@@ -290,11 +290,11 @@
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
                     if (this.name !== "") {
-                        obj[this.name] = $(this).val();
+                        obj[this.name] = $(this).html();
                     }
                 });
                 return obj;
-            }).html();
+            }).get();
 
             console.log(tblData)
 
