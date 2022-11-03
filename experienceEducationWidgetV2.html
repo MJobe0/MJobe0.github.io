@@ -791,17 +791,18 @@
         }
 
         function test02() {
-            var testTblRow
-            var tblData = $('tr').not(':first').map(function () {
-                if (this != undefined) {
-                    return this
-                }
-                console.log("this 1 = ", this)
-                // $(this).find('input, select, textarea').each(function () {
-                //     console.log("this 2 = ", this)
-                // });
-            }).get()
-            console.log("new table row =  ", tblData)
+
+            var newTblData = $('tr').not(':first').map(function () {
+                var obj;
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj += `<td>${$(this).val()}</td>`
+                    }
+                });
+                return obj;
+            }).get();
+
+            console.log("new table row =  ", newTblData)
         }
 
     </script>
