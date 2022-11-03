@@ -306,7 +306,7 @@
             $("input, select, textarea").each(function () {
                 $(this).attr("value", $(this).val());
             });
-            
+
             // var testData1 = $('#emptbl').html();
             var tableData = $('form').not('button').html();
 
@@ -799,32 +799,26 @@
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
         onchange="makeWidgetRequiredOrNot()">
         <table id="emptbl">
-            <tbody>
-                <tr id="tblHeading">
-                    <!-- <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3> -->
-                    <th> </th>
-                    <th>Type of activity</th>
-                    <th>Company</th>
-                    <th>Institution</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Position Held</th>
-                    <th>Grade/Band</th>
-                    <th>Results</th>
-                    <th>Comments</th>
-                    <th> </th>
-                </tr>
-            </tbody>
-        </table>
-        <table>
-            <tr>
-                <button type="button" id="addRowButton">Add Row</button>
-                <button type="button" id="test1" onclick="test01()"> True </button>
-                <button type="button" id="test2" onclick="test02()"> False </button>
-                <span>
-                    <p id="textArea"></p>
-                </span>
+            <tr id="tblHeading">
+                <!-- <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3> -->
+                <th> </th>
+                <th>Type of activity</th>
+                <th>Company</th>
+                <th>Institution</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Position Held</th>
+                <th>Grade/Band</th>
+                <th>Results</th>
+                <th>Comments</th>
+                <th> </th>
             </tr>
+            <button type="button" id="addRowButton">Add Row</button>
+            <button type="button" id="test1" onclick="test01()"> True </button>
+            <button type="button" id="test2" onclick="test02()"> False </button>
+            <span>
+                <p id="textArea"></p>
+            </span>
         </table>
     </form>
 </body>
