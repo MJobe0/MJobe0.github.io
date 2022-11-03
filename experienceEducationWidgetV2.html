@@ -321,6 +321,21 @@
                 $(this).attr("value", $(this).val());
             });
 
+            var newTblHeader = `<tr id="tblHeading">
+                <th> </th>
+                <th>Type of activity</th>
+                <th>Company</th>
+                <th>Institution</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Position Held</th>
+                <th>Grade/Band</th>
+                <th>Results</th>
+                <th>Comments</th>
+                <th> </th>
+            </tr>`
+
+
             // var testData1 = $('#emptbl').html();
             // var tableData = $('table').html();
 
@@ -328,7 +343,7 @@
 
             // console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table><tbody>${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
