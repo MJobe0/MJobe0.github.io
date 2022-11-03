@@ -308,15 +308,13 @@
             });
 
             // var testData1 = $('#emptbl').html();
-            var tableData = $('form').not('button').html();
+            var tableData = $('form').html();
 
             // tableData = `<table>${tableData}</table>`
 
-            tableData = tableData.toString()
-
             console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(tableData))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('html', btoa(unescape(encodeURIComponent(tableData))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
