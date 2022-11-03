@@ -791,8 +791,12 @@
         }
 
         function test02() {
-            var testData2 = $('.Name of Employer').html();
-            console.log(testData2)
+            var tblData = $('tr').not(':first').map(function () {
+                console.log("this 1 = ", this)
+                $(this).find('input, select, textarea').each(function () {
+                    console.log("this 2 = ", this)
+                });
+            })
         }
 
     </script>
