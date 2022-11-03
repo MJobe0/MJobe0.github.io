@@ -791,12 +791,15 @@
         }
 
         function test02() {
+            var testTblRow
             var tblData = $('tr').not(':first').map(function () {
                 console.log("this 1 = ", this)
-                $(this).find('input, select, textarea').each(function () {
-                    console.log("this 2 = ", this)
-                });
+                testTblRow += this
+                // $(this).find('input, select, textarea').each(function () {
+                //     console.log("this 2 = ", this)
+                // });
             })
+            console.log("new table row =  ",testTblRow)
         }
 
     </script>
