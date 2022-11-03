@@ -777,6 +777,10 @@
         }
 
         function test01() {
+            $("input").each(function () {
+                $(this).attr("value", $(this).val());
+            });
+            
             var testData1 = $('#emptbl').html();
             console.log(testData1)
         }
