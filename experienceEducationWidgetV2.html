@@ -300,8 +300,8 @@
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             // _data.value = JSON.stringify(tblData)
             // console.log("_data = ", _data)
-            var tableData = document.documentElement.innerHTML;
-            
+            var tableData = $('form').html();
+
             var test00001 = $('form').text();
             console.log("form as text = ", test00001)
 
@@ -777,20 +777,14 @@
         }
 
         function test01() {
-            var tableData1 = $('#emptbl').html();
-            console.log("tableData 1 as html = ", tableData1)
-
-            var tableData2 = document.getElementById('emptbl').outerHTML;
-            console.log("tableData 2 as html = ", tableData2)
-
-
+            var testData1 = $('#emptbl').html();
+            console.log(testData1)
         }
 
-        // function test02() {
-        //     validateWidget()
-        //     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-        //     JFCustomWidget.sendSubmit({ value: "False", valid: false });
-        // }
+        function test02() {
+            var testData2 = $('.Name of Employer').html();
+            console.log(testData2)
+        }
 
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
@@ -817,7 +811,7 @@
             <tr>
                 <button type="button" id="addRowButton">Add Row</button>
                 <button type="button" id="test1" onclick="test01()"> True </button>
-                <!-- <button type="button" id="test2" onclick="test02()"> False </button> -->
+                <button type="button" id="test2" onclick="test02()"> False </button>
                 <span>
                     <p id="textArea"></p>
                 </span>
