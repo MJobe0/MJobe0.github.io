@@ -286,15 +286,17 @@
         }
 
         function getData(fieldToFill, fullHis) {
-            // var tblData = $('tr').not(':first').map(function () {
-            //     var obj = {};
-            //     $(this).find('input, select, textarea').each(function () {
-            //         if (this.name !== "") {
-            //             obj[this.name] = $(this).val();
-            //         }
-            //     });
-            //     return obj;
-            // }).get();
+            var tblData = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
+                    }
+                });
+                return obj;
+            }).html();
+
+            console.log(tblData)
 
             // // console.log(JSON.stringify(tblData));
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
@@ -786,7 +788,6 @@
             $("input").each(function () {
                 $(this).attr("value", $(this).val());
             });
-
             var testData1 = $('#emptbl').html();
             console.log(testData1)
         }
