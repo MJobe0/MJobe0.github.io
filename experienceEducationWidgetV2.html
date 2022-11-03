@@ -285,6 +285,7 @@
             }
         }
 
+
         function getData(fieldToFill, fullHis) {
 
             var tblData = $('tr').not(':first').map(function () {
@@ -303,18 +304,31 @@
             // _data.value = JSON.stringify(tblData)
             // console.log("_data = ", _data)
 
+            var newTblData = $('tr').not(':first').map(function () {
+                var obj;
+                var newRow
+                $(this).find('input, select, textarea').each(function () {
+                    if ($(this).val() !== undefined) {
+                        obj += `<td>${$(this).val() ?? ""}</td>`
+                    }
+                });
+                return `<tr>${obj}</tr>`;
+            }).get();
+
+            console.log("new table row =  ", newTblData)
+
             $("input, select, textarea").each(function () {
                 $(this).attr("value", $(this).val());
             });
 
             // var testData1 = $('#emptbl').html();
-            var tableData = $('table').html();
+            // var tableData = $('table').html();
 
-            // tableData = `<table>${tableData}</table>`
+            // // tableData = `<table>${tableData}</table>`
 
-            console.log("tableData as html = ", tableData)
+            // console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('json', btoa(unescape(encodeURIComponent(tblData))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table><tbody>${newTblData}</tbody></table>`))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
@@ -797,7 +811,7 @@
                 var newRow
                 $(this).find('input, select, textarea').each(function () {
                     if ($(this).val() !== undefined) {
-                        obj += `<td>${$(this).val()}</td>`
+                        obj += `<td>${$(this).val() ?? ""}</td>`
                     }
                 });
                 return `<tr>${obj}</tr>`;
