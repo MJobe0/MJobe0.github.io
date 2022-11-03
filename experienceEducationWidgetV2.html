@@ -287,17 +287,17 @@
 
         function getData(fieldToFill, fullHis) {
 
-            var tblData = $('tr').not(':first').map(function () {
-                var obj = {};
-                $(this).find('input, select, textarea').each(function () {
-                    if (this.name !== "") {
-                        obj[this.name] = $(this).val();
-                    }
-                });
-                return obj;
-            }).get();
+            // var tblData = $('tr').not(':first').map(function () {
+            //     var obj = {};
+            //     $(this).find('input, select, textarea').each(function () {
+            //         if (this.name !== "") {
+            //             obj[this.name] = $(this).val();
+            //         }
+            //     });
+            //     return obj;
+            // }).get();
 
-            tblData = JSON.stringify(tblData);
+            // tblData = JSON.stringify(tblData);
             // // console.log(JSON.stringify(tblData));
             // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
             // _data.value = JSON.stringify(tblData)
@@ -308,14 +308,14 @@
             });
             
             // var testData1 = $('#emptbl').html();
-            var tableData = $('body').html();
+            var tableData = $('form').html();
 
             var test00001 = $('form').text();
             console.log("form as text = ", test00001)
 
-            console.log("tableData as html = ", tblData)
+            console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(tblData))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(tableData))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
