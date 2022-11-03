@@ -312,6 +312,8 @@
 
             // tableData = `<table>${tableData}</table>`
 
+            tableData = tableData.toString()
+
             console.log("tableData as html = ", tableData)
 
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(tableData))));
