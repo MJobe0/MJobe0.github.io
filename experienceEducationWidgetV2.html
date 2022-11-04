@@ -341,7 +341,7 @@
 
             // console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="border: 1px solid #dddddd; width: 100%; border-collapse: collapse; padding: 8px; text-align: left;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
