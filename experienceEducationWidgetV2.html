@@ -324,6 +324,9 @@
 
             var tableData = $('table').html();
 
+            var htmlElement = document.querySelector("html");
+
+
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Company</th>
@@ -344,7 +347,7 @@
 
             console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<div style="width: 100%;">${tableData}</div>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(htmlElement))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
