@@ -669,7 +669,7 @@
                     } catch (error) {
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
-                        var newWidgetValue2 = JFCustomWidgetUtils.extractMetadata(dataObj.widget_metadata.value);
+                        var newWidgetValue2 = JFCustomWidgetUtils.extractMetadata(dataObj);
                         console.log("new wid val2 = ", newWidgetValue2)
 
                         var newWidgetValue1 = JFCustomWidgetUtils.extractMetadata(decodeURIComponent(escape(atob(dataObj.widget_metadata.value))));
