@@ -319,8 +319,10 @@
             console.log("new table row =  ", newTblData)
 
             $("input, select, textarea").each(function () {
-                $(this).attr("value", $(this).val());
+                $(this).text($(this).val());
             });
+
+            var tableData = $('table').html();
 
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
@@ -340,7 +342,7 @@
 
             // // tableData = `<table>${tableData}</table>`
 
-            // console.log("tableData as html = ", tableData)
+            console.log("tableData as html = ", tableData)
 
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
