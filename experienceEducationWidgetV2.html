@@ -349,9 +349,8 @@
 
             console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
 
-            // decodeURIComponent(escape(atob(b64)));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
@@ -669,6 +668,12 @@
 
                     } catch (error) {
                         console.log(error)
+                        console.log("widget value = ", dataObj)
+                        var newWidgetValue1 = JFCustomWidgetUtils.extractMetadata(decodeURIComponent(escape(atob(dataObj))));
+                        var newWidgetValue2 = JFCustomWidgetUtils.extractMetadata(dataObj);
+                        console.log("new wid val1 = ", newWidgetValue1)
+                        console.log("new wid val2 = ", newWidgetValue2)
+
                         return
                     }
                 }
