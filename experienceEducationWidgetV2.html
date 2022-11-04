@@ -319,7 +319,7 @@
             console.log("new table row =  ", newTblData)
 
             $("input, select, textarea").each(function () {
-                $(this).text($(this).val());
+                $(this).attr("value", $(this).val());
             });
 
             var tableData = $('table').html();
@@ -344,7 +344,7 @@
 
             console.log("tableData as html = ", tableData)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%;">${tableData}</table>`))));
             console.log("widgetUtils = ", JFCustomWidgetUtils)
             console.log(widgetValue);
 
@@ -605,14 +605,14 @@
                         <option value="Studying">Studying</option>
                         <option value="Other">Other</option>
                     </select>`;
-                        companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
-                        institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
-                        startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required />`;
-                        endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" />`;
-                        positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
-                        gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
-                        resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
-                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                        companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required> </input>`;
+                        institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required> </input>`;
+                        startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required> </input>`;
+                        endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}"> </input>`;
+                        positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required> </input>`;
+                        gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required> </input>`;
+                        resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required> </input>`;
+                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required> </textarea>`;
                         deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                         //set values
