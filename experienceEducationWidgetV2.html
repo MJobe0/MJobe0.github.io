@@ -307,7 +307,7 @@
             var newTblData = $('tr').not(':first').map(function () {
                 var obj;
                 var newRow
-                $(this).find('input, select, textarea').each(function () {
+                $(this).find('input, select, textarea').not('button').each(function () {
                     if ($(this).val() !== undefined) {
                         obj += `<td>${$(this).val() ?? ""}</td>`
                     }
