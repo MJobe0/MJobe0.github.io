@@ -671,8 +671,7 @@
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-
-                        var newTblData = $('tr').not(':first').parseHTML(newWidgetValue1).map(function () {
+                        var newTblData = $.parseHTML(newWidgetValue1).find('tr').not('first').map(function () {
                             var obj = {};
                             $(this).find('input, select, textarea').each(function () {
                                 if (this.name !== "") {
