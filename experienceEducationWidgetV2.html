@@ -287,47 +287,21 @@
 
 
         function getData(fieldToFill, fullHis) {
+            var widgetValue = "";
+            var obj
 
-            var tblData = $('tr').not(':first').map(function () {
+            var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
-                    if (this.name !== "") {
-                        obj[this.name] = $(this).val();
+                    if ($(this).val() !== undefined) {
+                        obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
+                    }
+                    else {
+                        obj += ""
                     }
                 });
-                return obj;
-            }).get();
-
-            // tblData = JSON.stringify(tblData);
-            // // console.log(JSON.stringify(tblData));
-            // JFCustomWidget.setFieldsValueById([{ id: fieldToFill, value: JSON.stringify(tblData) }]);
-            // _data.value = JSON.stringify(tblData)
-            // console.log("_data = ", _data)
-
-            var obj
-            var newTblData = $('tr').not(':first').map(function () {
-                var newRow
-                console.log("current this = ", $(this))
-                if ($(this) !== undefined) {
-                    $(this).find('input, select, textarea').not('button').each(function () {
-                        if ($(this).val() !== undefined) {
-                            obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
-                        }
-                    });
-                }
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
-
-            console.log("new table row =  ", newTblData)
-
-            // $("input, select, textarea").each(function () {
-            //     $(this).attr("value", $(this).val());
-            // });
-
-            var tableData = $('table').html();
-
-            var htmlElement = document.documentElement.outerHTML;
-
 
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
@@ -341,18 +315,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-
-            // var testData1 = $('#emptbl').html();
-            // var tableData = $('table').html();
-
-            // // tableData = `<table>${tableData}</table>`
-
-            console.log("tableData as html = ", tableData)
-
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
-
-            console.log("widgetUtils = ", JFCustomWidgetUtils)
-            console.log(widgetValue);
 
             _data.value = widgetValue
 
