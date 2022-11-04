@@ -669,11 +669,19 @@
                     } catch (error) {
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
-                        var newWidgetValue2 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        console.log("new wid val2 = ", newWidgetValue2)
+                        var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
 
-                        var newWidgetValue1 = JFCustomWidgetUtils.extractMetadata(decodeURIComponent(escape(atob(dataObj.widget_metadata.value))));
-                        console.log("new wid val1 = ", newWidgetValue1)
+                        var newTblData = $($.parseHTML(newWidgetValue1)).$('tr').not(':first').map(function () {
+                            var obj = {};
+                            $(this).find('input, select, textarea').each(function () {
+                                if (this.name !== "") {
+                                    obj[this.name] = $(this).val();
+                                }
+                            });
+                            return obj;
+                        }).get();
+
+                        console.log("new date for table = ", newTblData)
 
                         return
                     }
