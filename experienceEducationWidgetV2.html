@@ -288,6 +288,17 @@
 
 
         function getData(fieldToFill, fullHis) {
+            var tblData001 = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
+                    }
+                });
+                return obj;
+            }).get();
+
+            console.log("HERE: ", tblData001)
             var widgetValue = "";
             var obj
 
@@ -646,8 +657,18 @@
                             return obj;
                         }).get();
 
+                        var tbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
+                            var $td = $('td', this);
+                            return {
+                                id: ++i,
+                                name: $td.eq(0).text(),
+                                age: $td.eq(1).text(),
+                                grade: $td.eq(2).text()
+                            }
+                        }).get();
 
-                        console.log("NEW VALUES: ", tblData1)
+
+                        console.log("NEW VALUES: ", tbl)
 
 
                         // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
