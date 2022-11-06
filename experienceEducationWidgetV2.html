@@ -347,7 +347,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table><tbody>${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(newTblData))));
 
             _data.value = widgetValue
 
