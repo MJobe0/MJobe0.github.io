@@ -637,7 +637,7 @@
                         console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
                         var newTblData = $(newWidgetValue1).find('tr').map(function () {
                             var obj = {};
-                            $(this).find('input, select, textarea').each(function () {
+                            $(newWidgetValue1).find('input, select, textarea').each(function () {
                                 if (this.name !== "") {
                                     obj[this.name] = $(this).val();
                                 }
