@@ -660,10 +660,15 @@
                         var tbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
                             var $td = $('td', this);
                             return {
-                                id: ++i,
-                                name: $td.eq(0).text(),
-                                age: $td.eq(1).text(),
-                                grade: $td.eq(2).text()
+                                "Type of Activity": $td.eq(0).text(),
+                                "Name of Employer": $td.eq(1).text(),
+                                "Institution": $td.eq(2).text(),
+                                "Start Date": $td.eq(3).text(),
+                                "End Date": $td.eq(4).text(),
+                                "Position Held": $td.eq(5).text(),
+                                "Grade/Band": $td.eq(6).text(),
+                                "Results": $td.eq(7).text(),
+                                "Comments": $td.eq(9).text()
                             }
                         }).get();
 
