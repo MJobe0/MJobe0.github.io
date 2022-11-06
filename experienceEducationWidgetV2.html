@@ -347,7 +347,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(newTblData))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(...newTblData))));
 
             _data.value = widgetValue
 
@@ -664,20 +664,20 @@
                     } catch (error) {
 
                         console.log(error)
-                        console.log("widget value = ", dataObj.widget_metadata.value)
-                        var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-                        var newTblData = $(newWidgetValue1).find('tr').map(function () {
-                            var obj = {};
-                            $(this).find('input, select, textarea').each(function () {
-                                if (this.name !== "") {
-                                    obj[this.name] = $(this).val();
-                                }
-                            });
-                            return obj;
-                        }).get();
+                        // console.log("widget value = ", dataObj.widget_metadata.value)
+                        // var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
+                        // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
+                        // var newTblData = $(newWidgetValue1).find('tr').map(function () {
+                        //     var obj = {};
+                        //     $(this).find('input, select, textarea').each(function () {
+                        //         if (this.name !== "") {
+                        //             obj[this.name] = $(this).val();
+                        //         }
+                        //     });
+                        //     return obj;
+                        // }).get();
 
-                        console.log("new date for table = ", newTblData)
+                        // console.log("new date for table = ", newTblData)
 
                         return
                     }
