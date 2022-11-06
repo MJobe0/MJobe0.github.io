@@ -638,12 +638,12 @@
                         // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
                         var tblData1 = $(newWidgetValue1).find('tr').map(function () {
                             console.log("THIS1: ", this)
-                            console.log("THIS2: ", $(this).val())
+                            console.log("THIS2: ", $(this).text())
 
                             var obj1 = {};
                             $(this).find('td').each(function () {
                                 if (this.name !== "") {
-                                    obj[this.name] = $(this).val();
+                                    obj[this.name] = $(this).text();
                                 }
                             });
                             return obj1;
@@ -653,7 +653,7 @@
                         console.log("NEW VALUES: ", tblData1)
 
 
-                        var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
+                        // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
                         console.log("new date for table = ", newTblData1)
 
                         return
