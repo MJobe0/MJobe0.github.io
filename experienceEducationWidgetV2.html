@@ -288,6 +288,7 @@
 
 
         function getData(fieldToFill, fullHis) {
+
             var widgetValue = "";
             var obj
 
@@ -301,7 +302,7 @@
                         obj += ""
                     }
                 });
-                return {...`<tr>${obj ?? ""}</tr>`};
+                return `<tr>${obj ?? ""}</tr>`;
             }).get();
 
             var newTblHeader = `<tr id="tblHeading"">
