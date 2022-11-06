@@ -634,7 +634,20 @@
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
+                        console.log("test01 = ", JSON.parse(JSON.stringify(newWidgetValue1)))
+
+
+                        var html = newWidgetValue1;
+                        var temp = { "html": html };
+                        var obj = JSON.parse(temp);
+                        console.log("TEST 1: ",obj); // shows json object   
+
+
+
+
+
+
+
                         var newTblData = $(newWidgetValue1).find('tr').map(function () {
                             var obj = {};
                             $(newWidgetValue1).find('input, select, textarea').each(function () {
