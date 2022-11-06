@@ -288,6 +288,10 @@
 
 
         function getData(fieldToFill, fullHis) {
+            $("input, select, textarea").each(function () {
+                $(this).attr("value", $(this).val());
+            });
+
 
             var NewTable = $('#emptbl').tableToJSON();
 
@@ -314,9 +318,6 @@
             console.log("HTML: ", NewTable)
 
 
-            $("input, select, textarea").each(function () {
-                $(this).attr("value", $(this).val());
-            });
 
 
             // var widgetValue = "";
