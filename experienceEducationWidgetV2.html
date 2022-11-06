@@ -7,6 +7,7 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/table-to-json/1.0.0/jquery.tabletojson.min.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -634,18 +635,10 @@
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-                        var newTblData = $(newWidgetValue1).find('tr').map(function () {
-                            var obj = {};
-                            $(newWidgetValue1).find('input, select, textarea').each(function () {
-                                if (this.name !== "") {
-                                    obj[this.name] = $(this).val();
-                                }
-                            });
-                            return obj;
-                        }).get();
+                        // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
 
-                        console.log("new date for table = ", newTblData)
+                        var newTblData1 = $(newWidgetValue1).tableToJSON();
+                        console.log("new date for table = ", newTblData1)
 
                         return
                     }
