@@ -636,19 +636,21 @@
                         console.log("widget value = ", dataObj.widget_metadata.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
                         // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-                        var tblData = $(newWidgetValue1).find('tr').map(function () {
+                        var tblData1 = $(newWidgetValue1).find('tr').map(function () {
                             console.log("THIS1: ", this)
                             console.log("THIS2: ", $(this).val())
 
-                            //var obj = {};
-                            // $(this).find('input, select, textarea').each(function () {
-                            //     if (this.name !== "") {
-                            //         obj[this.name] = $(this).val();
-                            //     }
-                            // });
-                            // return obj;
+                            var obj1 = {};
+                            $(this).find('td').each(function () {
+                                if (this.name !== "") {
+                                    obj[this.name] = $(this).val();
+                                }
+                            });
+                            return obj1;
                         }).get();
 
+
+                        console.log("NEW VALUES: ", tblData1)
 
 
                         var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
