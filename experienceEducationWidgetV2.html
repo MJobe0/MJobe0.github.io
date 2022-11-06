@@ -7,6 +7,7 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/table-to-json/1.0.0/jquery.tabletojson.min.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -288,6 +289,8 @@
 
         function getData(fieldToFill, fullHis) {
 
+            var NewTable = $('#emptbl').tableToJSON();
+
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
@@ -308,10 +311,7 @@
                 return obj;
             }).get();
 
-            console.log("HTML: ", newTblData1)
-
-            console.log("HTML2: ", ...newTblData1)
-
+            console.log("HTML: ", NewTable)
 
 
             $("input, select, textarea").each(function () {
