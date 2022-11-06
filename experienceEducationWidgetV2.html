@@ -7,7 +7,6 @@
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/table-to-json/1.0.0/jquery.tabletojson.min.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -288,59 +287,21 @@
 
 
         function getData(fieldToFill, fullHis) {
-            $("input, select, textarea").each(function () {
-                $(this).attr("value", $(this).val());
-            });
-
-
-            var NewTable = $('table').tableToJSON({
-                extractor: function (cellIndex, $cell) {
-                    // get text from the span inside table cells;
-                    // if empty or non-existant, get the cell text
-                    return $cell.val() ?? "";
-                }
-            });
+            var widgetValue = "";
+            var obj
 
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
-                    if (this.name !== "") {
-                        obj[this.name] = $(this).val();
+                    if ($(this).val() !== undefined) {
+                        obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
+                    }
+                    else {
+                        obj += ""
                     }
                 });
-                return obj;
+                return `<tr>${obj ?? ""}</tr>`;
             }).get();
-
-            var newTblData1 = $('tr').not(':first').map(function () {
-                var obj = {};
-                $(this).find('input, select, textarea').each(function () {
-                    if (this.name !== "") {
-                        obj[this.name] = $(this).val();
-                    }
-                });
-                return obj;
-            }).get();
-
-            console.log("HTML: ", NewTable)
-
-
-
-
-            // var widgetValue = "";
-            // var obj
-
-            // var newTblData = $('tr').not(':first').map(function () {
-            //     var obj = {};
-            //     $(this).find('input, select, textarea').each(function () {
-            //         if ($(this).val() !== undefined) {
-            //             obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
-            //         }
-            //         else {
-            //             obj += ""
-            //         }
-            //     });
-            //     return `<tr>${obj ?? ""}</tr>`;
-            // }).get();
 
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
@@ -354,7 +315,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent("<table>" + newTblData + "</table>"))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
 
             _data.value = widgetValue
 
@@ -671,20 +632,20 @@
                     } catch (error) {
 
                         console.log(error)
-                        // console.log("widget value = ", dataObj.widget_metadata.value)
-                        // var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-                        // var newTblData = $(newWidgetValue1).find('tr').map(function () {
-                        //     var obj = {};
-                        //     $(this).find('input, select, textarea').each(function () {
-                        //         if (this.name !== "") {
-                        //             obj[this.name] = $(this).val();
-                        //         }
-                        //     });
-                        //     return obj;
-                        // }).get();
+                        console.log("widget value = ", dataObj.widget_metadata.value)
+                        var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
+                        console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
+                        var newTblData = $(newWidgetValue1).find('tr').map(function () {
+                            var obj = {};
+                            $(newWidgetValue1).find('input, select, textarea').each(function () {
+                                if (this.name !== "") {
+                                    obj[this.name] = $(this).val();
+                                }
+                            });
+                            return obj;
+                        }).get();
 
-                        // console.log("new date for table = ", newTblData)
+                        console.log("new date for table = ", newTblData)
 
                         return
                     }
