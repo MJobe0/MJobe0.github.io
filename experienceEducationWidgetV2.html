@@ -287,21 +287,50 @@
 
 
         function getData(fieldToFill, fullHis) {
-            var widgetValue = "";
-            var obj
 
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
                 $(this).find('input, select, textarea').each(function () {
-                    if ($(this).val() !== undefined) {
-                        obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
-                    }
-                    else {
-                        obj += ""
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).val();
                     }
                 });
-                return `<tr>${obj ?? ""}</tr>`;
+                return obj;
             }).get();
+
+            var newTblData1 = $('tr').not(':first').map(function () {
+                var obj = {};
+                $(this).find('input, select, textarea').each(function () {
+                    if (this.name !== "") {
+                        obj[this.name] = $(this).html();
+                    }
+                });
+                return obj;
+            }).get();
+
+            console.log("HTML: ", newTblData1)
+
+
+            $("input, select, textarea").each(function () {
+                $(this).attr("value", $(this).val());
+            });
+
+
+            // var widgetValue = "";
+            // var obj
+
+            // var newTblData = $('tr').not(':first').map(function () {
+            //     var obj = {};
+            //     $(this).find('input, select, textarea').each(function () {
+            //         if ($(this).val() !== undefined) {
+            //             obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
+            //         }
+            //         else {
+            //             obj += ""
+            //         }
+            //     });
+            //     return `<tr>${obj ?? ""}</tr>`;
+            // }).get();
 
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
@@ -315,7 +344,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblData}</tbody></table>`))));
 
             _data.value = widgetValue
 
@@ -634,23 +663,10 @@
                         console.log(error)
                         console.log("widget value = ", dataObj.widget_metadata.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                        console.log("test01 = ", JSON.parse(JSON.stringify(newWidgetValue1)))
-
-
-                        var html = newWidgetValue1;
-                        var temp = { "html": html };
-                        var obj = JSON.parse(temp);
-                        console.log("TEST 1: ",obj); // shows json object   
-
-
-
-
-
-
-
+                        console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
                         var newTblData = $(newWidgetValue1).find('tr').map(function () {
                             var obj = {};
-                            $(newWidgetValue1).find('input, select, textarea').each(function () {
+                            $(this).find('input, select, textarea').each(function () {
                                 if (this.name !== "") {
                                     obj[this.name] = $(this).val();
                                 }
