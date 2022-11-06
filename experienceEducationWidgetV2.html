@@ -293,7 +293,13 @@
             });
 
 
-            var NewTable = $('#emptbl').tableToJSON();
+            var NewTable = $('table').tableToJSON({
+                extractor: function (cellIndex, $cell) {
+                    // get text from the span inside table cells;
+                    // if empty or non-existant, get the cell text
+                    return $cell.val() ?? "";
+                }
+            });
 
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
