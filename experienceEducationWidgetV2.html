@@ -305,7 +305,8 @@
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
 
-            console.log("VALUES FROM TABLE1: ", newTblData[0].replace(/\[object Object\]/g,''))
+
+            console.log("VALUES FROM TABLE1: ", newTblData[0].replace(/\[object Object\]/g, ''))
             console.log("VALUES FROM TABLE2: ", newTblData)
 
 
@@ -323,7 +324,12 @@
 
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
 
-            _data.value = JSON.stringify(widgetValue)
+            _data.value = widgetValue;
+
+            JFCustomWidget.setFieldsValueById([{
+                id: fieldToFill,
+                value: JSON.stringify(widgetValue)
+            }]);
 
             return _data
         }
