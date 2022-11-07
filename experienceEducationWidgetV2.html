@@ -293,7 +293,7 @@
             var obj;
 
             var newTblData = $('tr').not(':first').map(function () {
-                var obj = {};
+                var obj = "";
                 $(this).find('input, select, textarea').each(function () {
                     if ($(this).val() !== undefined) {
                         obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
@@ -304,7 +304,6 @@
                 });
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
-
 
             console.log("VALUES FROM TABLE1: ", newTblData[0].replace(/\[object Object\]/g, ''))
             console.log("VALUES FROM TABLE2: ", newTblData)
@@ -633,6 +632,7 @@
                 }
 
                 function restoreTableData(dataObj) {
+                    console.log("DATA OBJ: ", dataObj)
                     try {
                         dataObj.forEach(function (obj) {
                             if (Object.keys(obj).length !== 0) {
