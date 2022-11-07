@@ -306,8 +306,8 @@
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
 
-            console.log("VALUES FROM TABLE1: ", newTblData.replace(/\[object Object\]/g,''))
-            console.log("VALUES FROM TABLE1: ", ...newTblData)
+            console.log("VALUES FROM TABLE1: ", newTblData[0].replace(/\[object Object\]/g,''))
+            console.log("VALUES FROM TABLE2: ", newTblData)
 
 
             var newTblHeader = `<tr id="tblHeading"">
