@@ -729,12 +729,12 @@
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         makeWidgetRequiredOrNot()
-                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                        JFCustomWidget.sendSubmit(_data);
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         makeWidgetRequiredOrNot()
                         console.log("CURR _DATA ON SUBMIT2: ", _data)
-                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                        JFCustomWidget.sendSubmit(_data);
                     }
 
                     console.log(widgetParm["storageField"]);
