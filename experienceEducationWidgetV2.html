@@ -290,19 +290,19 @@
         function getData(fieldToFill, fullHis) {
 
             var widgetValue = "";
-            var obj;
+            var obj
 
             var newTblData = $('tr').not(':first').map(function () {
-                var obj = ""
+                // var obj = ""
                 $(this).find('input, select, textarea').each(function () {
                     if ($(this).val() !== undefined) {
-                        obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
+                        obj = `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
                     }
                     else {
-                        obj =+ ""
+                        obj = ""
                     }
                 });
-                return `<tr>${obj}</tr>`;
+                return `<tr>${obj ?? ""}</tr>`;
             }).get();
 
             var newTblHeader = `<tr id="tblHeading"">
@@ -638,7 +638,7 @@
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
                         // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
 
-                        var tblData = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
+                        var tbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
                             var $td = $('td', this);
                             return {
                                 "Type of Activity": $td.eq(0).text(),
@@ -654,9 +654,9 @@
                         }).get();
 
 
-                        console.log("NEW VALUES: ", tblData)
+                        console.log("NEW VALUES: ", tbl)
 
-                        tblData.forEach(function (tblInfo) {
+                        tbl.forEach(function (tblInfo) {
                             if (Object.keys(tblInfo).length !== 0) {
                                 console.log(tblInfo)
                                 addRow(true, tblInfo)
