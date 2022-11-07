@@ -195,7 +195,7 @@
         var currFullWorkHistory = "No";
 
         var _data = {
-            'valid': false,
+            'valid': true,
             'value': [],
         };
 
@@ -288,6 +288,7 @@
 
 
         function getData(fieldToFill, fullHis) {
+            makeWidgetRequiredOrNot()
 
             var widgetValue = "";
             var obj;
@@ -757,7 +758,7 @@
                 JFCustomWidget.sendSubmit({ valid: false, value:'' });
 
                 console.log(JFCustomWidget.isWidgetRequired())
-                JFCustomWidget.makeWidgetRequired();
+                // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
                 _data.valid = false
                 return
