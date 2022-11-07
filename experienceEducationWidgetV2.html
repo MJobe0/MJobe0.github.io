@@ -754,6 +754,8 @@
             console.log($('input:invalid').length)
 
             if (currRowCount <= 1) {
+                JFCustomWidget.sendSubmit({ valid: false });
+
                 console.log(JFCustomWidget.isWidgetRequired())
                 JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
