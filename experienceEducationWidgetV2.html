@@ -290,11 +290,11 @@
         function getData(fieldToFill, fullHis) {
 
             var widgetValue = "";
-            var obj;
+            var obj = {}
 
             var newTblData = $('tr').not(':first').map(function () {
-                var obj = {}
-                console.log("THIS 1: ",this)
+                // var obj = {}
+                console.log("THIS 1: ", this)
                 $(this).find('input, select, textarea').not(':first').each(function () {
                     if ($(this).val() !== undefined) {
                         obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
