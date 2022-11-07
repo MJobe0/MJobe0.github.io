@@ -746,11 +746,20 @@
 
 
         function makeWidgetRequiredOrNot() {
+            var currTable = document.getElementById('emptbl');
+            var currRowCount = table.rows.length;
             console.log("here")
             //Validate years since school leaving age
 
             console.log($('input:invalid').length)
 
+            if (currRowCount <= 1) {
+                console.log(JFCustomWidget.isWidgetRequired())
+                //JFCustomWidget.makeWidgetRequired();
+                JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
+                _data.valid = false
+                return
+            }
             if ($('input:invalid').length >= 1) {
                 console.log(JFCustomWidget.isWidgetRequired())
                 //JFCustomWidget.makeWidgetRequired();
