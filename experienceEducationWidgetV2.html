@@ -294,7 +294,9 @@
 
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {}
+                console.log("THIS 1: ",this)
                 $(this).find('input, select, textarea').each(function () {
+                    console.log("THIS 2: ",this)
                     if ($(this).val() !== undefined) {
                         obj += `<td style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;" >${$(this).val() ?? ""}</td>`
                     }
