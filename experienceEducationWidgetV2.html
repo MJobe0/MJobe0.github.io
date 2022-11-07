@@ -730,24 +730,24 @@
             });
 
             JFCustomWidget.subscribe('submit', function (data6) {
-                    console.log("CURR _DATA ON SUBMIT1: ", _data)
-                    // console.log("year of birth ", yearOfBirth)
-                    const widgetParm = JFCustomWidget.getWidgetSettings();
-                    if (widgetParm["fullWorkHistory"] === "No") {
-                        widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                        makeWidgetRequiredOrNot()
-                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
-                    }
-                    else if (widgetParm["fullWorkHistory"] === "Yes") {
-                        makeWidgetRequiredOrNot()
-                        console.log("CURR _DATA ON SUBMIT2: ", _data)
-                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
-                    }
+                console.log("CURR _DATA ON SUBMIT1: ", _data)
+                // console.log("year of birth ", yearOfBirth)
+                const widgetParm = JFCustomWidget.getWidgetSettings();
+                if (widgetParm["fullWorkHistory"] === "No") {
+                    widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                    makeWidgetRequiredOrNot()
+                    JFCustomWidget.sendSubmit({ valid: true, value: "" });
+                }
+                else if (widgetParm["fullWorkHistory"] === "Yes") {
+                    makeWidgetRequiredOrNot()
+                    console.log("CURR _DATA ON SUBMIT2: ", _data)
+                    JFCustomWidget.sendSubmit({ valid: true, value: "" });
+                }
 
-                    console.log(widgetParm["storageField"]);
+                console.log(widgetParm["storageField"]);
 
-                    // send the data
-                    // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+                // send the data
+                // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
             });
         })
 
