@@ -290,7 +290,7 @@
         function getData(fieldToFill, fullHis) {
 
             var widgetValue = "";
-            var obj
+            // var obj
 
             var newTblData = $('tr').not(':first').map(function () {
                 var obj = {};
@@ -656,10 +656,10 @@
 
                         console.log("NEW VALUES: ", tbl)
 
-                        tbl.forEach(function (obj) {
-                            if (Object.keys(obj).length !== 0) {
-                                console.log(obj)
-                                addRow(true, obj)
+                        tbl.forEach(function (tblInfo) {
+                            if (Object.keys(tblInfo).length !== 0) {
+                                console.log(tblInfo)
+                                addRow(true, tblInfo)
                             }
                         })
 
@@ -816,29 +816,29 @@
             }
         }
 
-        function test01() {
-            $("input").each(function () {
-                $(this).attr("value", $(this).val());
-            });
-            var testData1 = $('#tblHeading').html();
-            console.log(testData1)
-        }
+        // function test01() {
+        //     $("input").each(function () {
+        //         $(this).attr("value", $(this).val());
+        //     });
+        //     var testData1 = $('#tblHeading').html();
+        //     console.log(testData1)
+        // }
 
-        function test02() {
+        // function test02() {
 
-            var newTblData = $('tr').not(':first').map(function () {
-                var obj;
-                var newRow
-                $(this).find('input, select, textarea').each(function () {
-                    if ($(this).val() !== undefined) {
-                        obj += `<td>${$(this).val() ?? ""}</td>`
-                    }
-                });
-                return `<tr>${obj}</tr>`;
-            }).get();
+        //     var newTblData = $('tr').not(':first').map(function () {
+        //         var obj;
+        //         var newRow
+        //         $(this).find('input, select, textarea').each(function () {
+        //             if ($(this).val() !== undefined) {
+        //                 obj += `<td>${$(this).val() ?? ""}</td>`
+        //             }
+        //         });
+        //         return `<tr>${obj}</tr>`;
+        //     }).get();
 
-            console.log("new table row =  ", newTblData)
-        }
+        //     console.log("new table row =  ", newTblData)
+        // }
 
     </script>
     <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#">
