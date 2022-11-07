@@ -755,12 +755,12 @@
             console.log($('input:invalid').length)
 
             if (currRowCount <= 1) {
-                JFCustomWidget.sendSubmit({ valid: false, value:'' });
-
+                console.log(JFCustomWidget)
                 console.log(JFCustomWidget.isWidgetRequired())
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
                 _data.valid = false
+                console.log(_data)
                 return
             }
             if ($('input:invalid').length >= 1) {
