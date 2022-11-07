@@ -523,6 +523,11 @@
                         makeWidgetRequiredOrNot();
                     });
 
+                    $(document).ready(function () {
+                        console.alert("ready!");
+                        makeWidgetRequiredOrNot();
+                    });
+
                     $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
 
                     $("input[type=date]").attr("min", currMaxYear);
@@ -729,15 +734,12 @@
                     if (widgetParm["fullWorkHistory"] === "No") {
                         widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                         makeWidgetRequiredOrNot()
-                        getData(widgetParm["storageField"])
-
-                        JFCustomWidget.sendSubmit(_data);
+                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                     }
                     else if (widgetParm["fullWorkHistory"] === "Yes") {
                         makeWidgetRequiredOrNot()
                         console.log("CURR _DATA ON SUBMIT2: ", _data)
-                        getData(widgetParm["storageField"])
-                        JFCustomWidget.sendSubmit(_data);
+                        JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                     }
 
                     console.log(widgetParm["storageField"]);
