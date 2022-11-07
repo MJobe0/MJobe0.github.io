@@ -306,7 +306,7 @@
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
 
-            console.log("VALUES FROM TABLE1: ", newTblData)
+            console.log("VALUES FROM TABLE1: ", newTblData.replace(/\[object Object\]/g,''))
             console.log("VALUES FROM TABLE1: ", ...newTblData)
 
 
