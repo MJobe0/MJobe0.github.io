@@ -754,7 +754,7 @@
             console.log($('input:invalid').length)
 
             if (currRowCount <= 1) {
-                JFCustomWidget.sendSubmit({ valid: false });
+                JFCustomWidget.sendSubmit({ valid: false, value:'' });
 
                 console.log(JFCustomWidget.isWidgetRequired())
                 JFCustomWidget.makeWidgetRequired();
