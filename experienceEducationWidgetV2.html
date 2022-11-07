@@ -290,7 +290,7 @@
         function getData(fieldToFill, fullHis) {
 
             var widgetValue = "";
-            var obj = ""
+            var obj;
 
             var newTblData = $('tr').not(':first').map(function () {
                 // var obj = ""
@@ -302,7 +302,7 @@
                     //     obj =+ ""
                     // }
                 });
-                return `<tr>${obj ?? ""}</tr>`;
+                return `<tr>${obj}</tr>`;
             }).get();
 
             var newTblHeader = `<tr id="tblHeading"">
