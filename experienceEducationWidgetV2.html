@@ -286,9 +286,7 @@
             }
         }
 
-
         function getData(fieldToFill, fullHis) {
-            makeWidgetRequiredOrNot()
 
             var widgetValue = "";
             var obj;
@@ -300,10 +298,6 @@
                 });
                 return `<tr>${obj ?? ""}</tr>`;
             }).get();
-
-            console.log("VALUES FROM TABLE1: ", newTblData[0].replace(/\[object Object\]/g, ''))
-            console.log("VALUES FROM TABLE2: ", newTblData)
-
 
             var newTblHeader = `<tr id="tblHeading"">
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
@@ -317,7 +311,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow:auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto; max-width: 500px;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
 
             _data.value = widgetValue;
 
@@ -328,6 +322,7 @@
 
             return _data
         }
+
         function validateDates() {
             const currRowLength = document.getElementsByName("Start Date")?.length
 
@@ -414,6 +409,7 @@
                 var row = table.deleteRow(id);
                 resizeFrame();
                 validateDates();
+                makeWidgetRequiredOrNot()
                 return
                 //rowCount--;
             }
@@ -430,6 +426,7 @@
             console.log($(tblRow).prev()[0])
             $(tblRow).prev().before($(tblRow));
             validateDates();
+            makeWidgetRequiredOrNot()
             return
         }
 
@@ -441,6 +438,7 @@
             }
             $(tblRow).next().after($(tblRow));
             validateDates();
+            makeWidgetRequiredOrNot()
             return;
         }
 
@@ -472,6 +470,7 @@
                 // $('#listContainer').css('overflow-x', 'auto');
 
                 function init() {
+
                     // $('#' + containerId).attr('data-widget-name', 'e7ce64589c330d6bb7bf8c25').html(buildHTML);
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
@@ -498,6 +497,9 @@
                             var currYear = new Date().getFullYear();
 
                             maxLimit = Math.abs(currYear - schoolLeavingAge);
+
+                            makeWidgetRequiredOrNot();
+
                         });
                     }
                     // Create a condition that targets viewports at least 800px wide
@@ -586,14 +588,14 @@
                         <option value="Studying">Studying</option>
                         <option value="Other">Other</option>
                     </select>`;
-                        companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required> </input>`;
-                        institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required> </input>`;
-                        startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required> </input>`;
-                        endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}"> </input>`;
-                        positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required> </input>`;
-                        gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required> </input>`;
-                        resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required> </input>`;
-                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required> </textarea>`;
+                        companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
+                        institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
+                        startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required />`;
+                        endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" />`;
+                        positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
+                        gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
+                        resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
+                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
                         deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                         //set values
@@ -633,7 +635,6 @@
                 }
 
                 function restoreTableData(dataObj) {
-                    console.log("DATA OBJ: ", dataObj)
                     try {
                         dataObj.forEach(function (obj) {
                             if (Object.keys(obj).length !== 0) {
@@ -641,15 +642,19 @@
                                 addRow(true, obj)
                             }
                         })
+                        makeWidgetRequiredOrNot();
 
                     } catch (error) {
 
                         console.log(error)
-                        console.log("widget value = ", dataObj.widget_metadata.value)
+                        // var dataObj = JSON.parse(dataObj)
+                        console.log("DATA OBJECT: ", dataObj)
+                        console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
+                        console.log("DATA OBJECT3: ", dataObj?.widget_metadata?.value)
                         var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
                         // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
 
-                        var tblData = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
+                        var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
                             var $td = $('td', this);
                             return {
                                 "Type of Activity": $td.eq(0).text(),
@@ -665,14 +670,16 @@
                         }).get();
 
 
-                        console.log("NEW VALUES: ", tblData)
+                        console.log("NEW VALUES: ", newTbl)
 
-                        tblData.forEach(function (tblInfo) {
+                        newTbl.forEach(function (tblInfo) {
                             if (Object.keys(tblInfo).length !== 0) {
                                 console.log(tblInfo)
                                 addRow(true, tblInfo)
                             }
                         })
+                        makeWidgetRequiredOrNot();
+
 
                         // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
                         // console.log("new date for table = ", newTblData1)
@@ -721,35 +728,35 @@
 
                     if (currFullWorkHistory === "Yes" && data.value !== "") {
                         widget.restoreTableData(JSON.parse(data.value));
+                        makeWidgetRequiredOrNot();
                     }
                     // JFCustomWidget.sendData(getData(fieldToStoreData));
                 }
 
                 console.log(JFCustomWidget)
 
-            });
+                JFCustomWidget.subscribe('submit', function (data6) {
+                    console.log(data6)
+                    // console.log("year of birth ", yearOfBirth)
+                    const widgetParm = JFCustomWidget.getWidgetSettings();
+                    if (widgetParm["fullWorkHistory"] === "No") {
+                        widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                        makeWidgetRequiredOrNot()
+                        getData(widgetParm["storageField"])
+                        JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                    }
+                    else if (widgetParm["fullWorkHistory"] === "Yes") {
+                        makeWidgetRequiredOrNot()
+                        getData(widgetParm["storageField"])
+                        JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                    }
 
-            JFCustomWidget.subscribe('submit', function (data6) {
-                console.log("CURR _DATA ON SUBMIT1: ", _data)
-                // console.log("year of birth ", yearOfBirth)
-                const widgetParm = JFCustomWidget.getWidgetSettings();
-                if (widgetParm["fullWorkHistory"] === "No") {
-                    widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                    makeWidgetRequiredOrNot()
-                    getData(widgetParm["storageField"])
-                    JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
-                }
-                else if (widgetParm["fullWorkHistory"] === "Yes") {
-                    makeWidgetRequiredOrNot()
-                    console.log("CURR _DATA ON SUBMIT2: ", _data)
-                    getData(widgetParm["storageField"])
-                    JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
-                }
+                    console.log(widgetParm["storageField"]);
 
-                console.log(widgetParm["storageField"]);
+                    // send the data
+                    // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+                });
 
-                // send the data
-                // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
             });
         })
 
@@ -763,12 +770,11 @@
             console.log($('input:invalid').length)
 
             if (currRowCount <= 1) {
-                console.log(JFCustomWidget)
-                console.log(JFCustomWidget.isWidgetRequired())
+                // console.log(JFCustomWidget)
+                // console.log(JFCustomWidget.isWidgetRequired())
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
                 _data.valid = true
-                console.log(_data)
                 return
             }
             if ($('input:invalid').length >= 1) {
@@ -796,7 +802,6 @@
                 _data.valid = false
                 return
             }
-            console.log("DATA CURR VAL: ", _data)
         }
 
         function validateWidget() {
