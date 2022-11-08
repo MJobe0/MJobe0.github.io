@@ -772,7 +772,8 @@
             console.log("CURRENT ROW COUNT: ", currRowCount)
             //Validate years since school leaving age
 
-            console.log($('input:invalid').length)
+            console.log("Invalid name", $('input:invalid'))
+            console.log("Invalid name", $('input:invalid')?.name)
 
             if (currRowCount <= 1) {
                 // console.log(JFCustomWidget)
