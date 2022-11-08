@@ -365,7 +365,7 @@
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         console.log("here")
                         numOfIncorrectDates = numOfIncorrectDates + 1
-                        _data.valid = false
+                        // _data.valid = false
                         return false
                         //return { value: "Yes", valid: false };
                     }
@@ -376,7 +376,7 @@
                         console.log("Valid dates = ", dateDiffRes)
                         JFCustomWidget.setFieldsValueById(dateDiffRes);
                         numOfIncorrectDates = numOfIncorrectDates - 1;
-                        _data.valid = true
+                        // _data.valid = true
                         return true
                     }
                     //add coomments to array
@@ -551,12 +551,12 @@
                 function addRow(isPop, popData) {
                     if ($('input:invalid').length >= 1) {
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
-                        JFCustomWidget.sendSubmit({ valid: false });
+                        // JFCustomWidget.sendSubmit({ valid: false });
                         return
                     }
                     else {
                         JFCustomWidget.hideWidgetError();
-                        JFCustomWidget.sendSubmit({ valid: true });
+                        // JFCustomWidget.sendSubmit({ valid: true });
 
                         var table = document.getElementById("emptbl");
                         // GET TOTAL NUMBER OF ROWS 
@@ -736,12 +736,12 @@
                 if (widgetParm["fullWorkHistory"] === "No") {
                     widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                     makeWidgetRequiredOrNot()
-                    JFCustomWidget.sendSubmit({ valid: true, value: "" });
+                    JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                 }
                 else if (widgetParm["fullWorkHistory"] === "Yes") {
                     makeWidgetRequiredOrNot()
                     console.log("CURR _DATA ON SUBMIT2: ", _data)
-                    JFCustomWidget.sendSubmit({ valid: true, value: "" });
+                    JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
                 }
 
                 console.log(widgetParm["storageField"]);
@@ -765,7 +765,7 @@
                 console.log(JFCustomWidget.isWidgetRequired())
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
-                _data.valid = false
+                // _data.valid = false
                 console.log(_data)
                 return
             }
@@ -773,17 +773,17 @@
                 console.log(JFCustomWidget.isWidgetRequired())
                 //JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                _data.valid = false
+                // _data.valid = false
                 return
             }
             if (validateWidget() === false) {
-                _data.valid = false
+                // _data.valid = false
                 //JFCustomWidget.makeWidgetRequired();
                 //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                 return
             }
             if (validateDates() === false) {
-                _data.valid = false
+                // _data.valid = false
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
                 return
@@ -791,7 +791,7 @@
             else {
                 JFCustomWidget.makeWidgetNotRequired();
                 JFCustomWidget.hideWidgetError();
-                _data.valid = true
+                // _data.valid = true
                 return
             }
             console.log("DATA CURR VAL: ", _data)
@@ -830,12 +830,12 @@
 
             if (totalYears < maxLimit) {
                 JFCustomWidget.showWidgetError("Please make sure you've listed all posts held in the last " + maxLimit + " years")
-                JFCustomWidget.sendSubmit({ valid: false });
+                // JFCustomWidget.sendSubmit({ valid: false });
                 return false
             }
             else {
                 JFCustomWidget.hideWidgetError();
-                JFCustomWidget.sendSubmit({ valid: true });
+                // JFCustomWidget.sendSubmit({ valid: true });
                 return true
             }
         }
