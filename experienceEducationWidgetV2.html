@@ -774,8 +774,9 @@
             console.log("CURRENT ROW COUNT: ", currRowCount)
             //Validate years since school leaving age
 
-            console.log("Invalid name", $('input:invalid'))
-            console.log("Invalid name", $('input:invalid')?.name)
+            console.log("INVALID 1: ", $('input:invalid'));
+            console.log("INVALID 2: ", $('input:invalid').not("document").length)
+            console.log("INVALID 3: ", $('input:invalid')?.name)
 
             if (currRowCount <= 1) {
                 // console.log(JFCustomWidget)
@@ -855,13 +856,13 @@
             }
         }
 
-        // function test01() {
-        //     $("input").each(function () {
-        //         $(this).attr("value", $(this).val());
-        //     });
-        //     var testData1 = $('#tblHeading').html();
-        //     console.log(testData1)
-        // }
+        function test01() {
+            $("input").each(function () {
+                $(this).attr("value", $(this).val());
+            });
+            // var testData1 = $('#tblHeading').html();
+            // console.log(testData1)
+        }
 
         // function test02() {
 
