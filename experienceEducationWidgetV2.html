@@ -737,13 +737,13 @@
                     widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                     makeWidgetRequiredOrNot()
                     getData(widgetParm["storageField"])
-                    JFCustomWidget.sendSubmit({valid:true, value:_data.value});
+                    JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                 }
                 else if (widgetParm["fullWorkHistory"] === "Yes") {
                     makeWidgetRequiredOrNot()
                     console.log("CURR _DATA ON SUBMIT2: ", _data)
                     getData(widgetParm["storageField"])
-                    JFCustomWidget.sendSubmit({valid:true, value:_data.value});
+                    JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                 }
 
                 console.log(widgetParm["storageField"]);
@@ -793,7 +793,7 @@
             else {
                 JFCustomWidget.makeWidgetNotRequired();
                 JFCustomWidget.hideWidgetError();
-                // _data.valid = true
+                _data.valid = false
                 return
             }
             console.log("DATA CURR VAL: ", _data)
@@ -867,7 +867,8 @@
         // }
 
     </script>
-    <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#" onchange="makeWidgetRequiredOrNot()">
+    <form style="overflow:auto; width: 100%;" id="educationExperienceList[]" name="educationExperienceList" action="#"
+        onchange="makeWidgetRequiredOrNot()">
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
