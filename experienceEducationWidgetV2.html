@@ -551,7 +551,7 @@
                 // const currMaxYear = maxYear();
 
                 function addRow(isPop, popData) {
-                    if ($('input:invalid').length >= 1) {
+                    if ($('input:invalid').length > 1) {
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
                         // JFCustomWidget.sendSubmit({ valid: false });
                         return
@@ -609,7 +609,7 @@
                             document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
                             document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
                             document.getElementById(`results${x}`).value = popData["Results"] ?? "";
-                            document.getElementById(`comments${x}`).value = popData["Comments"] ?? ""
+                            document.getElementById(`comments${x}`).value = popData["Comments"] ?? "";
                         }
 
                         resizeFrame();
@@ -645,8 +645,6 @@
                         makeWidgetRequiredOrNot();
 
                     } catch (error) {
-
-                        console.log(error)
                         try {
                             if (typeof dataObj === "string") {
                                 var dataObj = JSON.parse(dataObj)
@@ -654,6 +652,7 @@
                         } catch (error2) { //due to dataObj being stored in a field
                             console.log(error2)
                         }
+                        console.log(error)
                         // var dataObj = JSON.parse(dataObj)
                         console.log("DATA OBJECT: ", dataObj)
                         console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
@@ -774,9 +773,7 @@
             console.log("CURRENT ROW COUNT: ", currRowCount)
             //Validate years since school leaving age
 
-            console.log("INVALID 1: ", $('input:invalid'));
-            console.log("INVALID 2: ", $('input:invalid').not("document").length)
-            console.log("INVALID 3: ", $('input:invalid')?.name)
+            console.log($('input:invalid').length)
 
             if (currRowCount <= 1) {
                 // console.log(JFCustomWidget)
@@ -786,7 +783,7 @@
                 _data.valid = true
                 return
             }
-            if ($('input:invalid').length >= 1) {
+            if ($('input:invalid').length > 1) {
                 console.log(JFCustomWidget.isWidgetRequired())
                 //JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
@@ -916,8 +913,8 @@
         <table>
             <tr>
                 <button type="button" id="addRowButton">Add Row</button>
-                <button type="button" id="test1" onclick="test01()"> True </button>
-                <button type="button" id="test2" onclick="test02()"> False </button>
+                <!-- <button type="button" id="test1" onclick="test01()"> True </button>
+                <button type="button" id="test2" onclick="test02()"> False </button> -->
                 <span>
                     <p id="textArea"></p>
                 </span>
