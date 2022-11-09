@@ -311,7 +311,7 @@
                 <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
             </tr>`
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto; max-width: 500px;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
 
             _data.value = widgetValue;
 
@@ -797,7 +797,7 @@
                 return
             }
             if (validateDates() === false) {
-                _data.valid = true
+                _data.valid = false
                 // JFCustomWidget.makeWidgetRequired();
                 JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below")
                 return
@@ -895,7 +895,7 @@
         <table id="emptbl">
             <tbody>
                 <tr id="tblHeading">
-                    <h3 style="max-width: 500px;">Click the Add Row button to add an Education or Experience</h3>
+                    <h3 style="max-width: 1000px;">Click the Add Row button to add an Education or Experience</h3>
                     <th> </th>
                     <th>Type of activity</th>
                     <th>Company</th>
