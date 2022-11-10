@@ -475,7 +475,7 @@
                     console.log("form Data = ", formData)
                     console.log("form data value = ", formData.value)
 
-                    if (formData.value !== undefined) {
+                    if (formData.value !== undefined && formData.value !== "") {
                         restoreTableData(JSON.parse(formData.value))
                     }
                     if (params["fullWorkHistory"] === "Yes") {
