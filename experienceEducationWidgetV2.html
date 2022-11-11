@@ -857,7 +857,10 @@
     
         </script>
         <form id="educationExperienceList[]" name="educationExperienceList" action="#"
-            onchange="makeWidgetRequiredOrNot()">
+            onchange="makeWidgetRequiredOrNot()" style=" max-width: 668px;
+            border: none;
+            width: 648px;
+            height: 250px;">
             <table id="emptbl">
                 <tbody>
                     <tr id="tblHeading" class="table">
@@ -873,6 +876,62 @@
                         <th>Results</th>
                         <th>Comments</th>
                         <th></th>
+                    </tr>
+                    <tr>
+                        <div>
+                            <label>
+                                Type of Activity<select name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                                    <option value="">Select Type of activity</option>
+                                    <option value="Employed">Employed</option>
+                                    <option value="Traveling">Traveling</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                    <option value="Studying">Studying</option>
+                                    <option value="Other">Other</option>
+                                </select>                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Name of Employer<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Institution<input type="text" name="Institution" value="" id="institution${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Start Date<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                End Date<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Position Held<input type="text" name="Position Held" value="" id="positionHeld${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Grade/Band<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Results<input type="text" name="Results" value="" id="results${x}" required />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Comments<textarea type="text" name="Comments" value="" id="comments${x}" required></textarea>
+                            </label>
+                        </div>
+                        <div>
+                            <button type="button" id="upRow${x}">↑</button> <button type="button" id="downRow${x}">↓</button> <button type="button" id="deleteRow${x}">Delete</button>
+                        </div>
                     </tr>
                 </tbody>
             </table>
