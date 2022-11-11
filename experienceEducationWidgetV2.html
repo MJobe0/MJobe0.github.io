@@ -7,6 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -900,11 +902,11 @@
         </script>
         <form id="educationExperienceList[]" name="educationExperienceList" action="#"
             onchange="makeWidgetRequiredOrNot()">
-            <table id="emptbl" class="table-responsive">
+            <table id="emptbl" class="table-auto">
                 <tbody>
                     <tr id="tblHeading">
                         <p>Click the Add Row button to add an Education or Experience</p>
-                        <th> </th>
+                        <th></th>
                         <th>Type of activity</th>
                         <th>Company</th>
                         <th>Institution</th>
@@ -914,16 +916,18 @@
                         <th>Grade/Band</th>
                         <th>Results</th>
                         <th>Comments</th>
-                        <th> </th>
+                        <th></th>
                     </tr>
                 </tbody>
+            </table>
+            <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <button type="button" id="test1" onclick="test01()"> True </button>
-                    <!-- <button type="button" id="test2" onclick="test02()"> False </button>
+                    <!-- <button type="button" id="test1" onclick="test01()"> True </button>
+                    <button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
-                    </span> -->
+                    </span>
                 </tr>
             </table>
         </form>
