@@ -578,8 +578,8 @@
                         var positionHeldCell = row.insertCell(6);
                         var gradeBandCell = row.insertCell(7)
                         var resultsCell = row.insertCell(8);
-                        var commentsCell = row.insertCell(9);
-                        var deleteRowCell = row.insertCell(10);
+                        // var commentsCell = row.insertCell(9);
+                        var deleteRowCell = row.insertCell(9);
                         // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                         moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
                         typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
@@ -597,7 +597,7 @@
                         positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
                         gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
                         resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
-                        commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                        // commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
                         deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
 
                         //set values
@@ -611,7 +611,7 @@
                             document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
                             document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
                             document.getElementById(`results${x}`).value = popData["Results"] ?? "";
-                            document.getElementById(`comments${x}`).value = popData["Comments"] ?? "";
+                            // document.getElementById(`comments${x}`).value = popData["Comments"] ?? "";
                         }
 
                         resizeFrame();
@@ -907,7 +907,7 @@
                     <th>Position Held</th>
                     <th>Grade/Band</th>
                     <th>Results</th>
-                    <th>Comments</th>
+                    <!-- <th>Comments</th> -->
                     <th> </th>
                 </tr>
             </tbody>
