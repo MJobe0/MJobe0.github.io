@@ -59,14 +59,6 @@
                 text-transform: uppercase;
             } */
             @media screen and (max-width: 800px) {
-                table {
-                    border: 1px solid #ccc;
-                    border-collapse: collapse;
-                    margin: 0;
-                    padding: 0;
-                    width: 100%;
-                    table-layout: fixed;
-                }
     
                 /* Hide table headers (but not display: none;, for accessibility) */
                 table th {
@@ -76,22 +68,6 @@
                     overflow: hidden;
                 }
     
-                table caption {
-                    font-size: 1.5em;
-                    margin: .5em 0 .75em;
-                }
-    
-                table tr {
-                    background-color: #f8f8f8;
-                    border: 1px solid #ddd;
-                    padding: .35em;
-                }
-    
-                table th,
-                table td {
-                    padding: .625em;
-                    text-align: center;
-                }
     
                 table th {
                     font-size: .85em;
@@ -104,32 +80,12 @@
                     max-width: 500px;
                 }
     
-                table caption {
-                    font-size: 1.3em;
-                }
-    
-                table thead {
-                    border: none;
-                    clip: rect(0 0 0 0);
-                    height: 1px;
-                    margin: -1px;
-                    overflow: hidden;
-                    padding: 0;
-                    position: absolute;
-                    width: 1px;
-                }
-    
-                table tr {
-                    border-bottom: 3px solid #ddd;
-                    display: block;
-                    margin-bottom: .625em;
-                }
-    
                 table td {
                     border-bottom: 1px solid #ddd;
                     display: block;
                     font-size: .8em;
                     text-align: right;
+                    display: inline-block;
                 }
     
                 table td::before {
@@ -904,7 +860,7 @@
             onchange="makeWidgetRequiredOrNot()">
             <table id="emptbl">
                 <tbody>
-                    <tr id="tblHeading">
+                    <tr id="tblHeading" class="table table-dark">
                         <p>Click the Add Row button to add an Education or Experience</p>
                         <th></th>
                         <th>Type of activity</th>
