@@ -533,19 +533,18 @@
                             var row = table.insertRow(x);
                             row.id = id;
                             // var rowNumberCell = row.insertCell(0);
-                            var moveButtonsCell = row.insertCell(0);
-                            var typeOfActivityCell = row.insertCell(1);
-                            var companyCell = row.insertCell(2);
-                            var institutionCell = row.insertCell(3);
-                            var startDateCell = row.insertCell(4);
-                            var endDateCell = row.insertCell(5);
-                            var positionHeldCell = row.insertCell(6);
-                            var gradeBandCell = row.insertCell(7)
-                            var resultsCell = row.insertCell(8);
-                            var commentsCell = row.insertCell(9);
-                            var deleteRowCell = row.insertCell(10);
+                            var typeOfActivityCell = row.insertCell(0);
+                            var companyCell = row.insertCell(1);
+                            var institutionCell = row.insertCell(2);
+                            var startDateCell = row.insertCell(3);
+                            var endDateCell = row.insertCell(4);
+                            var positionHeldCell = row.insertCell(5);
+                            var gradeBandCell = row.insertCell(6)
+                            var resultsCell = row.insertCell(7);
+                            var commentsCell = row.insertCell(8);
+                            var deleteRowCell = row.insertCell(9);
+                            var moveButtonsCell = row.insertCell(10);
                             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                            moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
                             typeOfActivityCell.innerHTML = `<div class="wrap"><label>Type of Activity</label><select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                             <option value="">Select Type of activity</option>
                             <option value="Employed">Employed</option>
@@ -562,6 +561,7 @@
                             gradeBandCell.innerHTML = `<div class="wrap"><label>Grade/Band</label><input type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="wrap"><label>Results</label><input type="text" name="Results" value="" id="results${x}" required /></div>`;
                             commentsCell.innerHTML = `<div class="wrap"><label>Comments</label><textarea type="text" name="Comments" value="" id="comments${x}" required /></div>`;
+                            moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
                             deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
     
                             //set values
