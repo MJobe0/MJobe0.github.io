@@ -561,7 +561,7 @@
                             gradeBandCell.innerHTML = `<div class="form-group"><label>Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="form-group"><label>Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
                             commentsCell.innerHTML = `<div class="form-group"><label>Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}" required></textarea></div>`;
-                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
+                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
                             //set values
                             if (isPop) {
                                 document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
