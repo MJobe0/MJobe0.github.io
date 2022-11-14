@@ -542,8 +542,7 @@
                             var gradeBandCell = row.insertCell(6)
                             var resultsCell = row.insertCell(7);
                             var commentsCell = row.insertCell(8);
-                            var deleteRowCell = row.insertCell(9);
-                            var moveButtonsCell = row.insertCell(10);
+                            var buttonsCell = row.insertCell(9);
                             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                             typeOfActivityCell.innerHTML = `<div class="form-group"><label>Type of Activity</label><select class="form-control" onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                             <option value="">Select Type of activity</option>
@@ -561,9 +560,7 @@
                             gradeBandCell.innerHTML = `<div class="form-group"><label>Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="form-group"><label>Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
                             commentsCell.innerHTML = `<div class="form-group"><label>Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}" required></textarea></div>`;
-                            moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
-                            deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
-    
+                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
                             //set values
                             if (isPop) {
                                 document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
