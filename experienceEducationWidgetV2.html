@@ -546,22 +546,22 @@
                             var deleteRowCell = row.insertCell(10);
                             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
                             moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
-                            typeOfActivityCell.innerHTML = `<select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                            typeOfActivityCell.innerHTML = `<div class="wrap"><label>Type of Activity</label><select onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
                             <option value="">Select Type of activity</option>
                             <option value="Employed">Employed</option>
                             <option value="Traveling">Traveling</option>
                             <option value="Unemployed">Unemployed</option>
                             <option value="Studying">Studying</option>
                             <option value="Other">Other</option>
-                        </select>`;
-                            companyCell.innerHTML = `<input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required />`;
-                            institutionCell.innerHTML = `<input type="text" name="Institution" value="" id="institution${x}" required />`;
-                            startDateCell.innerHTML = `<input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required />`;
-                            endDateCell.innerHTML = `<input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" />`;
-                            positionHeldCell.innerHTML = `<input type="text" name="Position Held" value="" id="positionHeld${x}" required />`;
-                            gradeBandCell.innerHTML = `<input type="text" name="Grade/Band" value="" id="gradeBand${x}" required />`;
-                            resultsCell.innerHTML = `<input type="text" name="Results" value="" id="results${x}" required />`;
-                            commentsCell.innerHTML = `<textarea type="text" name="Comments" value="" id="comments${x}" required />`;
+                        </select></div>`;
+                            companyCell.innerHTML = `<div class="wrap"><label>Name of Employer</label><input type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required /></div>`;
+                            institutionCell.innerHTML = `<div class="wrap"><label>Institution</label><input type="text" name="Institution" value="" id="institution${x}" required /></div>`;
+                            startDateCell.innerHTML = `<div class="wrap"><label>Start Date</label><input type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required /></div>`;
+                            endDateCell.innerHTML = `<div class="wrap"><label>End Date</label><input type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" /></div>`;
+                            positionHeldCell.innerHTML = `<div class="wrap"><label>Position Held</label><input type="text" name="Position Held" value="" id="positionHeld${x}" required /></div>`;
+                            gradeBandCell.innerHTML = `<div class="wrap"><label>Grade/Band</label><input type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
+                            resultsCell.innerHTML = `<div class="wrap"><label>Results</label><input type="text" name="Results" value="" id="results${x}" required /></div>`;
+                            commentsCell.innerHTML = `<div class="wrap"><label>Comments</label><textarea type="text" name="Comments" value="" id="comments${x}" required /></div>`;
                             deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
     
                             //set values
