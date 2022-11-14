@@ -560,7 +560,7 @@
                             positionHeldCell.innerHTML = `<div class="wrap"><label>Position Held</label><input type="text" name="Position Held" value="" id="positionHeld${x}" required /></div>`;
                             gradeBandCell.innerHTML = `<div class="wrap"><label>Grade/Band</label><input type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="wrap"><label>Results</label><input type="text" name="Results" value="" id="results${x}" required /></div>`;
-                            commentsCell.innerHTML = `<div class="wrap"><label>Comments</label><textarea type="text" name="Comments" value="" id="comments${x}" required /></div>`;
+                            commentsCell.innerHTML = `<div class="wrap"><label>Comments</label><textarea type="text" name="Comments" value="" id="comments${x}" required></textarea></div>`;
                             moveButtonsCell.innerHTML = `<button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button>`;
                             deleteRowCell.innerHTML = `<button type="button" id="deleteRow${x}" onclick="deleteRow(${x})">Delete</button>`;
     
