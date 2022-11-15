@@ -699,23 +699,11 @@
             }
     
             function test01() {
-                var selectionOptions = {
-                    "Employed": "1",
-                    "Traveling": "2",
-                    "Unemployed": "3",
-                    "Studying": "4",
-                    "Other": "5"
-                }
-                $("input").each(function () {
-                    $(this).attr("value", $(this).val());
-                });
-                $("select").each(function () {
+   
+                JFCustomWidget.getFieldsValueById(["10"], function (res) {
+                    console.log("GAP VALUE: ", res.data[0].value);
     
-                    $(this).attr("value", selectionOptions[$(this).val()]);
-                });
-    
-                // var testData1 = $('#tblHeading').html();
-                // console.log(testData1)
+                    });
             }
     
             // function test02() {
@@ -758,8 +746,8 @@
             <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <!-- <button type="button" id="test1" onclick="test01()"> True </button>
-                    <button type="button" id="test2" onclick="test02()"> False </button> -->
+                    <button type="button" id="test1" onclick="test01()"> True </button>
+                     <!--<button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
                     </span>
