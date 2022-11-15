@@ -28,6 +28,57 @@
   </head>
     <body>
         <style>
+            /* Hide table headers (but not display: none;, for accessibility) */
+table th {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    overflow: hidden;
+}
+
+input, label {
+    display:block;
+}
+input, select{
+    height: 40px;
+}
+
+label {
+    text-align: left;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+table {
+    border: 0;
+    max-width: 600px;
+}
+
+table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    display: inline-block;
+}
+
+table td::before {
+    /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+}
+
+table td:last-child {
+    border-bottom: 0;
+}
         </style>
         <script type="text/javascript">
     
