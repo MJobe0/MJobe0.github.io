@@ -622,7 +622,7 @@
                     _data.valid = true
                     return
                 }
-                if ($('input:invalid').length > 1) {
+                if ($('input:invalid').length >= 1) {
                     console.log(JFCustomWidget.isWidgetRequired())
                     //JFCustomWidget.makeWidgetRequired();
                     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
