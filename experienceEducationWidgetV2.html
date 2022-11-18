@@ -658,7 +658,7 @@ table tr:last-child, tr:first-child {
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
 
-                    JFCustomWidget.getFieldsValueById(["25"], function (res) {
+                    JFCustomWidget.getFieldsValueByName(["Type a question"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
                     if(res.data[0].value !== "") {
