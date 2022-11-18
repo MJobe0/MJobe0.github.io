@@ -28,6 +28,24 @@
   </head>
     <body>
         <style>
+            .form-control input, label {display: block;}
+
+.form-control {height: 40px; width: 150px;}
+
+.btn-group-vertical {position:relative; left:10px; top:2px;}
+
+table {border: 0; max-width: 600px;}
+
+table td {font-size: .8em; text-align: left; display: inline-block;}
+
+table tr {
+    border-bottom: 1px solid black;
+}​
+
+table tr:last-child, tr:first-child { 
+    border-bottom: none; 
+}
+#addRowButton {position:relative; top:10px;}
         </style>
         <script type="text/javascript">
     
@@ -757,7 +775,7 @@
             <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <button type="button" id="test1" onclick="test01()"> True </button>
+                    <!-- <button type="button" id="test1" onclick="test01()"> True </button> -->
                      <!--<button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
