@@ -30,22 +30,23 @@
         <style>
             .form-control input, label {display: block;}
 
-.form-control {height: 40px; width: 150px;}
+            .form-control {height: 40px; width: 150px;}
 
-.btn-group-vertical {position:relative; left:10px; top:2px;}
+            .btn-group-vertical {position:relative; left:10px; top:2px;}
 
-table {border: 0; max-width: 600px;}
+            table {border: 0; max-width: 600px;}
 
-table td {font-size: .8em; text-align: left; display: inline-block;}
+            table td {font-size: .8em; text-align: left; display: inline-block;}
 
-table tr {
-    border-bottom: 1px solid black;
-}​
+            table tr {
+                border-bottom: 1px solid black;
+            }​
 
-table tr:last-child, tr:first-child { 
-    border-bottom: none; 
-}
-#addRowButton {position:relative; top:10px;}
+            table tr:last-child, tr:first-child { 
+                border-bottom: none; 
+            }
+            
+            #addRowButton {position:relative; top:10px;}
         </style>
         <script type="text/javascript">
     
@@ -118,7 +119,7 @@ table tr:last-child, tr:first-child {
     
                         document.getElementById(nameOfEmployerId).disabled = true;
                         document.getElementById(institutionId).disabled = false;
-                        document.getElementById(gradeBandId).disabled = false;
+                        document.getElementById(gradeBandId).disabled = true;
                         document.getElementById(resultsId).disabled = false;
                         document.getElementById(positionHeldId).disabled = true;
                         break;
@@ -157,7 +158,7 @@ table tr:last-child, tr:first-child {
                     return `<tr>${obj ?? ""}</tr>`;
                 }).get();
     
-                var newTblHeader = `<tr id="tblHeading"">
+                var newTblHeader = `<tr id="tblHeading">
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Type of activity</th>
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Company</th>
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Institution</th>
@@ -169,7 +170,7 @@ table tr:last-child, tr:first-child {
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Comments</th>
                 </tr>`
     
-                var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+                var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto; table-layout: fixed;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
     
                 _data.value = widgetValue;
     
@@ -337,7 +338,7 @@ table tr:last-child, tr:first-child {
                             restoreTableData(JSON.parse(formData.value))
                         }
                         if (params["fullWorkHistory"] === "Yes") {
-                            JFCustomWidget.getFieldsValueById(["5"], function (res) {
+                            JFCustomWidget.getFieldsValueById(["11"], function (res) {
                                 console.log("res by Name= ", res.data[0].value);
                                 const strDate = res.data[0].value;
     
@@ -453,7 +454,7 @@ table tr:last-child, tr:first-child {
                             positionHeldCell.innerHTML = `<div class="form-group"><label for="positionHeld${x}" class="form-label">Position Held</label><input class="form-control" type="text" name="Position Held" value="" id="positionHeld${x}" required /></div>`;
                             gradeBandCell.innerHTML = `<div class="form-group"><label for="gradeBand${x}" class="form-label">Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="form-group"><label for="results${x}" class="form-label">Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
-                            commentsCell.innerHTML = `<div class="form-group"><label for="comments${x}" class="form-label">Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}" required></textarea></div>`;
+                            commentsCell.innerHTML = `<div class="form-group"><label for="comments${x}" class="form-label">Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}"></textarea></div>`;
                             buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
                             //set values
                             if (isPop) {
@@ -629,7 +630,7 @@ table tr:last-child, tr:first-child {
                 var currRowCount = currTable.rows.length;
                 console.log("CURRENT ROW COUNT: ", currRowCount)
                 //Validate years since school leaving age
-    
+                
                 console.log($('input:invalid').length)
     
                 if (currRowCount <= 1) {
@@ -640,12 +641,31 @@ table tr:last-child, tr:first-child {
                     _data.valid = true
                     return
                 }
-                if ($('input:invalid').length >= 1) {
-                    console.log(JFCustomWidget.isWidgetRequired())
-                    //JFCustomWidget.makeWidgetRequired();
-                    JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                    _data.valid = true
-                    return
+                // if ($('input:invalid').length >= 1) {
+                //     console.log(JFCustomWidget.isWidgetRequired())
+                //     //JFCustomWidget.makeWidgetRequired();
+                //     JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                //     _data.valid = true
+                //     return
+                // }
+                try {
+                    var required1 = $('input,textarea,option:selected').filter('[required]:enabled');
+                    var allRequired = true;
+                    required1.each(function(){
+                        if($(this).val() == ''){
+                            allRequired = false;
+                        }
+                    });
+
+                    if(!allRequired){
+                        console.log(JFCustomWidget.isWidgetRequired())
+                        //JFCustomWidget.makeWidgetRequired();
+                        JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
+                        _data.valid = true
+                        return
+                    }
+                } catch (error) {
+                    
                 }
                 if (validateWidget() === false) {
                     _data.valid = true
