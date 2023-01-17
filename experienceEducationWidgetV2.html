@@ -309,8 +309,12 @@
             $(function () {
                 function EducationExperienceList(containerId, formData, params) {
 
-                    var savedData = $('#' + 'Test01').attr('data-widget', 'e7ce64589c330d6bb7bf8c25').html("<p>All new content. <em>You bet!</em></p>")
-                    console.log("SAVED DATA = ",savedData)
+                    var savedData1 = $('#' + containerId).attr('data-widget', 'e7ce64589c330d6bb7bf8c25').html()
+                    console.log("SAVED DATA1 = ",savedData1)
+
+                    var savedData2 = $('#' + containerId).attr('data-widget', 'e7ce64589c330d6bb7bf8c25').html("<p>All new content. <em>You bet!</em></p>")
+                    console.log("SAVED DATA2 = ",savedData2)
+
                     console.log("JFCustomWidget = ",JFCustomWidget);
                     console.log("JFCustomWidgetUtils = ",JFCustomWidgetUtils)
 
