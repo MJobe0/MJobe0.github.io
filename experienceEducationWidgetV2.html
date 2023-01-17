@@ -623,7 +623,7 @@
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                     });
 
-                    JFCustomWidget.subscribe('save', function (data6) {
+                    JFCustomWidget.unsubscribe('submit', function (data6) {
                         console.log("Subscribe SAVE")
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
