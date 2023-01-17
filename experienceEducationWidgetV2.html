@@ -190,7 +190,7 @@
                     let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
                     if (currFullWorkHistory === "Yes") {
                         var dateDiffRes = [{
-                            id: "215",
+                            id: "29",
                             value: ""
                         }]
                     }
@@ -341,7 +341,7 @@
                             restoreTableData(JSON.parse(formData.value))
                         }
                         if (params["fullWorkHistory"] === "Yes") {
-                            JFCustomWidget.getFieldsValueById(["11"], function (res) {
+                            JFCustomWidget.getFieldsValueById(["31"], function (res) {
                                 console.log("res by Name= ", res.data[0].value);
                                 const strDate = res.data[0].value;
     
@@ -361,7 +361,6 @@
                                 maxLimit = Math.abs(currYear - schoolLeavingAge);
     
                                 makeWidgetRequiredOrNot();
-    
                             });
                         }
                         // Create a condition that targets viewports at least 800px wide
