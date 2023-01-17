@@ -610,7 +610,9 @@
 
                     JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
+                        getData(widgetParm["storageField"])
                         // console.log("year of birth ", yearOfBirth)
+                        JFCustomWidget.sendData({value:_data.value });
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
