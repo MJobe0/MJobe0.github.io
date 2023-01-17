@@ -601,12 +601,12 @@
     
                     console.log(JFCustomWidget)
     
-                    JFCustomWidget.subscribe('submit', function (data6) {
+                    JFCustomWidget.subscribe('store', function () {
                         console.log("AAAAAAAAAAAA")
-                        getData(widgetParm["storageField"])
 
-                        JFCustomWidget.sendData({ valid: false, value: _data.value });
+                    });
 
+                    JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
