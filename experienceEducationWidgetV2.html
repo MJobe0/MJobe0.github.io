@@ -602,6 +602,7 @@
                     console.log(JFCustomWidget)
     
                     JFCustomWidget.subscribe('submit', function (data6) {
+                        JFCustomWidget.sendData({ valid: true, value: _data.value });
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
@@ -609,34 +610,12 @@
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                            //JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
-                        }
-    
-                        console.log(widgetParm["storageField"]);
-    
-                        // send the data
-                        // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
-                    });
-
-                    JFCustomWidget.unsubscribe('submit', function (data6) {
-                        console.log("Subscribe SAVE")
-                        // console.log("year of birth ", yearOfBirth)
-                        const widgetParm = JFCustomWidget.getWidgetSettings();
-                        if (widgetParm["fullWorkHistory"] === "No") {
-                            // widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                            // makeWidgetRequiredOrNot()
-                            getData(widgetParm["storageField"])
-                            JFCustomWidget.sendData({ valid: true, value: _data.value });
-                        }
-                        else if (widgetParm["fullWorkHistory"] === "Yes") {
-                            // makeWidgetRequiredOrNot()
-                            getData(widgetParm["storageField"])
-                            JFCustomWidget.sendData({ valid: true, value:_data.value });
+                            //JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
     
                         console.log(widgetParm["storageField"]);
