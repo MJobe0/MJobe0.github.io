@@ -305,6 +305,66 @@
                 const currHeight = $("form").height();
                 JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
             }
+
+            function restoreTableData(dataObj) {
+                        try {
+                            dataObj.forEach(function (obj) {
+                                if (Object.keys(obj).length !== 0) {
+                                    console.log(obj)
+                                    addRow(true, obj)
+                                }
+                            })
+                            makeWidgetRequiredOrNot();
+    
+                        } catch (error) {
+                            try {
+                                if (typeof dataObj === "string") {
+                                    var dataObj = JSON.parse(dataObj)
+                                }
+                            } catch (error2) { //due to dataObj being stored in a field
+                                console.log(error2)
+                            }
+                            console.log(error)
+                            // var dataObj = JSON.parse(dataObj)
+                            console.log("DATA OBJECT: ", dataObj)
+                            console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
+                            console.log("DATA OBJECT3: ", dataObj?.widget_metadata?.value)
+                            var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
+                            // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
+    
+                            var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
+                                var $td = $('td', this);
+                                return {
+                                    "Type of Activity": $td.eq(0).text(),
+                                    "Name of Employer": $td.eq(1).text(),
+                                    "Institution": $td.eq(2).text(),
+                                    "Start Date": $td.eq(3).text(),
+                                    "End Date": $td.eq(4).text(),
+                                    "Position Held": $td.eq(5).text(),
+                                    "Grade/Band": $td.eq(6).text(),
+                                    "Results": $td.eq(7).text(),
+                                    "Comments": $td.eq(8).text()
+                                }
+                            }).get();
+    
+    
+                            console.log("NEW VALUES: ", newTbl)
+    
+                            newTbl.forEach(function (tblInfo) {
+                                if (Object.keys(tblInfo).length !== 0) {
+                                    console.log(tblInfo)
+                                    addRow(true, tblInfo)
+                                }
+                            })
+                            makeWidgetRequiredOrNot();
+    
+    
+                            // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
+                            // console.log("new date for table = ", newTblData1)
+    
+                            return
+                        }
+                    }
     
             $(function () {
                 function EducationExperienceList(containerId, formData, params) {
@@ -500,66 +560,6 @@
                         return arr;
                     }
     
-                    function restoreTableData(dataObj) {
-                        try {
-                            dataObj.forEach(function (obj) {
-                                if (Object.keys(obj).length !== 0) {
-                                    console.log(obj)
-                                    addRow(true, obj)
-                                }
-                            })
-                            makeWidgetRequiredOrNot();
-    
-                        } catch (error) {
-                            try {
-                                if (typeof dataObj === "string") {
-                                    var dataObj = JSON.parse(dataObj)
-                                }
-                            } catch (error2) { //due to dataObj being stored in a field
-                                console.log(error2)
-                            }
-                            console.log(error)
-                            // var dataObj = JSON.parse(dataObj)
-                            console.log("DATA OBJECT: ", dataObj)
-                            console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
-                            console.log("DATA OBJECT3: ", dataObj?.widget_metadata?.value)
-                            var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                            // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-    
-                            var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
-                                var $td = $('td', this);
-                                return {
-                                    "Type of Activity": $td.eq(0).text(),
-                                    "Name of Employer": $td.eq(1).text(),
-                                    "Institution": $td.eq(2).text(),
-                                    "Start Date": $td.eq(3).text(),
-                                    "End Date": $td.eq(4).text(),
-                                    "Position Held": $td.eq(5).text(),
-                                    "Grade/Band": $td.eq(6).text(),
-                                    "Results": $td.eq(7).text(),
-                                    "Comments": $td.eq(8).text()
-                                }
-                            }).get();
-    
-    
-                            console.log("NEW VALUES: ", newTbl)
-    
-                            newTbl.forEach(function (tblInfo) {
-                                if (Object.keys(tblInfo).length !== 0) {
-                                    console.log(tblInfo)
-                                    addRow(true, tblInfo)
-                                }
-                            })
-                            makeWidgetRequiredOrNot();
-    
-    
-                            // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
-                            // console.log("new date for table = ", newTblData1)
-    
-                            return
-                        }
-                    }
-    
                     function setCompanyNames(fieldIds) {
                         let currNames = getCompanyNames();
                         let fillArr = []
@@ -577,22 +577,7 @@
                 }
 
                 JFCustomWidget.subscribe('populate', fillConditionValue);
-    
-    function fillConditionValue(data) {
-        // JFCustomWidget.hideWidgetError();
 
-        var tbl = document.getElementById("emptbl");
-
-        currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-
-        console.log(currFullWorkHistory)
-
-        if (currFullWorkHistory === "Yes" && data.value !== "") {
-            restoreTableData(JSON.parse(data.value));
-            makeWidgetRequiredOrNot();
-        }
-        // JFCustomWidget.sendData(getData(fieldToStoreData));
-    }
     
                 JFCustomWidget.subscribe('ready', function (data) {
                     // console.log('Education Experience List ready', data);
