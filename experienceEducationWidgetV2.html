@@ -305,130 +305,6 @@
                 const currHeight = $("form").height();
                 JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
             }
-
-            function restoreTableData(dataObj) {
-                        try {
-                            dataObj.forEach(function (obj) {
-                                if (Object.keys(obj).length !== 0) {
-                                    console.log(obj)
-                                    addRow(true, obj)
-                                }
-                            })
-                            makeWidgetRequiredOrNot();
-    
-                        } catch (error) {
-                            try {
-                                if (typeof dataObj === "string") {
-                                    var dataObj = JSON.parse(dataObj)
-                                }
-                            } catch (error2) { //due to dataObj being stored in a field
-                                console.log(error2)
-                            }
-                            console.log(error)
-                            // var dataObj = JSON.parse(dataObj)
-                            console.log("DATA OBJECT: ", dataObj)
-                            console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
-                            console.log("DATA OBJECT3: ", dataObj?.widget_metadata?.value)
-                            var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
-                            // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
-    
-                            var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
-                                var $td = $('td', this);
-                                return {
-                                    "Type of Activity": $td.eq(0).text(),
-                                    "Name of Employer": $td.eq(1).text(),
-                                    "Institution": $td.eq(2).text(),
-                                    "Start Date": $td.eq(3).text(),
-                                    "End Date": $td.eq(4).text(),
-                                    "Position Held": $td.eq(5).text(),
-                                    "Grade/Band": $td.eq(6).text(),
-                                    "Results": $td.eq(7).text(),
-                                    "Comments": $td.eq(8).text()
-                                }
-                            }).get();
-    
-    
-                            console.log("NEW VALUES: ", newTbl)
-    
-                            newTbl.forEach(function (tblInfo) {
-                                if (Object.keys(tblInfo).length !== 0) {
-                                    console.log(tblInfo)
-                                    addRow(true, tblInfo)
-                                }
-                            })
-                            makeWidgetRequiredOrNot();
-    
-    
-                            // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
-                            // console.log("new date for table = ", newTblData1)
-    
-                            return
-                        }
-                    }
-
-                    function addRow(isPop, popData) {
-                        if ($('input:invalid').length > 1) {
-                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
-                            // JFCustomWidget.sendSubmit({ valid: false });
-                            return
-                        }
-                        else {
-                            JFCustomWidget.hideWidgetError();
-                            // JFCustomWidget.sendSubmit({ valid: true });
-    
-                            var table = document.getElementById("emptbl");
-                            // GET TOTAL NUMBER OF ROWS 
-                            var x = table.rows.length;
-                            var id = "tbl" + x;
-                            var row = table.insertRow(x);
-                            row.id = id;
-                            // var rowNumberCell = row.insertCell(0);
-                            var typeOfActivityCell = row.insertCell(0);
-                            var companyCell = row.insertCell(1);
-                            var institutionCell = row.insertCell(2);
-                            var startDateCell = row.insertCell(3);
-                            var endDateCell = row.insertCell(4);
-                            var positionHeldCell = row.insertCell(5);
-                            var gradeBandCell = row.insertCell(6)
-                            var resultsCell = row.insertCell(7);
-                            var commentsCell = row.insertCell(8);
-                            var buttonsCell = row.insertCell(9);
-                            // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                            typeOfActivityCell.innerHTML = `<div class="form-group"><label for="typeOfActivity${x}" class="form-label">Type of Activity</label><select class="form-control" onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
-                            <option value="">Select Type of activity</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Traveling">Traveling</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Studying">Studying</option>
-                            <option value="Other">Other</option>
-                        </select></div>`;
-                            companyCell.innerHTML = `<div class="form-group"><label for="nameOfEmployer${x}" class="form-label">Company</label><input class="form-control" type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required /></div>`;
-                            institutionCell.innerHTML = `<div class="form-group"><label for="institution${x}" class="form-label">Institution</label><input class="form-control" type="text" name="Institution" value="" id="institution${x}" required /></div>`;
-                            startDateCell.innerHTML = `<div class="form-group"><label for="startDate${x}" class="form-label">Start Date</label><input class="form-control" type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required /></div>`;
-                            endDateCell.innerHTML = `<div class="form-group"><label for="endDate${x}" class="form-label">End Date</label><input class="form-control" type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" /></div>`;
-                            positionHeldCell.innerHTML = `<div class="form-group"><label for="positionHeld${x}" class="form-label">Position Held</label><input class="form-control" type="text" name="Position Held" value="" id="positionHeld${x}" required /></div>`;
-                            gradeBandCell.innerHTML = `<div class="form-group"><label for="gradeBand${x}" class="form-label">Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
-                            resultsCell.innerHTML = `<div class="form-group"><label for="results${x}" class="form-label">Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
-                            commentsCell.innerHTML = `<div class="form-group"><label for="comments${x}" class="form-label">Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}"></textarea></div>`;
-                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
-                            //set values
-                            if (isPop) {
-                                document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
-                                modFields(x, popData["Type of Activity"] ?? "");
-                                document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
-                                document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
-                                document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
-                                document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
-                                document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
-                                document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
-                                document.getElementById(`results${x}`).value = popData["Results"] ?? "";
-                                document.getElementById(`comments${x}`).value = popData["Comments"] ?? "";
-                            }
-    
-                            resizeFrame();
-                            JFCustomWidget.sendData(getData(fieldToStoreData));
-                        }
-                    }
     
             $(function () {
                 function EducationExperienceList(containerId, formData, params) {
@@ -543,6 +419,70 @@
     
                     // const currMaxYear = maxYear();
     
+                    function addRow(isPop, popData) {
+                        if ($('input:invalid').length > 1) {
+                            JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in");
+                            // JFCustomWidget.sendSubmit({ valid: false });
+                            return
+                        }
+                        else {
+                            JFCustomWidget.hideWidgetError();
+                            // JFCustomWidget.sendSubmit({ valid: true });
+    
+                            var table = document.getElementById("emptbl");
+                            // GET TOTAL NUMBER OF ROWS 
+                            var x = table.rows.length;
+                            var id = "tbl" + x;
+                            var row = table.insertRow(x);
+                            row.id = id;
+                            // var rowNumberCell = row.insertCell(0);
+                            var typeOfActivityCell = row.insertCell(0);
+                            var companyCell = row.insertCell(1);
+                            var institutionCell = row.insertCell(2);
+                            var startDateCell = row.insertCell(3);
+                            var endDateCell = row.insertCell(4);
+                            var positionHeldCell = row.insertCell(5);
+                            var gradeBandCell = row.insertCell(6)
+                            var resultsCell = row.insertCell(7);
+                            var commentsCell = row.insertCell(8);
+                            var buttonsCell = row.insertCell(9);
+                            // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
+                            typeOfActivityCell.innerHTML = `<div class="form-group"><label for="typeOfActivity${x}" class="form-label">Type of Activity</label><select class="form-control" onchange="modFields(${x}, this.value)" name="Type of Activity" value="0" id="typeOfActivity${x}" required >
+                            <option value="">Select Type of activity</option>
+                            <option value="Employed">Employed</option>
+                            <option value="Traveling">Traveling</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Studying">Studying</option>
+                            <option value="Other">Other</option>
+                        </select></div>`;
+                            companyCell.innerHTML = `<div class="form-group"><label for="nameOfEmployer${x}" class="form-label">Company</label><input class="form-control" type="text" name="Name of Employer" value="" id="nameOfEmployer${x}" required /></div>`;
+                            institutionCell.innerHTML = `<div class="form-group"><label for="institution${x}" class="form-label">Institution</label><input class="form-control" type="text" name="Institution" value="" id="institution${x}" required /></div>`;
+                            startDateCell.innerHTML = `<div class="form-group"><label for="startDate${x}" class="form-label">Start Date</label><input class="form-control" type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required /></div>`;
+                            endDateCell.innerHTML = `<div class="form-group"><label for="endDate${x}" class="form-label">End Date</label><input class="form-control" type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" /></div>`;
+                            positionHeldCell.innerHTML = `<div class="form-group"><label for="positionHeld${x}" class="form-label">Position Held</label><input class="form-control" type="text" name="Position Held" value="" id="positionHeld${x}" required /></div>`;
+                            gradeBandCell.innerHTML = `<div class="form-group"><label for="gradeBand${x}" class="form-label">Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
+                            resultsCell.innerHTML = `<div class="form-group"><label for="results${x}" class="form-label">Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
+                            commentsCell.innerHTML = `<div class="form-group"><label for="comments${x}" class="form-label">Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}"></textarea></div>`;
+                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
+                            //set values
+                            if (isPop) {
+                                document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
+                                modFields(x, popData["Type of Activity"] ?? "");
+                                document.getElementById(`nameOfEmployer${x}`).value = popData["Name of Employer"] ?? "";
+                                document.getElementById(`institution${x}`).value = popData["Institution"] ?? "";
+                                document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
+                                document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
+                                document.getElementById(`positionHeld${x}`).value = popData["Position Held"] ?? "";
+                                document.getElementById(`gradeBand${x}`).value = popData["Grade/Band"] ?? "";
+                                document.getElementById(`results${x}`).value = popData["Results"] ?? "";
+                                document.getElementById(`comments${x}`).value = popData["Comments"] ?? "";
+                            }
+    
+                            resizeFrame();
+                            JFCustomWidget.sendData(getData(fieldToStoreData));
+                        }
+                    }
+    
                     function getCompanyNames() {
                         const currRowLength = document.getElementsByName("Name of Employer")?.length
                         console.log("Employer by name = ", document.getElementsByName("Name of Employer"))
@@ -558,6 +498,66 @@
                         }
                         console.log("arr length = ", arr.length)
                         return arr;
+                    }
+    
+                    function restoreTableData(dataObj) {
+                        try {
+                            dataObj.forEach(function (obj) {
+                                if (Object.keys(obj).length !== 0) {
+                                    console.log(obj)
+                                    addRow(true, obj)
+                                }
+                            })
+                            makeWidgetRequiredOrNot();
+    
+                        } catch (error) {
+                            try {
+                                if (typeof dataObj === "string") {
+                                    var dataObj = JSON.parse(dataObj)
+                                }
+                            } catch (error2) { //due to dataObj being stored in a field
+                                console.log(error2)
+                            }
+                            console.log(error)
+                            // var dataObj = JSON.parse(dataObj)
+                            console.log("DATA OBJECT: ", dataObj)
+                            console.log("DATA OBJECT2: ", dataObj?.widget_metadata)
+                            console.log("DATA OBJECT3: ", dataObj?.widget_metadata?.value)
+                            var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
+                            // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
+    
+                            var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
+                                var $td = $('td', this);
+                                return {
+                                    "Type of Activity": $td.eq(0).text(),
+                                    "Name of Employer": $td.eq(1).text(),
+                                    "Institution": $td.eq(2).text(),
+                                    "Start Date": $td.eq(3).text(),
+                                    "End Date": $td.eq(4).text(),
+                                    "Position Held": $td.eq(5).text(),
+                                    "Grade/Band": $td.eq(6).text(),
+                                    "Results": $td.eq(7).text(),
+                                    "Comments": $td.eq(8).text()
+                                }
+                            }).get();
+    
+    
+                            console.log("NEW VALUES: ", newTbl)
+    
+                            newTbl.forEach(function (tblInfo) {
+                                if (Object.keys(tblInfo).length !== 0) {
+                                    console.log(tblInfo)
+                                    addRow(true, tblInfo)
+                                }
+                            })
+                            makeWidgetRequiredOrNot();
+    
+    
+                            // var newTblData1 = $.parseHTML(newWidgetValue1).tableToJSON();
+                            // console.log("new date for table = ", newTblData1)
+    
+                            return
+                        }
                     }
     
                     function setCompanyNames(fieldIds) {
@@ -577,8 +577,7 @@
                 }
 
                 JFCustomWidget.subscribe('populate', fillConditionValue);
-
-                 
+    
     function fillConditionValue(data) {
         // JFCustomWidget.hideWidgetError();
 
