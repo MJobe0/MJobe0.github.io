@@ -527,6 +527,7 @@
                             var newWidgetValue1 = decodeURIComponent(escape(atob(dataObj.widget_metadata.value)));
                             // console.log("test01 = ", JSON.parse(JSON.stringify($.parseHTML(newWidgetValue1))))
     
+                            console.log("NEW WIDGET VALUES: ", newWidgetValue1)
                             var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
                                 var $td = $('td', this);
                                 return {
