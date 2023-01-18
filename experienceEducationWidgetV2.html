@@ -578,13 +578,7 @@
 
                 JFCustomWidget.subscribe('populate', fillConditionValue);
     
-                JFCustomWidget.subscribe('ready', function (data) {
-                    // console.log('Education Experience List ready', data);
-                    var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
-                    widget.init();
-                    widget.resizeFrame();
-
-                    function fillConditionValue(data) {
+    function fillConditionValue(data) {
         // JFCustomWidget.hideWidgetError();
 
         var tbl = document.getElementById("emptbl");
@@ -594,11 +588,17 @@
         console.log(currFullWorkHistory)
 
         if (currFullWorkHistory === "Yes" && data.value !== "") {
-            widget.restoreTableData(JSON.parse(data.value));
+            restoreTableData(JSON.parse(data.value));
             makeWidgetRequiredOrNot();
         }
         // JFCustomWidget.sendData(getData(fieldToStoreData));
     }
+    
+                JFCustomWidget.subscribe('ready', function (data) {
+                    // console.log('Education Experience List ready', data);
+                    var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
+                    widget.init();
+                    widget.resizeFrame();
     
                     var currParams = JFCustomWidget.getWidgetSettings();
                     if (currParams.fullWorkHistory === "No") {
