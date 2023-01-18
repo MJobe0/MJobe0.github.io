@@ -545,9 +545,10 @@
     
     
                             console.log("NEW VALUES: ", newTbl)
-    
-                            if(!newTbl.length) {
-                                console.log("NEW VALUES2: ", newTbl)
+                            console.log("NEW VALUES: ", newTbl.length >= 1)
+
+                            if(newTbl.length >= 1) {
+                                console.log("NEW VALUES3: ", newTbl)
 
                                 newTbl.forEach(function (tblInfo) {
                                     if (Object.keys(tblInfo).length !== 0) {
