@@ -578,7 +578,13 @@
 
                 JFCustomWidget.subscribe('populate', fillConditionValue);
     
-    function fillConditionValue(data) {
+                JFCustomWidget.subscribe('ready', function (data) {
+                    // console.log('Education Experience List ready', data);
+                    var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
+                    widget.init();
+                    widget.resizeFrame();
+
+                    function fillConditionValue(data) {
         // JFCustomWidget.hideWidgetError();
 
         var tbl = document.getElementById("emptbl");
@@ -593,12 +599,6 @@
         }
         // JFCustomWidget.sendData(getData(fieldToStoreData));
     }
-    
-                JFCustomWidget.subscribe('ready', function (data) {
-                    // console.log('Education Experience List ready', data);
-                    var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
-                    widget.init();
-                    widget.resizeFrame();
     
                     var currParams = JFCustomWidget.getWidgetSettings();
                     if (currParams.fullWorkHistory === "No") {
