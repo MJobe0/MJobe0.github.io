@@ -362,7 +362,7 @@
     
                             });
                         }
-                        
+
                         JFCustomWidget.getFieldsValueById([params["storageField"]], function (res) {
                                 console.log("res by Name= ", res.data[0].value);
                                 if (res.data[0].value !== ""){
@@ -545,12 +545,15 @@
     
                             console.log("NEW VALUES: ", newTbl)
     
-                            newTbl.forEach(function (tblInfo) {
-                                if (Object.keys(tblInfo).length !== 0) {
-                                    console.log(tblInfo)
-                                    addRow(true, tblInfo)
-                                }
-                            })
+                            if(newTbl?.length === 0) {
+                                newTbl.forEach(function (tblInfo) {
+                                    if (Object.keys(tblInfo).length !== 0) {
+                                        console.log(tblInfo)
+                                        addRow(true, tblInfo)
+                                    }
+                                })
+                            }
+                            
                             makeWidgetRequiredOrNot();
     
     
