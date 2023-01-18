@@ -363,6 +363,14 @@
                             });
                         }
 
+                        JFCustomWidget.getFieldsValueById([params["storageField"]], function (res) {
+                                console.log("STORAGE: ", res.data[0].value);
+                                if (res.data[0].value !== ""){
+                                    restoreTableData(JSON.parse(res.data[0].value));
+                                    resizeFrame();
+                                }
+                        });
+
                         // Create a condition that targets viewports at least 800px wide
                         const mediaQuery = window.matchMedia('(min-width: 800px)')
     
@@ -560,8 +568,11 @@
                             return
                         }
                     }
+   
+                }
     
-                    function setCompanyNames(fieldIds) {
+                 
+                function setCompanyNames(fieldIds) {
                         let currNames = getCompanyNames();
                         let fillArr = []
                         for (let i = 0; i < fieldIds.length; i++) {
@@ -575,8 +586,7 @@
                         JFCustomWidget.setFieldsValueById(fillArr);
                         console.log(fillArr)
                     }
-                }
-    
+
                 JFCustomWidget.subscribe('ready', function (data) {
                     // console.log('Education Experience List ready', data);
                     var widget = new EducationExperienceList('Test01', data, JFCustomWidget.getWidgetSettings());
@@ -608,12 +618,14 @@
     
                     console.log(JFCustomWidget)
     
-                    JFCustomWidget.subscribe('submit', function (data6) {
+                });
+                
+                JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
-                            widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                            setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
                             JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
@@ -629,8 +641,6 @@
                         // send the data
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                     });
-    
-                });
             })
     
     
