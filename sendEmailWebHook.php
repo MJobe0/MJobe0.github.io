@@ -5,7 +5,7 @@ $obj = json_decode($result, true);
 
 // Change with your emails
 $emailfrom = "john@example.com"; // Sender or From Email
-$emailto = "paul@example.com"; // Recipient, you can predefine or use a field value e.g. $obj['q4_email']
+$emailto = "TestPresent@hotmail.com"; // Recipient, you can predefine or use a field value e.g. $obj['q4_email']
 $subject = "You've got a new submission"; // Email Subject Title
 
 // Do not edit
