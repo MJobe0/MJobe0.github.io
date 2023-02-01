@@ -22,7 +22,7 @@
     <div>
         <canvas id="myChart"></canvas>
     </div>
-    <canvas id="myChart" width="400" height="700" aria-label="Hello ARIA World" role="img"></canvas>
+    <canvas id="myChart" width="400" height="700" aria-label="Hello World" role="img"></canvas>
     <script>
         var chartData = [];
         //subscrive to ready
@@ -35,6 +35,7 @@
                     chartData.push(parseFloat(resItem?.value) ?? 0)
                     console.log(resItem.value);
                 });
+                myChart.update();
             });
             //subscribe to submit
             JFCustomWidget.subscribe("submit", function (msg) {
