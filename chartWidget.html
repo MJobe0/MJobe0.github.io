@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,6 +14,8 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
+    <style>
+    </style>
 </head>
 <style>
 </style>
@@ -22,7 +25,7 @@
     <div>
         <canvas id="myChart"></canvas>
     </div>
-    <canvas id="myChart" width="400" height="700" aria-label="Hello World" role="img"></canvas>
+    <canvas id="myChart" width="1000" height="700" aria-label="Hello World" role="img"></canvas>
     <script>
         var chartData = [];
         //subscrive to ready
@@ -35,80 +38,74 @@
                     chartData.push(parseFloat(resItem?.value) ?? 0)
                     console.log(resItem.value);
                 });
-                myChart.update();
-            });
-            //subscribe to submit
-            JFCustomWidget.subscribe("submit", function (msg) {
-                var data2 = {
-                    value: "",
-                    valid: true
-                }
-                console.log(data2)
-                JFCustomWidget.sendSubmit(data2);
-            });
-            myChart.update();
-        });
+                
+                const labels = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                ];
 
-        // function getChartData() {
-        //     console.log("chart data =", chartData)
-        //     myChart.update();
-        //     return chartData ?? [];
-        // }
+                const data = {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: [{
+                        label: '2022',
+                        data: [...chartData],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                    }]
+                };
 
-        const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
-
-        const data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: '2022',
-                data: [...chartData],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-            }]
-        };
-
-        //config
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                transitions: {
-                    show: {
-                        animations: {
-                            x: {
-                                from: 0
+                //config
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        transitions: {
+                            show: {
+                                animations: {
+                                    x: {
+                                        from: 0
+                                    },
+                                    y: {
+                                        from: 0
+                                    }
+                                }
                             },
-                            y: {
-                                from: 0
-                            }
-                        }
-                    },
-                    hide: {
-                        animations: {
-                            x: {
-                                to: 0
-                            },
-                            y: {
-                                to: 0
+                            hide: {
+                                animations: {
+                                    x: {
+                                        to: 0
+                                    },
+                                    y: {
+                                        to: 0
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
-        };
+                };
 
-        //render the chart using our configuration:
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
+                //render the chart using our configuration:
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+            });
+
+        });
+
+        //subscribe to submit
+        JFCustomWidget.subscribe("submit", function (msg) {
+            var data2 = {
+                value: "",
+                valid: true
+            }
+            console.log(data2)
+            JFCustomWidget.sendSubmit(data2);
+        });
     </script>
 </body>
 
