@@ -567,6 +567,28 @@
                         console.log(fillArr)
                     }
                 }
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    try {
+
+                        var tbl = document.getElementById("emptbl");
+
+                        currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+
+                        console.log(currFullWorkHistory)
+
+                        if (currFullWorkHistory === "Yes" && data.value !== "") {
+                            widget.restoreTableData(JSON.parse(data.value));
+                            makeWidgetRequiredOrNot();
+                        }
+                        
+                    } catch (error) {
+                        console.log("ERROE!: ", error);
+                    }
+                    
+                }
     
                 JFCustomWidget.subscribe('ready', function (data) {
                     // console.log('Education Experience List ready', data);
@@ -579,25 +601,7 @@
                         maxLimit = 5;
                     }
     
-                    JFCustomWidget.subscribe('populate', fillConditionValue);
-    
-                    function fillConditionValue(data) {
-                        // JFCustomWidget.hideWidgetError();
-    
-                        var tbl = document.getElementById("emptbl");
-    
-                        currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-    
-                        console.log(currFullWorkHistory)
-    
-                        if (currFullWorkHistory === "Yes" && data.value !== "") {
-                            widget.restoreTableData(JSON.parse(data.value));
-                            makeWidgetRequiredOrNot();
-                        }
-                        // JFCustomWidget.sendData(getData(fieldToStoreData));
-                    }
-    
-                    console.log(JFCustomWidget)
+                    //console.log(JFCustomWidget)
     
                     JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
