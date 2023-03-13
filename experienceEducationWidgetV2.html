@@ -566,29 +566,30 @@
                         JFCustomWidget.setFieldsValueById(fillArr);
                         console.log(fillArr)
                     }
-                }
 
-                JFCustomWidget.subscribe('populate', fillConditionValue);
+                    JFCustomWidget.subscribe('populate', fillConditionValue);
 
-                function fillConditionValue(data) {
-                    try {
+                        function fillConditionValue(data) {
+                            try {
 
-                        var tbl = document.getElementById("emptbl");
+                                var tbl = document.getElementById("emptbl");
 
-                        currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+                                currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
 
-                        console.log(currFullWorkHistory)
+                                console.log(currFullWorkHistory)
 
-                        if (currFullWorkHistory === "Yes" && data.value !== "") {
-                            restoreTableData(JSON.parse(data.value));
-                            makeWidgetRequiredOrNot();
-                        }
+                                if (currFullWorkHistory === "Yes" && data.value !== "") {
+                                    restoreTableData(JSON.parse(data.value));
+                                    makeWidgetRequiredOrNot();
+                                }
+                                
+                            } catch (error) {
+                                console.log("ERROE!: ", error);
+                            }
                         
-                    } catch (error) {
-                        console.log("ERROE!: ", error);
                     }
-                    
                 }
+              
     
                 JFCustomWidget.subscribe('ready', function (data) {
                     // console.log('Education Experience List ready', data);
