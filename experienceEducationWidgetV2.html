@@ -580,7 +580,7 @@
                         console.log(currFullWorkHistory)
 
                         if (currFullWorkHistory === "Yes" && data.value !== "") {
-                            widget.restoreTableData(JSON.parse(data.value));
+                            restoreTableData(JSON.parse(data.value));
                             makeWidgetRequiredOrNot();
                         }
                         
