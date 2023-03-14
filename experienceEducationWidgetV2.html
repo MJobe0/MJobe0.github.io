@@ -336,13 +336,28 @@
     
                         if (formData.value !== undefined && formData.value !== "") {
                             try {
-                                restoreTableData(JSON.parse(formData.value))
-                            } catch (error) {
+                                if (params["fullWorkHistory"] === "Yes") {
+                                    JFCustomWidget.getFieldsValueById(["37"], function (storeValue) {
+                                        restoreTableData(JSON.parse(storeValue.data[0].value));
+                                    })
+                                }
+                                else {
+                                    restoreTableData(JSON.parse(formData.value))
+                                }
+                                
+                            } catch (errorInit1) {
                                 try {
-                                    var tempValue = decodeURI(formData.value);
-                                    console.log("DECODE: ", tempValue)
-                                    restoreTableData(tempValue);
-                                } catch (error) {
+                                    if (params["fullWorkHistory"] === "Yes") {
+                                        JFCustomWidget.getFieldsValueById(["37"], function (storeValue) {
+                                            var tempValue = storeValue.data[0].value.replace(/&quot;/g, '"');
+                                            console.log("DECODE: ", tempValue);
+                                            restoreTableData(JSON.parse(tempValue));
+                                        })
+                                    }
+                                    else {
+                                        restoreTableData(JSON.parse(formData.value))
+                                    }
+                                } catch (errorInit2) {
                                     
                                 }
                                 
