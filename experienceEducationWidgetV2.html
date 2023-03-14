@@ -335,7 +335,18 @@
                         console.log("form data value = ", formData.value)
     
                         if (formData.value !== undefined && formData.value !== "") {
-                            restoreTableData(JSON.parse(formData.value))
+                            try {
+                                restoreTableData(JSON.parse(formData.value))
+                            } catch (error) {
+                                try {
+                                    var tempValue = decodeURI(formData.value);
+                                    console.log("DECODE: ", tempValue)
+                                    restoreTableData(tempValue);
+                                } catch (error) {
+                                    
+                                }
+                                
+                            }
                         }
                         if (params["fullWorkHistory"] === "Yes") {
                             JFCustomWidget.getFieldsValueById(["11"], function (res) {
