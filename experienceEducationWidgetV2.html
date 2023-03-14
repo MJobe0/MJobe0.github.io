@@ -566,30 +566,30 @@
                         JFCustomWidget.setFieldsValueById(fillArr);
                         console.log(fillArr)
                     }
-
-                    JFCustomWidget.subscribe('populate', fillConditionValue);
-
-                        function fillConditionValue(data) {
-                            try {
-
-                                var tbl = document.getElementById("emptbl");
-
-                                currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
-
-                                console.log(currFullWorkHistory)
-
-                                if (currFullWorkHistory === "Yes" && data.value !== "") {
-                                    restoreTableData(JSON.parse(data.value));
-                                    makeWidgetRequiredOrNot();
-                                }
-                                
-                            } catch (error) {
-                                console.log("ERROE!: ", error);
-                            }
-                        
-                    }
                 }
-              
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    try {
+                        makeWidgetRequiredOrNot()
+
+                        var tbl = document.getElementById("emptbl");
+
+                        currFullWorkHistory = JFCustomWidget.getWidgetSetting("fullWorkHistory");
+
+                        console.log(currFullWorkHistory)
+
+                        if (currFullWorkHistory === "Yes" && data.value !== "") {
+                            widget.restoreTableData(JSON.parse(data.value));
+                            makeWidgetRequiredOrNot();
+                        }
+                        
+                    } catch (error) {
+                        console.log("ERROE!: ", error);
+                    }
+                    
+                }
     
                 JFCustomWidget.subscribe('ready', function (data) {
                     // console.log('Education Experience List ready', data);
