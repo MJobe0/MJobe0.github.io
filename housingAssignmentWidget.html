@@ -47,6 +47,7 @@
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("RES: ", responseData);
                     console.log("RES: ", responseData.content[0].answers["9"].answer);
+                    console.log("RES: ", responseData.content[1].answers["9"].answer);
                     checkSuitability(responseData, fieldValues)
                     return
                 },
