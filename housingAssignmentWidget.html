@@ -30,12 +30,12 @@
                 currFormValues = res.data;
             });
 
-            getHousingInfo(res.data);
+            getHousingInfo(currFormValues);
         }
 
-        function getHousingInfo(req) {
+        function getHousingInfo(fieldValues) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log("REQ: ", req)
+            console.log("REQ: ", fieldValues)
             console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
@@ -47,6 +47,7 @@
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
+                    //checkSuitability(responseData, fieldValues)
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -59,11 +60,11 @@
         function checkSuitability(housing, req) {
             var currOptions = [];
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.anwser[1] !== "Not Available") {
-                    if (housing.anwser[2] >= req.houseHoldSize) {
-                        if (housing.anwser[3] === req.pets) {
-                            if (housing.anwser[4] === req.access) {
-                                currOptions.push(housing[i])
+                if (housing.content[i].anwser[i] !== "Not Available") {
+                    if (housing.content[i].anwser[2] >= req.houseHoldSize) {
+                        if (housing.content[i].anwser[3] === req.pets) {
+                            if (housing.content[i].anwser[4] === req.access) {
+                                currOptions.push(housing.content[i]);
                             }
                         }
                     }
