@@ -59,6 +59,8 @@
         }
 
         function checkSuitability(housing, req) {
+            var table1 = document.getElementById("emptbl");
+            table1.innerHTML = "";
             console.log("REQ V1: ", req[0]);
             console.log("REQ V2: ", req[1]);
             console.log("REQ V3: ", req[2]);
@@ -92,7 +94,6 @@
 
         function addRow(roomNumber, category, maximumOccupancy, currentOccupancy) {
             var table = document.getElementById("emptbl");
-            table.innerHTML = "";
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
             var id = "tbl" + x;
