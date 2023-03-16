@@ -65,7 +65,7 @@
             console.log("REQ V4: ", req[3]);
 
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.content[i].answers["9"].answer === "Available") {
+                if (housing.content[i].answers["10"].answer === req[2]) {
                     console.log("HERE 1");
 
                     var roomNum = housing.content[i].answers["3"].answer;
@@ -95,6 +95,7 @@
 
         function addRow(roomNumber, category, maximumOccupancy, currentOccupancy) {
             var table = document.getElementById("emptbl");
+            table.innerHTML = "";
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
             var id = "tbl" + x;
