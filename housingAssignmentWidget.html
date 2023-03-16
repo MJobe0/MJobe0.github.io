@@ -135,13 +135,13 @@
 
         function updateDataBase(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`)
+            console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied`)
             jQuery.ajax({
-                url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`,
+                url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied`,
                 method: "POST",
-                data: {
-                    "submission[9]": "Occupied"
-                },
+                // data: {
+                //     "submission[9]": "Occupied"
+                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
