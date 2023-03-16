@@ -31,6 +31,7 @@
         }
 
         function getHousingInfo(req) {
+            var params = JFCustomWidget.getWidgetSettings()
             console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
@@ -53,20 +54,21 @@
 
         function checkSuitability(housing, req) {
             var currOptions = [];
-            if (houseing.anwser[1] !== "Not Available") {
-                if (houseing.anwser[2] >= req.houseHoldSize) {
-                    if (housing.anwser[3] === req.pets) {
-                        if (housing.anwser[4] === req.access) {
-                            currOptions.push(housing[1])
+            for (let i = 0; i < housing.content.length; i++) {
+                if (housing.anwser[1] !== "Not Available") {
+                    if (housing.anwser[2] >= req.houseHoldSize) {
+                        if (housing.anwser[3] === req.pets) {
+                            if (housing.anwser[4] === req.access) {
+                                currOptions.push(housing[i])
+                            }
                         }
                     }
                 }
             }
-
         }
 
         $(function () {
-            function HousingAssignment(containerId, formData, params) {
+            function HousingAssignment(containerId, formData) {
 
                 /**
                * Exposed
@@ -75,7 +77,6 @@
 
                 function init() {
                     console.log(formData)
-                    console.log(params)
 
                     // JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
                     //     console.log("originalSubmission = ", res.data[0].value)
@@ -90,7 +91,7 @@
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
-                var widget = new HousingAssignment('Test01', data, JFCustomWidget.getWidgetSettings());
+                var widget = new HousingAssignment('Test01', data);
                 widget.init();
             });
         });
@@ -100,7 +101,7 @@
     <br><button type="button" class="btn" onclick="getFormValues()">Search For Room Availability</button><br>
 
     <p>Please select a Housing Assigmnet from the following list</p>
-    
+
     <h2>Housing Assigmnet Options</h2>
 
 </body>
