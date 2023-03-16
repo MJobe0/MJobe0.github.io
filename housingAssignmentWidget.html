@@ -63,8 +63,8 @@
             for (let i = 0; i < housing.content.length; i++) {
                 if (housing.content[i].answers["9"].answer === "Available") {
                     console.log("HERE 1")
-                    if (housing.content[i].answers["8"].answer >= req[1]) {
-                        console.log("HERE 2")
+                    // if (housing.content[i].answers["8"].answer >= req[1]) {
+                        //console.log("HERE 2")
                         if (housing.content[i].answers["10"].answer === req[2]) {
                             console.log("HERE 3")
                             if (housing.content[i].answers["11"].answer === req[3]) {
@@ -77,7 +77,7 @@
                                 addRow(roomNum, categ, maximumOcc, currentOcc);
                             }
                         }
-                    }
+                    //}
                 }
             }
         }
