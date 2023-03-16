@@ -26,7 +26,7 @@
                 console.log("VALUE 2: ", res.data[1].value);
                 console.log("VALUE 3: ", res.data[2].value);
                 console.log("VALUE 4: ", res.data[3].value);
-                getHousingInfo(req);
+                getHousingInfo(res.data);
             });
         }
 
@@ -89,16 +89,16 @@
                 //     JFCustomWidget.hideWidgetError();
                 // }
             }
-        });
 
-        JFCustomWidget.subscribe('submit', function () {
-            // send the data
-            // JFCustomWidget.sendSubmit({value: "", valid:true});
-        });
+            JFCustomWidget.subscribe('submit', function () {
+                // send the data
+                // JFCustomWidget.sendSubmit({value: "", valid:true});
+            });
 
-        JFCustomWidget.subscribe('ready', function (data) {
-            var widget = new HousingAssignment('Test01', data, JFCustomWidget.getWidgetSettings());
-            widget.init();
+            JFCustomWidget.subscribe('ready', function (data) {
+                var widget = new HousingAssignment('Test01', data, JFCustomWidget.getWidgetSettings());
+                widget.init();
+            });
         });
 
     </script>
