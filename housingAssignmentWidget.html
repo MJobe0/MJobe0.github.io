@@ -21,16 +21,15 @@
         var currTaskId;
 
         function getFormValues() {
-            var currFormValues;
+            //var currFormValues;
             JFCustomWidget.getFieldsValueById(["3", "8", "5", "6"], function (res) {
                 console.log("VALUE 1: ", res.data[0].value);
                 console.log("VALUE 2: ", res.data[1].value);
                 console.log("VALUE 3: ", res.data[2].value);
                 console.log("VALUE 4: ", res.data[3].value);
-                currFormValues = res.data;
+                getHousingInfo(res.data);
+                return
             });
-
-            getHousingInfo(currFormValues);
         }
 
         function getHousingInfo(fieldValues) {
@@ -46,7 +45,7 @@
                 // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
-                    console.log(responseData);
+                    console.log("RES: ", responseData.content[0].answers["9"].anwser);
                     //checkSuitability(responseData, fieldValues)
                     return
                 },
@@ -60,7 +59,7 @@
         function checkSuitability(housing, req) {
             var currOptions = [];
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.content[i].anwser[i] !== "Not Available") {
+                if (housing.content[i].answers["9"].anwser !== "Not Available") {
                     if (housing.content[i].anwser[2] >= req.houseHoldSize) {
                         if (housing.content[i].anwser[3] === req.pets) {
                             if (housing.content[i].anwser[4] === req.access) {
