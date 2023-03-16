@@ -47,7 +47,7 @@
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("RES: ", responseData);
                     console.log("RES: ", responseData.content[0].answers["9"].answer);
-                    //checkSuitability(responseData, fieldValues)
+                    checkSuitability(responseData, fieldValues)
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -64,12 +64,37 @@
                     if (housing.content[i].answers["8"].answer >= req[1]) {
                         if (housing.content[i].answers["10"].answer === req[2]) {
                             if (housing.content[i].answers["11"].answer === req[3]) {
-                                currOptions.push(housing.content[i]);
+                                var roomNum = housing.content[i].answers["3"].answer;
+                                var categ = housing.content[i].answers["6"].answer;
+                                var maximumOcc = housing.content[i].answers["7"].answer;
+                                var currentOcc = housing.content[i].answers["8"].answer;
+
+                                addRow(roomNum, categ, maximumOcc, currentOcc);
                             }
                         }
                     }
                 }
             }
+        }
+
+        function addRow(roomNumber, category, maximumOccupancy, currentOccupancy) {
+            var table = document.getElementById("emptbl");
+            // GET TOTAL NUMBER OF ROWS 
+            var x = table.rows.length;
+            var id = "tbl" + x;
+            var row = table.insertRow(x);
+            row.id = id;
+            var roomNumberCell = row.insertCell(0);
+            var categoryCell = row.insertCell(1);
+            var maximumOccupancyCell = row.insertCell(2);
+            var currentOccupancyCell = row.insertCell(3);
+            var selectCell = row.insertCell(4);
+
+            roomNumberCell.innerHTML = `<input type="text" name="roomNumber[]" value="${roomNumber}" id="roomNumber${x}" />`;
+            categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" />`;
+            maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" />`;
+            currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" />`;
+            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" />`;
         }
 
         $(function () {
@@ -109,10 +134,17 @@
 
     <h2>Housing Assigmnet Options</h2>
 
-    <table>
-
+    <table id="emptbl">
+        <tbody>
+            <tr>
+                <th>Room Number</th>
+                <th>Category</th>
+                <th>Maximum Occupancy</th>
+                <th>Current Occupancy</th>
+                <th>Select</th>
+            </tr>
+        </tbody>
     </table>
-
 </body>
 
 </html>
