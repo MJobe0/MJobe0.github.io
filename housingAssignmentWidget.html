@@ -134,15 +134,15 @@
         }
 
         function updateDataBase(submissionId) {
+            var currData = {
+                    "submission[9]": "Occupied"
+                }
             var params = JFCustomWidget.getWidgetSettings();
             console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`,
                 method: "POST",
-                dataType: "json",
-                data: {
-                    "submission[9]": "Occupied",
-                },
+                data: JSON.stringify(currData) ,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
