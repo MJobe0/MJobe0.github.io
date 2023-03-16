@@ -70,32 +70,22 @@
             var accReq = req[3].value;
 
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.content[i].answers["9"].answer === "Available" && housing.content[i].answers["10"].answer === hasPets && housing.content[i].answers["11"].answer === accReq) {
-                    console.log("HERE 1");
+                if (housing.content[i].answers["9"].answer === "Available") {
+                    console.log("Is Available");
+                    if (housing.content[i].answers["10"].answer === hasPets) {
+                        console.log("Is Pet Friendly");
+                        if (housing.content[i].answers["11"].answer === accReq) {
+                            console.log("Has ADA Accessible?");
+                            var roomNum = housing.content[i].answers["3"].answer;
+                            var categ = housing.content[i].answers["6"].answer;
+                            var maximumOcc = housing.content[i].answers["7"].answer;
+                            var currentOcc = housing.content[i].answers["8"].answer;
+                            var subId = housing.content[i].id;
 
-                    var roomNum = housing.content[i].answers["3"].answer;
-                    var categ = housing.content[i].answers["6"].answer;
-                    var maximumOcc = housing.content[i].answers["7"].answer;
-                    var currentOcc = housing.content[i].answers["8"].answer;
-
-                    var subId = housing.content[i].id;
-
-                    addRow(roomNum, categ, maximumOcc, currentOcc, subId)
-                    // if (housing.content[i].answers["8"].answer >= req[1]) {
-                    //console.log("HERE 2")
-                    // if (housing.content[i].answers["10"].answer === req[2]) {
-                    //     console.log("HERE 3")
-                    //     if (housing.content[i].answers["11"].answer === req[3]) {
-                    //         console.log("HERE 4")
-                    //         var roomNum = housing.content[i].answers["3"].answer;
-                    //         var categ = housing.content[i].answers["6"].answer;
-                    //         var maximumOcc = housing.content[i].answers["7"].answer;
-                    //         var currentOcc = housing.content[i].answers["8"].answer;
-
-                    //         addRow(roomNum, categ, maximumOcc, currentOcc);
-                    //     }
-                    // }
-                    //}
+                            addRow(roomNum, categ, maximumOcc, currentOcc, subId)
+                            // if (housing.content[i].answers["8"].answer >= req[1]) {
+                        }
+                    }
                 }
             }
         }
