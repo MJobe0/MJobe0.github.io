@@ -21,17 +21,21 @@
         var currTaskId;
 
         function getFormValues() {
+            var currFormValues;
             JFCustomWidget.getFieldsValueById(["3", "8", "5", "6"], function (res) {
                 console.log("VALUE 1: ", res.data[0].value);
                 console.log("VALUE 2: ", res.data[1].value);
                 console.log("VALUE 3: ", res.data[2].value);
                 console.log("VALUE 4: ", res.data[3].value);
-                getHousingInfo(res.data);
+                currFormValues = res.data;
             });
+
+            getHousingInfo(res.data);
         }
 
         function getHousingInfo(req) {
-            var params = JFCustomWidget.getWidgetSettings()
+            var params = JFCustomWidget.getWidgetSettings();
+            console.log("REQ: ", req)
             console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
