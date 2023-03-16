@@ -19,6 +19,7 @@
 <body>
     <script type="text/javascript">
         var currTaskId;
+        var dataToReturn = { value: "", valid: false }
 
         function getFormValues() {
             //var currFormValues;
@@ -74,25 +75,27 @@
             for (let i = 0; i < housing.content.length; i++) {
                 if (housing.content[i].answers["9"].answer === "Available") {
                     console.log("Is Available");
-                    if (housing.content[i].answers["10"].answer === hasPets) {
-                        console.log("Is Pet Friendly");
-                        if (housing.content[i].answers["11"].answer === accReq) {
-                            console.log("Has ADA Accessible?");
-                            var roomNum = housing.content[i].answers["3"].answer;
-                            var categ = housing.content[i].answers["6"].answer;
-                            var maximumOcc = housing.content[i].answers["7"].answer;
-                            var currentOcc = housing.content[i].answers["8"].answer;
-                            var subId = housing.content[i].id;
+                    if (housing.content[i].answers["8"].answer <= householdSize) {
+                        if (housing.content[i].answers["10"].answer === hasPets) {
+                            console.log("Is Pet Friendly");
+                            if (housing.content[i].answers["11"].answer === accReq) {
+                                console.log("Has ADA Accessible?");
+                                var roomNum = housing.content[i].answers["3"].answer;
+                                var categ = housing.content[i].answers["6"].answer;
+                                var maximumOcc = housing.content[i].answers["7"].answer;
+                                var currentOcc = housing.content[i].answers["8"].answer;
+                                var subId = housing.content[i].id;
 
-                            addRow(roomNum, categ, maximumOcc, currentOcc, subId)
-                            // if (housing.content[i].answers["8"].answer >= req[1]) {
+                                addRow(roomNum, categ, maximumOcc, currentOcc, subId)
+                                // if () {
+                            }
                         }
                     }
                 }
             }
         }
 
-        function addRow(roomNumber, category, maximumOccupancy, currentOccupancy) {
+        function addRow(roomNumber, category, maximumOccupancy, currentOccupancy, submissionID) {
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
@@ -109,10 +112,10 @@
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" />`;
             currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" />`;
-            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" onclick="selectedHousing(${x})" />`;
+            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" onclick="selectedHousing(${x}, ${submissionID})" />`;
         }
 
-        function selectedHousing(rowId) {
+        function selectedHousing(rowId, submissionID) {
             // Get the row id where the cell exists
             //var rowId = this.parentNode.rowIndex;
 
@@ -127,6 +130,35 @@
             var rowSelected = table3.getElementsByTagName('tr')[rowId];
             rowSelected.style.backgroundColor = "yellow";
             rowSelected.className += " selected";
+
+            dataToReturn.value = submissionID;
+        }
+
+        function updateDataBase() {
+            var params = JFCustomWidget.getWidgetSettings();
+            console.log("REQ: ", fieldValues)
+            console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
+            jQuery.ajax({
+                url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
+                method: "GET",
+                dataType: "json",
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("RES: ", responseData);
+                    console.log("RES: ", responseData.content[0].answers["9"].answer);
+                    console.log("RES: ", responseData.content[1].answers["9"].answer);
+                    checkSuitability(responseData, fieldValues)
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                    return
+                }
+            })
+
         }
 
         $(function () {
