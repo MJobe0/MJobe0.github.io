@@ -20,6 +20,7 @@
     <script type="text/javascript">
         var currTaskId;
         var dataToReturn = { value: "", valid: false }
+        var oldTableHTML = document.getElementById("emptbl");
 
         function getFormValues() {
             //var currFormValues;
@@ -61,7 +62,7 @@
 
         function checkSuitability(housing, req) {
             var table1 = document.getElementById("emptbl");
-            table1.innerHTML = "";
+            table1.innerHTML = oldTableHTML;
             console.log("REQ V1: ", req[0]);
             console.log("REQ V2: ", req[1]);
             console.log("REQ V3: ", req[2]);
