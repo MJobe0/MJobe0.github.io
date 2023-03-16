@@ -45,7 +45,8 @@
                 // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
-                    console.log("RES: ", responseData.content[0].answers["9"].anwser);
+                    console.log("RES: ", responseData);
+                    console.log("RES: ", responseData.content[0].answers["9"].answer);
                     //checkSuitability(responseData, fieldValues)
                     return
                 },
@@ -59,10 +60,10 @@
         function checkSuitability(housing, req) {
             var currOptions = [];
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.content[i].answers["9"].anwser !== "Not Available") {
-                    if (housing.content[i].anwser[2] >= req.houseHoldSize) {
-                        if (housing.content[i].anwser[3] === req.pets) {
-                            if (housing.content[i].anwser[4] === req.access) {
+                if (housing.content[i].answers["9"].answer !== "Not Available") {
+                    if (housing.content[i].answers["8"].answer >= req[1]) {
+                        if (housing.content[i].answers["10"].answer === req[2]) {
+                            if (housing.content[i].answers["11"].answer === req[3]) {
                                 currOptions.push(housing.content[i]);
                             }
                         }
@@ -107,6 +108,10 @@
     <p>Please select a Housing Assigmnet from the following list</p>
 
     <h2>Housing Assigmnet Options</h2>
+
+    <table>
+
+    </table>
 
 </body>
 
