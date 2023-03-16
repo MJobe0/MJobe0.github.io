@@ -62,21 +62,28 @@
             var currOptions = [];
             for (let i = 0; i < housing.content.length; i++) {
                 if (housing.content[i].answers["9"].answer === "Available") {
-                    console.log("HERE 1")
-                    // if (housing.content[i].answers["8"].answer >= req[1]) {
-                        //console.log("HERE 2")
-                        if (housing.content[i].answers["10"].answer === req[2]) {
-                            console.log("HERE 3")
-                            if (housing.content[i].answers["11"].answer === req[3]) {
-                                console.log("HERE 4")
-                                var roomNum = housing.content[i].answers["3"].answer;
+                    console.log("HERE 1");
+
+                    var roomNum = housing.content[i].answers["3"].answer;
                                 var categ = housing.content[i].answers["6"].answer;
                                 var maximumOcc = housing.content[i].answers["7"].answer;
                                 var currentOcc = housing.content[i].answers["8"].answer;
 
                                 addRow(roomNum, categ, maximumOcc, currentOcc);
-                            }
-                        }
+                    // if (housing.content[i].answers["8"].answer >= req[1]) {
+                        //console.log("HERE 2")
+                        // if (housing.content[i].answers["10"].answer === req[2]) {
+                        //     console.log("HERE 3")
+                        //     if (housing.content[i].answers["11"].answer === req[3]) {
+                        //         console.log("HERE 4")
+                        //         var roomNum = housing.content[i].answers["3"].answer;
+                        //         var categ = housing.content[i].answers["6"].answer;
+                        //         var maximumOcc = housing.content[i].answers["7"].answer;
+                        //         var currentOcc = housing.content[i].answers["8"].answer;
+
+                        //         addRow(roomNum, categ, maximumOcc, currentOcc);
+                        //     }
+                        // }
                     //}
                 }
             }
