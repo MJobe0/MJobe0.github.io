@@ -87,7 +87,6 @@
                                 var subId = housing.content[i].id;
 
                                 addRow(roomNum, categ, maximumOcc, currentOcc, subId)
-                                // if () {
                             }
                         }
                     }
@@ -134,23 +133,19 @@
             dataToReturn.value = submissionID;
         }
 
-        function updateDataBase() {
+        function updateDataBase(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log("REQ: ", fieldValues)
-            console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
+            console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
-                url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
-                method: "GET",
+                url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`,
+                method: "POST",
                 dataType: "json",
-                // data: {
-                //     "apiKey": params["apiKey"]
-                // },
+                data: {
+                    "submission[9]": "Occupied",
+                },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
-                    console.log("RES: ", responseData);
-                    console.log("RES: ", responseData.content[0].answers["9"].answer);
-                    console.log("RES: ", responseData.content[1].answers["9"].answer);
-                    checkSuitability(responseData, fieldValues)
+                    console.log(responseData);
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
