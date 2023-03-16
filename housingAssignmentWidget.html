@@ -127,22 +127,21 @@
                 rowsNotSelected[row].classList.remove('selected');
             }
             var rowSelected = table3.getElementsByTagName('tr')[rowId];
-            rowSelected.style.backgroundColor = "yellow";
+            rowSelected.style.backgroundColor = "red";
             rowSelected.className += " selected";
 
             dataToReturn.value = submissionID;
         }
 
         function updateDataBase(submissionId) {
-            var currData = {
-                    "submission[9]": "Occupied"
-                }
             var params = JFCustomWidget.getWidgetSettings();
             console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}`,
                 method: "POST",
-                data: JSON.stringify(currData) ,
+                data: {
+                    "submission[9]": "Occupied"
+                },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
@@ -175,8 +174,9 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                updateDataBase(dataToReturn.value)
                 // send the data
-                // JFCustomWidget.sendSubmit({value: "", valid:true});
+                JFCustomWidget.sendSubmit(dataToReturn);
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
