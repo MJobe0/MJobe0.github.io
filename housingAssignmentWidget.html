@@ -64,8 +64,13 @@
             console.log("REQ V3: ", req[2]);
             console.log("REQ V4: ", req[3]);
 
+            var guestId = req[0].value;
+            var householdSize = req[1].value;
+            var hasPets = req[2].value;
+            var accReq = req[3].value;
+
             for (let i = 0; i < housing.content.length; i++) {
-                if (housing.content[i].answers["10"].answer === req[2]) {
+                if (housing.content[i].answers["9"].answer === "Available" && housing.content[i].answers["10"].answer === hasPets && housing.content[i].answers["11"].answer === accReq) {
                     console.log("HERE 1");
 
                     var roomNum = housing.content[i].answers["3"].answer;
@@ -73,7 +78,9 @@
                     var maximumOcc = housing.content[i].answers["7"].answer;
                     var currentOcc = housing.content[i].answers["8"].answer;
 
-                    addRow(roomNum, categ, maximumOcc, currentOcc);
+                    var subId = housing.content[i].id;
+
+                    addRow(roomNum, categ, maximumOcc, currentOcc, subId)
                     // if (housing.content[i].answers["8"].answer >= req[1]) {
                     //console.log("HERE 2")
                     // if (housing.content[i].answers["10"].answer === req[2]) {
