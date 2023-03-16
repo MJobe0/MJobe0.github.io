@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var currTaskId;
+
+        $(function () {
+            function HousingAssignment(containerId, formData, params) {
+
+                /**
+               * Exposed
+               */
+                this.init = init;
+                this.updateOriginalSubmission = updateOriginalSubmission;
+                this.markRefAsComplete = markRefAsComplete;
+
+                function init() {
+                    console.log(formData)
+                    console.log(params)
+
+                    JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
+                        console.log("originalSubmission = ", res.data[0].value)
+                        originalSubmissionId = res.data[0].value;
+                    });
+                }
+
+                function getFormValues() {
+                    JFCustomWidget.getFieldsValueById(["3", "4", "5", "6"], function (res) {
+                        console.log("VALUE 1: ", res.data[0].value);
+                        console.log("VALUE 2: ", res.data[1].value);
+                        console.log("VALUE 3: ", res.data[2].value);
+                        console.log("VALUE 5: ", res.data[3].value);
+                    });
+                }
+
+                function getHousingInfo(req) {
+                    console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
+                    jQuery.ajax({
+                        url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
+                        method: "GET",
+                        dataType: "json",
+                        // data: {
+                        //     "apiKey": params["apiKey"]
+                        // },
+                        // timeout: 10000,
+                        success: function (responseData, textStatus, jqXHR) {
+                            console.log(responseData);
+                            return
+                        },
+                        error: function (responseData, textStatus, jqXHR) {
+                            console.log(responseData);
+                            return
+                        }
+                    })
+                }
+
+                function checkSuitability(housing, req) {
+                    var currOptions = [];
+                    if (houseing.anwser[1] !== "Not Available") {
+                        if (houseing.anwser[2] >= req.houseHoldSize) {
+                            if (housing.anwser[3] === req.pets) {
+                                if (housing.anwser[4] === req.access) {
+                                    currOptions.push(housing[1])
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                // JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                // function fillConditionValue(data) {
+                //     JFCustomWidget.hideWidgetError();
+                // }
+
+                JFCustomWidget.subscribe('submit', function () {
+                    // send the data
+                    // JFCustomWidget.sendSubmit({value: "", valid:true});
+                });
+
+                JFCustomWidget.subscribe('ready', function (data) {
+                    var widget = new HousingAssignment('Test01', data, JFCustomWidget.getWidgetSettings());
+                    widget.init();
+                });
+            }
+        })
+
+    </script>
+
+    <br><button type="button" class="btn">Search For Room Availability</button><br>
+
+    <br><label for="result">Result:</label><br>
+    <input type="text" id="result" name="result"><br>
+</body>
+
+</html>
