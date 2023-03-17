@@ -20,7 +20,6 @@
     <script type="text/javascript">
         var currTaskId;
         var dataToReturn = { value: "", valid: false }
-        var oldTableHTML = document.getElementById("emptbl");
 
         function getFormValues() {
             //var currFormValues;
@@ -99,7 +98,7 @@
             }
         }
 
-        function addRow(roomNumber, category, maximumOccupancy, currentOccupancy, submissionID) {
+        function addRow(roomNumber, category, maximumOccupancy, currentOccupancy, submissId) {
             var table = document.getElementById("emptbl");
             // GET TOTAL NUMBER OF ROWS 
             var x = table.rows.length;
@@ -116,10 +115,10 @@
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" />`;
             currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" />`;
-            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" onclick="selectedHousing(${x}, ${submissionID})" />`;
+            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" onclick="selectedHousing(${x}, ${submissId})" />`;
         }
 
-        function selectedHousing(rowId, submissionID) {
+        function selectedHousing(rowId, currSubId) {
             // Get the row id where the cell exists
             //var rowId = this.parentNode.rowIndex;
 
@@ -135,7 +134,7 @@
             rowSelected.style.backgroundColor = "red";
             rowSelected.className += " selected";
 
-            dataToReturn.value = submissionID;
+            dataToReturn.value = currSubId;
         }
 
         function updateDataBase(submissionId) {
