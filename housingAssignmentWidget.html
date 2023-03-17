@@ -133,7 +133,7 @@
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" readOnly="true" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" readOnly="true" />`;
             currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" readOnly="true" />`;
-            selectCell.innerHTML = `<input type="button" id="${submissId}" value="Select" onclick="selectedHousing(${x}, ${hosHoldSize})" class="btn btn-secondary" />`;
+            selectCell.innerHTML = `<input type="button" id="${submissId}" value="Select" onclick="selectedHousing(${x}, ${hosHoldSize})" />`;
         }
 
         function selectedHousing(rowId, currHouseHoldSize) {
@@ -221,7 +221,7 @@
 
     <h2>Housing Assignment Options</h2>
     <div style="overflow-x:auto;">
-        <table id="emptbl" style="width: 100%; overflow: auto; table-layout: auto;" >
+        <table id="emptbl" style="width: 100%; overflow: auto;" >
             <tbody>
                 <tr>
                     <th>Room Number</th>
