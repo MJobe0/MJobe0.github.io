@@ -77,7 +77,7 @@
                     console.log("TYPEOF1: ", typeof housing.content[i].answers["8"].answer)
                     console.log("TYPEOF1: ", typeof householdSize)
 
-                    if (housing.content[i].answers["8"].answer >= householdSize || housing.content[i].answers["8"].answer == 0) {
+                    if (Number(housing.content[i].answers["8"].answer) >= Number(householdSize) || housing.content[i].answers["8"].answer == 0) {
                         if (housing.content[i].answers["10"].answer === hasPets || hasPets === "No") {
                             console.log("Is Pet Friendly");
                             if (housing.content[i].answers["11"].answer === accReq || accReq === "No") {
