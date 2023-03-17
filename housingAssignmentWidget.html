@@ -75,7 +75,7 @@
             for (let i = 0; i < housing.content.length; i++) {
                 if (housing.content[i].answers["9"].answer === "Available") {
                     console.log("Is Available");
-                    if (housing.content[i].answers["8"].answer < householdSize) {
+                    if (housing.content[i].answers["8"].answer >= householdSize) {
                         if (housing.content[i].answers["10"].answer === hasPets || hasPets === "No") {
                             console.log("Is Pet Friendly");
                             if (housing.content[i].answers["11"].answer === accReq || accReq === "No") {
