@@ -121,10 +121,10 @@
             var selectCell = row.insertCell(4);
 
             roomNumberCell.innerHTML = `<input type="text" name="roomNumber[]" value="${roomNumber}" id="roomNumber${x}" readOnly="true" />`;
-            categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" />`;
-            maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" />`;
-            currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" />`;
-            selectCell.innerHTML = `<input type="button" id="${submissId}" value="Select" onclick="selectedHousing(${x}, ${hosHoldSize})" />`;
+            categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" readOnly="true" />`;
+            maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" readOnly="true" />`;
+            currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" readOnly="true" />`;
+            selectCell.innerHTML = `<input type="button" id="${submissId}" value="Select" onclick="selectedHousing(${x}, ${hosHoldSize})" class="btn btn-secondary" />`;
         }
 
         function selectedHousing(rowId, currHouseHoldSize) {
@@ -204,13 +204,13 @@
 
     </script>
 
-    <br><button type="button" class="btn" onclick="getFormValues()">Search For Room Availability</button><br>
+    <br><button type="button" class="btn" onclick="getFormValues()" class="btn btn-success">Search For Room Availability</button><br>
 
     <p>Please select a Housing Assignment from the following list</p>
 
     <h2>Housing Assignment Options</h2>
     <div style="overflow-x:auto;">
-        <table id="emptbl" style="width: 100%; overflow: auto;">
+        <table id="emptbl" style="width: 100%; overflow: auto;" class="table table-striped">
             <tbody>
                 <tr>
                     <th>Room Number</th>
