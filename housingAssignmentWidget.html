@@ -61,10 +61,7 @@
         }
 
         function checkSuitability(housing, req) {
-            var table1 = document.getElementById("emptbl");
-            if (table1.rows.length > 1) {
-                table1.innerHTML = oldTableHTML;
-            }
+            $('#emptbl tr:not(:first)').remove();
             console.log("REQ V1: ", req[0]);
             console.log("REQ V2: ", req[1]);
             console.log("REQ V3: ", req[2]);
