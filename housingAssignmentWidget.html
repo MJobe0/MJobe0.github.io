@@ -178,6 +178,7 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                console.log("ID: ", dataToReturn.value)
                 updateDataBase(dataToReturn.value)
                 // send the data
                 JFCustomWidget.sendSubmit(dataToReturn);
