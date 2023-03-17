@@ -75,10 +75,13 @@
             for (let i = 0; i < housing.content.length; i++) {
                 if (housing.content[i].answers["9"].answer === "Available") {
                     console.log("Is Available");
-                    console.log("TYPEOF1: ", typeof housing.content[i].answers["8"].answer)
-                    console.log("TYPEOF1: ", typeof householdSize)
+                    console.log("TYPEOF1: ", typeof housing.content[i].answers["8"].answer);
+                    console.log("TYPEOF1: ", typeof householdSize);
+                    var currAva = Number(housing.content[i].answers["7"].answer) - Number(housing.content[i].answers["8"].answer)
+                    //maxOcc - currOcc = currAva
+                    //houseHoldSize <= currAva
 
-                    if (Number(housing.content[i].answers["8"].answer) >= Number(householdSize)) {
+                    if (currAva <= Number(householdSize)) {
                         if (housing.content[i].answers["10"].answer === hasPets || hasPets === "No") {
                             console.log("Is Pet Friendly");
                             if (housing.content[i].answers["11"].answer === accReq || accReq === "No") {
