@@ -105,6 +105,7 @@
             var id = "tbl" + x;
             var row = table.insertRow(x);
             row.id = id;
+            row.className = submissId
             var roomNumberCell = row.insertCell(0);
             var categoryCell = row.insertCell(1);
             var maximumOccupancyCell = row.insertCell(2);
@@ -134,9 +135,9 @@
             rowSelected.style.backgroundColor = "red";
             //rowSelected.className += " selected";
 
-            console.log("CLASSNAME: ", rowSelected.id)
+            console.log("CLASSNAME: ", rowSelected.className)
 
-            dataToReturn.value = rowSelected.id;
+            dataToReturn.value = rowSelected.className;
         }
 
         function updateDataBase(submissionId) {
