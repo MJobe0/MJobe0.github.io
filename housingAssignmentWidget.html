@@ -115,7 +115,7 @@
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" />`;
             currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" />`;
-            selectCell.innerHTML = `<input type="button" id="selectButton${x}" value="Select" onclick="selectedHousing(${x}, ${submissId})" />`;
+            selectCell.innerHTML = `<input type="button" id="selectButton${x}" className="${submissId}" value="Select" onclick="selectedHousing(${x}, ${submissId})" />`;
         }
 
         function selectedHousing(rowId, currSubId) {
@@ -128,13 +128,13 @@
             var rowsNotSelected = table3.getElementsByTagName('tr');
             for (var row = 0; row < rowsNotSelected.length; row++) {
                 rowsNotSelected[row].style.backgroundColor = "";
-                rowsNotSelected[row].classList.remove('selected');
+                //rowsNotSelected[row].classList.remove('selected');
             }
             var rowSelected = table3.getElementsByTagName('tr')[rowId];
             rowSelected.style.backgroundColor = "red";
-            rowSelected.className += " selected";
+            //rowSelected.className += " selected";
 
-            dataToReturn.value = currSubId;
+            dataToReturn.value = rowSelected.className;
         }
 
         function updateDataBase(submissionId) {
