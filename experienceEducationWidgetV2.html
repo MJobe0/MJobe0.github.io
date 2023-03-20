@@ -173,6 +173,10 @@
                 var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="width: 100%; overflow: auto; table-layout: fixed;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
     
                 _data.value = widgetValue;
+
+                console.log("PRE-WIDGETVALUE: ", widgetValue);
+                console.log("POST-WIDGETVALUE: ", JSON.stringify(widgetValue))
+
     
                 JFCustomWidget.setFieldsValueById([{
                     id: fieldToFill,
@@ -184,7 +188,10 @@
     
             function validateDates() {
                 const currRowLength = document.getElementsByName("Start Date")?.length
+
+                currFullWorkHistory = JFCustomWidget?.getWidgetSetting("fullWorkHistory");
     
+                console.log("currFullWorkHistory: " , currFullWorkHistory)
                 for (let i = 0; i < currRowLength; i++) {
                     let currEndDate = document.getElementsByName("End Date")[i]?.value; //check undefinded
                     let currStartDate = document.getElementsByName("Start Date")[i + 1]?.value; //check undefinded
@@ -336,28 +343,13 @@
     
                         if (formData.value !== undefined && formData.value !== "") {
                             try {
-                                if (params["fullWorkHistory"] === "Yes") {
-                                    JFCustomWidget.getFieldsValueById(["37"], function (storeValue) {
-                                        restoreTableData(JSON.parse(storeValue.data[0].value));
-                                    })
-                                }
-                                else {
-                                    restoreTableData(JSON.parse(formData.value))
-                                }
-                                
-                            } catch (errorInit1) {
+                                restoreTableData(JSON.parse(formData.value))
+                            } catch (error) {
                                 try {
-                                    if (params["fullWorkHistory"] === "Yes") {
-                                        JFCustomWidget.getFieldsValueById(["37"], function (storeValue) {
-                                            var tempValue = storeValue.data[0].value.replace(/&quot;/g, '"');
-                                            console.log("DECODE: ", tempValue);
-                                            restoreTableData(JSON.parse(tempValue));
-                                        })
-                                    }
-                                    else {
-                                        restoreTableData(JSON.parse(formData.value))
-                                    }
-                                } catch (errorInit2) {
+                                    var tempValue = formData.value.replace(/&quot;/g, '\"');
+                                    console.log("DECODE: ", tempValue);
+                                    restoreTableData(tempValue);
+                                } catch (error) {
                                     
                                 }
                                 
