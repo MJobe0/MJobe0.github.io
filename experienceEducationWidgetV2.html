@@ -155,7 +155,7 @@
                     $(this).find('input, select, textarea').each(function () {
                         obj += `<td  >${$(this).val() ?? ""}</td>`
                     });
-                    return `<tr>${obj ?? ""}</tr>`;
+                    return `<tr page-break-inside:avoid; page-break-after:auto>${obj ?? ""}</tr>`;
                 }).get();
     
                 var newTblHeader = `<tr id="tblHeading" style="border-collapse:collapse; border: 1px solid black; width:100%; text-align:left;">
@@ -170,7 +170,7 @@
                     <th >Comments</th>
                 </tr>`
     
-                var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="border-collapse:collapse; border: 1px solid black; width:100%; text-align:left;"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
+                var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table style="border-collapse:collapse; border: 1px solid black; width:100%; text-align:left; page-break-inside:auto"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
     
                 _data.value = widgetValue;
 
