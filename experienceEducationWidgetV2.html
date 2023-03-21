@@ -155,7 +155,7 @@
                     $(this).find('input, select, textarea').each(function () {
                         obj += `<td  >${$(this).val() ?? ""}</td>`
                     });
-                    return `<tr style="page-break-inside:avoid; page-break-after:auto">${obj ?? ""}</tr>`;
+                    return `<tr style="border-collapse:collapse; border: 1px solid black; width:100%; text-align:left; page-break-inside:avoid; page-break-after:auto">${obj ?? ""}</tr>`;
                 }).get();
     
                 var newTblHeader = `<thead style="display:table-header-group"><tr style="page-break-inside:avoid; page-break-after:auto">
