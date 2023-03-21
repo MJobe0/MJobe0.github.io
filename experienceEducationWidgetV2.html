@@ -158,7 +158,7 @@
                     return `<tr>${obj ?? ""}</tr>`;
                 }).get();
     
-                var newTblHeader = `<tr id="tblHeading">
+                var newTblHeader = `<thead><tr id="tblHeading">
                     <th >Type of activity</th>
                     <th >Company</th>
                     <th >Institution</th>
@@ -168,7 +168,7 @@
                     <th >Grade/Band</th>
                     <th >Results</th>
                     <th >Comments</th>
-                </tr>`
+                </tr></thead>`
     
                 var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`<table class="table"><tbody>${newTblHeader}${newTblData}</tbody></table>`))));
     
