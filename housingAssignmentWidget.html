@@ -133,7 +133,7 @@
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" readOnly="true" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" readOnly="true" />`;
             currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" readOnly="true" />`;
-            selectCell.innerHTML = `<input type="button" id="${submissId}" value="Select" onclick="selectedHousing(${x}, ${hosHoldSize})" />`;
+            selectCell.innerHTML = `<button type="button" id="${submissId}" value="" onclick="selectedHousing(${x}, ${hosHoldSize})">Select</>`;
         }
 
         function selectedHousing(rowId, currHouseHoldSize) {
