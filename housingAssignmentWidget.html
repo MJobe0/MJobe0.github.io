@@ -132,7 +132,7 @@
             roomNumberCell.innerHTML = `<input type="text" name="roomNumber[]" value="${roomNumber}" id="roomNumber${x}" readOnly="true" />`;
             categoryCell.innerHTML = `<input type="text" name="category[]" value="${category}" id="category${x}" readOnly="true" />`;
             maximumOccupancyCell.innerHTML = `<input type="text" name="maximumOccupancy[]" value="${maximumOccupancy}" id="maximumOccupancy${x}" readOnly="true" />`;
-            currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" readOnly="true" />`;
+            currentOccupancyCell.innerHTML = `<input type="text" name="currentOccupancy[]" value="${currentOccupancy}" id="currentOccupancy${x}" readOnly="true" size="10"/>`;
             selectCell.innerHTML = `<button type="button" id="${submissId}" value="" onclick="selectedHousing(${x}, ${hosHoldSize})">Select</>`;
         }
 
