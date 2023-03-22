@@ -27,20 +27,23 @@
 
         /* make the table a 100% wide by default */
         table {
-            width: 100%;
+            width: 70%;
+            table-layout: fixed;
         }
 
         /* if the browser window is at least 800px-s wide: */
         @media screen and (min-width: 800px) {
             table {
                 width: 90%;
+                table-layout: fixed;
             }
         }
 
         /* if the browser window is at least 1000px-s wide: */
         @media screen and (min-width: 1000px) {
             table {
-                width: 80%;
+                width: 70%;
+                table-layout: fixed;
             }
         }
     </style>
@@ -237,7 +240,7 @@
 
     <h2>Housing Assignment Options</h2>
     <div style="overflow-x:auto;">
-        <table id="emptbl" class="emptbl" style="width: 500px; overflow: auto; table-layout: fixed;">
+        <table id="emptbl" class="emptbl" style="overflow: auto;">
             <tbody>
                 <tr>
                     <th>Room Number</th>
