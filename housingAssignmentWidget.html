@@ -23,11 +23,13 @@
 </head>
 
 <body>
-    <!-- <style>
-        table td {
-            width: 200px;
+    <style>
+        @media (max-width: 1250px) {
+            .emptbl {
+                width: 800px;
+            }
         }
-    </style> -->
+    </style>
     <script type="text/javascript">
         var currTaskId;
         var dataToReturn = { value: "", valid: false, sizeOfHouseHold: "" }
@@ -221,7 +223,7 @@
 
     <h2>Housing Assignment Options</h2>
     <div style="overflow-x:auto;">
-        <table id="emptbl" style="width: 500px; overflow: auto; table-layout: fixed;" >
+        <table id="emptbl" class="emptbl" style="width: 500px; overflow: auto; table-layout: fixed;">
             <tbody>
                 <tr>
                     <th>Room Number</th>
