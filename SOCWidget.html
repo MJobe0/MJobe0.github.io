@@ -57,6 +57,19 @@
             document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
             document.getElementById("val2").innerHTML = "SubTotal1 = $" + subTotal2.toFixed(2);
             document.getElementById("val3").innerHTML = "SubTotal = $" + subTotal3.toFixed(2);
+            JFCustomWidget.setFieldsValueById([{
+                id: "4",
+                value: subTotal
+            }]);
+            JFCustomWidget.setFieldsValueById([{
+                id: "5",
+                value: subTotal2
+            }]);
+            JFCustomWidget.setFieldsValueById([{
+                id: "6",
+                value: subTotal3
+            }]);
+
         }
 
         function onClickRemove(deleteButton) {
