@@ -81,7 +81,13 @@
         function addRow() {
             $("#myTable").append(`<tr><td><input type="text" value=" " /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
+            resizeFrame();
         }
+
+        function resizeFrame() {
+                const currHeight = $("form").height();
+                JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+            }
 
         $(function () {
             function SOCWidget(containerId, formData) {
