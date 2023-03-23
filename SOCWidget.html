@@ -76,6 +76,7 @@
             let row = deleteButton.parentElement.parentElement;
             row.parentNode.removeChild(row);
             updateSubTotal(); // Call after delete
+            resizeFrame();
         }
 
         function addRow() {
@@ -86,7 +87,7 @@
 
         function resizeFrame() {
                 const currHeight = $("#myTable").height();
-                JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 20 })
+                JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 25 })
             }
 
         $(function () {
