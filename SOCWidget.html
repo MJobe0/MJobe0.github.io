@@ -54,20 +54,20 @@
             let subTotal3 = Array.from(table.rows).slice(1).reduce((total, row) => {
                 return total + parseFloat(row.cells[3].getElementsByTagName('input')[0].value);
             }, 0);
-            document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
-            document.getElementById("val2").innerHTML = "SubTotal1 = $" + subTotal2.toFixed(2);
-            document.getElementById("val3").innerHTML = "SubTotal = $" + subTotal3.toFixed(2);
+            // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
+            // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
+            // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
             JFCustomWidget.setFieldsValueById([{
                 id: "4",
-                value: subTotal
+                value: "$" + subTotal
             }]);
             JFCustomWidget.setFieldsValueById([{
                 id: "5",
-                value: subTotal2
+                value: "$" + subTotal2
             }]);
             JFCustomWidget.setFieldsValueById([{
                 id: "6",
-                value: subTotal3
+                value: "$" + subTotal3
             }]);
 
         }
@@ -79,7 +79,7 @@
         }
 
         function addRow() {
-            $("#myTable").append(`<tr><td><input type="text" value="Other" /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr><td><input type="text" value=" " /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><input type="number" value="0" /></td><td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
         }
 
@@ -108,7 +108,7 @@
         });
 
     </script>
-    <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
+    <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 70%; table-layout: fixed;">
         <tr>
             <th>Expense Description</th>
             <th>Projected Expenses</th>
@@ -209,13 +209,7 @@
             <td>Advertising/PR</td>
             <td><input type="number" value="0" /></td>
             <td><input type="number" value="0" /></td>
-            <td><input type="number" value="0" /></td>
-        </tr>
-        <tr>
-            <td>Other</td>
-            <td><input type="number" value="0" /></td>
-            <td><input type="number" value="0" /></td>
-            <td><input type="number" value="0" /></td>
+            <td><input type="number" value="" /></td>
         </tr>
     </table>
     <button type="button" onclick="addRow()">Add Row</button>
