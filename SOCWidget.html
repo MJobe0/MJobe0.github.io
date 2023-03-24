@@ -57,6 +57,10 @@
             // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
             // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
             // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
+            subTotal = subTotal.toFixed(2);
+            subTotal2 = subTotal2.toFixed(2);
+            subTotal3 = subTotal3.toFixed(2);
+
             JFCustomWidget.setFieldsValueById([{
                 id: "29",
                 value: "$" + subTotal
@@ -86,16 +90,16 @@
         }
 
         function resizeFrame() {
-                const currHeight = $("#myTable").height();
-                JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 30 })
-            }
+            const currHeight = $("#myTable").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 35 })
+        }
 
         $(function () {
             function SOCWidget(containerId, formData) {
 
-                console.log("FORM DATA: ",formData);
+                console.log("FORM DATA: ", formData);
 
-                console.log("WIDGETlIB: ",JFCustomWidget)
+                console.log("WIDGETlIB: ", JFCustomWidget)
 
                 /**
                * Exposed
