@@ -38,6 +38,9 @@
     <script type="text/javascript">
         //Global
         function updateSubTotal() {
+
+            var widgetSettings1 = JFCustomWidget.getWidgetSettings();
+
             var table = document.getElementById("myTable");
             console.log("TABLE ROWS: ", table.rows);
             console.log("TABLE ROWS2: ", Array.from(table.rows).slice(1));
@@ -62,15 +65,15 @@
             subTotal3 = subTotal3.toFixed(2);
 
             JFCustomWidget.setFieldsValueById([{
-                id: "29",
+                id: widgetSettings1["Total Final Expenses Field ID"],
                 value: "$" + subTotal
             }]);
             JFCustomWidget.setFieldsValueById([{
-                id: "30",
+                id: widgetSettings1["Total Mid-year Expenses Field ID"],
                 value: "$" + subTotal2
             }]);
             JFCustomWidget.setFieldsValueById([{
-                id: "31",
+                id: widgetSettings1["Total Projected Expenses Field ID"],
                 value: "$" + subTotal3
             }]);
 
@@ -142,6 +145,8 @@
                     console.log("STAGE 2 COLS: ", newCols)
 
                     document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
+
+                    resizeFrame();
 
                 }
             }
