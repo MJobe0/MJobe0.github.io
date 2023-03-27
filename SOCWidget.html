@@ -38,6 +38,9 @@
     <script type="text/javascript">
         //Global
         function updateSubTotal() {
+
+            var widgetSettings1 = JFCustomWidget.getWidgetSettings();
+
             var table = document.getElementById("myTable");
             console.log("TABLE ROWS: ", table.rows);
             console.log("TABLE ROWS2: ", Array.from(table.rows).slice(1));
@@ -62,15 +65,15 @@
             subTotal3 = subTotal3.toFixed(2);
 
             JFCustomWidget.setFieldsValueById([{
-                id: "29",
+                id: widgetSettings1["Total Projected Expenses Field ID"],
                 value: "$" + subTotal
             }]);
             JFCustomWidget.setFieldsValueById([{
-                id: "30",
+                id: widgetSettings1["Total Mid-year Expenses Field ID"],
                 value: "$" + subTotal2
             }]);
             JFCustomWidget.setFieldsValueById([{
-                id: "31",
+                id: widgetSettings1["Total Final Expenses Field ID"],
                 value: "$" + subTotal3
             }]);
 
@@ -107,7 +110,43 @@
                 this.init = init;
 
                 function init() {
-                    console.log(formData)
+                    console.log(formData);
+
+                    console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
+
+                    buildHTML();
+
+                }
+
+                function buildHTML() {
+                    var newCols = "";
+                    var newRows = "";
+                    var widgetSettings = JFCustomWidget.getWidgetSettings();
+
+                    widgetSettings["Columns"]
+                    widgetSettings["Rows"]
+
+                    const getRowsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
+                    const getColsFromSetting = widgetSettings["Columns"].split(/\r?\n/);
+
+                    console.log("STAGE 1 ROWS: ", getRowsFromSetting);
+                    console.log("STAGE 1 COLS: ", getColsFromSetting)
+
+
+                    getColsFromSetting.forEach(function (tHeaders) {
+                        newCols += `<th>${tHeaders}</th>`;
+                    });
+
+                    getRowsFromSetting.forEach(function (tRows) {
+                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
+                    });
+
+                    console.log("STAGE 2 ROWS: ", newRows);
+                    console.log("STAGE 2 COLS: ", newCols)
+
+                    document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
+
+                    resizeFrame();
 
                 }
             }
@@ -124,108 +163,6 @@
 
     </script>
     <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
-        <tr>
-            <th>Expense Description</th>
-            <th>Projected Expenses</th>
-            <th>Mid-year Expenses</th>
-            <th>Final Expenses</th>
-        </tr>
-        <tr>
-            <td>Accommodation</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Travel</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Honourariums (facilitators, guest speakers, Clinical Directors, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Food & Beverage</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Facility Rentals</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Sport Equipment</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Registration Fees</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Transportation (buses, mileage, taxis, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Medical</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Officials</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Meeting/course materials</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Event Rentals (tents, tables, chairs, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Printing/copying</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Shipping/postage</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Course fees</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
-        <tr>
-            <td>Advertising/PR</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-        </tr>
     </table>
     <button type="button" onclick="addRow()">Add Row</button>
     <span id="val"></span>
