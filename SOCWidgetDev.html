@@ -107,7 +107,29 @@
                 this.init = init;
 
                 function init() {
-                    console.log(formData)
+                    console.log(formData);
+
+                    console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings())
+
+                }
+
+                function buildHTML() {
+                    var newCols;
+                    var newRows;
+                    var widgetSettings = JFCustomWidget.getWidgetSettings();
+
+                    const getRowsFromSetting = str => str.split(/\r?\n/);
+                    const getColsFromSetting = str => str.split(/\r?\n/);
+
+                    genTableHeaders.forEach(function (tHeaders) {
+                        newCols += `<th>${tHeaders}</th>`;
+                    });
+
+                    genTableRows.forEach(function (tRows) {
+                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
+                    });
+
+                    document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
 
                 }
             }
@@ -132,99 +154,99 @@
         </tr>
         <tr>
             <td>Accommodation</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Travel</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Honourariums (facilitators, guest speakers, Clinical Directors, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Food & Beverage</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Facility Rentals</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Sport Equipment</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Registration Fees</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Transportation (buses, mileage, taxis, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Medical</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Officials</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Meeting/course materials</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Event Rentals (tents, tables, chairs, etc.)</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Printing/copying</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Shipping/postage</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Course fees</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
         <tr>
             <td>Advertising/PR</td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
-            <td><input type="number" value="0" min="0"/></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
+            <td><input type="number" value="0" min="0" /></td>
         </tr>
     </table>
     <button type="button" onclick="addRow()">Add Row</button>
