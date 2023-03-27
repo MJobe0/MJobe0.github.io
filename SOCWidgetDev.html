@@ -108,14 +108,22 @@
                * Exposed
                */
                 this.init = init;
+                this.getData = getData;
 
                 function init() {
                     console.log(formData);
 
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
-                    buildHTML();
+                    if (formData.value !== undefined && formData.value !== "") {
 
+                        document.getElementById("myTable").innerHTML = formData.value;
+
+                    }
+                    else {
+
+                        buildHTML();
+                    }
                 }
 
                 function buildHTML() {
@@ -147,11 +155,20 @@
                     document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
 
                     resizeFrame();
+                }
 
+                function getData() {
+                    var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`))));
+                    return widgetValue
                 }
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                var currValue = widget.getData();
+
+                console.log("CURRENT VALUE: ", currValue)
+
+                JFCustomWidget.sendSubmit({ valid: false, value: currValue });
 
             });
 
