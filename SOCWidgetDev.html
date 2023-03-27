@@ -109,7 +109,9 @@
                 function init() {
                     console.log(formData);
 
-                    console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings())
+                    console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
+
+                    buildHTML();
 
                 }
 
@@ -118,8 +120,15 @@
                     var newRows;
                     var widgetSettings = JFCustomWidget.getWidgetSettings();
 
-                    const getRowsFromSetting = str => str.split(/\r?\n/);
-                    const getColsFromSetting = str => str.split(/\r?\n/);
+                    widgetSettings["Columns"]
+                    widgetSettings["Rows"]
+
+                    const getRowsFromSetting = widgetSettings["Columns"].split(/\r?\n/);
+                    const getColsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
+
+                    console.log("STAGE 1 ROWS: ", getRowsFromSetting);
+                    console.log("STAGE 1 COLS: ", getRowsFromSetting)
+
 
                     genTableHeaders.forEach(function (tHeaders) {
                         newCols += `<th>${tHeaders}</th>`;
@@ -129,7 +138,10 @@
                         newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
                     });
 
-                    document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
+                    console.log("STAGE 2 ROWS: ", newRows);
+                    console.log("STAGE 2 COLS: ", newCols)
+
+                    // document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
 
                 }
             }
