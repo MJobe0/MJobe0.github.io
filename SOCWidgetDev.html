@@ -127,14 +127,14 @@
                     const getColsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
 
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
-                    console.log("STAGE 1 COLS: ", getRowsFromSetting)
+                    console.log("STAGE 1 COLS: ", getColsFromSetting)
 
 
-                    genTableHeaders.forEach(function (tHeaders) {
+                    getColsFromSetting.forEach(function (tHeaders) {
                         newCols += `<th>${tHeaders}</th>`;
                     });
 
-                    genTableRows.forEach(function (tRows) {
+                    getRowsFromSetting.forEach(function (tRows) {
                         newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
                     });
 
