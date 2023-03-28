@@ -86,15 +86,44 @@
             resizeFrame();
         }
 
+        function resizeFrame() {
+            const currHeight = $("#myTable").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 35 })
+        }
+
+        function addTableData(colSize) {
+            var wSettings = JFCustomWidget.getWidgetSettings();
+
+            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
+
+            var str = "";
+            for (var i = 1; i < colSize; i++) {
+                console.log("TYPE1: ", getTypeFromSetting[i])
+                if (!getTypeFromSetting[i].match(':')) {
+                    str += '<td><input type="number" value="0" min="0" />'
+                }
+                else {
+                    str += '<td><input type="text" value="" />'
+                }
+            }
+            return str
+
+        }
+
         function addRow() {
-            $("#myTable").append(`<tr><td><input type="text" value=" " /></td><td><input type="number" value="0" min="0"/></td><td><input type="number" value="0" min="0"/></td><td><input type="number" value="0" min="0"/></td><td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+
+            var widgetSett = JFCustomWidget.getWidgetSettings();
+
+            const colLen = widgetSett["Columns"].split(/\r?\n/).length;
+
+            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
 
-        function resizeFrame() {
-            const currHeight = $("#myTable").height();
-            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 35 })
+        function getData() {
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
+            return widgetValue
         }
 
         $(function () {
@@ -114,8 +143,12 @@
 
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
-                    buildHTML();
-
+                    if (formData.value !== undefined && formData.value !== "") {
+                        document.getElementById("myTable").innerHTML = atob(decodeURIComponent(formData.value));
+                    }
+                    else {
+                        buildHTML();
+                    }
                 }
 
                 function buildHTML() {
@@ -132,13 +165,23 @@
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
 
+                    var numOfCol = getColsFromSetting.length;
+
+                    console.log("COL LENGTH: ", numOfCol)
+
 
                     getColsFromSetting.forEach(function (tHeaders) {
-                        newCols += `<th>${tHeaders}</th>`;
+                        if (!tHeaders.match(':')) {
+                            newCols += `<th>${tHeaders}</th>`;
+                        } else {
+                            tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
+                            newCols += `<th>${tHeaders}</th>`;
+                        }
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
-                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
+                        //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
+                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
@@ -147,11 +190,15 @@
                     document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
 
                     resizeFrame();
-
                 }
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                var currValue = getData();
+
+                console.log("CURRENT VALUE: ", currValue)
+
+                JFCustomWidget.sendSubmit({ valid: false, value: currValue });
 
             });
 
@@ -168,7 +215,6 @@
     <span id="val"></span>
     <span id="val2"></span>
     <span id="val3"></span>
-
 </body>
 
 </html>
