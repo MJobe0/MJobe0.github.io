@@ -94,7 +94,7 @@
         function addTableData(colSize) {
             var wSettings = JFCustomWidget.getWidgetSettings();
 
-            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/) - 1;
+            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/) + 1;
 
             var str = "";
             for (var i = 0; i < colSize; i++) {
