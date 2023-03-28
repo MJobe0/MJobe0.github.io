@@ -95,7 +95,7 @@
             JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 35 })
         }
 
-        function addTableData(colSize) {
+        function addTableData(colSize, inputDisabled) {
             var wSettings = JFCustomWidget.getWidgetSettings();
 
             const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
@@ -104,10 +104,10 @@
             for (var i = 1; i < colSize; i++) {
                 console.log("TYPE1: ", getTypeFromSetting[i])
                 if (!getTypeFromSetting[i].match(':')) {
-                    str += '<td><input type="number" value="0" min="0" />'
+                    str += `<td><input type="number" value="0" min="0" disabled="${inputDisabled}"/>`
                 }
                 else {
-                    str += '<td><input type="text" value="" />'
+                    str += `<td><input type="text" value="" disabled="${inputDisabled}"/>`
                 }
             }
             return str
@@ -120,7 +120,7 @@
 
             const colLen = widgetSett["Columns"].split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen, false)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
@@ -185,10 +185,10 @@
 
                     getRowsFromSetting.forEach(function (tRows) {
                         if (!tRows.match(':')) {
-                            newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
+                            newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
                             newRows = newRows.substring(0, newRows.indexOf(':'));
-                            newRows += `<tr class="disabled"><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
+                            newRows += `<tr class="disabled"><td>${newRows}</td> ${addTableData(numOfCol, true)} </tr>`
                         }
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
                     });
