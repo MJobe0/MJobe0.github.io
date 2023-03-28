@@ -92,8 +92,19 @@
         }
 
         function addTableData(colSize) {
+            var wSettings = JFCustomWidget.getWidgetSettings();
+
+            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
+
             var str = "";
-            for (var i = 0; i < colSize; i++) { str += '<td><input type="number" value="0" min="0" />' }
+            for (var i = 0; i < colSize; i++) {
+                if (!getTypeFromSetting[i].match(':')) {
+                    str += '<td><input type="number" value="0" min="0" />'
+                }
+                else {
+                    str += '<td><input type="text" value="" />'
+                }
+            }
             return str
 
         }
@@ -159,14 +170,17 @@
 
 
                     getColsFromSetting.forEach(function (tHeaders) {
-                        newCols += `<th>${tHeaders}</th>`;
+                        if (!getTypeFromSetting[i].match(':')) {
+                            newCols += `<th>${tHeaders}</th>`;
+                        } else {
+                            tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
+                            newCols += `<th>${tHeaders}</th>`;
+                        }
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
-
                         newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
-
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
