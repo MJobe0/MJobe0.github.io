@@ -188,7 +188,7 @@
                             newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
                             tRows = tRows.substring(0, tRows.indexOf(':'));
-                            newRows += `<tr class="disabled"><td>${tRows}</td> ${addTableData(numOfCol, true)} </tr>`
+                            newRows += `<tr class="disabled"><td>${tRows}</td></tr>`
                         }
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
                     });
