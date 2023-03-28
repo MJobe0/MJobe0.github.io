@@ -133,7 +133,7 @@
 
                     if (formData.value !== undefined && formData.value !== "") {
 
-                        document.getElementById("myTable").innerHTML = decodeURIComponent(atob(formData.value));
+                        document.getElementById("myTable").innerHTML = atob(decodeURIComponent(formData.value));
 
                     }
                     else {
