@@ -140,7 +140,7 @@
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
 
-                    var numOfCol = newCols.length;
+                    var numOfCol = getColsFromSetting.length;
 
                     console.log("COL LENGTH: ", numOfCol)
 
@@ -150,8 +150,10 @@
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
-                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> </td><td><input type="number" value="0" min="0" /></td></tr>`;
-                        for (var i = 0; i < numOfCol; i++) { newRows += '<td><input type="number" value="0" min="0" />'; }
+                        //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
+
+                        newRows += `<tr><td>${tRows}</td>` + (function () { for (var i = 0; i < numOfCol; i++) { return '<td><input type="number" value="0" min="0" />'; } }) + `</tr>`
+
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
