@@ -34,6 +34,10 @@
             display: block;
             margin-top: 0.5em;
         }
+
+        tr.disabled {
+            background-color: grey;
+        }
     </style>
     <script type="text/javascript">
         //Global
@@ -180,8 +184,13 @@
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
+                        if (!tRows.match(':')) {
+                            newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
+                        } else {
+                            newRows = newRows.substring(0, newRows.indexOf(':'));
+                            newRows += `<tr class="disabled"><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
+                        }
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
-                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
