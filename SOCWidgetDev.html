@@ -94,7 +94,9 @@
         function addTableData(colSize) {
             var wSettings = JFCustomWidget.getWidgetSettings();
 
-            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
+            var getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
+
+            getTypeFromSetting = getTypeFromSetting.shift()
 
             var str = "";
             for (var i = 0; i < colSize; i++) {
@@ -116,7 +118,7 @@
 
             const colLen = widgetSett["Columns"].split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen - 1)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
@@ -159,8 +161,10 @@
                     widgetSettings["Columns"]
                     widgetSettings["Rows"]
 
-                    const getRowsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
-                    const getColsFromSetting = widgetSettings["Columns"].split(/\r?\n/);
+                    var getRowsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
+                    var getColsFromSetting = widgetSettings["Columns"].split(/\r?\n/);
+
+                    getColsFromSetting = getColsFromSetting.shift();
 
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
@@ -181,7 +185,7 @@
 
                     getRowsFromSetting.forEach(function (tRows) {
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
-                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol - 1)} </tr>`
+                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
