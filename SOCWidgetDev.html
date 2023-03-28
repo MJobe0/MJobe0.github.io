@@ -116,7 +116,7 @@
 
             const colLen = widgetSett["Columns"].split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen - 1)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
@@ -181,7 +181,7 @@
 
                     getRowsFromSetting.forEach(function (tRows) {
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
-                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
+                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol - 1)} </tr>`
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
