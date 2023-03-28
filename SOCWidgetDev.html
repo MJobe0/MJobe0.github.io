@@ -87,7 +87,10 @@
         }
 
         function addRow() {
-            const colLen = widgetSettings["Columns"].split(/\r?\n/).length;
+
+            var widgetSett = JFCustomWidget.getWidgetSettings();
+
+            const colLen = widgetSett["Columns"].split(/\r?\n/).length;
 
             $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
