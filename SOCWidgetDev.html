@@ -132,12 +132,9 @@
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
                     if (formData.value !== undefined && formData.value !== "") {
-
                         document.getElementById("myTable").innerHTML = atob(decodeURIComponent(formData.value));
-
                     }
                     else {
-
                         buildHTML();
                     }
                 }
