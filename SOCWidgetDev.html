@@ -93,7 +93,7 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("#myTable").height();
+            const currHeight = $("#container[]").height();
             JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 35 })
         }
 
@@ -117,7 +117,7 @@
 
                     if (formData.value !== undefined && formData.value !== "") {
 
-                        document.getElementById("myTable").innerHTML = formData.value;
+                        document.getElementById("myTable").innerHTML = decodeURIComponent(escape(atob(formData.value)));
 
                     }
                     else {
@@ -140,13 +140,16 @@
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
 
+                    var numOfCol = newCols.length;
+
 
                     getColsFromSetting.forEach(function (tHeaders) {
                         newCols += `<th>${tHeaders}</th>`;
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
-                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> <td><input type="number" value="0" min="0" /></td><td><input type="number" value="0" min="0" /></td></tr>`;
+                        newRows += `<tr><td>${tRows}</td><td><input type="number" value="0" min="0" /></td> </td><td><input type="number" value="0" min="0" /></td></tr>`;
+                        for (var i = 0; i < numOfCol; i++) { newRows += '<td><input type="number" value="0" min="0" />'; }
                     });
 
                     console.log("STAGE 2 ROWS: ", newRows);
@@ -179,12 +182,14 @@
         });
 
     </script>
-    <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
-    </table>
-    <button type="button" onclick="addRow()">Add Row</button>
-    <span id="val"></span>
-    <span id="val2"></span>
-    <span id="val3"></span>
+    <div id="container[]" style="overflow-x:auto;">
+        <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
+        </table>
+        <button type="button" onclick="addRow()">Add Row</button>
+        <span id="val"></span>
+        <span id="val2"></span>
+        <span id="val3"></span>
+    </div>
 
 </body>
 
