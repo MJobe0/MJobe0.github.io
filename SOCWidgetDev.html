@@ -110,7 +110,7 @@
         }
 
         function getData() {
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`))));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
             return widgetValue
         }
 
@@ -133,7 +133,7 @@
 
                     if (formData.value !== undefined && formData.value !== "") {
 
-                        document.getElementById("myTable").innerHTML = decodeURIComponent(escape(atob(formData.value)));
+                        document.getElementById("myTable").innerHTML = decodeURIComponent(atob(formData.value));
 
                     }
                     else {
