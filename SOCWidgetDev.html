@@ -114,7 +114,7 @@
 
             var widgetSett = JFCustomWidget.getWidgetSettings();
 
-            const colLen = widgetSett["Columns"].split(/\r?\n/).length - 1;
+            const colLen = widgetSett["Columns"].split(/\r?\n/).length;
 
             $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
@@ -165,7 +165,7 @@
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
 
-                    var numOfCol = getColsFromSetting.length - 1;
+                    var numOfCol = getColsFromSetting.length;
 
                     console.log("COL LENGTH: ", numOfCol)
 
