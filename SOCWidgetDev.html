@@ -152,9 +152,16 @@
                     getRowsFromSetting.forEach(function (tRows) {
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
 
-                        newRows += `<tr><td>${tRows}</td>` + (function () { for (var i = 0; i < numOfCol; i++) { return '<td><input type="number" value="0" min="0" />' } }) + `</tr>`
+                        newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol)} </tr>`
 
                     });
+
+                    function addTableData(colSize) {
+                        var str = "";
+                        for (var i = 0; i < colSize; i++) { str += '<td><input type="number" value="0" min="0" />' }
+                        return str
+
+                    }
 
                     console.log("STAGE 2 ROWS: ", newRows);
                     console.log("STAGE 2 COLS: ", newCols)
