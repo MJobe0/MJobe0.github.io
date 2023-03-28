@@ -42,44 +42,46 @@
     <script type="text/javascript">
         //Global
         function updateSubTotal() {
-
             var widgetSettings1 = JFCustomWidget.getWidgetSettings();
 
-            var table = document.getElementById("myTable");
-            console.log("TABLE ROWS: ", table.rows);
-            console.log("TABLE ROWS2: ", Array.from(table.rows).slice(1));
-            let subTotal = Array.from(table.rows).slice(1).reduce((total, row) => {
-                console.log("TABLE ROWS3: ", row);
-                console.log("TABLE ROWS4: ", row.cells);
-                console.log("TABLE ROWS5: ", row.cells[1].getElementsByTagName('input')[0].value);
+            if (widgetSettings1["Total Projected Expenses Field ID"] != "") {
 
-                return total + parseFloat(row.cells[1].getElementsByTagName('input')[0].value);
-            }, 0);
-            let subTotal2 = Array.from(table.rows).slice(1).reduce((total, row) => {
-                return total + parseFloat(row.cells[2].getElementsByTagName('input')[0].value);
-            }, 0);
-            let subTotal3 = Array.from(table.rows).slice(1).reduce((total, row) => {
-                return total + parseFloat(row.cells[3].getElementsByTagName('input')[0].value);
-            }, 0);
-            // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
-            // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
-            // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
-            subTotal = subTotal.toFixed(2);
-            subTotal2 = subTotal2.toFixed(2);
-            subTotal3 = subTotal3.toFixed(2);
+                var table = document.getElementById("myTable");
+                console.log("TABLE ROWS: ", table?.rows);
+                console.log("TABLE ROWS2: ", Array.from(table?.rows)?.slice(1));
+                let subTotal = Array.from(table?.rows).slice(1)?.reduce((total, row) => {
+                    console.log("TABLE ROWS3: ", row);
+                    console.log("TABLE ROWS4: ", row?.cells);
+                    console.log("TABLE ROWS5: ", row?.cells[1]?.getElementsByTagName('input')[0]?.value);
 
-            JFCustomWidget.setFieldsValueById([{
-                id: widgetSettings1["Total Projected Expenses Field ID"],
-                value: "$" + subTotal
-            }]);
-            JFCustomWidget.setFieldsValueById([{
-                id: widgetSettings1["Total Mid-year Expenses Field ID"],
-                value: "$" + subTotal2
-            }]);
-            JFCustomWidget.setFieldsValueById([{
-                id: widgetSettings1["Total Final Expenses Field ID"],
-                value: "$" + subTotal3
-            }]);
+                    return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value);
+                }, 0);
+                let subTotal2 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
+                    return total + parseFloat(row?.cells[2]?.getElementsByTagName('input')[0]?.value);
+                }, 0);
+                let subTotal3 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
+                    return total + parseFloat(row?.cells[3]?.getElementsByTagName('input')[0]?.value);
+                }, 0);
+                // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
+                // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
+                // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
+                subTotal = subTotal.toFixed(2);
+                subTotal2 = subTotal2.toFixed(2);
+                subTotal3 = subTotal3.toFixed(2);
+
+                JFCustomWidget.setFieldsValueById([{
+                    id: widgetSettings1["Total Projected Expenses Field ID"],
+                    value: "$" + subTotal
+                }]);
+                JFCustomWidget.setFieldsValueById([{
+                    id: widgetSettings1["Total Mid-year Expenses Field ID"],
+                    value: "$" + subTotal2
+                }]);
+                JFCustomWidget.setFieldsValueById([{
+                    id: widgetSettings1["Total Final Expenses Field ID"],
+                    value: "$" + subTotal3
+                }]);
+            }
 
         }
 
