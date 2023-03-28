@@ -104,10 +104,10 @@
             for (var i = 1; i < colSize; i++) {
                 console.log("TYPE1: ", getTypeFromSetting[i])
                 if (!getTypeFromSetting[i].match(':')) {
-                    str += `<td><input type="number" value="0" min="0" disabled="${inputDisabled}"/>`
+                    str += `<td><input type="number" value="0" min="0"/>`
                 }
                 else {
-                    str += `<td><input type="text" value="" disabled="${inputDisabled}"/>`
+                    str += `<td><input type="text" value=""/>`
                 }
             }
             return str
@@ -218,12 +218,14 @@
         });
 
     </script>
-    <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
-    </table>
-    <button type="button" onclick="addRow()">Add Row</button>
-    <span id="val"></span>
-    <span id="val2"></span>
-    <span id="val3"></span>
+    <div style="overflow: auto;">
+        <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
+        </table>
+        <button type="button" onclick="addRow()">Add Row</button>
+        <span id="val"></span>
+        <span id="val2"></span>
+        <span id="val3"></span>
+    </div>
 </body>
 
 </html>
