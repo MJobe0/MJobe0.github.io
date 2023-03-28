@@ -109,6 +109,11 @@
             resizeFrame();
         }
 
+        function getData() {
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`))));
+            return widgetValue
+        }
+
         $(function () {
             function SOCWidget(containerId, formData) {
 
@@ -120,7 +125,6 @@
                * Exposed
                */
                 this.init = init;
-                this.getData = getData;
 
                 function init() {
                     console.log(formData);
@@ -175,15 +179,10 @@
 
                     resizeFrame();
                 }
-
-                function getData() {
-                    var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(unescape(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`))));
-                    return widgetValue
-                }
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                var currValue = widget.getData();
+                var currValue = getData();
 
                 console.log("CURRENT VALUE: ", currValue)
 
