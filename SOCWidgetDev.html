@@ -87,7 +87,9 @@
         }
 
         function addRow() {
-            $("#myTable").append(`<tr><td><input type="text" value=" " /></td><td><input type="number" value="0" min="0"/></td><td><input type="number" value="0" min="0"/></td><td><input type="number" value="0" min="0"/></td><td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            const colLen = widgetSettings["Columns"].split(/\r?\n/).length;
+
+            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
