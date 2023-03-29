@@ -168,6 +168,11 @@
 
                         document.getElementById("myTable").innerHTML = atob(newDataObj.widget_metadata?.value);
 
+                        $('input').each(function () {
+                            var curInputValue = $(this).val()
+                            $(this).attr('text', curInputValue);
+                        });
+
                         resizeFrame();
                     }
                     else {

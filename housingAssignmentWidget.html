@@ -63,9 +63,9 @@
         function getHousingInfo(fieldValues) {
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", fieldValues)
-            console.log(`https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
+            console.log(`https://innovativebc.jotform.com/API/form/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
-                url: `https://eu-api.jotform.com/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
+                url: `https://innovativebc.jotform.com/API/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
                 method: "GET",
                 dataType: "json",
                 // data: {
@@ -175,9 +175,9 @@
 
         function updateDataBase(submissionId, houseHold) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log(`https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied`)
+            console.log(`https://innovativebc.jotform.com/API/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied`)
             jQuery.ajax({
-                url: `https://eu-api.jotform.com/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied&submission[8]=${houseHold}`,
+                url: `https://innovativebc.jotform.com/API/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied&submission[8]=${houseHold}`,
                 method: "POST",
                 // data: {
                 //     "submission[9]": "Occupied"
