@@ -128,8 +128,10 @@
         }
 
         function getData() {
-            var target = document.getElementById('myTable');
-            console.log("TARGET: ",target)
+            myTable = document.getElementsByTagName("table")[0];
+            myClone = myTable.cloneNode(true);
+            
+            console.log("TARGET: ", myClone)
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
             return widgetValue
         }
