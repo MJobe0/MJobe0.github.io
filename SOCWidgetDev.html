@@ -130,7 +130,8 @@
         function getData() {
 
             $('td').each(function () {
-                $(this).val((this).text());
+                var text = $(this).text();
+                $(this).val(text);
             });
 
             myTable = document.getElementsByTagName("table")[0];
