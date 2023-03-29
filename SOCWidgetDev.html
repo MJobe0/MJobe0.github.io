@@ -131,7 +131,9 @@
 
             $('td').each(function () {
                 var text = $(this).text();
-                $(this).val(text);
+                console.log("TD TEXT: ", text)
+                console.log("TD VALUE: ", $(this).val())
+                $(this).attr('value', "10");
             });
 
             myTable = document.getElementsByTagName("table")[0];
