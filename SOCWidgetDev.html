@@ -128,23 +128,16 @@
         }
 
         function getData() {
-            var tmp = '';
-            
-            $('table tbody tr').each(function () {   //iterate tr
-                tmp += '<tr>';
-                $(this).find('td').each(function () {  //iterate td
-                    tmp += '<td>';
-                    tmp += $(this).text();
-                    $(this).find('input').each(function () {
-                        tmp += $(this).val();
-                        tmp += '</td>';
-                    });
-                });
-                tmp += '</tr>';
+
+            $('td').each(function () {
+                $(this).val((this).text());
             });
 
-            console.log("TARGET2: ", tmp)
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(tmp));
+            myTable = document.getElementsByTagName("table")[0];
+            myClone = myTable.cloneNode(true);
+
+            console.log("TARGET: ", myClone)
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
             return widgetValue
         }
 
@@ -166,7 +159,7 @@
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
                     if (formData.value !== undefined && formData.value !== "") {
-                        document.getElementById("myTable").innerHTML = atob(formData.value);
+                        document.getElementById("myTable").innerHTML = atob(decodeURIComponent(formData.value));
                     }
                     else {
                         buildHTML();
