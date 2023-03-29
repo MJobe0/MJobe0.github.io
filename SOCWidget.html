@@ -100,7 +100,7 @@
         function addTableData(colSize, inputDisabled) {
             var wSettings = JFCustomWidget.getWidgetSettings();
 
-            const getTypeFromSetting = wSettings["Columns"].split(/\r?\n/);
+            const getTypeFromSetting = wSettings["Columns"]?.split(/\r?\n/);
 
             var str = "";
             for (var i = 1; i < colSize; i++) {
@@ -120,7 +120,7 @@
 
             var widgetSett = JFCustomWidget.getWidgetSettings();
 
-            const colLen = widgetSett["Columns"].split(/\r?\n/).length;
+            const colLen = widgetSett["Columns"]?.split(/\r?\n/).length;
 
             $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen, false)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
@@ -128,7 +128,17 @@
         }
 
         function getData() {
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
+
+            $('input').each(function () {
+                var curInputValue = $(this).val()
+                $(this).attr('value', curInputValue);
+            });
+
+            myTable = document.getElementsByTagName("table")[0];
+            myClone = myTable.cloneNode(true);
+
+            console.log("TARGET: ", myClone)
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myTable").innerHTML}`));
             return widgetValue
         }
 
@@ -150,7 +160,15 @@
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
                     if (formData.value !== undefined && formData.value !== "") {
-                        document.getElementById("myTable").innerHTML = atob(decodeURIComponent(formData.value));
+
+                        var newDataObj = JSON.parse(formData.value)
+                        console.log("DATA OBJECT: ", newDataObj)
+                        console.log("DATA OBJECT2: ", newDataObj.widget_metadata)
+                        console.log("DATA OBJECT3: ", newDataObj.widget_metadata?.value)
+
+                        document.getElementById("myTable").innerHTML = atob(newDataObj.widget_metadata?.value);
+
+                        resizeFrame();
                     }
                     else {
                         buildHTML();
@@ -165,8 +183,8 @@
                     widgetSettings["Columns"]
                     widgetSettings["Rows"]
 
-                    const getRowsFromSetting = widgetSettings["Rows"].split(/\r?\n/);
-                    const getColsFromSetting = widgetSettings["Columns"].split(/\r?\n/);
+                    const getRowsFromSetting = widgetSettings["Rows"]?.split(/\r?\n/);
+                    const getColsFromSetting = widgetSettings["Columns"]?.split(/\r?\n/);
 
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
