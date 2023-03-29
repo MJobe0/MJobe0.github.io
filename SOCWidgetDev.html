@@ -138,7 +138,7 @@
             myClone = myTable.cloneNode(true);
 
             console.log("TARGET: ", myClone)
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURI(`${document.getElementById("myTable").innerHTML}`)));
             return widgetValue
         }
 
@@ -166,7 +166,7 @@
                         console.log("DATA OBJECT2: ", newDataObj.widget_metadata)
                         console.log("DATA OBJECT3: ", newDataObj.widget_metadata?.value)
 
-                        document.getElementById("myTable").innerHTML = decodeURI(decodeURIComponent(escape(atob(newDataObj.widget_metadata?.value))));
+                        document.getElementById("myTable").innerHTML = decodeURI((atob(newDataObj.widget_metadata?.value)));
                     }
                     else {
                         buildHTML();
