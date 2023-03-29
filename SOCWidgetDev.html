@@ -128,11 +128,17 @@
         }
 
         function getData() {
-            myTable = document.getElementsByTagName("table")[0];
-            myClone = myTable.cloneNode(true);
-            
-            console.log("TARGET: ", myClone)
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(encodeURIComponent(`${document.getElementById("myTable").innerHTML}`)));
+            var tmp = '';
+            $('table tbody tr td').each(function () {
+                tmp = $(this).text();
+                $(this).find('input').each(function () {
+                    tmp += $(this).val();
+                });
+                $(this).html(tmp);
+            });
+
+            console.log("TARGET2: ", tmp)
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(tmp));
             return widgetValue
         }
 
