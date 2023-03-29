@@ -166,7 +166,9 @@
                         console.log("DATA OBJECT2: ", newDataObj.widget_metadata)
                         console.log("DATA OBJECT3: ", newDataObj.widget_metadata?.value)
 
-                        document.getElementById("myTable").innerHTML = (atob(newDataObj.widget_metadata?.value));
+                        document.getElementById("myTable").innerHTML = atob(newDataObj.widget_metadata?.value);
+
+                        resizeFrame();
                     }
                     else {
                         buildHTML();
