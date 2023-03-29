@@ -129,12 +129,18 @@
 
         function getData() {
             var tmp = '';
-            $('table tbody tr td').each(function () {
-                tmp = $(this).text();
-                $(this).find('input').each(function () {
-                    tmp += $(this).val();
+            
+            $('table tbody tr').each(function () {   //iterate tr
+                tmp += '<tr>';
+                $(this).find('td').each(function () {  //iterate td
+                    tmp += '<td>';
+                    tmp += $(this).text();
+                    $(this).find('input').each(function () {
+                        tmp += $(this).val();
+                        tmp += '</td>';
+                    });
                 });
-                $(this).html(tmp);
+                tmp += '</tr>';
             });
 
             console.log("TARGET2: ", tmp)
