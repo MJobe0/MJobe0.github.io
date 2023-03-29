@@ -160,11 +160,13 @@
                     console.log("SETTINGS: ", JFCustomWidget.getWidgetSettings());
 
                     if (formData.value !== undefined && formData.value !== "") {
-                        console.log("DATA OBJECT: ", formData.value)
-                        console.log("DATA OBJECT2: ", formData.value.widget_metadata)
-                        console.log("DATA OBJECT3: ", formData.value.widget_metadata?.value)
 
-                        document.getElementById("myTable").innerHTML = decodeURIComponent(escape(atob(formData.value)));
+                        var newDataObj = JSON.parse(formData.value)
+                        console.log("DATA OBJECT: ", newDataObj)
+                        console.log("DATA OBJECT2: ", newDataObj.widget_metadata)
+                        console.log("DATA OBJECT3: ", newDataObj.widget_metadata?.value)
+
+                        document.getElementById("myTable").innerHTML = decodeURIComponent(escape(atob(newDataObj)));
                     }
                     else {
                         buildHTML();
