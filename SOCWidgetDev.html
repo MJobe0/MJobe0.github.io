@@ -108,10 +108,10 @@
             for (var i = 1; i < colSize; i++) {
                 console.log("TYPE1: ", getTypeFromSetting[i])
                 if (!getTypeFromSetting[i].match(':')) {
-                    str += `<td><input type="number" value="0" min="0"/>`
+                    str += `<td><input type="number" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
                 }
                 else {
-                    str += `<td><input type="text" value=""/>`
+                    str += `<td><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
                 }
             }
             return str
@@ -124,7 +124,7 @@
 
             const colLen = widgetSett["Columns"]?.split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr><td><input type="text" value=" " />${addTableData(colLen, false)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
@@ -203,16 +203,16 @@
 
                     getColsFromSetting.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
-                            newCols += `<th>${tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         } else {
                             tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
-                            newCols += `<th>${tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         }
                     });
 
                     getRowsFromSetting.forEach(function (tRows) {
                         if (!tRows.match(':')) {
-                            newRows += `<tr><td>${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
+                            newRows += `<tr class="form-matrix-tr form-matrix-value-tr"><td>${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
                             tRows = tRows.substring(0, tRows.indexOf(':'));
                             newRows += `<tr class="disabled"><td>${tRows}</td></tr>`
@@ -223,7 +223,7 @@
                     console.log("STAGE 2 ROWS: ", newRows);
                     console.log("STAGE 2 COLS: ", newCols)
 
-                    document.getElementById("myTable").innerHTML = `<tr>${newCols}</tr>${newRows}`;
+                    document.getElementById("myTable").innerHTML = `<tr class="form-matrix-tr form-matrix-value-tr">${newCols}</tr>${newRows}`;
 
                     resizeFrame();
                 }
@@ -245,8 +245,8 @@
         });
 
     </script>
-    <div id="myDiv" style="overflow: auto;">
-        <table id="myTable" onchange="updateSubTotal()" style="overflow: auto; width: 100%; table-layout: fixed;">
+    <div id="myDiv" style="overflow: auto;" class="form-input-wide">
+        <table id="myTable" onchange="updateSubTotal()" cellpadding="4" cellspacing="0" class="form-matrix-table" data-component="matrix">
         </table>
         <button type="button" onclick="addRow()">Add Row</button>
         <span id="val"></span>
