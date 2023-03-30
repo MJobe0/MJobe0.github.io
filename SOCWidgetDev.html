@@ -196,12 +196,12 @@
                     console.log("STAGE 1 ROWS: ", getRowsFromSetting);
                     console.log("STAGE 1 COLS: ", getColsFromSetting)
 
-                    var numOfCol = getColsFromSetting.length;
+                    var numOfCol = getColsFromSetting?.length;
 
                     console.log("COL LENGTH: ", numOfCol)
 
 
-                    getColsFromSetting.forEach(function (tHeaders) {
+                    getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
                             newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         } else {
@@ -210,7 +210,7 @@
                         }
                     });
 
-                    getRowsFromSetting.forEach(function (tRows) {
+                    getRowsFromSetting?.forEach(function (tRows) {
                         if (!tRows.match(':')) {
                             newRows += `<tr class="form-matrix-tr form-matrix-value-tr"><td scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
