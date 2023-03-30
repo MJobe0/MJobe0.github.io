@@ -124,7 +124,7 @@
 
             const colLen = widgetSett["Columns"]?.split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box"; border: transparent; value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button class="form-matrix-values btn btn-danger" onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box"; border: transparent; value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button class="btn btn-danger" onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
