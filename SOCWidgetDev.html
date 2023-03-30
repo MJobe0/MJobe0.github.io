@@ -203,10 +203,10 @@
 
                     getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
-                            newCols += `<th class="form-matrix-tr form-matrix-value-tr">${tHeaders}</th>`;
+                            newCols += `<th form-matrix-tr form-matrix-value-tr>${tHeaders}</th>`;
                         } else {
                             tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
-                            newCols += `<th class="form-matrix-tr form-matrix-value-tr">${tHeaders}</th>`;
+                            newCols += `<th form-matrix-tr form-matrix-value-tr>${tHeaders}</th>`;
                         }
                     });
 
