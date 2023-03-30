@@ -124,7 +124,7 @@
 
             const colLen = widgetSett["Columns"]?.split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box"; border: transparent; value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button class="btn btn-danger" onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box"; border: transparent; value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}</tr> <button class="btn btn-danger" onClick="onClickRemove(this)">Remove</button>`);
             updateSubTotal();
             resizeFrame();
         }
@@ -247,7 +247,7 @@
     </script>
     <div id="myDiv" style="overflow: auto;" class="form-input-wide">
         <table id="myTable" onchange="updateSubTotal()" cellpadding="4" cellspacing="0" class="form-matrix-table"
-            data-component="matrix" style=" border-radius:10px;">
+            data-component="matrix">
         </table>
         <br>
         <button class="btn btn-success" type="button" onclick="addRow()">Add Row</button>
