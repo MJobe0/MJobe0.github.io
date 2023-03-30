@@ -108,10 +108,10 @@
             for (var i = 1; i < colSize; i++) {
                 console.log("TYPE1: ", getTypeFromSetting[i])
                 if (!getTypeFromSetting[i].match(':')) {
-                    str += `<td><input type="number" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
+                    str += `<td class="form-matrix-values"><input type="number" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
                 }
                 else {
-                    str += `<td><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
+                    str += `<td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box"/>`
                 }
             }
             return str
@@ -124,7 +124,7 @@
 
             const colLen = widgetSett["Columns"]?.split(/\r?\n/).length;
 
-            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button class="btn btn-danger" onClick="onClickRemove(this)">Remove</button></td></tr>`);
+            $("#myTable").append(`<tr class="form-matrix-tr form-matrix-value-tr"><td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box" value=" " aria-label="Cells Text Box" />${addTableData(colLen, false)}<td><button class="btn btn-danger" onClick="onClickRemove(this)">Remove</button></td></tr>`);
             updateSubTotal();
             resizeFrame();
         }
