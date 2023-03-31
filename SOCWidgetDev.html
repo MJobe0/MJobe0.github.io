@@ -62,7 +62,7 @@
                 let subTotal = Array.from(table?.rows).slice(1)?.reduce((total, row) => {
                     console.log("TABLE ROWS3: ", row);
                     console.log("TABLE ROWS4: ", row?.cells);
-                    console.log("TABLE ROWS5: ", row?.cells[1]?.getElementsByTagName('input')[0]?.value);
+                    console.log("TABLE ROWS5: ", row?.cells[1]?.getElementsByTagName('td')[0].getElementsByTagName('input')[0]?.value);
 
                     return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value);
                 }, 0);
