@@ -42,6 +42,14 @@
         }
     </style>
     <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("document loaded");
+        });
+
+        $(window).on("load", function () {
+            console.log("window loaded");
+        });
+
         //Global
         function updateSubTotal() {
             var widgetSettings1 = JFCustomWidget.getWidgetSettings();
@@ -217,19 +225,19 @@
 
                     getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${"  " + tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         } else {
                             tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${"  " + tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         }
                     });
 
                     getRowsFromSetting?.forEach(function (tRows) {
                         if (!tRows.match(':')) {
-                            newRows += `<tr class="form-matrix-tr form-matrix-value-tr"><td scope="col" class="form-matrix-headers form-matrix-row-headers">${"  " + tRows}</td> ${addTableData(numOfCol, false)} </tr>`
+                            newRows += `<tr class="form-matrix-tr form-matrix-value-tr"><td scope="col" class="form-matrix-headers form-matrix-row-headers" style="text-indent: 50px;">${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
                             tRows = tRows.substring(0, tRows.indexOf(':'));
-                            newRows += `<tr class="disabled"><td scope="col" class="form-matrix-headers form-matrix-row-headers">${"  " + tRows}</td> ${addBlankCells(numOfCol)}</tr>`
+                            newRows += `<tr class="disabled"><td scope="col" class="form-matrix-headers form-matrix-row-headers" style="text-indent: 50px;">${tRows}</td> ${addBlankCells(numOfCol)}</tr>`
                         }
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
                     });
