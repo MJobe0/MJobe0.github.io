@@ -118,6 +118,20 @@
 
         }
 
+        function addBlankCells(blankColSize) {
+            //var wSettings = JFCustomWidget.getWidgetSettings();
+            //const getTypeFromSetting = wSettings["Columns"]?.split(/\r?\n/);
+
+            var str = "";
+            for (var i = 1; i < colSize; i++) {
+                str += `<td class="form-matrix-values"></td>`
+            }
+
+            return str
+        }
+
+
+
         function addRow() {
 
             var widgetSett = JFCustomWidget.getWidgetSettings();
@@ -215,7 +229,7 @@
                             newRows += `<tr class="form-matrix-tr form-matrix-value-tr"><td scope="col" class="form-matrix-headers form-matrix-row-headers">${tRows}</td> ${addTableData(numOfCol, false)} </tr>`
                         } else {
                             tRows = tRows.substring(0, tRows.indexOf(':'));
-                            newRows += `<tr class="disabled"><td scope="col" class="form-matrix-headers form-matrix-row-headers">${tRows}</td></tr>`
+                            newRows += `<tr class="disabled"><td scope="col" class="form-matrix-headers form-matrix-row-headers">${tRows}</td> ${addBlankCells(numOfCol)}</tr>`
                         }
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
                     });
