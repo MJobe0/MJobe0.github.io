@@ -64,7 +64,7 @@
                     console.log("TABLE ROWS4: ", row?.cells);
                     console.log("TABLE ROWS5: ", row?.cells[1]?.getElementsByClassName('form-textbox')[0]?.value);
 
-                    return total + parseFloat(row?.cells[1]?.getElementsByTagName('form-textbox')[0]?.value);
+                    return total + parseFloat(Number(row?.cells[1]?.getElementsByTagName('form-textbox')[0]?.value));
                 }, 0);
                 let subTotal2 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
                     return total + parseFloat(row?.cells[2]?.getElementsByClassName('form-textbox')[0]?.value);
