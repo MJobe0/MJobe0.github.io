@@ -57,13 +57,13 @@
             if (widgetSettings1["Total Projected Expenses Field ID"] != "") {
                 var table = document.getElementById("myTable");
                 let subTotal = Array.from(table?.rows).slice(1)?.reduce((total, row) => {
-                    return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value);
+                    return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value) ?? 0;
                 }, 0);
                 let subTotal2 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
-                    return total + parseFloat(row?.cells[2]?.getElementsByTagName('input')[0]?.value);
+                    return total + parseFloat(row?.cells[2]?.getElementsByTagName('input')[0]?.value) ?? 0;
                 }, 0);
                 let subTotal3 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
-                    return total + parseFloat(row?.cells[3]?.getElementsByTagName('input')[0]?.value);
+                    return total + parseFloat(row?.cells[3]?.getElementsByTagName('input')[0]?.value) ?? 0;
                 }, 0);
                 // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
                 // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
