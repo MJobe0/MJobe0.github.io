@@ -63,7 +63,7 @@
         function getHousingInfo(fieldValues) {
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", fieldValues)
-            console.log(`https://innovativebc.jotform.com/API/form/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
+            console.log(`https://innovativebc.jotform.com/API/form/230735264344050/submissions?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
                 method: "GET",
