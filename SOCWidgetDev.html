@@ -83,13 +83,9 @@
                 // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
                 // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
                 // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
-                subTotal = subTotal.toFixed(2);
-                subTotal2 = subTotal2.toFixed(2);
-                subTotal3 = subTotal3.toFixed(2);
-
-                subTotal = Nubmer(subTotal).toLocaleString("en-US");
-                subTotal2 = Nubmer(subTotal).toLocaleString("en-US");;
-                subTotal3 = Nubmer(subTotal).toLocaleString("en-US");;
+                subTotal = subTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                subTotal2 = subTotal2.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                subTotal3 = subTotal3.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 JFCustomWidget.setFieldsValueById([{
                     id: widgetSettings1["Total Projected Expenses Field ID"],
