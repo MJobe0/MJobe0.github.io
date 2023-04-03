@@ -55,29 +55,37 @@
             var widgetSettings1 = JFCustomWidget.getWidgetSettings();
 
             if (widgetSettings1["Total Projected Expenses Field ID"] != "") {
-
                 var table = document.getElementById("myTable");
-                console.log("TABLE ROWS: ", table?.rows);
-                console.log("TABLE ROWS2: ", Array.from(table?.rows)?.slice(1));
                 let subTotal = Array.from(table?.rows).slice(1)?.reduce((total, row) => {
-                    console.log("TABLE ROWS3: ", row);
-                    console.log("TABLE ROWS4: ", row?.cells);
-                    console.log("TABLE ROWS5: ", row?.cells[1]?.getElementsByTagName('input')[0]?.value);
-
-                    return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value);
+                    if (row?.cells[1]?.getElementsByTagName('input')[0]?.value !== "") {
+                        return total + parseFloat(row?.cells[1]?.getElementsByTagName('input')[0]?.value);
+                    }
+                    else {
+                        return total + 0;
+                    }
                 }, 0);
                 let subTotal2 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
-                    return total + parseFloat(row?.cells[2]?.getElementsByTagName('input')[0]?.value);
+                    if (row?.cells[2]?.getElementsByTagName('input')[0]?.value !== "") {
+                        return total + parseFloat(row?.cells[2]?.getElementsByTagName('input')[0]?.value);
+                    }
+                    else {
+                        return total + 0;
+                    }
                 }, 0);
                 let subTotal3 = Array.from(table?.rows)?.slice(1)?.reduce((total, row) => {
-                    return total + parseFloat(row?.cells[3]?.getElementsByTagName('input')[0]?.value);
+                    if (row?.cells[3]?.getElementsByTagName('input')[0]?.value !== "") {
+                        return total + parseFloat(row?.cells[3]?.getElementsByTagName('input')[0]?.value);
+                    }
+                    else {
+                        return total + 0;
+                    }
                 }, 0);
                 // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
                 // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
                 // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
-                subTotal = subTotal.toFixed(2);
-                subTotal2 = subTotal2.toFixed(2);
-                subTotal3 = subTotal3.toFixed(2);
+                subTotal = subTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                subTotal2 = subTotal2.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                subTotal3 = subTotal3.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                 JFCustomWidget.setFieldsValueById([{
                     id: widgetSettings1["Total Projected Expenses Field ID"],
@@ -93,6 +101,8 @@
                 }]);
             }
 
+            var currValue = getData();
+            JFCustomWidget.sendSubmit({ valid: false, value: currValue });
         }
 
         function onClickRemove(deleteButton) {
@@ -114,12 +124,11 @@
 
             var str = "";
             for (var i = 1; i < colSize; i++) {
-                console.log("TYPE1: ", getTypeFromSetting[i])
                 if (!getTypeFromSetting[i].match(':')) {
                     str += `<td class="form-matrix-values"><input type="number" class="form-textbox" size="5" style="width:100%; box-sizing:border-box; border: transparent;" value="0" min="0" aria-label="Cells Text Box"/>`
                 }
                 else {
-                    str += `<td class="form-matrix-values"><input type="text" class="form-textbox" size="5" style="width:100%; box-sizing:border-box; border: transparent;" value=" " aria-label="Cells Text Box"/>`
+                    str += `<td class="form-matrix-values"><input type="textarea" class="form-textbox" size="50" style="width:100%; box-sizing:border-box; border: transparent;" value=" " aria-label="Cells Text Box"/>`
                 }
             }
             return str
@@ -137,8 +146,6 @@
 
             return str
         }
-
-
 
         function addRow() {
 
@@ -161,18 +168,12 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            console.log("TARGET: ", myClone)
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myTable").innerHTML}`));
             return widgetValue
         }
 
         $(function () {
             function SOCWidget(containerId, formData) {
-
-                console.log("FORM DATA: ", formData);
-
-                console.log("WIDGETlIB: ", JFCustomWidget)
-
                 /**
                * Exposed
                */
@@ -186,10 +187,6 @@
                     if (formData.value !== undefined && formData.value !== "") {
 
                         var newDataObj = JSON.parse(formData.value)
-                        console.log("DATA OBJECT: ", newDataObj)
-                        console.log("DATA OBJECT2: ", newDataObj.widget_metadata)
-                        console.log("DATA OBJECT3: ", newDataObj.widget_metadata?.value)
-
                         document.getElementById("myTable").innerHTML = atob(newDataObj.widget_metadata?.value);
 
                         // $('input').each(function () {
@@ -215,13 +212,7 @@
                     const getRowsFromSetting = widgetSettings["Rows"]?.split(/\r?\n/);
                     const getColsFromSetting = widgetSettings["Columns"]?.split(/\r?\n/);
 
-                    console.log("STAGE 1 ROWS: ", getRowsFromSetting);
-                    console.log("STAGE 1 COLS: ", getColsFromSetting)
-
                     var numOfCol = getColsFromSetting?.length;
-
-                    console.log("COL LENGTH: ", numOfCol)
-
 
                     getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
@@ -242,9 +233,6 @@
                         //jQuery('.ldrm tbody').append('<tr><td class="remove-row"><span class="btn">Remove</span></td><td class="rb-left">Test</td>' + (function() { var str = ''; for(var i=0; i < numOfCol; i++) { str += '<td>Test</td>'; } return str; })());
                     });
 
-                    console.log("STAGE 2 ROWS: ", newRows);
-                    console.log("STAGE 2 COLS: ", newCols)
-
                     document.getElementById("myTable").innerHTML = `<tr class="form-matrix-tr form-matrix-value-tr">${newCols}</tr>${newRows}`;
 
                     resizeFrame();
@@ -252,11 +240,6 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                var currValue = getData();
-
-                console.log("CURRENT VALUE: ", currValue)
-
-                JFCustomWidget.sendSubmit({ valid: false, value: currValue });
 
             });
 
