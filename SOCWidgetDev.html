@@ -83,9 +83,9 @@
                 // document.getElementById("val").innerHTML = "SubTotal = $" + subTotal.toFixed(2);
                 // document.getElementById("val2").innerHTML = "SubTotal2 = $" + subTotal2.toFixed(2);
                 // document.getElementById("val3").innerHTML = "SubTotal3 = $" + subTotal3.toFixed(2);
-                subTotal = subTotal.toFixed(2);
-                subTotal2 = subTotal2.toFixed(2);
-                subTotal3 = subTotal3.toFixed(2);
+                subTotal = subTotal.toFixed(2).toLocaleString("en-US");;
+                subTotal2 = subTotal2.toFixed(2).toLocaleString("en-US");;
+                subTotal3 = subTotal3.toFixed(2).toLocaleString("en-US");;
 
                 JFCustomWidget.setFieldsValueById([{
                     id: widgetSettings1["Total Projected Expenses Field ID"],
@@ -101,6 +101,8 @@
                 }]);
             }
 
+            var currValue = getData();
+            JFCustomWidget.sendSubmit({ valid: false, value: currValue });
         }
 
         function onClickRemove(deleteButton) {
@@ -240,8 +242,7 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                var currValue = getData();
-                JFCustomWidget.sendSubmit({ valid: false, value: currValue });
+
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
