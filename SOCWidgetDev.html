@@ -17,13 +17,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
-    </script> -->
+    </script>
 </head>
 
 <body>
@@ -128,7 +128,7 @@
                     str += `<td class="form-matrix-values"><input type="number" class="form-textbox" size="5" style="width:100%; box-sizing:border-box; border: transparent;" value="0" min="0" aria-label="Cells Text Box"/>`
                 }
                 else {
-                    str += `<td class="form-matrix-values"><input type="textarea" class="form-textbox" size="70" style="width:100%; box-sizing:border-box; border: transparent;" value=" " aria-label="Cells Text Box"/>`
+                    str += `<td class="form-matrix-values"><input type="textarea" class="form-textbox" size="80" style="width:100%; box-sizing:border-box; border: transparent;" value=" " aria-label="Cells Text Box"/>`
                 }
             }
             return str
@@ -167,6 +167,8 @@
 
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
+
+            console.log("HERE 1: ", document.getElementById("myDiv").innerHTML)
 
             var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
