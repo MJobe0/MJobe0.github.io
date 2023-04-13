@@ -168,9 +168,7 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            console.log("HERE 1: ", document.getElementById("myDiv").innerHTML)
-
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {width: 100%;}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
@@ -189,7 +187,7 @@
                     if (formData.value !== undefined && formData.value !== "") {
 
                         var newDataObj = JSON.parse(formData.value)
-                        document.getElementById("myTable").innerHTML = atob(newDataObj.widget_metadata?.value);
+                        document.getElementById("myDiv").innerHTML = atob(newDataObj.widget_metadata?.value);
 
                         // $('input').each(function () {
                         //     var curInputValue = $(this).val()
