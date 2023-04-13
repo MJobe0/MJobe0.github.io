@@ -168,7 +168,7 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myTable").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.documentElement.innerHTML}`));
             return widgetValue
         }
 
