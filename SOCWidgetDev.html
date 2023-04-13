@@ -170,7 +170,7 @@
 
             console.log("HERE 1: ", document.getElementById("myDiv").innerHTML)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>table { width: 100%; } td:first-child { background-color: #32a852; } td:nth-child(2) { background-color: #aaaaaa; } td:last-child { background-color: #5696c7; }<style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {width: 100%;} td:first-child {background-color: #32a852;} td:nth-child(2) {background-color: #aaaaaa;} td:last-child {background-color: #5696c7;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
@@ -257,11 +257,11 @@
             data-component="matrix">
         </table>
         <br>
+        <button class="btn btn-success" type="button" onclick="addRow()">Add Row</button>
         <span id="val"></span>
         <span id="val2"></span>
         <span id="val3"></span>
     </div>
-    <button class="btn btn-success" type="button" onclick="addRow()">Add Row</button>
 </body>
 
 </html>
