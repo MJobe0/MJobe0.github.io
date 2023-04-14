@@ -168,7 +168,9 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<div style="width: 100%; overflow: auto; table-layout: fixed;>${document.getElementById("myDiv").innerHTML}</div>`));
+            console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
+
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
