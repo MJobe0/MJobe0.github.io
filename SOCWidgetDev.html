@@ -170,19 +170,43 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>table {
+  border-collapse: collapse;
+  margin: 25px;
+  font-size: 0.9em;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  background-color: bisque;
+  table-layout: fixed;
+   }
+
+
+  thead {
+    border: 1px solid black;
+    display: table-header-group;
+    width: 50px;
+     }
+
+    tr {
+      background-color: #009879;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+  
+  
+  td {
+  display: table-cell;
+  width: 50px;
+  text-align: center;
 }
 
-td,
-th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-} table { page-break-inside:auto }
-    tr    { page-break-inside:avoid; page-break-after:auto }</style>${document.getElementById("myDiv").innerHTML}`));
+  tbody {
+    tr:nth-of-type(even) {
+      background-color: whitesmoke;
+    }
+  }</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
