@@ -170,7 +170,7 @@
 
             console.log("HTML: ", `<style> table{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;} button{ display:none}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;} button{ display:none}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>  #myTable{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;} button{ display:none}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
