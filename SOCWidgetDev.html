@@ -170,7 +170,7 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>table {
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> button {display:none;}table {
   border-collapse: collapse;
   margin: 25px;
   font-size: 0.9em;
@@ -192,14 +192,14 @@
       background-color: #009879;
       color: white;
       font-weight: bold;
-      text-align: center;
+      text-align: left;
     }
   
   
   td {
   display: table-cell;
   width: 50px;
-  text-align: center;
+  text-align: left;
 }
 
   tbody {
