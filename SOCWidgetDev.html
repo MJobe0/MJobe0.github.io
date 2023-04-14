@@ -168,7 +168,7 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>table{border-collapse:collapse; border: 1px solid black; width:100%; text-align:left; page-break-inside:auto;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
