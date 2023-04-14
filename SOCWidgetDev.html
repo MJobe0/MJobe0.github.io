@@ -170,7 +170,7 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style type="text/css"> table {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;} div { display:none !important; visibility:hidden !important; }</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
@@ -218,10 +218,10 @@
 
                     getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1"><label>${tHeaders}</label></th>`;
                         } else {
                             tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1"><label>${tHeaders}</label></th>`;
                         }
                     });
 
