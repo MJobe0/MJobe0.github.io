@@ -28,6 +28,9 @@
 
 <body>
     <style>
+        table {
+            border-radius: 5px 5px 0 0;
+        }
         #myTable td {
             padding: 0.25em;
         }
@@ -170,43 +173,7 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> button {display:none;}table {
-  border-collapse: collapse;
-  margin: 25px;
-  font-size: 0.9em;
-  border-radius: 5px 5px 0 0;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  background-color: bisque;
-  table-layout: fixed;
-   }
-
-
-  thead {
-    border: 1px solid black;
-    display: table-header-group;
-    width: 50px;
-     }
-
-    tr {
-      background-color: #009879;
-      color: white;
-      font-weight: bold;
-      text-align: left;
-    }
-  
-  
-  td {
-  display: table-cell;
-  width: 50px;
-  text-align: left;
-}
-
-  tbody {
-    tr:nth-of-type(even) {
-      background-color: whitesmoke;
-    }
-  }</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {table-layout: fixed !important;} table thead tr {position: fixed !important;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
