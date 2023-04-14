@@ -168,7 +168,112 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>table{border-collapse:collapse; border: 1px solid black; width:100%; text-align:left; page-break-inside:auto;}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>.form-matrix-values label.matrix-choice-label {
+    padding-left: 20px;
+    vertical-align: text-bottom;
+    display: inline-block
+}
+
+li[data-type=control_matrix] .form-dropdown,li[data-type=control_matrix] .form-textbox {
+    font-size: .875em;
+    border-radius: 0;
+    border-color: transparent
+}
+
+li[data-type=control_matrix] .form-dropdown:focus,li[data-type=control_matrix] .form-dropdown:hover,li[data-type=control_matrix] .form-textbox:focus,li[data-type=control_matrix] .form-textbox:hover {
+    position: relative;
+    z-index: 1
+}
+
+.form-matrix-table {
+    width: 100%;
+    border-spacing: 0;
+    text-align: left
+}
+
+.form-matrix-headers {
+    position: relative;
+    font-size: .75em;
+    font-weight: 500;
+    padding: 12px
+}
+
+.form-matrix-headers.form-matrix-column-headers {
+    text-align: center;
+    border-top: 1px solid #c3cad8
+}
+
+.form-matrix-values {
+    text-align: center;
+    padding: 0;
+    position: relative
+}
+
+.JotFormBuilder #stage .form-matrix-values {
+    pointer-events: none
+}
+
+.form-matrix-headers,.form-matrix-values {
+    border-left: 1px solid;
+    border-bottom: 1px solid
+}
+
+.form-matrix-column-headers:last-child {
+    border-radius: 0 4px 0 0
+}
+
+.isSelected .form-matrix-column-headers:nth-last-of-type(2) {
+    border-right: 1px solid #c3cad8;
+    border-radius: 0 4px 0 0
+}
+
+.form-matrix-value-tr:nth-child(2) .form-matrix-row-headers {
+    border-top: 1px solid #c3cad8;
+    border-radius: 4px 0 0 0
+}
+
+.form-matrix-column_0 {
+    border-radius: 4px 0 0
+}
+
+.form-matrix-column_0:last-child {
+    border-radius: 4px 4px 0 0
+}
+
+.form-matrix-table td:last-child,.form-matrix-table th:last-child {
+    border-right: 1px solid
+}
+
+.form-matrix-table tr:last-child td,.form-matrix-table tr:last-child th {
+    border-bottom: 1px solid
+}
+
+.form-matrix-table tr:last-child .form-matrix-row-headers {
+    border-radius: 0 0 0 4px
+}
+
+.form-matrix-table tr:last-child td:last-of-type,.form-matrix-table tr:last-child td:last-of-type .form-dropdown,.form-matrix-table tr:last-child td:last-of-type .form-textbox {
+    border-radius: 0 0 4px
+}
+
+.form-matrix-table tr:not([role=group])+tr[role=group] th {
+    border-top: 1px solid
+}
+
+.form-matrix-table tr:not([role=group])+tr[role=group] .form-matrix-row-headers {
+    border-radius: 4px 0 0
+}
+
+.form-matrix-table tr:not([role=group])+tr[role=group]:last-child .form-matrix-row-headers {
+    border-radius: 4px 0 0 4px
+}
+
+@media (-ms-high-contrast:none),screen and (-ms-high-contrast:active) {
+    .form-matrix-values .form-checkbox,.form-matrix-values .form-radio {
+        left: calc(50% - 10px);
+        top: auto
+    }
+}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
