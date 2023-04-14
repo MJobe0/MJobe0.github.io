@@ -168,9 +168,28 @@
             myTable = document.getElementsByTagName("table")[0];
             myClone = myTable.cloneNode(true);
 
+            var copyOfHTML = document.getElementById("myDiv").innerHTML;
+
+           var copyOfHTML = $(copyOfHTML).siblings().each(
+                function () {
+                    // if the td elements contain any input tag
+                    if ($(this).find('input').length) {
+                        console.log("THIS VALUE: ", this)
+                        // sets the text content of the tag equal to the value of the input
+                        $(this).text($(this).find('input').val());
+                    }
+                    else {
+                        // removes the text, appends an input and sets the value to the text-value
+                        var t = $(this).text();
+                        $(this).html($('<input />', { 'value': t }).val(t));
+                    }
+                });
+
+                console.log("copyOfHTML: ", copyOfHTML)
+
             console.log("HTML: ", `<style> table{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;} button{ display:none}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style>  #myTable{ max-width: 100%; min-width: 100%; table-layout: auto; text-align: center; border-collapse: collapse; border-radius: 4px; overflow: hidden; box-shadow: rgb(229, 230, 239) 0px 0px 0px 1px; word-break: break-word; hyphens: auto;} button{ display:none}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
@@ -218,10 +237,10 @@
 
                     getColsFromSetting?.forEach(function (tHeaders) {
                         if (!tHeaders.match(':')) {
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1"><label>${tHeaders}</label></th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         } else {
                             tHeaders = tHeaders.substring(0, tHeaders.indexOf(':'));
-                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1"><label>${tHeaders}</label></th>`;
+                            newCols += `<th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1">${tHeaders}</th>`;
                         }
                     });
 
