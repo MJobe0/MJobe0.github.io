@@ -170,7 +170,18 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {table-layout: auto; max-height: 300px;} table thead, table tfoot,table tbody tr {table-layout: fixed;} tbody td, thead th, tfoot td{border-right: 1px solid transparent; vertical-align: middle; white-space: nowrap;} table thead {width: 100%;} table tfoot {width: 100%;} table tbody {overflow-y: auto;} table tbody tr {width: 100%;}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
