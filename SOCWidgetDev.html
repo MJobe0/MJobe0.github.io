@@ -170,7 +170,7 @@
 
             console.log("HTML: ", `<style> table {width: 100%; overflow: auto; table-layout: fixed;}</style>${document.getElementById("myDiv").innerHTML}`)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style> table {width: 100%; overflow: auto; table-layout: auto;}</style>${document.getElementById("myDiv").innerHTML}`));
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<style type="text/css"> table {position: absolute; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%;}</style>${document.getElementById("myDiv").innerHTML}`));
             return widgetValue
         }
 
