@@ -180,6 +180,8 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/submission/${submissionId}?apiKey=${params["apiKey"]}&submission[9]=Occupied&submission[8]=${houseHold}`,
                 method: "POST",
+                crossDomain: true,
+                dataType: 'jsonp',
                 // data: {
                 //     "submission[9]": "Occupied"
                 // },
