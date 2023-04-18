@@ -39,16 +39,10 @@
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
 
-                    JFCustomWidget.getFieldsValueByName(["id"], function (res) {
+                    JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
                         console.log("ID = ", res.data[0].value)
                         originalSubmissionId = res.data[0].value;
                     });
-
-                    console.log("FRAME DATA = ", JFCustomWidget.getFrameData())
-                    console.log("WIDGET DATA = ", JFCustomWidget.getWidgetData())
-                    console.log("FORMDOMAIN = ", JFCustomWidgetUtils.getFormDomain())
-
-
                 }
 
             }
