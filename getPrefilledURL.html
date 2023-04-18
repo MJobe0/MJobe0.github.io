@@ -38,6 +38,11 @@
                     console.log(formData);
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
+
+                    JFCustomWidget.getFieldsValueByName(["id"], function (res) {
+                        console.log("ID = ", res.data[0].value)
+                        originalSubmissionId = res.data[0].value;
+                    });
                 }
 
             }
