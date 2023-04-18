@@ -67,6 +67,8 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/form/230735264344050/submissions?apiKey=${params["apiKey"]}`,
                 method: "GET",
+                crossDomain: true,
+                dataType: 'jsonp',
                 // data: {
                 //     "apiKey": params["apiKey"]
                 // },
