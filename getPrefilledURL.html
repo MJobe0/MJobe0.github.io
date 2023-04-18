@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+        $(function () {
+            function GetPrefilledURLWidget(containerId, formData) {
+                /**
+               * Exposed
+               */
+                this.init = init;
+
+                function init() {
+                    console.log(formData);
+                }
+
+            }
+
+            JFCustomWidget.subscribe('submit', function () {
+
+            });
+
+            JFCustomWidget.subscribe('ready', function (data) {
+                var widget = new GetPrefilledURLWidget('Test01', data);
+                widget.init();
+            });
+        });
+
+    </script>
+    <div id="myDiv" style="overflow: auto;" class="form-input-wide">
+        <button class="btn btn-success" type="button" onclick="">Get Link</button>
+    </div>
+</body>
+
+</html>
