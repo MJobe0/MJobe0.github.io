@@ -37,12 +37,12 @@
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
-                // headers: {
-                //     'jf-team-id': '223182511172042'
-                // },
-                data: {
+                headers: {
                     'jf-team-id': '223182511172042'
                 },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
@@ -73,12 +73,12 @@
                     method: "GET",
                     crossDomain: true,
                     dataType: 'jsonp',
-                    // headers: {
-                    //     'jf-team-id': '223182511172042'
-                    // },
-                    data: {
+                    headers: {
                         'jf-team-id': '223182511172042'
                     },
+                    // data: {
+                    //     "apiKey": params["apiKey"]
+                    // },
                     // timeout: 10000,
                     success: function (responseData, textStatus, jqXHR) {
                         console.log("success: ", responseData);
