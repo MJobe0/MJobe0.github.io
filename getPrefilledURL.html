@@ -54,8 +54,8 @@
                             if (responseData.content[i].actionDetails.subject === params["formType"]) {
                                 console.log("FORM LINK: ", responseData.content[i].actionDetails.body)
                                 var extractedLinkFromBody = responseData.content[i].actionDetails.body.match(/"https:(.*?)"/g);
-                                extractedLinkFromBody = extractedLinkFromBody.replace("&amp;", "");
-                                extractedLinkFromBody = extractedLinkFromBody.replace(/"/g, "");
+                                // extractedLinkFromBody = extractedLinkFromBody.replace("&amp;", "");
+                                // extractedLinkFromBody = extractedLinkFromBody.replace(/"/g, "");
                                 document.getElementById('canFormLink').value = extractedLinkFromBody;
                             }
                         }
