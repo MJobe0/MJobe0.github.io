@@ -31,93 +31,75 @@
 
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
-            jQuery.ajax({
-                url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
-                method: "GET",
-                crossDomain: true,
-                dataType: 'json',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("jf-team-id", "223182511172042");
-                },
-                // headers: {
-                //     'jf-team-id': '223182511172042'
-                // },
-                // data: {
-                //     "apiKey": params["apiKey"]
-                // },
-                // timeout: 10000,
-                success: function (responseData, textStatus, jqXHR) {
-                    console.log("success: ", responseData);
-                    for (let i = 0; i < responseData.length; i++) {
-                        if (responseData[i].actionDetails.to === candEmail) {
-                            console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
-                        }
-                    }
-                    return
-                },
-                error: function (responseData, textStatus, jqXHR) {
-                    console.log("error: ", responseData);
-                    return
-                }
-            })
+            // console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
+            // jQuery.ajax({
+            //     url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
+            //     method: "GET",
+            //     crossDomain: true,
+            //     dataType: 'json',
+            //     beforeSend: function (xhr) {
+            //         xhr.setRequestHeader("jf-team-id", "223182511172042");
+            //     },
+            //     // headers: {
+            //     //     'jf-team-id': '223182511172042'
+            //     // },
+            //     // data: {
+            //     //     "apiKey": params["apiKey"]
+            //     // },
+            //     // timeout: 10000,
+            //     success: function (responseData, textStatus, jqXHR) {
+            //         console.log("success: ", responseData);
+            //         for (let i = 0; i < responseData.length; i++) {
+            //             if (responseData[i].actionDetails.to === candEmail) {
+            //                 console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
+            //             }
+            //         }
+            //         return
+            //     },
+            //     error: function (responseData, textStatus, jqXHR) {
+            //         console.log("error: ", responseData);
+            //         return
+            //     }
+            // })
         }
 
         function getLinkStageOne() {
             var params2 = JFCustomWidget.getWidgetSettings();
-            // JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
-            //     console.log("iqxReference = ", res.data[0].value);
-            //     console.log("email = ", res.data[1].value);
-            //     iqxNumber = res.data[0].value;
-            //     candEmail = res.data[1].value;
-            //     console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`)
-            //     jQuery.ajax({
-            //         url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`,
-            //         method: "GET",
-            //         crossDomain: true,
-            //         dataType: 'json',
-            //         beforeSend: function (xhr) {
-            //             xhr.setRequestHeader("jf-team-id", "223182511172042");
-            //         },
-            //         // headers: {
-            //         //     'jf-team-id': '223182511172042'
-            //         // },
-            //         // data: {
-            //         //     "apiKey": params["apiKey"]
-            //         // },
-            //         // timeout: 10000,
-            //         success: function (responseData, textStatus, jqXHR) {
-            //             console.log("success: ", responseData);
-            //             for (let j = 0; j < responseData.content.length; j++) {
-            //                 if (responseData.content[j].answers["183"].answer === iqxNumber) {
-            //                     getLinkStageTwo(responseData.content[j].id);
-            //                 }
-            //             }
-            //             return
-            //         },
-            //         error: function (responseData, textStatus, jqXHR) {
-            //             console.log("error: ", responseData);
-            //             return
-            //         }
-            //     })
-            // });
             JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                 console.log("iqxReference = ", res.data[0].value);
                 console.log("email = ", res.data[1].value);
-                fetch(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`, {
-                    method: 'GET',
+                iqxNumber = res.data[0].value;
+                candEmail = res.data[1].value;
+                console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`)
+                jQuery.ajax({
+                    url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`,
+                    method: "GET",
+                    // crossDomain: true,
+                    // dataType: 'jsonp',
+                    // beforeSend: function (xhr) {
+                    //     xhr.setRequestHeader("jf-team-id", "223182511172042");
+                    // },
                     headers: {
-                        'jf-team-id': '223182511172042',
+                        'jf-team-id': '223182511172042'
                     },
+                    // data: {
+                    //     "apiKey": params["apiKey"]
+                    // },
+                    // timeout: 10000,
+                    success: function (responseData, textStatus, jqXHR) {
+                        console.log("success: ", responseData);
+                        for (let j = 0; j < responseData.content.length; j++) {
+                            if (responseData.content[j].answers["183"].answer === iqxNumber) {
+                                getLinkStageTwo(responseData.content[j].id);
+                            }
+                        }
+                        return
+                    },
+                    error: function (responseData, textStatus, jqXHR) {
+                        console.log("error: ", responseData);
+                        return
+                    }
                 })
-                    .then(response => {
-                        console.log("RESPONSE: ", response)
-                        // handle the response
-                    })
-                    .catch(error => {
-                        console.log("ERROR: ", response)
-                        // handle the error
-                    });
             });
         }
 
