@@ -49,9 +49,9 @@
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
-                    for (let i = 0; i < responseData.length; i++) {
-                        if (responseData[i].actionDetails.to === candEmail) {
-                            console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
+                    for (let i = 0; i < responseData.content.length; i++) {
+                        if (responseData.content[i].actionDetails.to === candEmail) {
+                            console.log("FORM LINK: ", responseData.content[i].actionDetails.formLink)
                         }
                     }
                     return
