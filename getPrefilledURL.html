@@ -31,36 +31,36 @@
 
         function getLinkStageTwo(submissionId, candidateEmail) {
             var params = JFCustomWidget.getWidgetSettings();
-            // console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
-            // jQuery.ajax({
-            //     url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
-            //     method: "GET",
-            //     crossDomain: true,
-            //     dataType: 'json',
-            //     beforeSend: function (xhr) {
-            //         xhr.setRequestHeader("jf-team-id", "223182511172042");
-            //     },
-            //     // headers: {
-            //     //     'jf-team-id': '223182511172042'
-            //     // },
-            //     // data: {
-            //     //     "apiKey": params["apiKey"]
-            //     // },
-            //     // timeout: 10000,
-            //     success: function (responseData, textStatus, jqXHR) {
-            //         console.log("success: ", responseData);
-            //         for (let i = 0; i < responseData.length; i++) {
-            //             if (responseData[i].actionDetails.to === candEmail) {
-            //                 console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
-            //             }
-            //         }
-            //         return
-            //     },
-            //     error: function (responseData, textStatus, jqXHR) {
-            //         console.log("error: ", responseData);
-            //         return
-            //     }
-            // })
+            console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
+            jQuery.ajax({
+                url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
+                method: "GET",
+                // crossDomain: true,
+                // dataType: 'json',
+                // beforeSend: function (xhr) {
+                //     xhr.setRequestHeader("jf-team-id", "223182511172042");
+                // },
+                // headers: {
+                //     'jf-team-id': '223182511172042'
+                // },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("success: ", responseData);
+                    for (let i = 0; i < responseData.length; i++) {
+                        if (responseData[i].actionDetails.to === candEmail) {
+                            console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
+                        }
+                    }
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log("error: ", responseData);
+                    return
+                }
+            })
         }
 
         function getLinkStageOne() {
@@ -85,7 +85,7 @@
                         for (let j = 0; j < responseData.data.length; j++) {
                             if (responseData.data[j]["11"] === iqxNumber) {
                                 console.log("SUBID: ", responseData.data[j].id)
-                                getLinkStageTwo(responseData.data[j].id);
+                                getLinkStageTwo(responseData.data[j].id, responseData.data[j]["6"]);
                             }
                         }
                         return
