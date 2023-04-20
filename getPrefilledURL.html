@@ -70,27 +70,27 @@
                 console.log("email = ", res.data[1].value);
                 iqxNumber = res.data[0].value;
                 candEmail = res.data[1].value;
-                console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`)
+                console.log(`https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
                 jQuery.ajax({
-                    url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`,
+                    url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&sort=id&dir=DESC&_dc=1682001053683&`,
                     method: "GET",
                     // crossDomain: true,
-                    dataType: 'jsonp',
+                    // dataType: 'jsonp',
                     // beforeSend: function (xhr) {
                     //     xhr.setRequestHeader("jf-team-id", "223182511172042");
                     // },
-                    headers: {
-                        'jf-team-id': '223182511172042'
-                    },
+                    // headers: {
+                    //     'jf-team-id': '223182511172042'
+                    // },
                     // data: {
                     //     "apiKey": params["apiKey"]
                     // },
                     // timeout: 10000,
                     success: function (responseData, textStatus, jqXHR) {
                         console.log("success: ", responseData);
-                        for (let j = 0; j < responseData.content.length; j++) {
-                            if (responseData.content[j].answers["183"].answer === iqxNumber) {
-                                getLinkStageTwo(responseData.content[j].id);
+                        for (let j = 0; j < responseData.data.length; j++) {
+                            if (responseData.data[j]["11"] === iqxNumber) {
+                                getLinkStageTwo(responseData.data[j].id);
                             }
                         }
                         return
