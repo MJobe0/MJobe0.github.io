@@ -26,7 +26,7 @@
 
 <body>
     <script type="text/javascript">
-        var subId = "";
+        var iqxNumber = "";
         var candEmail = "";
 
         function getLinkStageTwo(submissionId) {
@@ -34,6 +34,8 @@
             jQuery.ajax({
                 url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
                 method: "GET",
+                crossDomain: true,
+                dataType: 'jsonp',
                 // data: {
                 //     "apiKey": params["apiKey"]
                 // },
@@ -55,7 +57,7 @@
         }
 
         function getLinkStageOne() {
-            JFCustomWidget.getFieldsValueByName(["refNumber", "Email"], function (res) {
+            JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                 console.log("ID = ", res.data[0].value);
                 iqxNumber = res.data[0].value;
                 candEmail = res.data[1].value;
@@ -64,14 +66,18 @@
                 jQuery.ajax({
                     url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params["apiKey"]}`,
                     method: "GET",
+                    crossDomain: true,
+                    dataType: 'jsonp',
                     // data: {
                     //     "apiKey": params["apiKey"]
                     // },
                     // timeout: 10000,
                     success: function (responseData, textStatus, jqXHR) {
                         console.log("success: ", responseData);
-                        if (responseData.iqx === iqxNumber) {
-                            getLinkStageTwo(responseData.id);
+                        for (let j = 0; j < responseData.content.length; j++) {
+                            if (responseData.content[j].answers["183"].answer === iqxNumber) {
+                                getLinkStageTwo(responseData.content[j].id);
+                            }
                         }
                         return
                     },
