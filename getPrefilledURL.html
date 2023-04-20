@@ -51,7 +51,7 @@
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.content.length; i++) {
                         if (responseData.content[i].actionDetails.to === candEmail) {
-                            if (responseData.content[i].actionDetails.subject === params["formLink"]) {
+                            if (responseData.content[i].actionDetails.subject === params["formType"]) {
                                 console.log("FORM LINK: ", responseData.content[i].actionDetails.body)
                                 var extractedLinkFromBody = responseData.content[i].actionDetails.body.match(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/);
                                 document.getElementById('canFormLink').value = extractedLinkFromBody;
