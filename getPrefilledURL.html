@@ -52,6 +52,7 @@
                     for (let i = 0; i < responseData.content.length; i++) {
                         if (responseData.content[i].actionDetails.to === candEmail) {
                             console.log("FORM LINK: ", responseData.content[i].actionDetails.formLink)
+                            document.getElementById('canFormLink').value = responseData.content[i].actionDetails.formLink;
                         }
                     }
                     return
@@ -126,6 +127,8 @@
     </script>
     <div id="myDiv" style="overflow: auto;" class="form-input-wide">
         <button class="btn btn-success" type="button" onclick="getLinkStageOne()">Get Link</button>
+        <label for="canFormLink">Link: </label>
+        <input type="text" id="canFormLink" name="canFormLink" size="10">
     </div>
 </body>
 
