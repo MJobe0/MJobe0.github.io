@@ -37,12 +37,12 @@
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
-                headers: {
+                // headers: {
+                //     'jf-team-id': '223182511172042'
+                // },
+                data: {
                     'jf-team-id': '223182511172042'
                 },
-                // data: {
-                //     "apiKey": params["apiKey"]
-                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
@@ -63,7 +63,8 @@
         function getLinkStageOne() {
             var params2 = JFCustomWidget.getWidgetSettings();
             JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
-                console.log("ID = ", res.data[0].value);
+                console.log("iqxReference = ", res.data[0].value);
+                console.log("email = ", res.data[1].value);
                 iqxNumber = res.data[0].value;
                 candEmail = res.data[1].value;
                 console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`)
@@ -72,12 +73,12 @@
                     method: "GET",
                     crossDomain: true,
                     dataType: 'jsonp',
-                    headers: {
+                    // headers: {
+                    //     'jf-team-id': '223182511172042'
+                    // },
+                    data: {
                         'jf-team-id': '223182511172042'
                     },
-                    // data: {
-                    //     "apiKey": params["apiKey"]
-                    // },
                     // timeout: 10000,
                     success: function (responseData, textStatus, jqXHR) {
                         console.log("success: ", responseData);
