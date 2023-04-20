@@ -29,9 +29,8 @@
         var iqxNumber = "";
         var candEmail = "";
 
-        var params = JFCustomWidget.getWidgetSettings();
-
         function getLinkStageTwo(submissionId) {
+            var params = JFCustomWidget.getWidgetSettings();
             console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
@@ -62,14 +61,14 @@
         }
 
         function getLinkStageOne() {
+            var params2 = JFCustomWidget.getWidgetSettings();
             JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                 console.log("ID = ", res.data[0].value);
                 iqxNumber = res.data[0].value;
                 candEmail = res.data[1].value;
-
-                console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params["apiKey"]}`)
+                console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`)
                 jQuery.ajax({
-                    url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params["apiKey"]}`,
+                    url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`,
                     method: "GET",
                     crossDomain: true,
                     dataType: 'jsonp',
