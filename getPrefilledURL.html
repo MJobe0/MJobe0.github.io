@@ -29,6 +29,8 @@
         var iqxNumber = "";
         var candEmail = "";
 
+        var params = JFCustomWidget.getWidgetSettings();
+
         function getLinkStageTwo(submissionId) {
             console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
@@ -97,9 +99,6 @@
                 this.init = init;
 
                 function init() {
-
-                    var params = JFCustomWidget.getWidgetSettings();
-
                     console.log(formData);
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
