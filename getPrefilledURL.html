@@ -29,7 +29,7 @@
         var iqxNumber = "";
         var candEmail = "";
 
-        function getLinkStageTwo(submissionId) {
+        function getLinkStageTwo(submissionId, candidateEmail) {
             var params = JFCustomWidget.getWidgetSettings();
             // console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
             // jQuery.ajax({
@@ -74,8 +74,8 @@
                 jQuery.ajax({
                     url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&sort=id&dir=DESC&_dc=1682001053683&`,
                     method: "GET",
-                    // crossDomain: true,
-                    // dataType: 'jsonp',
+                    crossDomain: true,
+                    dataType: 'jsonp',
                     // beforeSend: function (xhr) {
                     //     xhr.setRequestHeader("jf-team-id", "223182511172042");
                     // },
