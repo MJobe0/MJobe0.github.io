@@ -101,21 +101,24 @@
             //         }
             //     })
             // });
-
-            fetch(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`, {
-                method: 'GET',
-                headers: {
-                    'jf-team-id': '223182511172042',
-                },
-            })
-                .then(response => {
-                    console.log("RESPONSE: ", response)
-                    // handle the response
+            JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
+                console.log("iqxReference = ", res.data[0].value);
+                console.log("email = ", res.data[1].value);
+                fetch(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params2["apiKey"]}`, {
+                    method: 'GET',
+                    headers: {
+                        'jf-team-id': '223182511172042',
+                    },
                 })
-                .catch(error => {
-                    console.log("ERROR: ", response)
-                    // handle the error
-                });
+                    .then(response => {
+                        console.log("RESPONSE: ", response)
+                        // handle the response
+                    })
+                    .catch(error => {
+                        console.log("ERROR: ", response)
+                        // handle the error
+                    });
+            });
         }
 
         $(function () {
