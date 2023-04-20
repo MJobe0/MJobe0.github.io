@@ -26,6 +26,62 @@
 
 <body>
     <script type="text/javascript">
+        var subId = "";
+        var candEmail = "";
+
+        function getLinkStageTwo(submissionId) {
+            console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
+            jQuery.ajax({
+                url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
+                method: "GET",
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("success: ", responseData);
+                    for (let i = 0; i < responseData.length; i++) {
+                        if (responseData[i].actionDetails.to === candEmail) {
+                            console.log("FORM LINK: ", responseData[i].actionDetails.formLink)
+                        }
+                    }
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log("error: ", responseData);
+                    return
+                }
+            })
+        }
+
+        function getLinkStageOne() {
+            JFCustomWidget.getFieldsValueByName(["refNumber", "Email"], function (res) {
+                console.log("ID = ", res.data[0].value);
+                iqxNumber = res.data[0].value;
+                candEmail = res.data[1].value;
+
+                console.log(`https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params["apiKey"]}`)
+                jQuery.ajax({
+                    url: `https://acaciumgroup.jotform.com/API/form/221914243957359/submissions?apiKey=${params["apiKey"]}`,
+                    method: "GET",
+                    // data: {
+                    //     "apiKey": params["apiKey"]
+                    // },
+                    // timeout: 10000,
+                    success: function (responseData, textStatus, jqXHR) {
+                        console.log("success: ", responseData);
+                        if (responseData.iqx === iqxNumber) {
+                            getLinkStageTwo(responseData.id);
+                        }
+                        return
+                    },
+                    error: function (responseData, textStatus, jqXHR) {
+                        console.log("error: ", responseData);
+                        return
+                    }
+                })
+            });
+        }
 
         $(function () {
             function GetPrefilledURLWidget(containerId, formData) {
@@ -35,14 +91,12 @@
                 this.init = init;
 
                 function init() {
+
+                    var params = JFCustomWidget.getWidgetSettings();
+
                     console.log(formData);
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
-
-                    JFCustomWidget.getFieldsValueByName(["refNumber"], function (res) {
-                        console.log("ID = ", res.data[0].value)
-                        originalSubmissionId = res.data[0].value;
-                    });
                 }
 
             }
@@ -59,7 +113,7 @@
 
     </script>
     <div id="myDiv" style="overflow: auto;" class="form-input-wide">
-        <button class="btn btn-success" type="button" onclick="">Get Link</button>
+        <button class="btn btn-success" type="button" onclick="getLinkStageOne()">Get Link</button>
     </div>
 </body>
 
