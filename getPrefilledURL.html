@@ -76,12 +76,6 @@
                     method: "GET",
                     crossDomain: true,
                     dataType: 'jsonp',
-                    // beforeSend: function (xhr) {
-                    //     xhr.setRequestHeader("jf-team-id", "223182511172042");
-                    // },
-                    // headers: {
-                    //     'jf-team-id': '223182511172042'
-                    // },
                     // data: {
                     //     "apiKey": params["apiKey"]
                     // },
@@ -90,6 +84,7 @@
                         console.log("success: ", responseData);
                         for (let j = 0; j < responseData.data.length; j++) {
                             if (responseData.data[j]["11"] === iqxNumber) {
+                                console.log("SUBID: ", responseData.data[j].id)
                                 getLinkStageTwo(responseData.data[j].id);
                             }
                         }
