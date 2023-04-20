@@ -51,8 +51,10 @@
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.content.length; i++) {
                         if (responseData.content[i].actionDetails.to === candEmail) {
-                            console.log("FORM LINK: ", responseData.content[i].actionDetails.formLink)
-                            document.getElementById('canFormLink').value = responseData.content[i].actionDetails.formLink;
+                            if (responseData.content[i].actionDetails.subject === params["formLink"]) {
+                                console.log("FORM LINK: ", responseData.content[i].actionDetails.formLink)
+                                document.getElementById('canFormLink').value = responseData.content[i].actionDetails.formLink;
+                            }
                         }
                     }
                     return
