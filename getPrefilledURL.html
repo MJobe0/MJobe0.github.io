@@ -29,14 +29,14 @@
         var iqxNumber = "";
         var candEmail = "";
 
-        function getLinkStageTwo(submissionId, candidateEmail) {
+        function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
             console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
                 method: "GET",
-                // crossDomain: true,
-                // dataType: 'json',
+                crossDomain: true,
+                dataType: 'jsonp',
                 // beforeSend: function (xhr) {
                 //     xhr.setRequestHeader("jf-team-id", "223182511172042");
                 // },
