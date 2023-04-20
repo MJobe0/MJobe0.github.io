@@ -52,8 +52,9 @@
                     for (let i = 0; i < responseData.content.length; i++) {
                         if (responseData.content[i].actionDetails.to === candEmail) {
                             if (responseData.content[i].actionDetails.subject === params["formLink"]) {
-                                console.log("FORM LINK: ", responseData.content[i].actionDetails.formLink)
-                                document.getElementById('canFormLink').value = responseData.content[i].actionDetails.formLink;
+                                console.log("FORM LINK: ", responseData.content[i].actionDetails.body)
+                                var extractedLinkFromBody = responseData.content[i].actionDetails.body.match(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/);
+                                document.getElementById('canFormLink').value = extractedLinkFromBody;
                             }
                         }
                     }
