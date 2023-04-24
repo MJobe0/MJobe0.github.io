@@ -147,8 +147,8 @@
                     var params3 = JFCustomWidget.getWidgetSettings();
                     JFCustomWidget.getFieldsValueById(["16", "17"], function (res) {
                         console.log("HERE 2")
-                        temp1 = res[0];
-                        temp2 = res[1];
+                        temp1 = res.data[0].value;
+                        temp2 = res.data[0].value;
                     })
 
                     console.log("TEMP 1: ", temp1)
