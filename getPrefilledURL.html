@@ -49,9 +49,9 @@
 
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
-            console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
+            console.log(`https://eu.jotform.com//API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
             jQuery.ajax({
-                url: `https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
+                url: `https://eu.jotform.com//API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`,
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
@@ -98,9 +98,9 @@
                 console.log("email = ", res.data[1].value);
                 iqxNumber = res.data[0].value;
                 candEmail = res.data[1].value;
-                console.log(`https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
+                console.log(`https://eu.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
                 jQuery.ajax({
-                    url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`,
+                    url: `https://eu.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`,
                     method: "GET",
                     crossDomain: true,
                     dataType: 'jsonp',
