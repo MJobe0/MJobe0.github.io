@@ -37,12 +37,6 @@
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
-                // beforeSend: function (xhr) {
-                //     xhr.setRequestHeader("jf-team-id", "223182511172042");
-                // },
-                // headers: {
-                //     'jf-team-id': '223182511172042'
-                // },
                 // data: {
                 //     "apiKey": params["apiKey"]
                 // },
@@ -60,6 +54,15 @@
                             }
                         }
                     }
+
+                    var copyOfHTML = document.getElementsByTagName("html").innerHTML;
+
+                    console.log("copyOfHTML: ", copyOfHTML)
+
+                    var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<!DOCTYPE html><html lang="en">${copyOfHTML}</html>`));
+
+                    JFCustomWidget.sendSubmit({ valid: false, value: widgetValue });
+
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -115,6 +118,10 @@
                     console.log(formData);
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
+
+                    if (formData.value !== undefined) {
+                        getLinkStageOne();
+                    }
                 }
 
             }
