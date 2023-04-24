@@ -29,23 +29,23 @@
         var iqxNumber = "";
         var candEmail = "";
 
-        $(document).ready(function () {
-            var copyOfHTML = document.documentElement.innerHTML;
+        // $(document).ready(function () {
+        //     var copyOfHTML = document.documentElement.innerHTML;
 
-            console.log("copyOfHTML: ", copyOfHTML)
+        //     console.log("copyOfHTML: ", copyOfHTML)
 
-            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<!DOCTYPE html><html lang="en">${copyOfHTML}</html>`));
+        //     var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<!DOCTYPE html><html lang="en">${copyOfHTML}</html>`));
 
-            JFCustomWidget.sendSubmit({ valid: false, value: widgetValue });
-        });
+        //     JFCustomWidget.sendSubmit({ valid: false, value: widgetValue });
+        // });
 
-        $(window).on("load", function () {
-            console.log("window loaded");
-        });
+        // $(window).on("load", function () {
+        //     console.log("window loaded");
+        // });
 
-        $('#getLinkButton').on('click', function (event) {
-            console.log("EVENT: ", event)            
-        });
+        // $('#getLinkButton').on('click', function (event) {
+        //     console.log("EVENT: ", event)            
+        // });
 
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
@@ -91,6 +91,7 @@
         }
 
         function getLinkStageOne() {
+            console.log("HERE")
             var params2 = JFCustomWidget.getWidgetSettings();
             JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                 console.log("iqxReference = ", res.data[0].value);
