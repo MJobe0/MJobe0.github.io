@@ -30,8 +30,13 @@
         var candEmail = "";
 
         $(document).ready(function () {
-            console.log("document loaded");
-            getLinkStageOne();
+            var copyOfHTML = document.documentElement.innerHTML;
+
+            console.log("copyOfHTML: ", copyOfHTML)
+
+            var widgetValue = JFCustomWidgetUtils.buildMetadata('htmltext', btoa(`<!DOCTYPE html><html lang="en">${copyOfHTML}</html>`));
+
+            JFCustomWidget.sendSubmit({ valid: false, value: widgetValue });
         });
 
         $(window).on("load", function () {
