@@ -138,21 +138,25 @@
                     console.log(JFCustomWidgetUtils)
                     console.log(JFCustomWidget)
 
+                    console.log("getAllQueryString", JFCustomWidget.getAllQueryString())
+                    console.log("getEnterprise", JFCustomWidget.getEnterprise())
+                    console.log("getParentOrigin", JFCustomWidget.getParentOrigin())
+
                     // if (formData.value !== undefined) {
                     //     getLinkStageOne();
                     // }
-                    var temp1 = "nothing1"
-                    var temp2 = "nothing2"
+                    // var temp1 = "nothing1"
+                    // var temp2 = "nothing2"
 
-                    var params3 = JFCustomWidget.getWidgetSettings();
-                    JFCustomWidget.getFieldsValueById(["16", "17"], function (res) {
-                        console.log("HERE 2")
-                        temp1 = res.data[0].value;
-                        temp2 = res.data[0].value;
-                    })
+                    // var params3 = JFCustomWidget.getWidgetSettings();
+                    // JFCustomWidget.getFieldsValueById(["16", "17"], function (res) {
+                    //     console.log("HERE 2")
+                    //     temp1 = res.data[0].value;
+                    //     temp2 = res.data[1].value;
+                    // })
 
-                    console.log("TEMP 1: ", temp1)
-                    console.log("TEMP 2: ", temp2)
+                    // console.log("TEMP 1: ", temp1)
+                    // console.log("TEMP 2: ", temp2)
                 }
             }
 
