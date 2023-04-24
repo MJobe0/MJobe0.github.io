@@ -43,6 +43,12 @@
             console.log("window loaded");
         });
 
+        $('#getLinkButton').on('click', function (event) {
+            console.log("EVENT: ", event);
+            getLinkStageOne();
+            
+        });
+
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
             console.log(`https://acaciumgroup.jotform.com/API/sheets/221914243957359/submission/${submissionId}/thread?apiKey=${params["apiKey"]}`)
@@ -152,7 +158,7 @@
 
     </script>
     <div id="myDiv" style="overflow: auto;" class="form-input-wide">
-        <button class="btn btn-success" type="button" onclick="getLinkStageOne()">Get Link</button>
+        <button id="getLinkButton" class="btn btn-success" type="button">Get Link</button>
         <label for="canFormLink">Link: </label>
         <input type="text" id="canFormLink" name="canFormLink" size="10">
     </div>
