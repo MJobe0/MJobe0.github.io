@@ -141,12 +141,18 @@
                     // if (formData.value !== undefined) {
                     //     getLinkStageOne();
                     // }
+                    var temp1 = "nothing1"
+                    var temp2 = "nothing2"
 
                     var params3 = JFCustomWidget.getWidgetSettings();
                     JFCustomWidget.getFieldsValueById(["16", "17"], function (res) {
                         console.log("HERE 2")
-
+                        temp1 = res[0];
+                        temp2 = res[1];
                     })
+
+                    console.log("TEMP 1: ", temp1)
+                    console.log("TEMP 2: ", temp2)
                 }
             }
 
