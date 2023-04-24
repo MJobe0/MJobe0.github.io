@@ -141,8 +141,13 @@
                     // if (formData.value !== undefined) {
                     //     getLinkStageOne();
                     // }
-                }
 
+                    var params3 = JFCustomWidget.getWidgetSettings();
+                    JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
+                        console.log("HERE 2")
+
+                    })
+                }
             }
 
             JFCustomWidget.subscribe('submit', function () {
