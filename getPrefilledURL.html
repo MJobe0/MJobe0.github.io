@@ -170,9 +170,14 @@
                 }
             }
 
-            JFCustomWidget.subscribe('submit', function (data) {
-                console.log("DATA: ", data);
+            JFCustomWidget.subscribe('submit', function () {
+                JFCustomWidget.getFieldsValueById(["iqxReference", "email"], function (res) {
+                    console.log("HERE 2")
+                    iqxNum = res.data[0].value;
+                    candEmail = res.data[1].value;
 
+                    JFCustomWidget.sendSubmit({ valid: false, value: { iqxNumber: iqxNum, email: candEmail } });
+                })
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
