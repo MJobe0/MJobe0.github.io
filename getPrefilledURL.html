@@ -136,7 +136,7 @@
                     console.log("getEnterprise", JFCustomWidget.getEnterprise())
                     console.log("getParentOrigin", JFCustomWidget.getParentOrigin())
 
-                    if (formData.value === "") {
+                    if (formData.value === "" || formData.value === undefined) {
                         var params3 = JFCustomWidget.getWidgetSettings();
                         JFCustomWidget.getFieldsValueById(["iqxReference", "email"], function (res) {
                             console.log("HERE 2")
