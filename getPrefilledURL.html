@@ -143,11 +143,12 @@
                             iqxNum = res.data[0].value;
                             candEmail = res.data[1].value;
 
-                            JFCustomWidget.sendSubmit({ valid: false, value: { iqxNumber: iqxNum, email: candEmail } });
+                            JFCustomWidget.sendSubmit({ valid: false, value: JSON.stringify({ iqxNumber: iqxNum, email: candEmail }) });
                         })
                     }
                     else {
                         try {
+                            var newformData = JSON.parse(formData.value);
                             iqxNum = formData.value.iqxNumber;
                             candEmail = formData.value.email;
 
