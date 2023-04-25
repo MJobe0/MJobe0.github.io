@@ -89,11 +89,11 @@
                                 // extractedLinkFromBody = extractedLinkFromBody.replace("&amp;", "");
                                 // extractedLinkFromBody = extractedLinkFromBody.replace(/"/g, "");
                                 try {
-                                    const newString = extractedLinkFromBody.replace(/['"]+/g, '')
+                                    const newString = String(extractedLinkFromBody).replace(/['"]+/g, '')
                                     console.log("NEW URL: ", newString);
 
                                 } catch (error) {
-                                    console.log("Error1")
+                                    console.log("Error1 ", error)
 
                                 }
 
@@ -213,7 +213,7 @@
         <button id="getLinkButton" class="btn btn-success" type="button" onclick="getLinkStageOne()">Get Link</button>
         <label for="canFormLink">Link: </label>
         <input type="text" id="canFormLink" name="canFormLink" size="10">
-        <button id="copyToClip" class="btn btn-success" type="button" onclick="copyContent()">Copy</button>
+        <!-- <button id="copyToClip" class="btn btn-success" type="button" onclick="copyContent()">Copy</button> -->
 
     </div>
 </body>
