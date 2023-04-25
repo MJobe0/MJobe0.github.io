@@ -162,8 +162,8 @@
                     else {
                         try {
                             var newformData = formData.value;
-                            iqxNum = newformData.match(/IQX Number:([^:\s]+)/g);
-                            candEmail = newformData.match(/Email:([^:\s]+)/g);
+                            iqxNum = newformData.match(/IQX Number:([^:\s]+)/g)[0].replace(/IQX Number:/g, '');
+                            candEmail = newformData.match(/Email:([^:\s]+)/g)[0].replace(/Email:/g, '');
 
                             console.log("IQX NUM: ", iqxNum);
                             console.log("CANDEMAIL: ", candEmail);
