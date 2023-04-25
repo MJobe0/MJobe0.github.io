@@ -149,11 +149,10 @@
                     else {
                         try {
                             var newformData = JSON.parse(formData.value);
-                            iqxNum = formData.value.iqxNumber;
-                            candEmail = formData.value.email;
-
+                            iqxNum = newformData.iqxNumber;
+                            candEmail = newformData.email;
                         } catch (error) {
-
+                            console.log("ERROR: ", error);
                         }
                     }
                     // var temp1 = "nothing1"
