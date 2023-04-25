@@ -156,14 +156,17 @@
                             iqxNum = res.data[0].value;
                             candEmail = res.data[1].value;
 
-                            JFCustomWidget.sendSubmit({ valid: false, value: JSON.stringify({ iqxNumber: iqxNum, email: candEmail }) });
+                            JFCustomWidget.sendSubmit({ valid: false, value: `Double click cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
                         })
                     }
                     else {
                         try {
-                            var newformData = JSON.parse(formData.value);
-                            iqxNum = newformData.iqxNumber;
-                            candEmail = newformData.email;
+                            var newformData = formData.value;
+                            iqxNum = newformData.match(/IQX Number:([^:\s]+)/g)[1];
+                            candEmail = newformData.match(/Email:([^:\s]+)/g)[1];
+
+                            console.log("IQX NUM: ", iqxNum);
+                            console.log("CANDEMAIL: ", candEmail);
                         } catch (error) {
                             console.log("ERROR: ", error);
                         }
@@ -189,7 +192,7 @@
                     iqxNum = res.data[0].value;
                     candEmail = res.data[1].value;
 
-                    JFCustomWidget.sendSubmit({ valid: false, value: JSON.stringify({ iqxNumber: iqxNum, email: candEmail }) });
+                    JFCustomWidget.sendSubmit({ valid: false, value: `Double click cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
                 })
             });
 
