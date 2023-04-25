@@ -170,7 +170,8 @@
                 }
             }
 
-            JFCustomWidget.subscribe('submit', function () {
+            JFCustomWidget.subscribe('submit', function (data) {
+                console.log("DATA: ", data);
 
             });
 
