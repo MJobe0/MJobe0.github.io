@@ -86,19 +86,10 @@
                             if (responseData.content[i].actionDetails.subject === params["formType"]) {
                                 console.log("FORM LINK: ", responseData.content[i].actionDetails.body)
                                 var extractedLinkFromBody = responseData.content[i].actionDetails.body.match(/"https:(.*?)"/g);
-                                // extractedLinkFromBody = extractedLinkFromBody.replace("&amp;", "");
-                                // extractedLinkFromBody = extractedLinkFromBody.replace(/"/g, "");
-                                try {
-                                    const newString = String(extractedLinkFromBody).replace(/['"]+/g, '')
-                                    console.log("NEW URL: ", newString);
-
-                                } catch (error) {
-                                    console.log("Error1 ", error)
-
-                                }
-
-                                document.getElementById('canFormLink').value = extractedLinkFromBody;
-                                clipText = extractedLinkFromBody;
+                                const newString = String(extractedLinkFromBody).replace(/['"]+/g, '').replace(/&amp;/g, '&');
+                                console.log("NEW URL: ", newString);
+                                document.getElementById('canFormLink').value = newString;
+                                clipText = newString;
                             }
                         }
                     }
