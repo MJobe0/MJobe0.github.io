@@ -88,8 +88,15 @@
                                 var extractedLinkFromBody = responseData.content[i].actionDetails.body.match(/"https:(.*?)"/g);
                                 // extractedLinkFromBody = extractedLinkFromBody.replace("&amp;", "");
                                 // extractedLinkFromBody = extractedLinkFromBody.replace(/"/g, "");
-                                const myOtherUrl = new URL(extractedLinkFromBody);
-                                console.log("NEW URL: ", myOtherUrl);
+                                try {
+                                    const newString = extractedLinkFromBody.replace(/['"]+/g, '')
+                                    console.log("NEW URL: ", newString);
+
+                                } catch (error) {
+                                    console.log("Error1")
+
+                                }
+
                                 document.getElementById('canFormLink').value = extractedLinkFromBody;
                                 clipText = extractedLinkFromBody;
                             }
