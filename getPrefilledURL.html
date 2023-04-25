@@ -138,7 +138,7 @@
 
                     if (formData.value === "" || formData.value === undefined) {
                         var params3 = JFCustomWidget.getWidgetSettings();
-                        JFCustomWidget.getFieldsValueById(["iqxReference", "email"], function (res) {
+                        JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                             console.log("HERE 2")
                             iqxNum = res.data[0].value;
                             candEmail = res.data[1].value;
@@ -172,7 +172,7 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                JFCustomWidget.getFieldsValueById(["iqxReference", "email"], function (res) {
+                JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
                     console.log("HERE 2")
                     iqxNum = res.data[0].value;
                     candEmail = res.data[1].value;
