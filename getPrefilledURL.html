@@ -156,7 +156,7 @@
                             iqxNum = res.data[0].value;
                             candEmail = res.data[1].value;
 
-                            JFCustomWidget.sendSubmit({ valid: false, value: `Double click cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
+                            JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
                         })
                     }
                     else {
@@ -171,18 +171,6 @@
                             console.log("ERROR: ", error);
                         }
                     }
-                    // var temp1 = "nothing1"
-                    // var temp2 = "nothing2"
-
-                    // var params3 = JFCustomWidget.getWidgetSettings();
-                    // JFCustomWidget.getFieldsValueById(["16", "17"], function (res) {
-                    //     console.log("HERE 2")
-                    //     temp1 = res.data[0].value;
-                    //     temp2 = res.data[1].value;
-                    // })
-
-                    // console.log("TEMP 1: ", temp1)
-                    // console.log("TEMP 2: ", temp2)
                 }
             }
 
@@ -192,7 +180,7 @@
                     iqxNum = res.data[0].value;
                     candEmail = res.data[1].value;
 
-                    JFCustomWidget.sendSubmit({ valid: false, value: `Double click cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
+                    JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
                 })
             });
 
