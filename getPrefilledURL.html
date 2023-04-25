@@ -50,6 +50,11 @@
         // });
 
         const copyContent = async () => {
+            navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
+                if (result.state == "granted" || result.state == "prompt") {
+                    alert("Write access granted!");
+                }
+            });
             document.getElementById('copyToClip').value = "Copying";
             try {
                 await navigator.clipboard.writeText(clipText);
@@ -59,7 +64,7 @@
                 console.error('Failed to copy: ', err);
                 document.getElementById('copyToClip').value = "Failed to copy";
             }
-            document.getElementById('copyToClip').value = "Copy"
+            document.getElementById('copyToClip').value = "Copy";
         }
 
         function getLinkStageTwo(submissionId) {
