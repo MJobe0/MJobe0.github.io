@@ -108,31 +108,69 @@
             console.log("IQX NUM: ", iqxNum);
             console.log("CANDEMAIL: ", candEmail);
             var params2 = JFCustomWidget.getWidgetSettings();
-            console.log(`https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
-            jQuery.ajax({
-                url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`,
-                method: "GET",
-                crossDomain: true,
-                dataType: 'jsonp',
-                // data: {
-                //     "apiKey": params["apiKey"]
-                // },
-                // timeout: 10000,
-                success: function (responseData, textStatus, jqXHR) {
-                    console.log("success: ", responseData);
-                    for (let j = 0; j < responseData.data.length; j++) {
-                        if (responseData.data[j]["11"] === iqxNum) {
-                            console.log("SUBID: ", responseData.data[j].id)
-                            getLinkStageTwo(responseData.data[j].id, responseData.data[j]["6"]);
+            if (iqxNum === "" || candEmail === "") {
+                JFCustomWidget.getFieldsValueByName(["iqxReference", "email"], function (res) {
+                    console.log("HERE 1.1")
+                    iqxNum = res.data[0].value;
+                    candEmail = res.data[1].value;
+
+                    console.log(`https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
+                    jQuery.ajax({
+                        url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`,
+                        method: "GET",
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        // data: {
+                        //     "apiKey": params["apiKey"]
+                        // },
+                        // timeout: 10000,
+                        success: function (responseData, textStatus, jqXHR) {
+                            console.log("success: ", responseData);
+                            for (let j = 0; j < responseData.data.length; j++) {
+                                if (responseData.data[j]["11"] === iqxNum) {
+                                    console.log("SUBID: ", responseData.data[j].id)
+                                    getLinkStageTwo(responseData.data[j].id, responseData.data[j]["6"]);
+                                }
+                            }
+                            return
+                        },
+                        error: function (responseData, textStatus, jqXHR) {
+                            console.log("error: ", responseData);
+                            return
                         }
+                    })
+
+                    JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
+                })
+            }
+            else {
+                console.log("HERE 1.2")
+                console.log(`https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`)
+                jQuery.ajax({
+                    url: `https://acaciumgroup.jotform.com//server.php?action=getExtGridSubmissions&formID=221914243957359&listID=231093864225052&includeSheetRows=true&excludeArchivedRows=true&startDate=&endDate=&start=0&limit=1000&sort=id&dir=DESC&_dc=1682001053683&apiKey=${params2["apiKey"]}`,
+                    method: "GET",
+                    crossDomain: true,
+                    dataType: 'jsonp',
+                    // data: {
+                    //     "apiKey": params["apiKey"]
+                    // },
+                    // timeout: 10000,
+                    success: function (responseData, textStatus, jqXHR) {
+                        console.log("success: ", responseData);
+                        for (let j = 0; j < responseData.data.length; j++) {
+                            if (responseData.data[j]["11"] === iqxNum) {
+                                console.log("SUBID: ", responseData.data[j].id)
+                                getLinkStageTwo(responseData.data[j].id, responseData.data[j]["6"]);
+                            }
+                        }
+                        return
+                    },
+                    error: function (responseData, textStatus, jqXHR) {
+                        console.log("error: ", responseData);
+                        return
                     }
-                    return
-                },
-                error: function (responseData, textStatus, jqXHR) {
-                    console.log("error: ", responseData);
-                    return
-                }
-            })
+                })
+            }
         }
 
         $(function () {
