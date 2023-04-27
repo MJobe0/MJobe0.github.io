@@ -75,13 +75,14 @@
                             }
                         }
                     }
-
+                    document.getElementById("getLinkButton").value = "Get Link Again";
                     document.getElementById("myLoadIcon").classList.remove("fa fa-spinner fa-spin");
 
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
                     console.log("error: ", responseData);
+                    document.getElementById("getLinkButton").value = "Retry";
                     document.getElementById('canFormLink').value = "Failed Stage 2";
                     return
                 }
@@ -89,7 +90,7 @@
         }
 
         function getLinkStageOne() {
-
+            document.getElementById("getLinkButton").value = "Getting Link....";
             document.getElementById("myLoadIcon").classList.add("fa fa-spinner fa-spin");
 
             console.log("HERE");
@@ -124,6 +125,7 @@
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log("error: ", responseData);
+                            document.getElementById("getLinkButton").value = "Retry";
                             document.getElementById('canFormLink').value = "Failed Stage 1";
                             return
                         }
@@ -156,6 +158,7 @@
                     },
                     error: function (responseData, textStatus, jqXHR) {
                         console.log("error: ", responseData);
+                        document.getElementById("getLinkButton").value = "Retry";
                         document.getElementById('canFormLink').value = "Failed Stage 1";
                         return
                     }
