@@ -45,7 +45,7 @@
                 return window.clipboardData.setData("Text", text);
             }
             else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-                var inputArea = document.createElement("inputArea");
+                var inputArea = document.createElement("textarea");
                 inputArea.textContent = text;
                 inputArea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
                 document.body.appendChild(inputArea);
