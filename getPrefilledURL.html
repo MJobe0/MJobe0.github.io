@@ -31,20 +31,20 @@
         var candEmail = "";
         var clipText = "";
 
-        var copyTextBtn = document.querySelector('.btn btn-outline-secondary');
+        // var copyTextBtn = document.querySelector('.btn btn-outline-secondary');
 
-        copyTextBtn.addEventListener('click', function (event) {
-            var copyText = document.querySelector('.form-control');
-            copyText.focus();
-            copyText.select();
-            try {
-                var successful = document.execCommand('copy');
-                var msg = successful ? 'successful' : 'unsuccessful';
-                console.log('Copying text command was ' + msg);
-            } catch (err) {
-                console.log('Oops, unable to copy');
-            }
-        });
+        // copyTextBtn.addEventListener('click', function (event) {
+        //     var copyText = document.querySelector('.form-control');
+        //     copyText.focus();
+        //     copyText.select();
+        //     try {
+        //         var successful = document.execCommand('copy');
+        //         var msg = successful ? 'successful' : 'unsuccessful';
+        //         console.log('Copying text command was ' + msg);
+        //     } catch (err) {
+        //         console.log('Oops, unable to copy');
+        //     }
+        // });
 
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
@@ -231,7 +231,7 @@
         </div>
         <input type="text" id="canFormLink" name="canFormLink" class="form-control" placeholder="" aria-label=""
             aria-describedby="basic-addon1">
-        <button class="btn btn-outline-secondary" type="button">Copy</button>
+        <!-- <button class="btn btn-outline-secondary" type="button">Copy</button> -->
     </div>
 
 
