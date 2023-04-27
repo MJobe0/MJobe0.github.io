@@ -31,23 +31,20 @@
         var candEmail = "";
         var clipText = "";
 
-        const copyContent = async () => {
-            navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
-                if (result.state == "granted" || result.state == "prompt") {
-                    alert("Write access granted!");
-                }
-            });
-            document.getElementById('copyToClip').value = "Copying";
+        var copyTextBtn = document.querySelector('.btn btn-outline-secondary');
+
+        copyTextBtn.addEventListener('click', function (event) {
+            var copyText = document.querySelector('.form-control');
+            copyText.focus();
+            copyText.select();
             try {
-                await navigator.clipboard.writeText(clipText);
-                console.log('Content copied to clipboard');
-                document.getElementById('copyToClip').value = "Copied";
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Copying text command was ' + msg);
             } catch (err) {
-                console.error('Failed to copy: ', err);
-                document.getElementById('copyToClip').value = "Failed to copy";
+                console.log('Oops, unable to copy');
             }
-            document.getElementById('copyToClip').value = "Copy";
-        }
+        });
 
         function getLinkStageTwo(submissionId) {
             var params = JFCustomWidget.getWidgetSettings();
@@ -227,14 +224,24 @@
         });
 
     </script>
-    <div id="myDiv" style="overflow: auto;" class="form-input-wide">
-        <button id="getLinkButton" class="btn btn-success" type="button" onclick="getLinkStageOne()">
-            <i id="myLoadIcon" class=""></i> Get Link</button>
-        <label for="canFormLink">Link: </label>
-        <input type="text" id="canFormLink" name="canFormLink" size="10">
-        <!-- <button id="copyToClip" class="btn btn-success" type="button" onclick="copyContent()">Copy</button> -->
-
+    <div id="myDiv" class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button id="getLinkButton" class="btn btn-success" type="button" onclick="getLinkStageOne()">
+                <i id="myLoadIcon" class=""></i> Get Link</button>
+            <button class="btn btn-outline-secondary" type="button">Copy Link</button>
+        </div>
+        <input type="text" id="canFormLink" name="canFormLink" class="form-control" placeholder="" aria-label=""
+            aria-describedby="basic-addon1">
     </div>
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
