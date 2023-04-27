@@ -75,22 +75,23 @@
                             }
                         }
                     }
-                    document.getElementById("getLinkButton").value = "Get Link Again";
+                    document.getElementById("getLinkButton").textContent = "Get Link Again";
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
 
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
                     console.log("error: ", responseData);
-                    document.getElementById("getLinkButton").value = "Retry";
+                    document.getElementById("getLinkButton").textContent = "Retry";
                     document.getElementById('canFormLink').value = "Failed Stage 2";
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     return
                 }
             })
         }
 
         function getLinkStageOne() {
-            document.getElementById("getLinkButton").value = "Getting Link....";
+            document.getElementById("getLinkButton").textContent = "Getting Link....";
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
             console.log("HERE");
@@ -125,8 +126,9 @@
                         },
                         error: function (responseData, textStatus, jqXHR) {
                             console.log("error: ", responseData);
-                            document.getElementById("getLinkButton").value = "Retry";
+                            document.getElementById("getLinkButton").textContent = "Retry";
                             document.getElementById('canFormLink').value = "Failed Stage 1";
+                            document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                             return
                         }
                     })
@@ -158,8 +160,9 @@
                     },
                     error: function (responseData, textStatus, jqXHR) {
                         console.log("error: ", responseData);
-                        document.getElementById("getLinkButton").value = "Retry";
+                        document.getElementById("getLinkButton").textContent = "Retry";
                         document.getElementById('canFormLink').value = "Failed Stage 1";
+                        document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         return
                     }
                 })
