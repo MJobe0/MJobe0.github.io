@@ -157,7 +157,7 @@
                 case "231183863105856": //Needs Assessment
                     JFCustomWidget.setFieldsValueById([{
                         id: "155",
-                        value: responseFromForm["5"] + " " + responseFromForm["6"] + " " + responseFromForm["7"] ?? "" //First Name
+                        value: `${responseFromForm["5"] ?? ""}` + " " + `${responseFromForm["6"] ?? ""}` + " " + `${responseFromForm["7"] ?? ""}` //First Name
                     }, {
                         id: "156",
                         value: responseFromForm["9"] ?? "" //Date of Birth
