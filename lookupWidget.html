@@ -43,8 +43,14 @@
                 success: function (responseData, textStatus, jqXHR) {
                     // if (curCaseId === responseData.content[0].)
                     console.log("RES: ", responseData);
-                    console.log("RES: ", responseData.content[0].answers["9"].answer);
-                    console.log("RES: ", responseData.content[1].answers["9"].answer);
+                    console.log("success: ", responseData);
+                    for (let i = 0; i < responseData.data.length; i++) {
+                        if (responseData.data[i]["60"] === currCaseId) {
+                            console.log("SUBID: ", responseData.data[i].id);
+                            setFieldValuesByFormId(responseData.data[i]);
+                        }
+                    }
+                    return
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -52,6 +58,67 @@
                     return
                 }
             })
+        }
+
+        function setFieldValuesByFormId(responseFromForm) {
+            console.log(currFormID)
+            var fields = [];
+            switch (currFormID) {
+                case "231192194561051":
+                    /*
+                    Test form
+                    Field Name and ID
+                    First Name: 4
+                    Middle Name: 5
+                    Last Name: 6
+                    Country of Origin: 7
+                    Date of Birth: 8
+                    Registration Center: 9
+                    Case ID: 10
+                    Active Client: 11
+                    Checked In: 12
+                    Alert: 13
+                    */
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "4",
+                        value: responseFromForm["5"] ?? ""
+                    }, {
+                        id: "5",
+                        value: responseFromForm["6"] ?? ""
+                    }, {
+                        id: "6",
+                        value: responseFromForm["7"] ?? ""
+                    }, {
+                        id: "7",
+                        value: responseFromForm["8"] ?? ""
+                    }, {
+                        id: "8",
+                        value: responseFromForm["9"] ?? ""
+                    }, {
+                        id: "9",
+                        value: responseFromForm["62"] ?? ""
+                    }, {
+                        id: "10",
+                        value: responseFromForm["60"] ?? ""
+                    }, {
+                        id: "11",
+                        value: responseFromForm["55"] ?? ""
+                    }, {
+                        id: "12",
+                        value: responseFromForm["56"] ?? ""
+                    }, {
+                        id: "13",
+                        value: responseFromForm["57"] ?? ""
+                    }]);
+                    break;
+                case "from2":
+                    break;
+                case "form3":
+                    break
+                default:
+                    break;
+            }
+
         }
 
         $(function () {
