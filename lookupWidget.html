@@ -30,13 +30,12 @@
             var currCaseId = document.getElementById("caseID").value;
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currCaseId)
-            console.log(`https://innovativebc.jotform.com/API/form/${params["formId"]}/submissions?apiKey=${params["apiKey"]}`)
+            console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${params["formId"]}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
             jQuery.ajax({
-                url: `https://innovativebc.jotform.com/API/form/${params["formId"]}/submissions?apiKey=${params["apiKey"]}`,
+                url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${params["formId"]}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
-                headers: { "jf-team-id": "231156469084056" },
                 // data: {
                 //     "apiKey": params["apiKey"]
                 // },
