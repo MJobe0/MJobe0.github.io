@@ -27,12 +27,13 @@
 
 
         function getUserInfo() {
+            var clientFormID = "231172796476870"
             var currCaseId = document.getElementById("caseID").value;
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currCaseId)
-            console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${params["formId"]}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
+            console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
             jQuery.ajax({
-                url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${params["formId"]}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
+                url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
                 method: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
@@ -62,7 +63,6 @@
 
         function setFieldValuesByFormId(responseFromForm, currFormID) {
             console.log(currFormID)
-            var fields = [];
             switch (currFormID) {
                 case "231172796476870":
                     /*
@@ -79,41 +79,144 @@
                     Checked In: 12
                     Alert: 13
                     */
+
                     JFCustomWidget.setFieldsValueById([{
                         id: "4",
-                        value: responseFromForm["5"] ?? ""
+                        value: responseFromForm["5"] ?? "" //First Name
                     }, {
                         id: "5",
-                        value: responseFromForm["6"] ?? ""
+                        value: responseFromForm["6"] ?? "" //Middle Name
                     }, {
                         id: "6",
-                        value: responseFromForm["7"] ?? ""
+                        value: responseFromForm["7"] ?? "" //Last Name
                     }, {
                         id: "7",
-                        value: responseFromForm["8"] ?? ""
+                        value: responseFromForm["8"] ?? "" //Country of Origin
                     }, {
                         id: "8",
-                        value: responseFromForm["9"] ?? ""
+                        value: responseFromForm["9"] ?? "" //Date of Birth
                     }, {
                         id: "9",
-                        value: responseFromForm["62"] ?? ""
+                        value: responseFromForm["62"] ?? "" //Registration Center
                     }, {
                         id: "10",
-                        value: responseFromForm["60"] ?? ""
+                        value: responseFromForm["60"] ?? "" //Case ID
                     }, {
                         id: "11",
-                        value: responseFromForm["55"] ?? ""
+                        value: responseFromForm["55"] ?? "" //Active Client
                     }, {
                         id: "12",
-                        value: responseFromForm["56"] ?? ""
+                        value: responseFromForm["56"] ?? "" //Checked In
                     }, {
                         id: "13",
-                        value: responseFromForm["57"] ?? ""
+                        value: responseFromForm["57"] ?? "" //Alert
                     }]);
                     break;
-                case "from2":
+                case "231173448610855": //Client Check-In
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "25",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "26",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "25",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "27",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "22",
+                        value: responseFromForm["60"] ?? "" //Case ID
+                    }]);
                     break;
-                case "form3":
+                case "231156624458862": //Registration Information
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "55",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "6",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "7",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "8",
+                        value: responseFromForm["8"] ?? "" //Country of Origin Drop down
+                    }, {
+                        id: "9",
+                        value: responseFromForm["9"] ?? "" //Date of Birth datefield
+                    }, {
+                        id: "10",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }, {
+                        id: "56",
+                        value: responseFromForm["60"] ?? "" //Case ID
+                    }]);
+                    break
+                case "231154934853055": //Needs Assessment
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "155",
+                        value: responseFromForm["5"] + " " + responseFromForm["6"] + " " + responseFromForm["7"] ?? "" //First Name
+                    }, {
+                        id: "156",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "163",
+                        value: responseFromForm["60"] ?? "" //Case ID
+                    }]);
+                    break
+                case "231166137203850": //Service Referral
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "10",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "45",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "46",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "47",
+                        value: responseFromForm["9"] ?? "" //Date of Birth datefield
+                    }, {
+                        id: "50",
+                        value: responseFromForm["60"] ?? "" //Case ID
+                    }]);
+                    break
+                case "231174162082852": //Client Check-Out
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "23",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "25",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "24",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "26",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "27",
+                        value: responseFromForm["60"] ?? "" //Case ID
+                    }]);
+                    break
+                case "231184726318861": //Client Wrap-Up (TBD)
+                    /*
+                     Client Creation
+                     Field Name and ID
+                     First Name: 5
+                     Middle Name: 6
+                     Last Name: 7
+                     Country of Origin: 8
+                     Date of Birth: 9
+                     Registration Center: 62
+                     Case ID: 60
+                     Active Client: 55
+                     Checked In: 56
+                     Alert: 57
+                     */
                     break
                 default:
                     console.log("NOTHING TO SEE HERE")
