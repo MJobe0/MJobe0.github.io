@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -13,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -27,6 +30,7 @@
 
 
         function getUserInfo() {
+            document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
             var clientFormID = "231172796476870"
             var currCaseId = document.getElementById("caseID").value;
             var params = JFCustomWidget.getWidgetSettings();
@@ -49,13 +53,14 @@
                         if (responseData.data[i]["60"] === currCaseId) {
                             console.log("SUBID: ", responseData.data[i].id);
                             setFieldValuesByFormId(responseData.data[i], params["formId"]);
+                            document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
                     }
-                    return
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     return
                 }
             })
@@ -250,12 +255,12 @@
         });
 
     </script>
-    <div style="overflow-x:auto;">
-        <label for="caseID"></label>
-        <input type="text" id="caseID" name="caseID">
-        <button id="getInfo" class="btn btn-success" type="button" onclick="getUserInfo()">Look Up</button>
+    <div id="myDiv" class="input-group mb-3">
+        <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
+            aria-describedby="basic-addon1">
+        <button id="getInfo" class="btn btn-success" type="button" onclick="getUserInfo()"><i id="myLoadIcon"
+                class=""></i> Lookup</button>
     </div>
-
 </body>
 
 </html>
