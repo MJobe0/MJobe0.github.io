@@ -47,7 +47,7 @@
                     for (let i = 0; i < responseData.data.length; i++) {
                         if (responseData.data[i]["60"] === currCaseId) {
                             console.log("SUBID: ", responseData.data[i].id);
-                            setFieldValuesByFormId(responseData.data[i]);
+                            setFieldValuesByFormId(responseData.data[i], params["formId"]);
                         }
                     }
                     return
@@ -60,8 +60,7 @@
             })
         }
 
-        function setFieldValuesByFormId(responseFromForm) {
-            console.log("getAllQueryString", JFCustomWidget.getAllQueryString())
+        function setFieldValuesByFormId(responseFromForm, currFormID) {
             console.log(currFormID)
             var fields = [];
             switch (currFormID) {
