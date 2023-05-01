@@ -50,7 +50,7 @@
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.data.length; i++) {
-                        if (responseData.data[i]["60"] === currCaseId) {
+                        if (responseData.data[i]["63"] === currCaseId) {
                             console.log("SUBID: ", responseData.data[i].id);
                             setFieldValuesByFormId(responseData.data[i], params["formId"]);
                             document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
@@ -105,7 +105,7 @@
                         value: responseFromForm["62"] ?? "" //Registration Center
                     }, {
                         id: "10",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }, {
                         id: "11",
                         value: responseFromForm["55"] ?? "" //Active Client
@@ -132,7 +132,7 @@
                         value: responseFromForm["9"] ?? "" //Date of Birth
                     }, {
                         id: "22",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }, {
                         id: "31",
                         value: responseFromForm["8"] ?? "" //Country of Origin
@@ -162,7 +162,7 @@
                         value: responseFromForm["62"] ?? "" //Registration Center
                     }, {
                         id: "56",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }]);
                     break
                 case "231183863105856": //Needs Assessment
@@ -174,7 +174,7 @@
                         value: responseFromForm["9"] ?? "" //Date of Birth
                     }, {
                         id: "163",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }, {
                         id: "157",
                         value: responseFromForm["8"] ?? "" //Country of Origin
@@ -195,7 +195,7 @@
                         value: responseFromForm["9"] ?? "" //Date of Birth
                     }, {
                         id: "50",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }, {
                         id: "53",
                         value: responseFromForm["8"] ?? "" //Country of Origin
@@ -219,7 +219,7 @@
                         value: responseFromForm["9"] ?? "" //Date of Birth
                     }, {
                         id: "27",
-                        value: responseFromForm["60"] ?? "" //Case ID
+                        value: responseFromForm["63"] ?? "" //Case ID
                     }, {
                         id: "29",
                         value: responseFromForm["8"] ?? "" //Country of Origin
@@ -238,7 +238,7 @@
                      Country of Origin: 8
                      Date of Birth: 9
                      Registration Center: 62
-                     Case ID: 60
+                     Case ID: 63
                      Active Client: 55
                      Checked In: 56
                      Alert: 57
