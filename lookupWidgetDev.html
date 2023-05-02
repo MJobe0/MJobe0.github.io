@@ -50,7 +50,8 @@
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.data.length; i++) {
-                        var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`
+                        var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
+                        console.log("FULLNAME: ", fullNameFromDb);
                         if (fullNameFromDb.includes(currClientName)) {
                             console.log("SUBID: ", responseData.data[i].id);
 
