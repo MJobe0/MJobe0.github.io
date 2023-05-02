@@ -122,6 +122,8 @@
 
         function setFieldValuesByFormId(responseFromForm, currFormID) {
             console.log(currFormID);
+            console.log("TYPE OF: ", typeof currFormID);
+
             console.log("TYPE OF RES 1: ",responseFromForm);
             try {
                 JSON.parse(responseFromForm);
