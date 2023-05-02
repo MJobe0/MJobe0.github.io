@@ -17,8 +17,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Data table-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -103,10 +102,10 @@
                     for (let i = 0; i < responseData.data.length; i++) {
                         // var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
                         // console.log("FULLNAME: ", fullNameFromDb);
-                        var clientNameFromDb = responseData.data[i]["5"] ?? "-";
-                        var clientMiddleNameFromDb = responseData.data[i]["6"] ?? "-";
-                        var clientLastNameFromDb = responseData.data[i]["7"] ?? "-";
-                        var clientDobFromDb = responseData.data[i]["9"] ?? "-";
+                        var clientNameFromDb = responseData.data[i]["5"] ?? "";
+                        var clientMiddleNameFromDb = responseData.data[i]["6"] ?? "";
+                        var clientLastNameFromDb = responseData.data[i]["7"] ?? "";
+                        var clientDobFromDb = responseData.data[i]["9"] ?? "";
                         console.log("CHECK FIRST NAME: ", clientNameFromDb.includes(currClientName))
                         console.log("CHECK MIDDLE  NAME: ", clientMiddleNameFromDb.includes(currClientMiddleName))
                         console.log("CHECK LAST  NAME: ", clientLastNameFromDb.includes(currClientLastName))
@@ -447,11 +446,11 @@
 
                     getFirstEightRec();
 
-                    $('#emptbl').DataTable({
-                        responsive: true,
-                        pagingType: "simple",
-                        pageLength: 2
+                    paginator({
+                        table: document.getElementById("emptbl"),
+                        // box: document.getElementById("box"),
                     });
+
                 }
             }
 
