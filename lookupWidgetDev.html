@@ -29,10 +29,10 @@
     <script type="text/javascript">
 
 
-        function getUserInfo() {
-            document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
+        function getInfoByName() {
+            // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
             var clientFormID = "231172796476870"
-            var currCaseId = document.getElementById("caseID").value;
+            var currClientName = document.getElementById("searchByClientName").value;
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currCaseId)
             console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
@@ -50,17 +50,19 @@
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.data.length; i++) {
-                        if (responseData.data[i]["63"] === currCaseId) {
+                        if (currClientName.includes(`${responseFromForm["5"] ?? ""}` + " " + `${responseFromForm["6"] ?? ""}` + " " + `${responseFromForm["7"] ?? ""}`)) {
                             console.log("SUBID: ", responseData.data[i].id);
-                            setFieldValuesByFormId(responseData.data[i], params["formId"]);
-                            document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+
+                            $("#emptbl").append(`<tr><td>${responseFromForm["63"] ?? ""}</td><td>${responseFromForm["5"] ?? ""}</td><td>${responseFromForm["6"] ?? ""}</td><td>${responseFromForm["7"] ?? ""}</td><td>${responseFromForm["9"] ?? ""}</td><td>${responseFromForm["8"] ?? ""}</td><td>${responseFromForm["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                            //resizeFrame();
+                            // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
                     }
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
                     console.log(responseData);
-                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     return
                 }
             })
@@ -264,12 +266,11 @@
                         <th>CHECKIN DATE/TIME</th>
                         <th> </th>
                     </tr>
-                </tbody >`
+                </tbody>`
             }
             else {
 
             }
-
         }
 
         $(function () {
@@ -309,8 +310,8 @@
     <div>
         <input type="text" id="searchByClientName" name="searchByClientName" placeholder="Search by Client Name"
             aria-label="" aria-describedby="basic-addon1">
-        <button id="searchByNameBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon"
-                class=""></i> Search</button>
+        <button id="searchByNameBtn" class="btn btn-success" type="button" onclick="getInfoByName()"><i id="myLoadIcon" class=""></i>
+            Search</button>
     </div>
     OR
     <p>Search by Name and Date of Birth</p>
@@ -322,8 +323,8 @@
         aria-describedby="basic-addon1">
     <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
         aria-describedby="basic-addon1">
-    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon"
-            class=""></i> Search</button>
+    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon" class=""></i>
+        Search</button>
 
     <table id="emptbl" class="emptbl" style="overflow: auto; width: 100%; table-layout: fixed;">
     </table>
