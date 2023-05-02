@@ -27,15 +27,6 @@
 
 <body>
     <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('#emptbl').DataTable({
-                responsive: true,
-                pagingType: "simple",
-                pageLength: 2
-            });
-        });
-
         function getInfoByName() {
             //Clear table
             var mytbl = document.getElementById("emptbl");
@@ -159,6 +150,11 @@
                         //resizeFrame();
                         // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     }
+                    $('#emptbl').DataTable({
+                        responsive: true,
+                        pagingType: "simple",
+                        pageLength: 2
+                    });
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
