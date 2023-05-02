@@ -418,13 +418,13 @@
         function updateTable(formIdFromSettings, dateFromDb) { //Registration Information and Needs Assessment
             const forButton = JSON.stringify(dateFromDb)
             if (formIdFromSettings === "231183863105856" || formIdFromSettings === "231156624458862") {
-                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${'231172796476870'})'>Select</button></td></tr>`);
+                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
             if (formIdFromSettings === "231173448610855") { //Client Check-In
-                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${"Active Client here"}</td><td>${"Checked in? here"}</td><td>${"Alert here"}</td><td>${"Status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${'231172796476870'})'>Select</button></td></tr>`);
+                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${"Active Client here"}</td><td>${"Checked in? here"}</td><td>${"Alert here"}</td><td>${"Status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
             if (formIdFromSettings === "231166137203850") { //Service Referral
-                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${"Referral category here"}</td><td>${"Referral type here"}</td><td>${"Referral status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${'231172796476870'})'>Select</button></td></tr>`);
+                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${"Referral category here"}</td><td>${"Referral type here"}</td><td>${"Referral status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
         }
 
