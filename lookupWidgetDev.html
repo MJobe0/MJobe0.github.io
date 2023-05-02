@@ -446,6 +446,12 @@
                     }
 
                     getFirstEightRec();
+
+                    $('#emptbl').DataTable({
+                        responsive: true,
+                        pagingType: "simple",
+                        pageLength: 2
+                    });
                 }
             }
 
