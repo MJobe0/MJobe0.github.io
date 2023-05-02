@@ -27,6 +27,15 @@
 
 <body>
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#emptbl').DataTable({
+                responsive: true,
+                pagingType: "simple",
+                pageLength: 2
+            });
+        });
+
         function getInfoByName() {
             //Clear table
             var mytbl = document.getElementById("emptbl");
