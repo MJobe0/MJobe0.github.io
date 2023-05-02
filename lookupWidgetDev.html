@@ -80,10 +80,10 @@
             mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
             // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
             var clientFormID = "231172796476870"
-            var currClientName = document.getElementById("firstName").value ?? "";
-            var currClientMiddleName = document.getElementById("middleName").value ?? "";
-            var currClientLastName = document.getElementById("lastName").value ?? "";
-            var currClientDob = document.getElementById("dateMonth").value ?? "" + "-" + document.getElementById("dateDay").value ?? "" + "-" + document.getElementById("dateYear").value ?? "";
+            var currClientName = document.getElementById("firstName").value ?? "-";
+            var currClientMiddleName = document.getElementById("middleName").value ?? "-";
+            var currClientLastName = document.getElementById("lastName").value ?? "-";
+            var currClientDob = document.getElementById("dateMonth").value ?? "-" + "-" + document.getElementById("dateDay").value ?? "-" + "-" + document.getElementById("dateYear").value ?? "-";
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currClientName)
             console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
@@ -103,16 +103,16 @@
                     for (let i = 0; i < responseData.data.length; i++) {
                         // var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
                         // console.log("FULLNAME: ", fullNameFromDb);
-                        var clientNameFromDb = responseData.data[i]["5"] ?? "";
-                        var clientMiddleNameFromDb = responseData.data[i]["6"] ?? "";
-                        var clientLastNameFromDb = responseData.data[i]["7"] ?? "";
-                        var clientDobFromDb = responseData.data[i]["9"] ?? "";
+                        var clientNameFromDb = responseData.data[i]["5"] ?? "-";
+                        var clientMiddleNameFromDb = responseData.data[i]["6"] ?? "-";
+                        var clientLastNameFromDb = responseData.data[i]["7"] ?? "-";
+                        var clientDobFromDb = responseData.data[i]["9"] ?? "-";
                         console.log("CHECK FIRST NAME: ", clientNameFromDb.includes(currClientName))
                         console.log("CHECK MIDDLE  NAME: ", clientMiddleNameFromDb.includes(currClientMiddleName))
                         console.log("CHECK LAST  NAME: ", clientLastNameFromDb.includes(currClientLastName))
                         console.log("CHECK DOB: ", clientDobFromDb.includes(currClientDob))
 
-                        if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb.includes(currClientDob)) {
+                        if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb === currClientDob) {
                             console.log("SUBID: ", responseData.data[i].id);
                             updateTable(params["formId"], responseData.data[i]);
                             //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
