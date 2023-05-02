@@ -121,7 +121,14 @@
         }
 
         function setFieldValuesByFormId(responseFromForm, currFormID) {
-            console.log(currFormID)
+            console.log(currFormID);
+            console.log("TYPE OF RES 1: ",responseFromForm);
+            try {
+                JSON.parse(responseFromForm);
+            } catch (error) {
+                
+            }
+
             switch (currFormID) {
                 case "231172796476870":
                     /*
@@ -348,7 +355,7 @@
 
         function updateTable(formIdFromSettings, dateFromDb) {
             if (formIdFromSettings === "231183863105856" || formIdFromSettings === "231156624458862") {
-                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button onClick="setFieldValuesByFormId(${dateFromDb}, ${"231172796476870"})">Button</button></td></tr>`);
+                $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button onClick="setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${"231172796476870"})">Button</button></td></tr>`);
             }
             if (formIdFromSettings=== "231173448610855") { //Client Check-In
 
