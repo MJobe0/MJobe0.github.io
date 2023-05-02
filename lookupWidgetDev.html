@@ -57,8 +57,8 @@
                         console.log("FULLNAME: ", fullNameFromDb);
                         if (fullNameFromDb.includes(currClientName)) {
                             console.log("SUBID: ", responseData.data[i].id);
-
-                            $("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                            updateTable(params["formId"], responseData.data[i]);
+                            //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
                             //resizeFrame();
                             // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
@@ -347,13 +347,13 @@
         }
 
         function updateTable(formIdFromSettings, dateFromDb) {
-            if (formIdFromSettings === "231183863105856" || formIdFromSettings["formId"] === "231156624458862") {
+            if (formIdFromSettings === "231183863105856" || formIdFromSettings === "231156624458862") {
                 $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button onClick="setFieldValuesByFormId(${dateFromDb}, ${"231172796476870"})">Button</button></td></tr>`);
             }
-            if (formIdFromSettings["formId"] === "231173448610855") { //Client Check-In
+            if (formIdFromSettings=== "231173448610855") { //Client Check-In
 
             }
-            if (formIdFromSettings["formId"] === "231166137203850") {  //Service Referral
+            if (formIdFromSettings === "231166137203850") {  //Service Referral
 
             }
         }
