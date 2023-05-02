@@ -34,7 +34,7 @@
             var clientFormID = "231172796476870"
             var currClientName = document.getElementById("searchByClientName").value;
             var params = JFCustomWidget.getWidgetSettings();
-            console.log("REQ: ", currCaseId)
+            console.log("REQ: ", currClientName)
             console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
