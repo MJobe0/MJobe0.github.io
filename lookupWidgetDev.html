@@ -102,7 +102,11 @@
                     for (let i = 0; i < responseData.data.length; i++) {
                         // var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
                         // console.log("FULLNAME: ", fullNameFromDb);
-                        if (responseData.data[i]["5"].includes(currClientName) || responseData.data[i]["6"].includes(currClientMiddleName) || responseData.data[i]["7"].includes(currClientLastName) || responseData.data[i]["9"].includes(currClientDob) ) {
+                        var clientNameFromDb = responseData.data[i]["5"];
+                        var clientMiddleNameFromDb = responseData.data[i]["6"];
+                        var clientLastNameFromDb = responseData.data[i]["7"];
+                        var clientDobFromDb = responseData.data[i]["9"];
+                        if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb.includes(currClientDob)) {
                             console.log("SUBID: ", responseData.data[i].id);
                             updateTable(params["formId"], responseData.data[i]);
                             //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
@@ -468,7 +472,8 @@
         aria-describedby="basic-addon1">
     <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
         aria-describedby="basic-addon1">
-    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i id="myLoadIcon" class=""></i>
+    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i
+            id="myLoadIcon" class=""></i>
         Search</button>
 
     <table id="emptbl" class="emptbl" style="overflow: auto; width: 100%; table-layout: fixed;">
