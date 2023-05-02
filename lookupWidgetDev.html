@@ -109,7 +109,7 @@
                         console.log("CHECK LAST  NAME: ", clientLastNameFromDb.includes(currClientLastName))
                         console.log("CHECK DOB: ", clientDobFromDb.includes(currClientDob))
 
-                        if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb === currClientDob) {
+                        if ((clientNameFromDb.includes(currClientName) && clientLastNameFromDb.includes(currClientLastName)) || (clientNameFromDb.includes(currClientName) || clientLastNameFromDb.includes(currClientLastName)) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientDobFromDb === currClientDob) {
                             console.log("SUBID: ", responseData.data[i].id);
                             updateTable(params["formId"], responseData.data[i]);
                             //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
