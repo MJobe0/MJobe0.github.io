@@ -89,7 +89,7 @@
             var currClientName = document.getElementById("firstName").value ?? "";
             var currClientMiddleName = document.getElementById("middleName").value ?? "";
             var currClientLastName = document.getElementById("lastName").value ?? "";
-            var currClientDob = document.getElementById("dateOfBirth").value ?? "";
+            var currClientDob = document.getElementById("dateMonth").value ?? "" + "-" + document.getElementById("dateDay").value ?? "" + "-" + document.getElementById("dateYear").value ?? "";
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currClientName)
             console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
@@ -477,8 +477,11 @@
         aria-describedby="basic-addon1">
     <input type="text" id="lastName" name="lastName" placeholder="Last Name" aria-label=""
         aria-describedby="basic-addon1">
-    <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
-        aria-describedby="basic-addon1">
+    <input type="text" id="dateMonth" name="dateMonth" placeholder="MM" aria-label="" aria-describedby="basic-addon1">/
+    <input type="text" id="dateDay" name="dateDay" placeholder="DD" aria-label="" aria-describedby="basic-addon1">/
+    <input type="text" id="dateYear" name="dateYear" placeholder="YYYY" aria-label="" aria-describedby="basic-addon1">
+    <!-- <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
+        aria-describedby="basic-addon1"> -->
     <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i
             id="myLoadIcon" class=""></i>
         Search</button>
