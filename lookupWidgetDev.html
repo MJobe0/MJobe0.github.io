@@ -107,6 +107,11 @@
                         var clientMiddleNameFromDb = responseData.data[i]["6"] ?? "";
                         var clientLastNameFromDb = responseData.data[i]["7"] ?? "";
                         var clientDobFromDb = responseData.data[i]["9"] ?? "";
+                        console.log("CHECK FIRST NAME: ", clientNameFromDb.includes(currClientName))
+                        console.log("CHECK MIDDLE  NAME: ", clientMiddleNameFromDb.includes(currClientMiddleName))
+                        console.log("CHECK LAST  NAME: ", clientLastNameFromDb.includes(currClientLastName))
+                        console.log("CHECK DOB: ", clientDobFromDb.includes(currClientDob))
+
                         if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb.includes(currClientDob)) {
                             console.log("SUBID: ", responseData.data[i].id);
                             updateTable(params["formId"], responseData.data[i]);
@@ -153,11 +158,6 @@
                         //resizeFrame();
                         // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     }
-                    $('#emptbl').DataTable({
-                        responsive: true,
-                        pagingType: "simple",
-                        pageLength: 2
-                    });
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
