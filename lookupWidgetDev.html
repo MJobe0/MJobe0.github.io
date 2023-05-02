@@ -79,9 +79,10 @@
             mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
             // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
             var clientFormID = "231172796476870"
-            var currClientFirstName = document.getElementById("searchByClientName").value;
-            var currClientLastName = document.getElementById("searchByClientName").value;
-            var currClientDob = document.getElementById("searchByClientName").value;
+            var currClientName = document.getElementById("firstName").value;
+            var currClientMiddleName = document.getElementById("middleName").value;
+            var currClientLastName = document.getElementById("lastName").value;
+            var currClientDob = document.getElementById("dateOfBirth").value;
             var params = JFCustomWidget.getWidgetSettings();
             console.log("REQ: ", currClientName)
             console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
@@ -99,13 +100,12 @@
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.data.length; i++) {
-                        var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
-                        console.log("FULLNAME: ", fullNameFromDb);
-                        if (fullNameFromDb.includes(currClientName)) {
+                        // var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`;
+                        // console.log("FULLNAME: ", fullNameFromDb);
+                        if (responseData.data[i]["5"].includes(currClientName) || responseData.data[i]["6"].includes(currClientMiddleName) || responseData.data[i]["7"].includes(currClientLastName) || responseData.data[i]["9"].includes(currClientDob) ) {
                             console.log("SUBID: ", responseData.data[i].id);
                             updateTable(params["formId"], responseData.data[i]);
-
-                            // $("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                            //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
                             //resizeFrame();
                             // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
@@ -400,7 +400,7 @@
             }
         }
 
-        function updateTable(formIdFromSettings, dateFromDb) {
+        function updateTable(formIdFromSettings, dateFromDb) { //Registration Information and Needs Assessment
             const forButton = JSON.stringify(dateFromDb)
             if (formIdFromSettings === "231183863105856" || formIdFromSettings === "231156624458862") {
                 $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${'231172796476870'})'>Button</button></td></tr>`);
@@ -408,7 +408,7 @@
             if (formIdFromSettings === "231173448610855") { //Client Check-In
 
             }
-            if (formIdFromSettings === "231166137203850") {  //Service Referral
+            if (formIdFromSettings === "231166137203850") { //Service Referral
 
             }
         }
@@ -468,7 +468,7 @@
         aria-describedby="basic-addon1">
     <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
         aria-describedby="basic-addon1">
-    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon" class=""></i>
+    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i id="myLoadIcon" class=""></i>
         Search</button>
 
     <table id="emptbl" class="emptbl" style="overflow: auto; width: 100%; table-layout: fixed;">
