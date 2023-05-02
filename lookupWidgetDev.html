@@ -120,6 +120,44 @@
             })
         }
 
+        function getFirstEightRec() {
+            //Clear table
+            var mytbl = document.getElementById("emptbl");
+            mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
+            // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
+            var clientFormID = "231172796476870"
+            var params = JFCustomWidget.getWidgetSettings();
+            console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
+            jQuery.ajax({
+                url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
+                method: "GET",
+                crossDomain: true,
+                dataType: 'jsonp',
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    // if (curCaseId === responseData.content[0].)
+                    console.log("RES: ", responseData);
+                    console.log("success: ", responseData);
+                    for (let i = 0; i < 9; i++) {
+                        console.log("SUBID: ", responseData.data[i].id);
+                        updateTable(params["formId"], responseData.data[i]);
+                        //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                        //resizeFrame();
+                        // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    }
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                    // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    return
+                }
+            })
+        }
+
         function setFieldValuesByFormId(responseFromForm, currFormID) {
             console.log(currFormID);
             console.log("TYPE OF: ", typeof currFormID);
@@ -396,6 +434,8 @@
                     if (currSetting["formId"] === "231166137203850") {  //Service Referral
                         buildHTML("v3");
                     }
+
+                    getFirstEightRec();
                 }
             }
 
