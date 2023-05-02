@@ -50,7 +50,8 @@
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
                     for (let i = 0; i < responseData.data.length; i++) {
-                        if (currClientName.includes(`${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`)) {
+                        var fullNameFromDb = `${responseData.data[i]["5"] ?? ""}` + " " + `${responseData.data[i]["6"] ?? ""}` + " " + `${responseData.data[i]["7"] ?? ""}`
+                        if (fullNameFromDb.includes(currClientName)) {
                             console.log("SUBID: ", responseData.data[i].id);
 
                             $("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
