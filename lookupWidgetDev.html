@@ -57,7 +57,7 @@
                         if (fullNameFromDb.includes(currClientName)) {
                             console.log("SUBID: ", responseData.data[i].id);
 
-                            $("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                            $("#emptbl tbody").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
                             //resizeFrame();
                             // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
@@ -259,8 +259,7 @@
 
         function buildHTML(buildVOne) {
             if (buildVOne === true) {
-                document.getElementById("emptbl").innerHTML = `<tbody>
-                    <tr><th>#</th>
+                document.getElementById("emptbl").innerHTML = `<tr><th>#</th>
                         <th>FIEST NAME</th>
                         <th>MIDDLE NAME</th>
                         <th>LAST NAME</th>
@@ -269,8 +268,7 @@
                         <th>CASE STATUS</th>
                         <th>CHECKIN DATE/TIME</th>
                         <th> </th>
-                    </tr>
-                </tbody>`
+                    </tr><tbody></tbody>`
             }
             else {
 
