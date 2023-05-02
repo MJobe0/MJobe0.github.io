@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+
+        function getUserInfo() {
+            document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
+            var clientFormID = "231172796476870"
+            var currCaseId = document.getElementById("caseID").value;
+            var params = JFCustomWidget.getWidgetSettings();
+            console.log("REQ: ", currCaseId)
+            console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
+            jQuery.ajax({
+                url: `https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`,
+                method: "GET",
+                crossDomain: true,
+                dataType: 'jsonp',
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    // if (curCaseId === responseData.content[0].)
+                    console.log("RES: ", responseData);
+                    console.log("success: ", responseData);
+                    for (let i = 0; i < responseData.data.length; i++) {
+                        if (responseData.data[i]["63"] === currCaseId) {
+                            console.log("SUBID: ", responseData.data[i].id);
+                            setFieldValuesByFormId(responseData.data[i], params["formId"]);
+                            document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                        }
+                    }
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    return
+                }
+            })
+        }
+
+        function setFieldValuesByFormId(responseFromForm, currFormID) {
+            console.log(currFormID)
+            switch (currFormID) {
+                case "231172796476870":
+                    /*
+                    Test form
+                    Field Name and ID
+                    First Name: 4
+                    Middle Name: 5
+                    Last Name: 6
+                    Country of Origin: 7
+                    Date of Birth: 8
+                    Registration Center: 9
+                    Case ID: 10
+                    Active Client: 11
+                    Checked In: 12
+                    Alert: 13
+                    */
+
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "4",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "5",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "6",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "7",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }, {
+                        id: "8",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "9",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }, {
+                        id: "10",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }, {
+                        id: "11",
+                        value: responseFromForm["55"] ?? "" //Active Client
+                    }, {
+                        id: "12",
+                        value: responseFromForm["56"] ?? "" //Checked In
+                    }, {
+                        id: "13",
+                        value: responseFromForm["57"] ?? "" //Alert
+                    }]);
+                    break;
+                case "231173448610855": //Client Check-In
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "24",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "26",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "25",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "27",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "22",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }, {
+                        id: "31",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }, {
+                        id: "32",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }]);
+                    break;
+                case "231156624458862": //Registration Information
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "55",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "6",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "7",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "62",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }, {
+                        id: "61",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "10",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }, {
+                        id: "56",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }]);
+                    break
+                case "231183863105856": //Needs Assessment
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "155",
+                        value: `${responseFromForm["5"] ?? ""}` + " " + `${responseFromForm["6"] ?? ""}` + " " + `${responseFromForm["7"] ?? ""}` //First Name
+                    }, {
+                        id: "156",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "163",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }, {
+                        id: "157",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }]);
+                    break
+                case "231166137203850": //Service Referral
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "10",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "45",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "46",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "52",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "50",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }, {
+                        id: "53",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }, {
+                        id: "54",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }]);
+                    break
+                case "231174162082852": //Client Check-Out
+                    JFCustomWidget.setFieldsValueById([{
+                        id: "23",
+                        value: responseFromForm["5"] ?? "" //First Name
+                    }, {
+                        id: "25",
+                        value: responseFromForm["6"] ?? "" //Middle Name
+                    }, {
+                        id: "24",
+                        value: responseFromForm["7"] ?? "" //Last Name
+                    }, {
+                        id: "26",
+                        value: responseFromForm["9"] ?? "" //Date of Birth
+                    }, {
+                        id: "27",
+                        value: responseFromForm["63"] ?? "" //Case ID
+                    }, {
+                        id: "29",
+                        value: responseFromForm["8"] ?? "" //Country of Origin
+                    }, {
+                        id: "30",
+                        value: responseFromForm["62"] ?? "" //Registration Center
+                    }]);
+                    break
+                case "231184726318861": //Client Wrap-Up (TBD)
+                    /*
+                     Client Creation
+                     Field Name and ID
+                     First Name: 5
+                     Middle Name: 6
+                     Last Name: 7
+                     Country of Origin: 8
+                     Date of Birth: 9
+                     Registration Center: 62
+                     Case ID: 63
+                     Active Client: 55
+                     Checked In: 56
+                     Alert: 57
+                     */
+                    break
+                default:
+                    console.log("NOTHING TO SEE HERE")
+                    break;
+            }
+
+        }
+
+        function buildHTML(buildVOne) {
+            if (buildV1 === true) {
+                document.getElementById("emptbl").innerHTML = <tbody>
+                    <tr><th>#</th>
+                        <th>FIEST NAME</th>
+                        <th>MIDDLE NAME</th>
+                        <th>LAST NAME</th>
+                        <th>DATE OF BIRTH</th>
+                        <th>COUNTRY OF ORIGIN</th>
+                        <th>CASE STATUS</th>
+                        <th>CHECKIN DATE/TIME</th>
+                        <th> </th>
+                    </tr>
+                </tbody >
+            }
+            else {
+
+            }
+
+        }
+
+        $(function () {
+            function CaseIdLookUp(containerId, formData) {
+
+                /**
+               * Exposed
+               */
+                this.init = init;
+
+                function init() {
+                    console.log("Widget ready: ", formData);
+                    const currSetting = JFCustomWidget.getWidgetSettings();
+
+                    if (currSetting["formId"] === "231183863105856" || currSetting["formId"] === "231156624458862") {
+                        buildHTML(true);
+                    }
+                    else {
+                        buildHTML(false);
+                    }
+
+                }
+            }
+
+            JFCustomWidget.subscribe('submit', function () {
+                // send the data
+                // JFCustomWidget.sendSubmit();
+            });
+
+            JFCustomWidget.subscribe('ready', function (data) {
+                var widget = new CaseIdLookUp('Test01', data);
+                widget.init();
+            });
+        });
+
+    </script>
+    <div>
+        <input type="text" id="searchByClientName" name="searchByClientName" placeholder="Search by Client Name"
+            aria-label="" aria-describedby="basic-addon1">
+        <button id="searchByNameBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon"
+                class=""></i> Search</button>
+    </div>
+    OR
+    <p>Search by Name and Date of Birth</p>
+    <input type="text" id="firstName" name="firstName" placeholder="First Name" aria-label=""
+        aria-describedby="basic-addon1">
+    <input type="text" id="middleName" name="middleName" placeholder="Middle Name" aria-label=""
+        aria-describedby="basic-addon1">
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name" aria-label=""
+        aria-describedby="basic-addon1">
+    <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
+        aria-describedby="basic-addon1">
+    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick=""><i id="myLoadIcon"
+            class=""></i> Search</button>
+
+    <table id="emptbl" class="emptbl" style="overflow: auto; width: 100%; table-layout: fixed;">
+    </table>
+    <!-- <div id="myDiv" class="input-group mb-3">
+        <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
+            aria-describedby="basic-addon1">
+        <button id="getInfo" class="btn btn-success" type="button" onclick="getUserInfo()"><i id="myLoadIcon"
+                class=""></i> Lookup</button>
+    </div> -->
+</body>
+
+</html>
