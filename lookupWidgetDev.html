@@ -108,13 +108,41 @@
                         console.log("CHECK MIDDLE  NAME: ", clientMiddleNameFromDb.includes(currClientMiddleName))
                         console.log("CHECK LAST  NAME: ", clientLastNameFromDb.includes(currClientLastName))
                         console.log("CHECK DOB: ", clientDobFromDb.includes(currClientDob))
-
-                        if (clientNameFromDb.includes(currClientName) || clientMiddleNameFromDb.includes(currClientMiddleName) || clientLastNameFromDb.includes(currClientLastName) || clientDobFromDb === currClientDob) {
-                            console.log("SUBID: ", responseData.data[i].id);
-                            updateTable(params["formId"], responseData.data[i]);
-                            //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
-                            //resizeFrame();
-                            // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                        if (currClientName !== "") {
+                            if (clientNameFromDb.includes(currClientName)) {
+                                console.log("SUBID: ", responseData.data[i].id);
+                                updateTable(params["formId"], responseData.data[i]);
+                                //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                                //resizeFrame();
+                                // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                            }
+                        }
+                        if (currClientMiddleName !== "") {
+                            if (clientMiddleNameFromDb.includes(currClientMiddleName)) {
+                                console.log("SUBID: ", responseData.data[i].id);
+                                updateTable(params["formId"], responseData.data[i]);
+                                //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                                //resizeFrame();
+                                // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                            }
+                        }
+                        if (currClientLastName !== "") {
+                            if (clientLastNameFromDb.includes(currClientLastName)) {
+                                console.log("SUBID: ", responseData.data[i].id);
+                                updateTable(params["formId"], responseData.data[i]);
+                                //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                                //resizeFrame();
+                                // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                            }
+                        }
+                        if (currClientDob !== "") {
+                            if (clientDobFromDb === currClientDob) {
+                                console.log("SUBID: ", responseData.data[i].id);
+                                updateTable(params["formId"], responseData.data[i]);
+                                //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
+                                //resizeFrame();
+                                // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                            }
                         }
                     }
                     return
@@ -458,7 +486,7 @@
         });
 
     </script>
-    <div id="myDiv" style="overflow: scroll;">
+    <div id="myDiv" style="overflow: auto;">
         <div>
             <input type="text" id="searchByClientName" name="searchByClientName" placeholder="Search by Client Name"
                 aria-label="" aria-describedby="basic-addon1">
@@ -486,7 +514,7 @@
                 id="myLoadIcon" class=""></i>
             Search</button>
         <Br></Br>
-        <table id="emptbl" class="table table-striped" style="overflow: auto; width: 100%; table-layout: fixed;">
+        <table id="emptbl" class="table table-bordered" style="overflow: auto; width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
