@@ -30,6 +30,10 @@
 
 
         function getInfoByName() {
+            //Clear table
+            var new_tbody = document.createElement('tbody');
+            populate_with_new_rows(new_tbody);
+            old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
             // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
             var clientFormID = "231172796476870"
             var currClientName = document.getElementById("searchByClientName").value;
@@ -312,7 +316,8 @@
     <div>
         <input type="text" id="searchByClientName" name="searchByClientName" placeholder="Search by Client Name"
             aria-label="" aria-describedby="basic-addon1">
-        <button id="searchByNameBtn" class="btn btn-success" type="button" onclick="getInfoByName()"><i id="myLoadIcon" class=""></i>
+        <button id="searchByNameBtn" class="btn btn-success" type="button" onclick="getInfoByName()"><i id="myLoadIcon"
+                class=""></i>
             Search</button>
     </div>
     OR
