@@ -31,18 +31,22 @@
         width: 100%;
     } */
 
+    th {
+        border: 1px solid #dedbf0;
+    }
+
+    td {
+        border: 1px solid #dedbf0;
+        width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     div.pager {
         text-align: center;
         margin: 1em 0;
     }
-
-
-    td {
-        max-width: 150px;
-        max-height: 50px;
-        overflow: hidden;
-    }
-
 
     div.pager span {
         display: inline-block;
@@ -481,7 +485,7 @@
 
         function genPages() {
             $(".pager").remove();
-            $('table.table.table-sm').each(function () {
+            $('table.table').each(function () {
                 var currentPage = 0;
                 var numPerPage = 5;
                 var $table = $(this);
@@ -571,8 +575,8 @@
             Search</button>
     </div>
     <Br></Br>
-    <div id="myDiv" style="height:400px;overflow:auto;">
-        <table id="emptbl" class="table table-bordered" style="width: 100%; table-layout: fixed;">
+    <div id="myDiv" style="height:400px;overflow:auto;" class="table-responsive-sm">
+        <table id="emptbl" class="table" style="width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
