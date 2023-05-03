@@ -452,7 +452,7 @@
         }
 
         function genPages() {
-            $('#emptbl').each(function () {
+            $('table #emptbl').each(function () {
                 var currentPage = 0;
                 var numPerPage = 3;
                 var $table = $(this);
@@ -472,7 +472,7 @@
                         $(this).addClass('active').siblings().removeClass('active');
                     }).appendTo($pager).addClass('clickable');
                 }
-                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+                $pager.insertBefore($table).find('span.page-number:first').addClass('active');
             });
         }
 
