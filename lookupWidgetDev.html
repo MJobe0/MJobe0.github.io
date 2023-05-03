@@ -32,8 +32,56 @@
         overflow: auto
     }
 
-    #emptbl tr {
-        display: none;
+    table {
+        width: 40em;
+        margin: 2em auto;
+    }
+
+    thead {
+        background: #000;
+        color: #fff;
+    }
+
+    td {
+        width: 10em;
+        padding: 0.3em;
+    }
+
+    tbody {
+        background: #ccc;
+    }
+
+    div.pager {
+        text-align: center;
+        margin: 1em 0;
+    }
+
+    div.pager {
+        text-align: center;
+        margin: 1em 0;
+    }
+
+    div.pg-goto {
+        color: #000000;
+        font-size: 15px;
+        cursor: pointer;
+        background: #D0B389;
+        padding: 2px 4px 2px 4px;
+    }
+
+    div.pg-selected {
+        color: #fff;
+        font-size: 15px;
+        background: #000000;
+        padding: 2px 4px 2px 4px;
+    }
+
+    div.pg-normal {
+        color: #000000;
+        font-size: 15px;
+        cursor: pointer;
+        background: #D0B389;
+        padding: 2px 4px 2px 4px;
     }
 </style>
 
@@ -436,26 +484,67 @@
         }
 
         function genPages() {
-            $('#emptbl').after('<div id="nav"></div>');
-            var rowsShown = 4;
-            var rowsTotal = $('#emptbl tbody tr').length;
-            var numPages = rowsTotal / rowsShown;
-            for (i = 0; i < numPages; i++) {
-                var pageNum = i + 1;
-                $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
-            }
-            $('#emptbl tbody tr').hide();
-            $('#emptbl tbody tr').slice(0, rowsShown).show();
-            $('#nav a:first').addClass('active');
-            $('#nav a').bind('click', function () {
+            $('table.paginated').each(function () {
+                var $table = $(this);
+                var itemsPerPage = 10;
+                var currentPage = 0;
+                var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage);
+                $table.bind('repaginate', function () {
+                    if (pages > 1) {
+                        var pager;
+                        if ($table.next().hasClass("pager"))
+                            pager = $table.next().empty(); else
+                            pager = $('<div class="pager" style="padding-top: 20px; direction:ltr; " align="center"></div>');
 
-                $('#nav a').removeClass('active');
-                $(this).addClass('active');
-                var currPage = $(this).attr('rel');
-                var startItem = currPage * rowsShown;
-                var endItem = startItem + rowsShown;
-                $('#emptbl tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
-                    css('display', 'table-row').animate({ opacity: 1 }, 300);
+                        $('<span class="pg-goto"></span>').text(' « First ').bind('click', function () {
+                            currentPage = 0;
+                            $table.trigger('repaginate');
+                        }).appendTo(pager);
+
+                        $('<span class="pg-goto"> « Prev </span>').bind('click', function () {
+                            if (currentPage > 0)
+                                currentPage--;
+                            $table.trigger('repaginate');
+                        }).appendTo(pager);
+
+                        var startPager = currentPage > 2 ? currentPage - 2 : 0;
+                        var endPager = startPager > 0 ? currentPage + 3 : 5;
+                        if (endPager > pages) {
+                            endPager = pages;
+                            startPager = pages - 5; if (startPager < 0)
+                                startPager = 0;
+                        }
+
+                        for (var page = startPager; page < endPager; page++) {
+                            $('<span id="pg' + page + '" class="' + (page == currentPage ? 'pg-selected' : 'pg-normal') + '"></span>').text(page + 1).bind('click', {
+                                newPage: page
+                            }, function (event) {
+                                currentPage = event.data['newPage'];
+                                $table.trigger('repaginate');
+                            }).appendTo(pager);
+                        }
+
+                        $('<span class="pg-goto"> Next » </span>').bind('click', function () {
+                            if (currentPage < pages - 1)
+                                currentPage++;
+                            $table.trigger('repaginate');
+                        }).appendTo(pager);
+                        $('<span class="pg-goto"> Last » </span>').bind('click', function () {
+                            currentPage = pages - 1;
+                            $table.trigger('repaginate');
+                        }).appendTo(pager);
+
+                        if (!$table.next().hasClass("pager"))
+                            pager.insertAfter($table);
+                        //pager.insertBefore($table);
+
+                    }// end $table.bind('repaginate', function () { ...
+
+                    $table.find(
+                        'tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
+                });
+
+                $table.trigger('repaginate');
             });
         }
 
@@ -527,7 +616,7 @@
         Search</button>
     <Br></Br>
     <div id="myDiv" style="overflow: auto;">
-        <table id="emptbl" class="table table-bordered" style="overflow: auto; width: 100%; table-layout: fixed;">
+        <table id="emptbl" class="paginated" style="overflow: auto; width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
