@@ -485,7 +485,7 @@
 
         function genPages() {
             $(".pager").remove();
-            $('table.table').each(function () {
+            $('table.table.table-sm').each(function () {
                 var currentPage = 0;
                 var numPerPage = 5;
                 var $table = $(this);
@@ -554,7 +554,6 @@
         <button id="searchByNameBtn" class="btn btn-success" type="button" onclick="getInfoByName()"><i id="myLoadIcon"
                 class=""></i>
             Search</button>
-
         OR
         <input type="text" id="firstName" name="firstName" placeholder="First Name" aria-label=""
             aria-describedby="basic-addon1" size="5">
@@ -575,8 +574,8 @@
             Search</button>
     </div>
     <Br></Br>
-    <div id="myDiv" style="height:400px;overflow:auto;" class="table-responsive-sm">
-        <table id="emptbl" class="table" style="width: 100%; table-layout: fixed;">
+    <div id="myDiv" style="height:400px;overflow:auto;" >
+        <table id="emptbl" class="table table-sm" style="width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
