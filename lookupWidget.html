@@ -473,7 +473,7 @@
 
         function genPages() {
             $(".pager").remove();
-            $('table.table.table-bordered').each(function () {
+            $('table.table.table-sm').each(function () {
                 var currentPage = 0;
                 var numPerPage = 5;
                 var $table = $(this);
@@ -564,7 +564,7 @@
     </div>
     <Br></Br>
     <div id="myDiv" style="height:400px;overflow:auto;">
-        <table id="emptbl" class="table table-bordered" style="width: 100%; table-layout: fixed;">
+        <table id="emptbl" class="table table-sm" style="width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
