@@ -16,6 +16,9 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Data Table-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -35,6 +38,9 @@
 
 <body>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
         function getInfoByName() {
             //Clear table
             var mytbl = document.getElementById("emptbl");
@@ -503,6 +509,25 @@
         <button id="getInfo" class="btn btn-success" type="button" onclick="getUserInfo()"><i id="myLoadIcon"
                 class=""></i> Lookup</button>
     </div> -->
+
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Row 1 Data 1</td>
+                    <td>Row 1 Data 2</td>
+                </tr>
+                <tr>
+                    <td>Row 2 Data 1</td>
+                    <td>Row 2 Data 2</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 
