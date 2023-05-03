@@ -451,6 +451,7 @@
         }
 
         function genPages() {
+            $("#pager").remove();
             $('table.table.table-bordered').each(function () {
                 var currentPage = 0;
                 var numPerPage = 3;
