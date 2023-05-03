@@ -32,56 +32,25 @@
         overflow: auto
     }
 
-    table {
-        width: 40em;
-        margin: 2em auto;
+    div.pager {
+        text-align: center;
+        margin: 1em 0;
     }
 
-    thead {
+    div.pager span {
+        display: inline-block;
+        width: 1.8em;
+        height: 1.8em;
+        line-height: 1.8;
+        text-align: center;
+        cursor: pointer;
         background: #000;
         color: #fff;
+        margin-right: 0.5em;
     }
 
-    td {
-        width: 10em;
-        padding: 0.3em;
-    }
-
-    tbody {
-        background: #ccc;
-    }
-
-    div.pager {
-        text-align: center;
-        margin: 1em 0;
-    }
-
-    div.pager {
-        text-align: center;
-        margin: 1em 0;
-    }
-
-    div.pg-goto {
-        color: #000000;
-        font-size: 15px;
-        cursor: pointer;
-        background: #D0B389;
-        padding: 2px 4px 2px 4px;
-    }
-
-    div.pg-selected {
-        color: #fff;
-        font-size: 15px;
-        background: #000000;
-        padding: 2px 4px 2px 4px;
-    }
-
-    div.pg-normal {
-        color: #000000;
-        font-size: 15px;
-        cursor: pointer;
-        background: #D0B389;
-        padding: 2px 4px 2px 4px;
+    div.pager span.active {
+        background: #c00;
     }
 </style>
 
@@ -485,66 +454,26 @@
 
         function genPages() {
             $('table.paginated').each(function () {
-                var $table = $(this);
-                var itemsPerPage = 10;
                 var currentPage = 0;
-                var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage);
+                var numPerPage = 10;
+                var $table = $(this);
                 $table.bind('repaginate', function () {
-                    if (pages > 1) {
-                        var pager;
-                        if ($table.next().hasClass("pager"))
-                            pager = $table.next().empty(); else
-                            pager = $('<div class="pager" style="padding-top: 20px; direction:ltr; " align="center"></div>');
-
-                        $('<span class="pg-goto"></span>').text(' « First ').bind('click', function () {
-                            currentPage = 0;
-                            $table.trigger('repaginate');
-                        }).appendTo(pager);
-
-                        $('<span class="pg-goto"> « Prev </span>').bind('click', function () {
-                            if (currentPage > 0)
-                                currentPage--;
-                            $table.trigger('repaginate');
-                        }).appendTo(pager);
-
-                        var startPager = currentPage > 2 ? currentPage - 2 : 0;
-                        var endPager = startPager > 0 ? currentPage + 3 : 5;
-                        if (endPager > pages) {
-                            endPager = pages;
-                            startPager = pages - 5; if (startPager < 0)
-                                startPager = 0;
-                        }
-
-                        for (var page = startPager; page < endPager; page++) {
-                            $('<span id="pg' + page + '" class="' + (page == currentPage ? 'pg-selected' : 'pg-normal') + '"></span>').text(page + 1).bind('click', {
-                                newPage: page
-                            }, function (event) {
-                                currentPage = event.data['newPage'];
-                                $table.trigger('repaginate');
-                            }).appendTo(pager);
-                        }
-
-                        $('<span class="pg-goto"> Next » </span>').bind('click', function () {
-                            if (currentPage < pages - 1)
-                                currentPage++;
-                            $table.trigger('repaginate');
-                        }).appendTo(pager);
-                        $('<span class="pg-goto"> Last » </span>').bind('click', function () {
-                            currentPage = pages - 1;
-                            $table.trigger('repaginate');
-                        }).appendTo(pager);
-
-                        if (!$table.next().hasClass("pager"))
-                            pager.insertAfter($table);
-                        //pager.insertBefore($table);
-
-                    }// end $table.bind('repaginate', function () { ...
-
-                    $table.find(
-                        'tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
+                    $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
                 });
-
                 $table.trigger('repaginate');
+                var numRows = $table.find('tbody tr').length;
+                var numPages = Math.ceil(numRows / numPerPage);
+                var $pager = $('<div class="pager"></div>');
+                for (var page = 0; page < numPages; page++) {
+                    $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                        newPage: page
+                    }, function (event) {
+                        currentPage = event.data['newPage'];
+                        $table.trigger('repaginate');
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }).appendTo($pager).addClass('clickable');
+                }
+                $pager.insertBefore($table).find('span.page-number:first').addClass('active');
             });
         }
 
