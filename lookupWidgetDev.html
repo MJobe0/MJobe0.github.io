@@ -32,7 +32,7 @@
         overflow: auto
     }
 
-    /* div.pager {
+    div.pager {
         text-align: center;
         margin: 1em 0;
     }
@@ -51,7 +51,7 @@
 
     div.pager span.active {
         background: #c00;
-    } */
+    }
 </style>
 
 <body>
@@ -452,7 +452,7 @@
         }
 
         function genPages() {
-            $('table.paginated').each(function () {
+            $('#emptbl').each(function () {
                 var currentPage = 0;
                 var numPerPage = 3;
                 var $table = $(this);
@@ -543,7 +543,7 @@
         Search</button>
     <Br></Br>
     <div id="myDiv" style="overflow: auto;">
-        <table id="emptbl" class="paginated" style="overflow: auto; width: 100%; table-layout: fixed;">
+        <table id="emptbl" class="table" style="overflow: auto; width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
