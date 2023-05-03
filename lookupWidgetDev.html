@@ -43,13 +43,14 @@
         line-height: 1.8;
         text-align: center;
         cursor: pointer;
-        background: #000;
-        color: #fff;
+        background: #eeebfb;
+        color: #020202;
         margin-right: 0.5em;
     }
 
     div.pager span.active {
-        background: #c00;
+        background: #909ae0;
+        color: #fbf7f7;
     }
 </style>
 
@@ -522,28 +523,28 @@
         <button id="searchByNameBtn" class="btn btn-success" type="button" onclick="getInfoByName()"><i id="myLoadIcon"
                 class=""></i>
             Search</button>
-    </div>
-    OR
-    <p>Search by Name and Date of Birth</p>
-    <input type="text" id="firstName" name="firstName" placeholder="First Name" aria-label=""
-        aria-describedby="basic-addon1">
-    <input type="text" id="middleName" name="middleName" placeholder="Middle Name" aria-label=""
-        aria-describedby="basic-addon1">
-    <input type="text" id="lastName" name="lastName" placeholder="Last Name" aria-label=""
-        aria-describedby="basic-addon1">
-    <input type="text" id="dateMonth" name="dateMonth" placeholder="MM" aria-label="" aria-describedby="basic-addon1"
-        size="1">/
-    <input type="text" id="dateDay" name="dateDay" placeholder="DD" aria-label="" aria-describedby="basic-addon1"
-        size="1">/
-    <input type="text" id="dateYear" name="dateYear" placeholder="YYYY" aria-label="" aria-describedby="basic-addon1"
-        size="1">
-    <!-- <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
+
+        OR
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" aria-label=""
+            aria-describedby="basic-addon1" size="15">
+        <input type="text" id="middleName" name="middleName" placeholder="Middle Name" aria-label=""
+            aria-describedby="basic-addon1" size="15">
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" aria-label=""
+            aria-describedby="basic-addon1" size="15">
+        <input type="text" id="dateMonth" name="dateMonth" placeholder="MM" aria-label=""
+            aria-describedby="basic-addon1" size="1">/
+        <input type="text" id="dateDay" name="dateDay" placeholder="DD" aria-label="" aria-describedby="basic-addon1"
+            size="1">/
+        <input type="text" id="dateYear" name="dateYear" placeholder="YYYY" aria-label=""
+            aria-describedby="basic-addon1" size="1">
+        <!-- <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="MM DD YYYY" aria-label=""
         aria-describedby="basic-addon1"> -->
-    <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i
-            id="myLoadIcon" class=""></i>
-        Search</button>
+        <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="getInfoByNameAndDob()"><i
+                id="myLoadIcon" class=""></i>
+            Search</button>
+    </div>
     <Br></Br>
-    <div id="myDiv" style="height:100px;overflow:auto;">
+    <div id="myDiv" style="height:500px;overflow:auto;">
         <table id="emptbl" class="table table-bordered" style="width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
