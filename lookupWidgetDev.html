@@ -382,7 +382,7 @@
 
         function buildHTML(buildVer) {
             if (buildVer === "v1") {
-                document.getElementById("emptbl").innerHTML = `<tr><th>#</th>
+                document.getElementById("emptbl").innerHTML = `<thead><tr><th>#</th>
                         <th>FIRST NAME</th>
                         <th>MIDDLE NAME</th>
                         <th>LAST NAME</th>
@@ -391,10 +391,10 @@
                         <th>CASE STATUS</th>
                         <th>CHECKIN DATE/TIME</th>
                         <th> </th>
-                    </tr>`
+                    </tr></thead>`
             }
             if (buildVer === "v2") {
-                document.getElementById("emptbl").innerHTML = `<tr><th>#</th>
+                document.getElementById("emptbl").innerHTML = `<thead><tr><th>#</th>
                         <th>FIRST NAME</th>
                         <th>MIDDLE NAME</th>
                         <th>LAST NAME</th>
@@ -405,10 +405,10 @@
                         <th>STATUS</th>
                         <th>ALERT</th>
                         <th> </th>
-                    </tr>`
+                    </tr></thead>`
             }
             if (buildVer === "v3") {
-                document.getElementById("emptbl").innerHTML = `<tr><th>#</th>
+                document.getElementById("emptbl").innerHTML = `<thead><tr><th>#</th>
                         <th>FIRST NAME</th>
                         <th>MIDDLE NAME</th>
                         <th>LAST NAME</th>
@@ -417,7 +417,7 @@
                         <th>REFERRAL TYPE</th>
                         <th>REFERRAL STATUS</th>
                         <th> </th>
-                    </tr>`
+                    </tr></thead>`
             }
         }
 
@@ -501,7 +501,7 @@
         Search</button>
     <Br></Br>
     <div id="myDiv" style="overflow: auto;">
-        <table id="emptbl" class="table table-bordered" style="overflow: auto; width: 100%; table-layout: fixed;">
+        <table id="emptbl" class="display" style="overflow: auto; width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
         <input type="text" id="caseID" name="caseID" class="form-control" placeholder="" aria-label=""
