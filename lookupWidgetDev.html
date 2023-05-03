@@ -38,9 +38,6 @@
 
 <body>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#emptbl').DataTable();
-        });
         function getInfoByName() {
             //Clear table
             var mytbl = document.getElementById("emptbl");
@@ -457,6 +454,8 @@
                     }
 
                     getFirstEightRec();
+
+                    $('#emptbl').DataTable();
                 }
             }
 
