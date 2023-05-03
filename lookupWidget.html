@@ -29,7 +29,28 @@
         overflow: scroll;
         height: 500px;
         width: 100%;
-        overflow: auto
+        overflow: auto;
+    }
+
+    div.pager {
+        text-align: center;
+        margin: 1em 0;
+    }
+
+    div.pager span {
+        display: inline-block;
+        width: 1.8em;
+        height: 1.8em;
+        line-height: 1.8;
+        text-align: center;
+        cursor: pointer;
+        background: #000;
+        color: #fff;
+        margin-right: 0.5em;
+    }
+
+    div.pager span.active {
+        background: #c00;
     }
 </style>
 
@@ -69,6 +90,7 @@
                             // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
                     }
+                    genPages();
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -125,6 +147,7 @@
                             // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                         }
                     }
+                    genPages();
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -163,6 +186,7 @@
                         //resizeFrame();
                         // document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     }
+                    genPages();
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -420,12 +444,38 @@
             if (formIdFromSettings === "231183863105856" || formIdFromSettings === "231156624458862") {
                 $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${dateFromDb["58"] ?? ""}</td><td>${" "}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
-            if (formIdFromSettings === "231173448610855") { //Client Check-In
+            if (formIdFromSettings === "231173448610855" || formIdFromSettings === "231174162082852") { //Client Check-In
                 $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${dateFromDb["8"] ?? ""}</td><td>${"Active Client here"}</td><td>${"Checked in? here"}</td><td>${"Alert here"}</td><td>${"Status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
             if (formIdFromSettings === "231166137203850") { //Service Referral
                 $("#emptbl").append(`<tr><td>${dateFromDb["63"] ?? ""}</td><td>${dateFromDb["5"] ?? ""}</td><td>${dateFromDb["6"] ?? ""}</td><td>${dateFromDb["7"] ?? ""}</td><td>${dateFromDb["9"] ?? ""}</td><td>${"Referral category here"}</td><td>${"Referral type here"}</td><td>${"Referral status here"}</td><td><button class="btn btn-success" onclick='setFieldValuesByFormId(${JSON.stringify(dateFromDb)}, ${formIdFromSettings})'>Select</button></td></tr>`);
             }
+        }
+
+        function genPages() {
+            $(".pager").remove();
+            $('table.table.table-bordered').each(function () {
+                var currentPage = 0;
+                var numPerPage = 5;
+                var $table = $(this);
+                $table.bind('repaginate', function () {
+                    $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+                });
+                $table.trigger('repaginate');
+                var numRows = $table.find('tbody tr').length;
+                var numPages = Math.ceil(numRows / numPerPage);
+                var $pager = $('<div class="pager"></div>');
+                for (var page = 0; page < numPages; page++) {
+                    $('<span class="page-number"></span>').text(page + 1).bind('click', {
+                        newPage: page
+                    }, function (event) {
+                        currentPage = event.data['newPage'];
+                        $table.trigger('repaginate');
+                        $(this).addClass('active').siblings().removeClass('active');
+                    }).appendTo($pager).addClass('clickable');
+                }
+                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+            });
         }
 
         $(function () {
@@ -443,7 +493,7 @@
                     if (currSetting["formId"] === "231183863105856" || currSetting["formId"] === "231156624458862") { //Registration Information and Needs Assessment
                         buildHTML("v1");
                     }
-                    if (currSetting["formId"] === "231173448610855") { //Client Check-In
+                    if (currSetting["formId"] === "231173448610855" || currSetting["formId"] === "231174162082852") { //Client Check-In
                         buildHTML("v2");
                     }
                     if (currSetting["formId"] === "231166137203850") {  //Service Referral
