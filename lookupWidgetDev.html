@@ -32,7 +32,7 @@
         overflow: auto
     }
 
-    div.pager {
+    /* div.pager {
         text-align: center;
         margin: 1em 0;
     }
@@ -51,7 +51,7 @@
 
     div.pager span.active {
         background: #c00;
-    }
+    } */
 </style>
 
 <body>
@@ -472,7 +472,7 @@
                         $(this).addClass('active').siblings().removeClass('active');
                     }).appendTo($pager).addClass('clickable');
                 }
-                $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
             });
         }
 
