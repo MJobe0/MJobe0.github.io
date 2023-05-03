@@ -27,7 +27,7 @@
 <style>
     #emptbl {
         overflow: scroll;
-        height: 500px;
+        height: 50%;
         width: 100%;
         overflow: auto
     }
@@ -472,7 +472,7 @@
                         $(this).addClass('active').siblings().removeClass('active');
                     }).appendTo($pager).addClass('clickable');
                 }
-                $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+                $pager.insertAfter($table).find('span.page-number:first').addClass('active');
             });
         }
 
