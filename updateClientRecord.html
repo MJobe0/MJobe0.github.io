@@ -40,7 +40,7 @@
 
                     console.log(JFCustomWidget.getWidgetSettings())
 
-                    JFCustomWidget.getFieldsValueByName(["originalSubmission"], function (res) {
+                    JFCustomWidget.getFieldsValueByName(["clientId"], function (res) {
                         var clientFormID = "231172796476870"
                         var params = JFCustomWidget.getWidgetSettings();
                         console.log(`https://innovativebc.jotform.com//server.php?action=getExtGridSubmissions&formID=${clientFormID}&listID=${params["reportId"]}&includeSheetRows=true&excludeArchivedRows=true&start=0&limit=47&sort=id&dir=DESC&startDate=&endDate=&keyword=&_dc=1682849715135&apiKey=${params["apiKey"]}`)
