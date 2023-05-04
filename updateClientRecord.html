@@ -23,45 +23,21 @@
         var originalSubmissionId;
 
         function updateOriginalSubmission(apiKey) {
-            fetch(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}&callback=jQuery35102710905181478207_1683203620998&_=1683203621000`, {
-                "headers": {
-                    "accept": "*/*",
-                    "Content-Type":"application/json",
-                    "Origin":"https://mjobe0.github.io/",
-                    "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
-                    "jf-team-id": "231156469084056",
-                    "sec-ch-ua": "\"Chromium\";v=\"112\", \"Microsoft Edge\";v=\"112\", \"Not:A-Brand\";v=\"99\"",
-                    "sec-ch-ua-mobile": "?0",
-                    "sec-ch-ua-platform": "\"Windows\"",
-                    "sec-fetch-dest": "empty",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "same-origin"
+            console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
+            jQuery.ajax({
+                url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
+                method: "POST",
+                crossDomain: true,
+                dataType: 'jsonp',
+                data: controlFieldsToUpdate,
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
                 },
-                "referrerPolicy": "strict-origin-when-cross-origin",
-                "body": controlFieldsToUpdate,
-                "method": "GET",
-                "mode": "cors",
-                "credentials": "include"
-            });
-
-            // console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
-            // jQuery.ajax({
-            //     url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
-            //     method: "POST",
-            //     crossDomain: true,
-            //     dataType: 'jsonp',
-            //     headers: {
-            //         "jf-team-id": "231156469084056"
-            //     },
-            //     data: controlFieldsToUpdate,
-            //     // timeout: 10000,
-            //     success: function (responseData, textStatus, jqXHR) {
-            //         console.log(responseData);
-            //     },
-            //     error: function (responseData, textStatus, jqXHR) {
-            //         console.log(responseData);
-            //     }
-            // })
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                }
+            })
         }
 
         function checkFormId(currFormID) {
@@ -75,7 +51,8 @@
                 case "231173448610855":
                     //Client Check-In
                     controlFieldsToUpdate = {
-                        "submission[56]": "YES"
+                        "submission[56]": "YES",
+                        "jf-team-id": "231156469084056"
                     }
                     // fields = ["91", "451", "302", "452"];
                     // JFCustomWidget.getFieldsValueById(fields, function (res) {
@@ -86,7 +63,8 @@
                 case "231174162082852":
                     //Client Check-Out
                     controlFieldsToUpdate = {
-                        "submission[56]": "YES"
+                        "submission[56]": "YES",
+                        "jf-team-id": "231156469084056"
                     }
                     // fields = ["91", "452", "333", "453"];
                     // JFCustomWidget.getFieldsValueById(fields, function (res) {
