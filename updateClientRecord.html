@@ -18,7 +18,61 @@
 
 <body>
     <script type="text/javascript">
-        var currTaskId;
+        var currFormID = formData["formID"];
+        var controlFieldsToUpdate;
+        var originalSubmissionId;
+
+        function updateOriginalSubmission(apiKey) {
+            console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
+            jQuery.ajax({
+                url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
+                method: "POST",
+                data: controlFieldsToUpdate,
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                }
+            })
+        }
+
+        function checkFormId(currFormID) {
+            console.log(currFormID)
+            var fields = [];
+            /*
+            Control form:
+            Checked in? = 56
+            */
+            switch (currFormID) {
+                case "231173448610855":
+                    //Client Check-In
+                    controlFieldsToUpdate = {
+                        "submission[56]": "YES"
+                    }
+                    // fields = ["91", "451", "302", "452"];
+                    // JFCustomWidget.getFieldsValueById(fields, function (res) {
+                    //     console.log("res value (Pulse App) = ", res.data)
+
+                    // });
+                    break;
+                case "231174162082852":
+                    //Client Check-Out
+                    controlFieldsToUpdate = {
+                        "submission[56]": "YES"
+                    }
+                    // fields = ["91", "452", "333", "453"];
+                    // JFCustomWidget.getFieldsValueById(fields, function (res) {
+                    //     console.log("res value (TCS App) = ", res.data)
+                    //     controlFieldsToUpdate = {
+                    //     }
+                    // });
+                    break;
+                default:
+                    break;
+            }
+        }
 
         $(function () {
             function UpdateControlForm(containerId, formData, params) {
@@ -27,12 +81,6 @@
                * Exposed
                */
                 this.init = init;
-                this.updateOriginalSubmission = updateOriginalSubmission;
-
-                var currFormID = formData["formID"];
-                var controlFieldsToUpdate;
-                var originalSubmissionId;
-                var refNumber;
 
                 function init() {
                     console.log(formData)
@@ -77,57 +125,7 @@
                     checkFormId(currFormID);
                 }
 
-                function updateOriginalSubmission(apiKey) {
-                    console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
-                    jQuery.ajax({
-                        url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
-                        method: "POST",
-                        data: controlFieldsToUpdate,
-                        // timeout: 10000,
-                        success: function (responseData, textStatus, jqXHR) {
-                            console.log(responseData);
-                        },
-                        error: function (responseData, textStatus, jqXHR) {
-                            console.log(responseData);
-                        }
-                    })
-                }
 
-                function checkFormId(currFormID) {
-                    console.log(currFormID)
-                    var fields = [];
-                    /*
-                    Control form:
-                    Checked in? = 56
-                    */
-                    switch (currFormID) {
-                        case "231173448610855":
-                            //Client Check-In
-                            controlFieldsToUpdate = {
-                                "submission[56]": "YES"
-                            }
-                            // fields = ["91", "451", "302", "452"];
-                            // JFCustomWidget.getFieldsValueById(fields, function (res) {
-                            //     console.log("res value (Pulse App) = ", res.data)
-
-                            // });
-                            break;
-                        case "231174162082852":
-                            //Client Check-Out
-                            controlFieldsToUpdate = {
-                                "submission[56]": "YES"
-                            }
-                            // fields = ["91", "452", "333", "453"];
-                            // JFCustomWidget.getFieldsValueById(fields, function (res) {
-                            //     console.log("res value (TCS App) = ", res.data)
-                            //     controlFieldsToUpdate = {
-                            //     }
-                            // });
-                            break;
-                        default:
-                            break;
-                    }
-                }
 
             }
 
@@ -142,10 +140,9 @@
                 // }
             });
 
-
             JFCustomWidget.subscribe('submit', function () {
-                widgetParams = JFCustomWidget.getWidgetSettings()
-                widget.updateOriginalSubmission(widgetParams["apiKey"]);
+                var widgetParams = JFCustomWidget.getWidgetSettings();
+                updateOriginalSubmission(widgetParams["apiKey"]);
                 // send the data
                 // JFCustomWidget.sendSubmit({value: "Control form updated", valid:true});
             });
