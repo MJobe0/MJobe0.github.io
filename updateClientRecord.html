@@ -29,6 +29,9 @@
                 method: "POST",
                 crossDomain: true,
                 dataType: 'jsonp',
+                headers: {
+                    "jf-team-id": "231156469084056"
+                },
                 data: controlFieldsToUpdate,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
