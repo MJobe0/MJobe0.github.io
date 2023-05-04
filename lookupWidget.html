@@ -189,7 +189,7 @@
             })
         }
 
-        function getFirstEightRec() {
+        function getAllRecords() {
             //Clear table
             var mytbl = document.getElementById("emptbl");
             mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
@@ -210,7 +210,7 @@
                     // if (curCaseId === responseData.content[0].)
                     console.log("RES: ", responseData);
                     console.log("success: ", responseData);
-                    for (let i = 0; i < 8; i++) {
+                    for (let i = 0; i < responseData.data.length; i++) {
                         console.log("SUBID: ", responseData.data[i].id);
                         updateTable(params["formId"], responseData.data[i]);
                         //$("#emptbl").append(`<tr><td>${responseData.data[i]["63"] ?? ""}</td><td>${responseData.data[i]["5"] ?? ""}</td><td>${responseData.data[i]["6"] ?? ""}</td><td>${responseData.data[i]["7"] ?? ""}</td><td>${responseData.data[i]["9"] ?? ""}</td><td>${responseData.data[i]["8"] ?? ""}</td><td>${responseData.data[i]["58"] ?? ""}</td><td>${" "}</td><td><button onClick="onClickRemove(this)">Button</button></td></tr>`);
@@ -531,7 +531,7 @@
                         buildHTML("v3");
                     }
 
-                    getFirstEightRec();
+                    getAllRecords();
                 }
             }
 
@@ -574,7 +574,7 @@
             Search</button>
     </div>
     <Br></Br>
-    <div id="myDiv" style="height:400px;overflow:auto;" >
+    <div id="myDiv" style="height:400px;overflow:auto;">
         <table id="emptbl" class="table table-sm" style="width: 100%; table-layout: fixed;">
         </table>
         <!-- <div id="myDiv" class="input-group mb-3">
