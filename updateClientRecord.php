@@ -29,7 +29,7 @@ $curl = curl_init();
 curl_setopt_array($curl, [
   CURLOPT_URL => $url,
   CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_CUSTOMREQUEST => 'PUT',
   CURLOPT_POSTFIELDS => http_build_query($data),
   CURLOPT_HTTPHEADER => [
     "APIKEY: $api_key",
