@@ -26,6 +26,7 @@
             var widgetParams2 = JFCustomWidget.getWidgetSettings();
             console.log("FIELDS TO UPDATE: ", controlFieldsToUpdate)
             controlFieldsToUpdate = {
+                "jf-team-id": "231156469084056",
                 "submission[5]": "m",
                 "submission[6]": "j",
                 "submission[56]": "YES"
@@ -34,9 +35,6 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${widgetParams2["apiKey"]}`,
                 method: "POST",
-                headers: {
-                    "jf-team-id": "231156469084056"
-                },
                 data: controlFieldsToUpdate,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
