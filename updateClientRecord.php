@@ -42,3 +42,5 @@ curl_close($curl);
 
 // Output the API response
 echo $response;
+
+?>
