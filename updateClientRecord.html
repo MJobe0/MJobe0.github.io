@@ -46,6 +46,31 @@
             })
         }
 
+        function updateOriginalSubmission2() {
+            var form = new FormData();
+            form.append("submission[5]", " mu");
+            form.append("submission[6]", " jo");
+            form.append("submission[56]", " YES");
+
+            var settings = {
+                "url": "https://innovativebc.jotform.com/API/submission/5589980639829119136?apiKey=bb3ac481fc42853b4acf9b822af03d63",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "jf-team-id": "231156469084056",
+                    "Cookie": "ENTERPRISE_SESSION=9t9b7kepqpcbj5u3gpcitivui1; guest=guest_466ede1c1793db84; theme=tile-black"
+                },
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        }
+
         function checkFormId(currFormID) {
             console.log(currFormID)
             var fields = [];
@@ -166,5 +191,7 @@
 </body>
 <button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="updateOriginalSubmission()">Test
     call</button>
+<button id="searchByNameAndDobBtn2" class="btn btn-success" type="button" onclick="updateOriginalSubmission2()">Test
+    call2</button>
 
 </html>
