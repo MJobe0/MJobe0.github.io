@@ -33,6 +33,8 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
                 method: "POST",
+                crossDomain: true,
+                dataType: 'jsonp',
                 data: controlFieldsToUpdate,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
