@@ -27,8 +27,6 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
                 method: "POST",
-                crossDomain: true,
-                dataType: 'jsonp',
                 data: controlFieldsToUpdate,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
@@ -51,8 +49,7 @@
                 case "231173448610855":
                     //Client Check-In
                     controlFieldsToUpdate = {
-                        "submission[56]": "YES",
-                        "jf-team-id": "231156469084056"
+                        "submission[56]": "YES"
                     }
                     // fields = ["91", "451", "302", "452"];
                     // JFCustomWidget.getFieldsValueById(fields, function (res) {
@@ -63,8 +60,7 @@
                 case "231174162082852":
                     //Client Check-Out
                     controlFieldsToUpdate = {
-                        "submission[56]": "YES",
-                        "jf-team-id": "231156469084056"
+                        "submission[56]": "YES"
                     }
                     // fields = ["91", "452", "333", "453"];
                     // JFCustomWidget.getFieldsValueById(fields, function (res) {
