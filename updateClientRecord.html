@@ -34,7 +34,9 @@
             jQuery.ajax({
                 url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${widgetParams2["apiKey"]}`,
                 method: "POST",
-       
+                headers: {
+                    "jf-team-id": "231156469084056"
+                },
                 data: controlFieldsToUpdate,
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
@@ -164,6 +166,7 @@
 
     </script>
 </body>
-<button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="updateOriginalSubmission()">Test call</button>
+<button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="updateOriginalSubmission()">Test
+    call</button>
 
 </html>
