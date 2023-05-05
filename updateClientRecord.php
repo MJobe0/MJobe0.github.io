@@ -1,41 +1,44 @@
 <?php
-// Convert JSON data to PHP
-$result = $_REQUEST['rawRequest'];
-$obj = json_decode($result, true);
 
-//Set field values
-// $gseNumber = $obj['q4_enterThe'];
-// $typeOfPack = $obj['q5_whatType'];
-// $whoToInform = $obj['q6_whoShould'];
-// $addPerson = $obj['q7_wouldYou'];
+// Get the webhook payload
+$json = file_get_contents('php://input');
+$data = json_decode($json);
 
-$currId = $obj['editSubmission'];
+// Extract the field value from the payload
+$field_value = $data->field_value;
 
-echo $currId;
+// Set up the Jotform API
+$api_key = '05f90a7283fd85e72ab2d2d45909bb1a'; //Test remove later
+$team_id = "231156469084056"; //Test remove later
+$sub_id = '5589980639829119136'; //Test remove later
+$url = "https://innovativebc.jotform.com/API/submission/$sub_id?apiKey=$api_key"; //"https://api.jotform.com/form/$form_id/submissions";
 
-function updateFieldValues() {
-    $curl = curl_init();
+// Set up the API data
+$data = [
+  //'submission[FIELD_ID]' => $field_value,
+  "submission[5]" => "M",
+  "submission[5]" => "J",
+  "submission[55]" => "NO",
+  "submission[56]" => "YES",
+  "submission[57]" => "YES",
+  "submission[58]" => "Needs Assessment Pending"
+];
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://innovativebc.jotform.com/API/submission/5587718922157254289?apiKey=0939588d108aab1075b45c7dc97ce7ec&submission%5B55%5D=NO&submission%5B56%5D=YES&submission%5B57%5D=YES&submission%5B58%5D=Needs%20Assessment%20Pending',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_HTTPHEADER => array(
-            'Cookie: ENTERPRISE_SESSION=9t9b7kepqpcbj5u3gpcitivui1; guest=guest_466ede1c1793db84; theme=tile-black'
-    ),
-));
+// Send the API request
+$curl = curl_init();
+curl_setopt_array($curl, [
+  CURLOPT_URL => $url,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => http_build_query($data),
+  CURLOPT_HTTPHEADER => [
+    "APIKEY: $api_key",
+    "jf-team-id: $team_id"
 
-    $response = curl_exec($curl);
+  ],
+]);
+$response = curl_exec($curl);
+curl_close($curl);
 
-    curl_close($curl);
-    echo $response;
-}
-  
-  updateFieldValues(); // call the function
-
-?>
+// Output the API response
+echo $response;
