@@ -22,16 +22,17 @@
         var controlFieldsToUpdate;
         var originalSubmissionId;
 
-        function updateOriginalSubmission(apiKey) {
+        function updateOriginalSubmission() {
+            var widgetParams2 = JFCustomWidget.getWidgetSettings();
             console.log("FIELDS TO UPDATE: ", controlFieldsToUpdate)
             controlFieldsToUpdate = {
                 "submission[5]": "m",
                 "submission[6]": "j",
                 "submission[56]": "YES"
             }
-            console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`)
+            console.log(`https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${widgetParams2["apiKey"]}`)
             jQuery.ajax({
-                url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${apiKey}`,
+                url: `https://innovativebc.jotform.com/API/submission/${originalSubmissionId}?apiKey=${widgetParams2["apiKey"]}`,
                 method: "POST",
                 crossDomain: true,
                 dataType: 'jsonp',
@@ -164,5 +165,6 @@
 
     </script>
 </body>
+<button id="searchByNameAndDobBtn" class="btn btn-success" type="button" onclick="updateOriginalSubmission()">Test call</button>
 
 </html>
