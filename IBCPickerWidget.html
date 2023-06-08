@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,16 +95,16 @@
                 generateBlocks(blockLabels);
 
                 $('.option').click(handleClick);
-
-                JFCustomWidget.subscribe('submit', function () {
-
-                });
-
-                JFCustomWidget.subscribe('ready', function (data) {
-                    var widget = new PickerWidget('Test01', data);
-                    widget.init();
-                });
             }
+        });
+
+        JFCustomWidget.subscribe('submit', function () {
+
+        });
+
+        JFCustomWidget.subscribe('ready', function (data) {
+            var widget = new PickerWidget('Test01', data);
+            widget.init();
         });
     </script>
 </body>
