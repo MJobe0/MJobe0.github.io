@@ -64,7 +64,7 @@
                     const param = c["optionLabels"].split(/\r?\n/);
 
                     var blockLabels = param ?? ['Option 1', 'Option 2', 'Option 3'];
-                    var allowMultipleSelection = true;
+                    var allowMultipleSelection = c["allowMultipleSelection"];
                     var selectedBlocks = [];
 
                     function generateBlocks(labels) {
