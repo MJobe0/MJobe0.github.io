@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .option {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .selected {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <script>
+        // $(document).ready(function () {
+        $(function () {
+            function PickerWidget(containerId, formData) {
+                var blockLabels = ['Option 1', 'Option 2', 'Option 3'];
+                var allowMultipleSelection = true;
+                var selectedBlocks = [];
+
+                function generateBlocks(labels) {
+                    var container = $('#container');
+                    container.empty(); // Clear any existing blocks
+
+                    for (var i = 0; i < labels.length; i++) {
+                        var label = labels[i];
+                        var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
+                        var span = $('<span></span>').text(label);
+                        block.append(span);
+                        container.append(block);
+                    }
+                }
+
+                function handleClick(event) {
+                    var clickedBlock = $(event.target).closest('.option');
+                    var isAlreadySelected = clickedBlock.hasClass('selected');
+
+                    if (allowMultipleSelection) {
+                        clickedBlock.toggleClass('selected');
+
+                        var label = clickedBlock.find('span').text();
+                        if (isAlreadySelected) {
+                            // Remove the label from the selectedBlocks array
+                            var index = selectedBlocks.indexOf(label);
+                            if (index !== -1) {
+                                selectedBlocks.splice(index, 1);
+                            }
+                        } else {
+                            // Add the label to the selectedBlocks array
+                            selectedBlocks.push(label);
+                        }
+
+                        var result = selectedBlocks.join(', ');
+                        alert('Selected blocks: ' + result);
+                    } else {
+                        $('.option').removeClass('selected');
+                        clickedBlock.addClass('selected');
+                        var label = clickedBlock.find('span').text();
+                        alert('Selected: ' + label);
+                    }
+                }
+
+                generateBlocks(blockLabels);
+
+                $('.option').click(handleClick);
+
+                JFCustomWidget.subscribe('submit', function () {
+
+                });
+
+                JFCustomWidget.subscribe('ready', function (data) {
+                    var widget = new PickerWidget('Test01', data);
+                    widget.init();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
