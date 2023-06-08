@@ -57,6 +57,10 @@
                 this.init = init;
 
                 function init() {
+                    var c = JFCustomWidget.getWidgetSettings()
+                    console.log(formData)
+                    console.log(c)
+
                     var blockLabels = ['Option 1', 'Option 2', 'Option 3'];
                     var allowMultipleSelection = true;
                     var selectedBlocks = [];
