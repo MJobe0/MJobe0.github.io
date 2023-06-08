@@ -61,7 +61,9 @@
                     console.log(formData)
                     console.log(c)
 
-                    var blockLabels = ['Option 1', 'Option 2', 'Option 3'];
+                    const param = c.split(/\r?\n/);
+
+                    var blockLabels = param ?? ['Option 1', 'Option 2', 'Option 3'];
                     var allowMultipleSelection = true;
                     var selectedBlocks = [];
 
