@@ -49,6 +49,8 @@
         }
     </style>
     <script type="text/javascript">
+        var widgetValue;
+
         $(function () {
             function PickerWidget(containerId, formData) {
                 /**
@@ -101,11 +103,13 @@
 
                             var result = selectedBlocks.join(', ');
                             console.log('Selected blocks: ' + result);
+                            widgetValue = result;
                         } else {
                             $('.option').removeClass('selected');
                             clickedBlock.addClass('selected');
                             var label = clickedBlock.find('span').text();
                             console.log('Selected: ' + label);
+                            widgetValue = label;
                         }
                     }
 
@@ -117,6 +121,7 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
+             JFCustomWidget.sendSubmit({ value: widgetValue });
 
             });
 
