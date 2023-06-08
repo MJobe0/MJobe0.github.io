@@ -100,12 +100,12 @@
                             }
 
                             var result = selectedBlocks.join(', ');
-                            alert('Selected blocks: ' + result);
+                            console.log('Selected blocks: ' + result);
                         } else {
                             $('.option').removeClass('selected');
                             clickedBlock.addClass('selected');
                             var label = clickedBlock.find('span').text();
-                            alert('Selected: ' + label);
+                            console.log('Selected: ' + label);
                         }
                     }
 
