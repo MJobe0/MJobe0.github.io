@@ -30,11 +30,13 @@
     <style>
         .container {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
+            /* Allow blocks to wrap to new lines */
         }
 
         .option {
-            width: 200px;
+            flex: 1 0 200px;
+            /* Flex-grow: 1 to fill empty space, flex-shrink: 0 to prevent resizing, fixed width of 200px */
             height: 100px;
             background-color: lightblue;
             display: flex;
@@ -42,17 +44,15 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
+            margin-bottom: 10px;
+            /* Add margin bottom for spacing between blocks */
             white-space: nowrap;
-            /* Prevent text from wrapping */
             overflow: hidden;
-            /* Hide overflowing text */
             text-overflow: ellipsis;
-            /* Display ellipsis (...) for overflowing text */
         }
 
         .option span {
             font-weight: bold;
-            /* Make the text bold */
         }
 
         .selected {
