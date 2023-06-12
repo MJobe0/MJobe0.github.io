@@ -31,12 +31,11 @@
         .container {
             display: flex;
             flex-wrap: wrap;
-            /* Allow blocks to wrap to new lines */
+            /* Allow blocks to wrap to the next line */
         }
 
         .option {
-            flex: 1 0 200px;
-            /* Flex-grow: 1 to fill empty space, flex-shrink: 0 to prevent resizing, fixed width of 200px */
+            width: 200px;
             height: 100px;
             background-color: lightblue;
             display: flex;
@@ -44,8 +43,6 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
-            margin-bottom: 10px;
-            /* Add margin bottom for spacing between blocks */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -57,6 +54,23 @@
 
         .selected {
             border: 2px solid red;
+        }
+
+        /* Media queries for responsive design */
+        @media screen and (max-width: 600px) {
+            .option {
+                width: calc(50% - 5px);
+                /* Adjust the width for smaller screens */
+                margin-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .option {
+                width: 100%;
+                /* Adjust the width for even smaller screens */
+                margin-bottom: 10px;
+            }
         }
     </style>
     <script type="text/javascript">
@@ -112,7 +126,7 @@
                                 selectedBlocks.push(label);
                             }
 
-                            var result = selectedBlocks.join(', ');
+                            var result = selectedBlocks.join('; ');
                             console.log('Selected blocks: ' + result);
                             widgetValue = result;
                         } else {
