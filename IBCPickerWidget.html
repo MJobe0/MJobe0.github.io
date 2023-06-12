@@ -30,17 +30,13 @@
     <style>
         .container {
             display: flex;
-            flex-wrap: nowrap;
-            /* Prevent wrapping to the next line */
-            overflow-x: auto;
-            /* Enable horizontal scrolling when blocks exceed container width */
+            flex-direction: row;
+            padding-left:0px;
+            margin-left: 0px;
         }
 
         .option {
-            min-width: 200px;
-            /* Minimum width for the blocks */
-            flex-shrink: 0;
-            /* Prevent blocks from shrinking */
+            width: 200px;
             height: 100px;
             background-color: lightblue;
             display: flex;
@@ -49,12 +45,16 @@
             cursor: pointer;
             margin-right: 10px;
             white-space: nowrap;
+            /* Prevent text from wrapping */
             overflow: hidden;
+            /* Hide overflowing text */
             text-overflow: ellipsis;
+            /* Display ellipsis (...) for overflowing text */
         }
 
         .option span {
             font-weight: bold;
+            /* Make the text bold */
         }
 
         .selected {
