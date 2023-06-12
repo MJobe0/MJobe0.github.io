@@ -42,6 +42,17 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Hide overflowing text */
+            text-overflow: ellipsis;
+            /* Display ellipsis (...) for overflowing text */
+        }
+
+        .option span {
+            font-weight: bold;
+            /* Make the text bold */
         }
 
         .selected {
@@ -121,8 +132,7 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-             JFCustomWidget.sendSubmit({ value: widgetValue });
-
+                JFCustomWidget.sendSubmit({ value: widgetValue });
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
