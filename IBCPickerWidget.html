@@ -31,7 +31,7 @@
         .container {
             display: flex;
             flex-direction: row;
-            padding-left:0px;
+            padding-left: 0px;
             margin-left: 0px;
         }
 
@@ -77,7 +77,28 @@
         }
     </style>
     <script type="text/javascript">
-        var widgetValue;
+        var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
+
+        console.log(JFCustomWidget.isWidgetRequired())
+
+        function makeWidgetRequiredOrNot() {
+            console.log($('input:invalid').length)
+
+            if (_data.value === "" || _data.value === undefined) {
+                // console.log(JFCustomWidget)
+                // console.log(JFCustomWidget.isWidgetRequired())
+                // JFCustomWidget.makeWidgetRequired();
+                JFCustomWidget.showWidgetError("Please select an option for this question")
+                _data.valid = true
+                return
+            }
+            else {
+                JFCustomWidget.makeWidgetNotRequired();
+                JFCustomWidget.hideWidgetError();
+                _data.valid = false
+                return
+            }
+        }
 
         $(function () {
             function PickerWidget(containerId, formData) {
@@ -131,13 +152,17 @@
 
                             var result = selectedBlocks.join('; ');
                             console.log('Selected blocks: ' + result);
-                            widgetValue = result;
+                            _data.value = result;
+                            makeWidgetRequiredOrNot();
+
                         } else {
                             $('.option').removeClass('selected');
                             clickedBlock.addClass('selected');
                             var label = clickedBlock.find('span').text();
                             console.log('Selected: ' + label);
-                            widgetValue = label;
+                            _data.value = label;
+
+                            makeWidgetRequiredOrNot();
                         }
                     }
 
@@ -149,7 +174,8 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                JFCustomWidget.sendSubmit({ value: widgetValue });
+                makeWidgetRequiredOrNot();
+                JFCustomWidget.sendSubmit(_data);
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
