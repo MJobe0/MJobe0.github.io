@@ -87,21 +87,21 @@
         function makeWidgetRequiredOrNot() {
             console.log(JFCustomWidget.isWidgetRequired())
 
-            console.log($('input:invalid').length)
-
-            if (_data.value === "" || _data.value === undefined) {
-                // console.log(JFCustomWidget)
-                // console.log(JFCustomWidget.isWidgetRequired())
-                // JFCustomWidget.makeWidgetRequired();
-                JFCustomWidget.showWidgetError("Please select an option for this question")
-                _data.valid = true
-                return
-            }
-            else {
-                JFCustomWidget.makeWidgetNotRequired();
-                JFCustomWidget.hideWidgetError();
-                _data.valid = false
-                return
+            if (JFCustomWidget.isWidgetRequired() === true) {
+                if (_data.value === "" || _data.value === undefined) {
+                    // console.log(JFCustomWidget)
+                    // console.log(JFCustomWidget.isWidgetRequired())
+                    // JFCustomWidget.makeWidgetRequired();
+                    JFCustomWidget.showWidgetError("Please select an option for this question")
+                    _data.valid = true
+                    return
+                }
+                else {
+                    JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = false
+                    return
+                }
             }
         }
 
