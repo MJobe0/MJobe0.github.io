@@ -84,9 +84,9 @@
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
-        console.log(JFCustomWidget.isWidgetRequired())
-
         function makeWidgetRequiredOrNot() {
+            console.log(JFCustomWidget.isWidgetRequired())
+
             console.log($('input:invalid').length)
 
             if (_data.value === "" || _data.value === undefined) {
