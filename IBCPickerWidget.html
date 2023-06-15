@@ -104,20 +104,20 @@
             }
         }
 
-
-
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
+            // Default font size
+            const defaultFontSize = 16;
+
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const fontSize = optionWidth / 12; // Adjust the divisor to control font size scaling
+                const fontSize = Math.max(defaultFontSize - optionWidth / 100, 10); // Adjust the divisor and minimum font size as needed
                 option.style.fontSize = `${fontSize}px`;
             });
         }
-
         $(function () {
             function PickerWidget(containerId, formData) {
                 /**
@@ -147,7 +147,7 @@
                             block.append(span);
                             container.append(block);
                         }
-                        
+
                         // Call the function initially and on window resize
                         setOptionFontSize();
                         window.addEventListener('resize', setOptionFontSize);
