@@ -114,7 +114,7 @@
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const fontSize = Math.max(defaultFontSize - optionWidth / 100, 10); // Adjust the divisor and minimum font size as needed
+                const fontSize = Math.min(defaultFontSize, optionWidth / 12); // Adjust divisor for font size scaling
                 option.style.fontSize = `${fontSize}px`;
             });
         }
