@@ -31,17 +31,14 @@
         .container {
             display: flex;
             flex-wrap: nowrap;
-            /* Prevent options from wrapping to a new line */
             padding: 0;
             margin: 0;
             max-width: 740px;
             overflow-x: auto;
-            /* Enable horizontal scrolling if needed */
         }
 
         .option {
             flex: 1;
-            /* Distribute available space evenly among options */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
@@ -50,12 +47,13 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
-            white-space: nowrap;
-            /* Prevent text from wrapping */
+            white-space: normal;
+            /* Allow text to wrap within options */
+            padding: 10px;
+            /* Add padding to maintain option shape */
+            box-sizing: border-box;
+            /* Include padding in option dimensions */
             overflow: hidden;
-            /* Hide overflowing text */
-            text-overflow: ellipsis;
-            /* Display ellipsis (...) for overflowing text */
         }
 
         .option:hover {
@@ -76,6 +74,8 @@
             .option {
                 flex-basis: calc(33.33% - 10px);
                 /* Adjust the width for smaller screens */
+                font-size: 14px;
+                /* Reduce font size on smaller screens */
             }
         }
 
@@ -83,6 +83,8 @@
             .option {
                 flex-basis: calc(50% - 10px);
                 /* Adjust the width for even smaller screens */
+                font-size: 12px;
+                /* Reduce font size on even smaller screens */
             }
         }
     </style>
