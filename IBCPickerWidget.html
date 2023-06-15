@@ -47,10 +47,10 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
-            white-space: normal;
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .option:hover {
@@ -58,8 +58,7 @@
         }
 
         .option span {
-            display: inline-block;
-            max-width: 100%;
+            font-weight: bold;
             text-align: center;
         }
 
@@ -99,23 +98,17 @@
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const span = option.querySelector('span');
-                span.style.fontSize = ''; // Reset font size to determine auto-sizing
+                const margin = 5; // Specify the desired margin
+                let fontSize = 1; // Specify the initial font size
 
-                const availableWidth = optionWidth - 2 * 4; // Assuming 4px margin on both sides
-                const spanWidth = span.offsetWidth;
-                const fontSize = Math.min((availableWidth / spanWidth) * 0.9, 1) * 100; // Adjust the multiplier to control font size scaling
-
-                span.style.fontSize = `${fontSize}%`;
-
-                if (spanWidth > availableWidth) {
-                    span.style.whiteSpace = 'normal';
-                } else {
-                    span.style.whiteSpace = 'nowrap';
+                while (option.scrollWidth <= optionWidth - margin) {
+                    fontSize++;
+                    option.style.fontSize = `${fontSize}px`;
                 }
+                option.style.fontSize = `${fontSize - 1}px`;
             });
         }
-        
+
         $(function () {
             function PickerWidget(containerId, formData) {
                 /**
