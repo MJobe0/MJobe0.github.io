@@ -47,10 +47,10 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
-            white-space: normal;
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .option:hover {
@@ -64,20 +64,6 @@
 
         .selected {
             border: 4px solid #2F3B65;
-        }
-
-        @media screen and (max-width: 600px) {
-            .option {
-                flex-basis: calc(33.33% - 10px);
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            .option {
-                flex-basis: calc(50% - 10px);
-                font-size: 12px;
-            }
         }
     </style>
     <script type="text/javascript">
@@ -106,25 +92,30 @@
 
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
+
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const maxFontSize = 24; // Maximum font size for the options
-                const minFontSize = 12; // Minimum font size for the options
-                const fontSizeFactor = 0.05; // Factor to control the font size decrease
+                const margin = 10; // Specify the desired margin
+                let fontSize = 16; // Specify the initial font size
+                let textFits = false;
 
-                // Calculate the font size based on the option width and number of options
-                const calculatedFontSize = Math.max(
-                    maxFontSize - fontSizeFactor * (options.length - 2) * optionWidth,
-                    minFontSize
-                );
-
-                option.style.fontSize = `${calculatedFontSize}px`;
+                while (!textFits) {
+                    option.style.fontSize = `${fontSize}px`;
+                    if (option.scrollWidth <= optionWidth - margin) {
+                        textFits = true;
+                    } else if (fontSize > 8) {
+                        fontSize--;
+                    } else {
+                        // In case the text cannot fit even with the minimum font size, break the loop
+                        break;
+                    }
+                }
             });
         }
-        
+
         $(function () {
             function PickerWidget(containerId, formData) {
                 /**
