@@ -98,21 +98,14 @@
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const margin = 10; // Specify the desired margin
-                let fontSize = 16; // Specify the initial font size
-                let textFits = false;
+                const margin = 5; // Specify the desired margin
+                let fontSize = 1; // Specify the initial font size
 
-                while (!textFits) {
+                while (option.scrollWidth <= optionWidth - margin) {
+                    fontSize++;
                     option.style.fontSize = `${fontSize}px`;
-                    if (option.scrollWidth <= optionWidth - margin) {
-                        textFits = true;
-                    } else if (fontSize > 8) {
-                        fontSize--;
-                    } else {
-                        // In case the text cannot fit even with the minimum font size, break the loop
-                        break;
-                    }
                 }
+                option.style.fontSize = `${fontSize - 1}px`;
             });
         }
 
