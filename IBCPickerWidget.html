@@ -47,11 +47,10 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
-            /* white-space: normal; */
+            white-space: normal;
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
-            white-space: nowrap;
         }
 
         .option:hover {
@@ -111,14 +110,14 @@
             const options = document.querySelectorAll('.option');
 
             options.forEach(option => {
-                const optionWidth = option.offsetWidth;
+                const optionHeight = option.offsetHeight;
                 const optionText = option.querySelector('span');
 
                 // Reset font size to the maximum value
-                optionText.style.fontSize = '17px';
+                optionText.style.fontSize = '21px';
 
-                // Reduce font size until the text fits within the option
-                while (optionText.offsetWidth > optionWidth) {
+                // Reduce font size until the text fits within the option width and height
+                while (optionText.offsetWidth > option.clientWidth || optionText.offsetHeight > optionHeight) {
                     let fontSize = parseInt(optionText.style.fontSize);
                     fontSize -= 1;
                     optionText.style.fontSize = `${fontSize}px`;
