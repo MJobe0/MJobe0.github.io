@@ -109,26 +109,31 @@
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
-            // Find the maximum width among all options
+            // Find the maximum width and height among all options
             let maxWidth = 0;
+            let maxHeight = 0;
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
+                const optionHeight = option.offsetHeight;
                 maxWidth = Math.max(maxWidth, optionWidth);
+                maxHeight = Math.max(maxHeight, optionHeight);
             });
 
-            // Calculate the available width for the options
+            // Calculate the available width and height for the options
             const containerWidth = document.getElementById('container').offsetWidth;
             const availableWidth = containerWidth - (options.length - 1) * 10; // Considering the margin-right property
+            const availableHeight = maxHeight;
 
-            // Calculate the maximum font size based on the available width
-            const maxFontSize = Math.floor(availableWidth / maxWidth);
+            // Calculate the maximum font size based on the available width and height
+            const maxFontSize = Math.floor(Math.min(availableWidth / maxWidth, availableHeight));
 
             // Calculate the minimum font size based on the maximum font size
             const minFontSize = Math.floor(maxFontSize / 2);
 
             // Set the font size for all options
             options.forEach(option => {
-                const optionText = option.querySelector('span');
+                const optionTextContainer = option.querySelector('.text-container');
+                const optionText = optionTextContainer.querySelector('span');
                 optionText.style.fontSize = `${maxFontSize}px`;
             });
         }
