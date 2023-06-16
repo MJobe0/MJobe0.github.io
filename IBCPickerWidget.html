@@ -109,42 +109,30 @@
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
+            // Find the maximum width among all options
+            let maxWidth = 0;
+            options.forEach(option => {
+                const optionWidth = option.offsetWidth;
+                maxWidth = Math.max(maxWidth, optionWidth);
+            });
+
             // Calculate the available width for the options
             const containerWidth = document.getElementById('container').offsetWidth;
             const availableWidth = containerWidth - (options.length - 1) * 10; // Considering the margin-right property
 
+            // Calculate the maximum font size based on the available width
+            let maxFontSize = Math.floor(availableWidth / maxWidth);
+
+            // Calculate the minimum font size based on the maximum font size
+            const minFontSize = Math.max(Math.floor(maxFontSize / 2), 1);
+
+            // Set the font size for all options
             options.forEach(option => {
-                // Reset the font size to its default value before calculations
                 const optionText = option.querySelector('span');
-                optionText.style.fontSize = '';
-
-                // Find the maximum font size that fits the option
-                let maxFontSize = availableWidth / optionText.offsetWidth;
-                maxFontSize = Math.floor(maxFontSize); // Round down to an integer value
-
-                // Limit the maximum font size to avoid text overflow
-                const maxHeight = option.offsetHeight;
-                let currentFontSize = maxFontSize;
-                optionText.style.fontSize = `${currentFontSize}px`;
-
-                while (optionText.offsetHeight > maxHeight && currentFontSize > 1) {
-                    currentFontSize--;
-                    optionText.style.fontSize = `${currentFontSize}px`;
-                }
-
-                // Adjust the font size for two options
-                if (options.length === 2) {
-                    const siblingOption = option.nextElementSibling;
-                    const siblingOptionText = siblingOption.querySelector('span');
-
-                    while (optionText.offsetWidth > availableWidth && currentFontSize > 1) {
-                        currentFontSize--;
-                        optionText.style.fontSize = `${currentFontSize}px`;
-                        siblingOptionText.style.fontSize = `${currentFontSize}px`;
-                    }
-                }
+                optionText.style.fontSize = `${minFontSize}px`;
             });
         }
+
 
         $(function () {
             function PickerWidget(containerId, formData) {
