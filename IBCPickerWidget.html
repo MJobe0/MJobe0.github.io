@@ -137,7 +137,7 @@
                 const optionTexts = Array.from(options).map(option => option.querySelector('span'));
                 const combinedWidth = optionTexts.reduce((width, optionText) => width + optionText.offsetWidth, 0);
                 const averageWidth = combinedWidth / options.length;
-                maxFontSize = Math.min(maxFontSize, Math.floor(availableWidth / averageWidth));
+                maxFontSize = 21;
             }
 
             // Set the font size and margin for all options, adjusting if necessary
