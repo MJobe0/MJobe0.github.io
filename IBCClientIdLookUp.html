@@ -42,12 +42,12 @@
                 method: "GET",
                 // crossDomain: true,
                 dataType: 'json',
-                // "headers": {
-                //     "apikey": params["apiKey"]
-                // },
-                data: {
-                    "apiKey": params["apiKey"]
+                "headers": {
+                    "apikey": params["apiKey"]
                 },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
