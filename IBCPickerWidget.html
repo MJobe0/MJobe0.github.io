@@ -109,23 +109,24 @@
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
+            let longestTextWidth = 0;
+
+            options.forEach(option => {
+                const optionWidth = option.offsetWidth;
+                longestTextWidth = Math.max(longestTextWidth, optionWidth);
+            });
+
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
                 const maxFontSize = 21; // Maximum font size for the options
                 const minFontSize = 15; // Minimum font size for the options
                 const fontSizeFactor = 0.05; // Factor to control the font size decrease
-                const minWidthForFontDecrease = 200; // Minimum width for font size decrease to take effect
 
-                // Calculate the font size based on the option width and number of options
-                let calculatedFontSize = maxFontSize;
-
-                if (optionWidth < minWidthForFontDecrease) {
-                    const widthDifference = minWidthForFontDecrease - optionWidth;
-                    calculatedFontSize = Math.max(
-                        maxFontSize - fontSizeFactor * widthDifference,
-                        minFontSize
-                    );
-                }
+                // Calculate the font size based on the longest text width and number of options
+                const calculatedFontSize = Math.max(
+                    maxFontSize - fontSizeFactor * (longestTextWidth - optionWidth),
+                    minFontSize
+                );
 
                 option.style.fontSize = `${calculatedFontSize}px`;
             });
