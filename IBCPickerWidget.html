@@ -144,9 +144,9 @@
                     var allowMultipleSelection;
 
                     if (c["allowMultipleSelection"] === "Yes") {
-                         allowMultipleSelection = true;
+                        allowMultipleSelection = true;
                     }
-                    else {
+                    if (c["allowMultipleSelection"] === "No") {
                         allowMultipleSelection = false;
                     }
                     var selectedBlocks = [];
