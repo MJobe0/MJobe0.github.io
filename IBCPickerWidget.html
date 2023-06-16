@@ -126,20 +126,20 @@
         }
 
         $(function () {
-            function PickerWidget(containerId, formData) {
+            function PickerWidget(containerId, formData, params) {
                 /**
                * Exposed
                */
                 this.init = init;
 
                 function init() {
-                    var c = JFCustomWidget.getWidgetSettings()
+                    // var c = JFCustomWidget.getWidgetSettings()
                     console.log(formData)
-                    console.log(c)
+                    console.log(params)
 
-                    const param = c["optionLabels"].split(/\r?\n/);
+                    const currOptions = params["optionLabels"].split(/\r?\n/);
 
-                    var blockLabels = param ?? ['Option 1', 'Option 2', 'Option 3'];
+                    var blockLabels = currOptions ?? ['Option 1', 'Option 2', 'Option 3'];
 
                     var allowMultipleSelection;
 
@@ -216,7 +216,7 @@
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
-                var widget = new PickerWidget('Test01', data);
+                var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
                 widget.init();
             });
         });
