@@ -108,31 +108,21 @@
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
-            // Find the maximum width among all options
-            let maxWidth = 0;
+            // Find the minimum width among all options
+            let minWidth = Number.POSITIVE_INFINITY;
             options.forEach(option => {
-                console.log("Option: ", option)
                 const optionWidth = option.offsetWidth;
-                maxWidth = Math.max(maxWidth, optionWidth);
+                minWidth = Math.min(minWidth, optionWidth);
             });
 
-            // Calculate the font size based on the maximum width
-            const maxFontSize = 30; // Maximum font size for the options
-            var minFontSize = 10; // Minimum font size for the options
+            // Calculate the font size based on the minimum width
+            const maxFontSize = 21; // Maximum font size for the options
+            const minFontSize = 12; // Minimum font size for the options
             const fontSizeFactor = 0.05; // Factor to control the font size decrease
 
-            // Adjust the maximum font size for containers with only two options
-            if (options.length === 2) {
-                minFontSize = 15; // Minimum font size for the options
-            }
-
-            if (options.length === 6) {
-                minFontSize = 12; // Minimum font size for the options
-            }
-
-            // Calculate the font size based on the maximum width and number of options
+            // Calculate the font size based on the minimum width and number of options
             const calculatedFontSize = Math.max(
-                maxFontSize - fontSizeFactor * (options.length - 1) * maxWidth,
+                maxFontSize - fontSizeFactor * (options.length - 1) * minWidth,
                 minFontSize
             );
 
