@@ -111,6 +111,7 @@
             // Find the maximum width among all options
             let maxWidth = 0;
             options.forEach(option => {
+                console.log("Option: ", option)
                 const optionWidth = option.offsetWidth;
                 maxWidth = Math.max(maxWidth, optionWidth);
             });
