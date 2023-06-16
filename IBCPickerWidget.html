@@ -127,7 +127,7 @@
 
         $(function () {
             window.addEventListener("load", function () {
-                var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
+                var widget = new PickerWidget('Test01', JFCustomWidget.getWidgetSettings());
                 widget.init();
             });
 
@@ -136,7 +136,7 @@
             //     widget.init();
             // });
 
-            function PickerWidget(containerId, formData, params) {
+            function PickerWidget(containerId, params) {
                 /**
                * Exposed
                */
@@ -144,7 +144,7 @@
 
                 function init() {
                     // var c = JFCustomWidget.getWidgetSettings()
-                    console.log(formData)
+                    // console.log(formData)
                     console.log(params)
 
                     const currOptions = params["optionLabels"]?.split(/\r?\n/);
