@@ -27,17 +27,18 @@
 
 <body>
     <script type="text/javascript">
+        var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
-        function getLinkStageOne() {
+        function getClientInfo() {
             const params = JFCustomWidget.getWidgetSettings();
+            const userInput = document.getElementById('clientInfo').value;
             // document.getElementById("getLinkButton").textContent = "Getting Link....";
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
             console.log("HERE");
-
             console.log(``)
             jQuery.ajax({
-                url: `https://6eaxmrh5zk.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact`,
+                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
                 method: "GET",
                 crossDomain: true,
                 dataType: 'json',
@@ -51,13 +52,36 @@
                 },
                 error: function (responseData, textStatus, jqXHR) {
                     console.log("error: ", responseData);
-                    // document.getElementById('canFormLink').value = "Failed Stage 1";
+                    document.getElementById('clientInfo').value = "Something went wrong please try again";
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     return
                 }
             })
 
             // JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
+        }
+
+        function makeWidgetRequiredOrNot() {
+            console.log(JFCustomWidget.isWidgetRequired())
+
+            // Get field value by ID if fields are not filled require
+
+            if (JFCustomWidget.isWidgetRequired() === true) {
+                if (document.getElementById('clientInfo').value === "") {
+                    // console.log(JFCustomWidget)
+                    // console.log(JFCustomWidget.isWidgetRequired())
+                    // JFCustomWidget.makeWidgetRequired();
+                    JFCustomWidget.showWidgetError("Please enter a a valid ID and search for your record")
+                    _data.valid = true
+                    return
+                }
+                else {
+                    JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = false
+                    return
+                }
+            }
         }
 
         $(function () {
@@ -79,6 +103,8 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                makeWidgetRequiredOrNot();
+                JFCustomWidget.sendSubmit(_data);
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
@@ -89,13 +115,14 @@
 
     </script>
     <div id="myDiv" class="input-group mb-3">
-        <div class="input-group-prepend">
+        <!-- <div class="input-group-prepend">
             <button id="getLinkButton" class="btn btn-success" type="button" onclick="getLinkStageOne()">
                 <i id="myLoadIcon" class=""></i>Search ID</button>
-        </div>
-        <input type="text" id="canFormLink" name="canFormLink" class="form-control" placeholder="" aria-label=""
+        </div> -->
+        <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
             aria-describedby="basic-addon1">
-        <!-- <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()">Copy</button> -->
+        <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()">
+            <i id="myLoadIcon" class=""></i>Search ID</button>
     </div>
 </body>
 
