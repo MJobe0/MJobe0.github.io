@@ -133,19 +133,18 @@
                 this.init = init;
 
                 function init() {
-                    const params = JSON.parse(decodeURIComponent(formData.settings));
-                    // var c = JFCustomWidget.getWidgetSettings()
+                    var c = JFCustomWidget.getWidgetSettings()
                     console.log(formData)
-                    console.log(params)
+                    console.log(c)
 
-                    const currOptions = params[0]["value"]?.split(/\r?\n/);
+                    const param = c["optionLabels"].split(/\r?\n/);
 
-                    var blockLabels = currOptions;
+                    var blockLabels = param ?? ['Option 1', 'Option 2', 'Option 3'];
 
                     var allowMultipleSelection;
 
-                    if (params["allowMultipleSelection"] === "Yes") {
-                        allowMultipleSelection = true;
+                    if (c["allowMultipleSelection"] === "Yes") {
+                         allowMultipleSelection = true;
                     }
                     else {
                         allowMultipleSelection = false;
@@ -153,14 +152,6 @@
                     var selectedBlocks = [];
 
                     function generateBlocks(labels) {
-
-                        console.log("CURR LABELS", labels)
-
-                        if (labels === undefined) {
-                            var params2 = JFCustomWidget.getWidgetSetting("optionLabels");
-                            labels = params2?.split(/\r?\n/);
-                        }
-
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
