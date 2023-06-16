@@ -105,27 +105,29 @@
             }
         }
 
-        // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const optionHeight = option.offsetHeight;
-                const optionText = option.querySelector('span');
-                const maxFontSize = Math.min(optionWidth / 10, optionHeight / 2); // Maximum font size based on option size
+                const maxFontSize = 21; // Maximum font size for the options
                 const minFontSize = 15; // Minimum font size for the options
                 const fontSizeFactor = 0.05; // Factor to control the font size decrease
+                const minWidthForFontDecrease = 200; // Minimum width for font size decrease to take effect
 
-                let fontSize = maxFontSize;
-                optionText.style.fontSize = `${fontSize}px`;
+                // Calculate the font size based on the option width and number of options
+                let calculatedFontSize = maxFontSize;
 
-                // Decrease the font size until the text fits within the option
-                while (optionText.scrollWidth > optionWidth || optionText.scrollHeight > optionHeight) {
-                    fontSize -= 1;
-                    optionText.style.fontSize = `${fontSize}px`;
+                if (optionWidth < minWidthForFontDecrease) {
+                    const widthDifference = minWidthForFontDecrease - optionWidth;
+                    calculatedFontSize = Math.max(
+                        maxFontSize - fontSizeFactor * widthDifference,
+                        minFontSize
+                    );
                 }
+
+                option.style.fontSize = `${calculatedFontSize}px`;
             });
         }
 
