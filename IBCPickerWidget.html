@@ -125,7 +125,7 @@
             // Calculate the available width for the options
             const container = document.getElementById('container');
             const containerWidth = container.offsetWidth;
-            const margin = 0.02 * containerWidth; // 2% of the container's width
+            const margin = containerWidth; // 2% of the container's width
             const availableWidth = containerWidth - (options.length - 1) * margin;
 
             // Calculate the maximum font size based on the available width
