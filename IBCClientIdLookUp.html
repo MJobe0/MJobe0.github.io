@@ -40,11 +40,14 @@
             jQuery.ajax({
                 url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
                 method: "GET",
-                crossDomain: true,
-                dataType: 'json',
-                data: {
-                    "apiKey": params["apiKey"]
+                // crossDomain: true,
+                // dataType: 'json',
+                "headers": {
+                    "apikey": params["apiKey"]
                 },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
