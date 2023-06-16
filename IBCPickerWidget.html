@@ -126,28 +126,19 @@
         }
 
         $(function () {
-            window.addEventListener("load", function () {
-                var widget = new PickerWidget('Test01', JFCustomWidget.getWidgetSettings());
-                widget.init();
-            });
-
-            // window.addEventListener("ready", function () {
-            //     var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
-            //     widget.init();
-            // });
-
-            function PickerWidget(containerId, params) {
+            function PickerWidget(containerId, formData) {
                 /**
                * Exposed
                */
                 this.init = init;
 
                 function init() {
+                    const params = decodeURIComponent(formData.settings);
                     // var c = JFCustomWidget.getWidgetSettings()
-                    // console.log(formData)
+                    console.log(formData)
                     console.log(params)
 
-                    const currOptions = params["optionLabels"]?.split(/\r?\n/);
+                    const currOptions = params[0]["value"]?.split(/\r?\n/);
 
                     var blockLabels = currOptions;
 
@@ -166,7 +157,6 @@
                         console.log("CURR LABELS", labels)
 
                         if (labels === undefined) {
-                            var test = JFCustomWidget.getAllQueryString();
                             var params2 = JFCustomWidget.getWidgetSetting("optionLabels");
                             labels = params2?.split(/\r?\n/);
                         }
@@ -235,9 +225,8 @@
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
-                console.log("DATA",data)
-                // var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
-                // widget.init();
+                var widget = new PickerWidget('Test01', data);
+                widget.init();
             });
         });
 
