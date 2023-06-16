@@ -139,12 +139,7 @@
 
                     const currOptions = params["optionLabels"]?.split(/\r?\n/);
 
-                    if (params === undefined) {
-                        var params2 = JFCustomWidget.getWidgetSettings();
-                        var currOptions2 = params2["optionLabels"]?.split(/\r?\n/);
-                    }
-
-                    var blockLabels = currOptions ?? currOptions2;
+                    var blockLabels = currOptions;
 
                     var allowMultipleSelection;
 
@@ -157,6 +152,14 @@
                     var selectedBlocks = [];
 
                     function generateBlocks(labels) {
+
+                        console.log("CURR LABELS", labels)
+
+                        if (labels === undefined) {
+                            var params2 = JFCustomWidget.getWidgetSettings();
+                            labels = params2["optionLabels"]?.split(/\r?\n/);
+                        }
+
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
