@@ -30,49 +30,36 @@
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
         function getClientInfo() {
-            var myHeaders = new Headers();
-            myHeaders.append("apikey", "GCsyxx%X2b8zMhbcXuY&NSH1Ex&UQw3JLsK3Wt!ydrVxuCzRVFtSx&RkDRN8");
+            const params = JFCustomWidget.getWidgetSettings();
+            const userInput = document.getElementById('clientInfo').value;
+            // document.getElementById("getLinkButton").textContent = "Getting Link....";
+            document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                redirect: 'follow'
-            };
-
-            fetch("https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact", requestOptions)
-                .then(response => response.text())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-            // const params = JFCustomWidget.getWidgetSettings();
-            // const userInput = document.getElementById('clientInfo').value;
-            // // document.getElementById("getLinkButton").textContent = "Getting Link....";
-            // document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
-
-            // console.log("HERE");
-            // console.log(``)
-            // jQuery.ajax({
-            //     url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
-            //     method: "GET",
-            //     // crossDomain: true,
-            //     dataType: 'json',
-            //     "headers": {
-            //         "apikey": params["apiKey"]
-            //     },
-            //     // data: {
-            //     //     "apiKey": params["apiKey"]
-            //     // },
-            //     // timeout: 10000,
-            //     success: function (responseData, textStatus, jqXHR) {
-            //         console.log("success: ", responseData);
-            //         return
-            //     },
-            //     error: function (responseData, textStatus, jqXHR) {
-            //         console.log("error: ", responseData);
-            //         document.getElementById('clientInfo').value = "Something went wrong please try again";
-            //         document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
-            //         return
-            //     }
-            // })
+            console.log("HERE");
+            console.log(``)
+            jQuery.ajax({
+                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact?apikey=${params["apiKey"]}`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
+                method: "GET",
+                // crossDomain: true,
+                dataType: 'json',
+                // "headers": {
+                //     "apikey": params["apiKey"]
+                // },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("success: ", responseData);
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log("error: ", responseData);
+                    document.getElementById('clientInfo').value = "Something went wrong please try again";
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    return
+                }
+            })
 
             // JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
         }
