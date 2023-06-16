@@ -116,24 +116,22 @@
                 maxWidth = Math.max(maxWidth, optionWidth);
             });
 
-            // Calculate the font size based on the maximum width
-            const maxFontSize = 21; // Maximum font size for the options
-            const minFontSize = 12; // Minimum font size for the options
-            const fontSizeFactor = 0.05; // Factor to control the font size decrease
+            // Calculate the available width for the options
+            const containerWidth = document.getElementById('container').offsetWidth;
+            const availableWidth = containerWidth - (options.length - 1) * 10; // Considering the margin-right property
 
-            // Calculate the font size based on the maximum width and number of options
-            const calculatedFontSize = Math.max(
-                maxFontSize - fontSizeFactor * (options.length - 1) * maxWidth,
-                minFontSize
-            );
+            // Calculate the maximum font size based on the available width
+            const maxFontSize = Math.floor(availableWidth / maxWidth);
 
-            // Set the same font size for all options
+            // Calculate the minimum font size based on the maximum font size
+            const minFontSize = Math.floor(maxFontSize / 2);
+
+            // Set the font size for all options
             options.forEach(option => {
                 const optionText = option.querySelector('span');
-                optionText.style.fontSize = `${calculatedFontSize}px`;
+                optionText.style.fontSize = `${maxFontSize}px`;
             });
         }
-
 
         $(function () {
             function PickerWidget(containerId, formData) {
