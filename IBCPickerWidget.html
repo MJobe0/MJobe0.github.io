@@ -133,7 +133,7 @@
                 this.init = init;
 
                 function init() {
-                    const params = decodeURIComponent(formData.settings);
+                    const params = JSON.parse(decodeURIComponent(formData.settings));
                     // var c = JFCustomWidget.getWidgetSettings()
                     console.log(formData)
                     console.log(params)
