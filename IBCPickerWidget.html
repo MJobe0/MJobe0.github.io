@@ -156,8 +156,9 @@
                         console.log("CURR LABELS", labels)
 
                         if (labels === undefined) {
-                            var params2 = JFCustomWidget.getWidgetSettings();
-                            labels = params2["optionLabels"]?.split(/\r?\n/);
+                            var test = JFCustomWidget.getAllQueryString();
+                            var params2 = JFCustomWidget.getWidgetSetting("optionLabels");
+                            labels = params2?.split(/\r?\n/);
                         }
 
                         var container = $('#container');
