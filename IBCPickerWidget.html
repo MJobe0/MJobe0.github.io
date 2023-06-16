@@ -125,108 +125,110 @@
             });
         }
 
-        $(function () {
-            function PickerWidget(containerId, formData, params) {
-                /**
-               * Exposed
-               */
-                this.init = init;
+        window.addEventListener("ready", function () {
+            $(function () {
+                function PickerWidget(containerId, formData, params) {
+                    /**
+                   * Exposed
+                   */
+                    this.init = init;
 
-                function init() {
-                    // var c = JFCustomWidget.getWidgetSettings()
-                    console.log(formData)
-                    console.log(params)
+                    function init() {
+                        // var c = JFCustomWidget.getWidgetSettings()
+                        console.log(formData)
+                        console.log(params)
 
-                    const currOptions = params["optionLabels"]?.split(/\r?\n/);
+                        const currOptions = params["optionLabels"]?.split(/\r?\n/);
 
-                    var blockLabels = currOptions;
+                        var blockLabels = currOptions;
 
-                    var allowMultipleSelection;
+                        var allowMultipleSelection;
 
-                    if (params["allowMultipleSelection"] === "Yes") {
-                        allowMultipleSelection = true;
-                    }
-                    else {
-                        allowMultipleSelection = false;
-                    }
-                    var selectedBlocks = [];
-
-                    function generateBlocks(labels) {
-
-                        console.log("CURR LABELS", labels)
-
-                        if (labels === undefined) {
-                            var test = JFCustomWidget.getAllQueryString();
-                            var params2 = JFCustomWidget.getWidgetSetting("optionLabels");
-                            labels = params2?.split(/\r?\n/);
+                        if (params["allowMultipleSelection"] === "Yes") {
+                            allowMultipleSelection = true;
                         }
-
-                        var container = $('#container');
-                        container.empty(); // Clear any existing blocks
-
-                        for (var i = 0; i < labels.length; i++) {
-                            var label = labels[i];
-                            var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
-                            var span = $('<span></span>').text(label);
-                            block.append(span);
-                            container.append(block);
+                        else {
+                            allowMultipleSelection = false;
                         }
+                        var selectedBlocks = [];
 
-                        // Call the function initially and on window resize
-                        setOptionFontSize();
-                        window.addEventListener('resize', setOptionFontSize);
-                    }
+                        function generateBlocks(labels) {
 
-                    function handleClick(event) {
-                        var clickedBlock = $(event.target).closest('.option');
-                        var isAlreadySelected = clickedBlock.hasClass('selected');
+                            console.log("CURR LABELS", labels)
 
-                        if (allowMultipleSelection) {
-                            clickedBlock.toggleClass('selected');
-
-                            var label = clickedBlock.find('span').text();
-                            if (isAlreadySelected) {
-                                // Remove the label from the selectedBlocks array
-                                var index = selectedBlocks.indexOf(label);
-                                if (index !== -1) {
-                                    selectedBlocks.splice(index, 1);
-                                }
-                            } else {
-                                // Add the label to the selectedBlocks array
-                                selectedBlocks.push(label);
+                            if (labels === undefined) {
+                                var test = JFCustomWidget.getAllQueryString();
+                                var params2 = JFCustomWidget.getWidgetSetting("optionLabels");
+                                labels = params2?.split(/\r?\n/);
                             }
 
-                            var result = selectedBlocks.join('; ');
-                            console.log('Selected blocks: ' + result);
-                            _data.value = result;
-                            makeWidgetRequiredOrNot();
+                            var container = $('#container');
+                            container.empty(); // Clear any existing blocks
 
-                        } else {
-                            $('.option').removeClass('selected');
-                            clickedBlock.addClass('selected');
-                            var label = clickedBlock.find('span').text();
-                            console.log('Selected: ' + label);
-                            _data.value = label;
+                            for (var i = 0; i < labels.length; i++) {
+                                var label = labels[i];
+                                var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
+                                var span = $('<span></span>').text(label);
+                                block.append(span);
+                                container.append(block);
+                            }
 
-                            makeWidgetRequiredOrNot();
+                            // Call the function initially and on window resize
+                            setOptionFontSize();
+                            window.addEventListener('resize', setOptionFontSize);
                         }
+
+                        function handleClick(event) {
+                            var clickedBlock = $(event.target).closest('.option');
+                            var isAlreadySelected = clickedBlock.hasClass('selected');
+
+                            if (allowMultipleSelection) {
+                                clickedBlock.toggleClass('selected');
+
+                                var label = clickedBlock.find('span').text();
+                                if (isAlreadySelected) {
+                                    // Remove the label from the selectedBlocks array
+                                    var index = selectedBlocks.indexOf(label);
+                                    if (index !== -1) {
+                                        selectedBlocks.splice(index, 1);
+                                    }
+                                } else {
+                                    // Add the label to the selectedBlocks array
+                                    selectedBlocks.push(label);
+                                }
+
+                                var result = selectedBlocks.join('; ');
+                                console.log('Selected blocks: ' + result);
+                                _data.value = result;
+                                makeWidgetRequiredOrNot();
+
+                            } else {
+                                $('.option').removeClass('selected');
+                                clickedBlock.addClass('selected');
+                                var label = clickedBlock.find('span').text();
+                                console.log('Selected: ' + label);
+                                _data.value = label;
+
+                                makeWidgetRequiredOrNot();
+                            }
+                        }
+
+                        generateBlocks(blockLabels);
+
+                        $('.option').click(handleClick);
                     }
 
-                    generateBlocks(blockLabels);
-
-                    $('.option').click(handleClick);
                 }
 
-            }
+                JFCustomWidget.subscribe('submit', function () {
+                    makeWidgetRequiredOrNot();
+                    JFCustomWidget.sendSubmit(_data);
+                });
 
-            JFCustomWidget.subscribe('submit', function () {
-                makeWidgetRequiredOrNot();
-                JFCustomWidget.sendSubmit(_data);
-            });
-
-            JFCustomWidget.subscribe('ready', function (data) {
-                var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
-                widget.init();
+                JFCustomWidget.subscribe('ready', function (data) {
+                    var widget = new PickerWidget('Test01', data, JFCustomWidget.getWidgetSettings());
+                    widget.init();
+                });
             });
         });
 
