@@ -125,7 +125,7 @@
             });
         }
 
-        window.addEventListener("load", function () {
+        $(function () {
             function PickerWidget(containerId, formData, params) {
                 /**
                * Exposed
@@ -137,9 +137,14 @@
                     console.log(formData)
                     console.log(params)
 
-                    const currOptions = params["optionLabels"].split(/\r?\n/);
+                    const currOptions = params["optionLabels"]?.split(/\r?\n/);
 
-                    var blockLabels = currOptions ?? ['Option 1', 'Option 2', 'Option 3'];
+                    if (params === undefined) {
+                        var params2 = JFCustomWidget.getWidgetSettings();
+                        var currOptions2 = params2["optionLabels"]?.split(/\r?\n/);
+                    }
+
+                    var blockLabels = currOptions ?? currOptions2;
 
                     var allowMultipleSelection;
 
