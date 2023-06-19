@@ -32,9 +32,7 @@
         function getClientInfo() {
             const params = JFCustomWidget.getWidgetSettings();
             const userInput = document.getElementById('clientInfo').value;
-            var userInfoName = document.getElementById("userInfoName");
-            var userInfoOrigin = document.getElementById("userInfoOrigin");
-
+            var userInfo = document.getElementById("userInfoPara");
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
             console.log("HERE");
@@ -56,8 +54,7 @@
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
-                    userInfoName.innerHTML = `Name: ${responseData.Name}`;
-                    userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
+                    userInfo.innerHTML = `Name:${responseData.Name} Country you arrived from:${responseData.What_country_have_you_arrived_from__c}`;
                     JFCustomWidget.setFieldsValueById([{
                         id: "6",
                         value: responseData.Id
@@ -140,8 +137,7 @@
             aria-describedby="basic-addon1">
         <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()">
             Search ID <i id="myLoadIcon" class=""></i></button>
-        <p id="userInfoName"></p>
-        <p id="userInfoOrigin"></p>
+        <p id="userInfoPara"></p>
     </div>
 </body>
 
