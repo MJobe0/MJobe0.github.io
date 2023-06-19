@@ -42,16 +42,15 @@
                 method: "GET",
                 crossDomain: true,
                 dataType: 'json',
-                // headers: {
-                //     "Access-Control-Allow-Origin": "*",
-                //     "accept": "*/*",
-                //     "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
-                //     "apikey": params["apiKey"]
-                // },
-                data: {
-                    "apiKey": params["apiKey"],
-                    "url": "https://mjobe0.github.io/"
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "accept": "*/*",
+                    "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
+                    "apikey": params["apiKey"]
                 },
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
