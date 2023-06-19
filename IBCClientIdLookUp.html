@@ -40,7 +40,7 @@
             console.log("HERE");
             console.log(``)
             jQuery.ajax({
-                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
+                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, 
                 method: "GET",
                 // crossDomain: true,
                 dataType: 'json',
@@ -142,10 +142,10 @@
             aria-describedby="basic-addon1">
         <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
                 class=""></i>Search ID</button>
-        <div>
-            <p id="userInfoName"></p>
-            <p id="userInfoOrigin"></p>
-        </div>
+    </div>
+    <div id="userInfo">
+        <p id="userInfoName"></p>
+        <p id="userInfoOrigin"></p>
     </div>
 </body>
 
