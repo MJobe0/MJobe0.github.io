@@ -32,11 +32,11 @@
         function getClientInfo() {
             const params = JFCustomWidget.getWidgetSettings();
             const userInput = document.getElementById('clientInfo').value;
-            // document.getElementById("getLinkButton").textContent = "Getting Link....";
+            var userInfo = document.getElementById("userInfoPara");
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
             console.log("HERE");
-            console.log(`Key`, params["apiKey"])
+            console.log(``)
             jQuery.ajax({
                 url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
                 method: "GET",
@@ -53,6 +53,16 @@
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    userInfo.innerHTML = `Name:${responseData.Name}/nCountry you arrived from:${responseData.What_country_have_you_arrived_from__c}`;
+                    JFCustomWidget.setFieldsValueById({
+                        id: "6",
+                        value: responseData.Id
+                    });
+                    JFCustomWidget.setFieldsValueById({
+                        id: "7",
+                        value: responseData.Service_Center_Case__c
+                    });
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
@@ -127,7 +137,8 @@
         <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
             aria-describedby="basic-addon1">
         <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()">
-            <i id="myLoadIcon" class=""></i>Search ID</button>
+            Search ID <i id="myLoadIcon" class=""></i></button>
+        <p id="userInfoPara"></p>
     </div>
 </body>
 
