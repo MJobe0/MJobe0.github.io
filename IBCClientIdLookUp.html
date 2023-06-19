@@ -41,11 +41,10 @@
                 url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
                 method: "GET",
                 crossDomain: true,
-                dataType: 'json',
+                dataType: 'jsonp',
                 headers: {
+                    "accept": "application/json",
                     "Access-Control-Allow-Origin": "*",
-                    "accept": "*/*",
-                    "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
                     "apikey": params["apiKey"]
                 },
                 // data: {
