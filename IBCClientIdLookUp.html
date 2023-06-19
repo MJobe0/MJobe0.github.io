@@ -37,9 +37,13 @@
 
             console.log("HERE");
             console.log(``)
-
-            fetch("https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact", {
-                "headers": {
+            jQuery.ajax({
+                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
+                method: "GET",
+                crossDomain: true,
+                dataType: 'json',
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
                     "accept": "*/*",
                     "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
                     "cache-control": "no-cache",
@@ -49,37 +53,21 @@
                     "sec-fetch-site": "cross-site",
                     "apikey": params["apiKey"]
                 },
-                "referrer": "https://mjobe0.github.io/",
-                "referrerPolicy": "strict-origin-when-cross-origin",
-                "body": null,
-                "method": "GET",
-                "mode": "no-cors",
-            });
-
-            // jQuery.ajax({
-            //     url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
-            //     method: "GET",
-            //     crossDomain: true,
-            //     dataType: 'json',
-            //     headers: {
-            //         "Access-Control-Allow-Origin": "https://mjobe0.github.io/",
-            //         "apikey": params["apiKey"]
-            //     },
-            //     // data: {
-            //     //     "apiKey": params["apiKey"]
-            //     // },
-            //     // timeout: 10000,
-            //     success: function (responseData, textStatus, jqXHR) {
-            //         console.log("success: ", responseData);
-            //         return
-            //     },
-            //     error: function (responseData, textStatus, jqXHR) {
-            //         console.log("error: ", responseData);
-            //         document.getElementById('clientInfo').value = "Something went wrong please try again";
-            //         document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
-            //         return
-            //     }
-            // })
+                // data: {
+                //     "apiKey": params["apiKey"]
+                // },
+                // timeout: 10000,
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("success: ", responseData);
+                    return
+                },
+                error: function (responseData, textStatus, jqXHR) {
+                    console.log("error: ", responseData);
+                    document.getElementById('clientInfo').value = "Something went wrong please try again";
+                    document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
+                    return
+                }
+            })
 
             // JFCustomWidget.sendSubmit({ valid: false, value: `Please double click this cell to open widget. Email:${candEmail} IQX Number:${iqxNum} ` });
         }
