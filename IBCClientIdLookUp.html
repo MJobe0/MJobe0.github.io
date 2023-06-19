@@ -29,6 +29,11 @@
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
+        function resizeFrame() {
+            const currHeight = $("body").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+        }
+
         function getClientInfo() {
             const params = JFCustomWidget.getWidgetSettings();
             const userInput = document.getElementById('clientInfo').value;
@@ -40,7 +45,7 @@
             console.log("HERE");
             console.log(``)
             jQuery.ajax({
-                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, 
+                url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`,
                 method: "GET",
                 // crossDomain: true,
                 dataType: 'json',
@@ -58,6 +63,7 @@
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     userInfoName.innerHTML = `Name: ${responseData.Name}`;
                     userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
+                    resizeFrame();
                     JFCustomWidget.setFieldsValueById([{
                         id: "6",
                         value: responseData.Id
