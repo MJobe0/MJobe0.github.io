@@ -36,7 +36,7 @@
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
             console.log("HERE");
-            console.log(``)
+            console.log(`Key`, params["apiKey"])
             jQuery.ajax({
                 url: `https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/${userInput}/Contact`, //https://w5oj2da5kj.execute-api.eu-west-1.amazonaws.com/SalesForce/Client/CL004780/Contact
                 method: "GET",
