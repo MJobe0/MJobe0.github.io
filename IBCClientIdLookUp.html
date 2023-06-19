@@ -138,8 +138,8 @@
             JFCustomWidget.subscribe('submit', function () {
                 var currUserInfoName = document.getElementById("userInfoName");
                 var currUserInfoOrigin = document.getElementById("userInfoOrigin");
-                currUserInfoName.innerHTML = "";
-                currUserInfoOrigin.innerHTML = "";
+                currUserInfoName.innerHTML = "Name:-";
+                currUserInfoOrigin.innerHTML = "Country you arrived from:-";
                 resizeFrame();
                 makeWidgetRequiredOrNot();
                 JFCustomWidget.sendSubmit(_data);
