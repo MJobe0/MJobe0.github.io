@@ -54,15 +54,14 @@
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
-                    userInfo.innerHTML = `Name:${responseData.Name}/nCountry you arrived from:${responseData.What_country_have_you_arrived_from__c}`;
-                    JFCustomWidget.setFieldsValueById({
+                    userInfo.innerHTML = `Name:${responseData.Name} Country you arrived from:${responseData.What_country_have_you_arrived_from__c}`;
+                    JFCustomWidget.setFieldsValueById([{
                         id: "6",
                         value: responseData.Id
-                    });
-                    JFCustomWidget.setFieldsValueById({
+                    }, {
                         id: "7",
                         value: responseData.Service_Center_Case__c
-                    });
+                    }]);
                     return
                 },
                 error: function (responseData, textStatus, jqXHR) {
