@@ -81,23 +81,25 @@
         function makeWidgetRequiredOrNot() {
             console.log(JFCustomWidget.isWidgetRequired())
 
-            // Get field value by ID if fields are not filled require
+            JFCustomWidget.getFieldsValueById(["6", "7"], function (res) {
+                console.log("res by Name= ", res.data[0].value);
+                var valueInIdField = res.data[0].value
+                var valueInCountryField = res.data[1].value
+            })
 
-            if (JFCustomWidget.isWidgetRequired() === true) {
-                if (document.getElementById('clientInfo').value === "") {
-                    // console.log(JFCustomWidget)
-                    // console.log(JFCustomWidget.isWidgetRequired())
-                    // JFCustomWidget.makeWidgetRequired();
-                    JFCustomWidget.showWidgetError("Please enter a a valid ID and search for your record")
-                    _data.valid = true
-                    return
-                }
-                else {
-                    JFCustomWidget.makeWidgetNotRequired();
-                    JFCustomWidget.hideWidgetError();
-                    _data.valid = false
-                    return
-                }
+            if (valueInIdField === "" || valueInCountryField === "") {
+                // console.log(JFCustomWidget)
+                // console.log(JFCustomWidget.isWidgetRequired())
+                // JFCustomWidget.makeWidgetRequired();
+                JFCustomWidget.showWidgetError("Please try searching for your record again as your data has not been set correctly")
+                _data.valid = true
+                return
+            }
+            else {
+                JFCustomWidget.makeWidgetNotRequired();
+                JFCustomWidget.hideWidgetError();
+                _data.valid = false
+                return
             }
         }
 
