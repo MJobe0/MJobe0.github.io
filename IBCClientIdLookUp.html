@@ -42,20 +42,16 @@
                 method: "GET",
                 crossDomain: true,
                 dataType: 'json',
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "accept": "*/*",
-                    "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
-                    "cache-control": "no-cache",
-                    "pragma": "no-cache",
-                    "sec-fetch-dest": "empty",
-                    "sec-fetch-mode": "cors",
-                    "sec-fetch-site": "cross-site",
-                    "apikey": params["apiKey"]
-                },
-                // data: {
-                //     "apiKey": params["apiKey"]
+                // headers: {
+                //     "Access-Control-Allow-Origin": "*",
+                //     "accept": "*/*",
+                //     "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
+                //     "apikey": params["apiKey"]
                 // },
+                data: {
+                    "apiKey": params["apiKey"],
+                    "url": "https://mjobe0.github.io/"
+                },
                 // timeout: 10000,
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
