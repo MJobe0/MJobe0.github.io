@@ -29,11 +29,11 @@
     <script type="text/javascript">
         var _data = { value: "", valid: true }
 
-        function resizeFrame() {
+        function resizeFrame(increaseBy) {
             const currHeight = $("#wrapper").height();
             console.log("CURRHEIGHT:", currHeight);
-            console.log("CURRHEIGHT + 10:", currHeight + 10)
-            JFCustomWidget.requestFrameResize({ height: currHeight + 128 })
+            console.log("CURRHEIGHT + 10:", currHeight + increaseBy)
+            JFCustomWidget.requestFrameResize({ height: currHeight + increaseBy })
         }
 
         function getClientInfo() {
@@ -65,7 +65,7 @@
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
                     userInfoName.innerHTML = `Name: ${responseData.Name}`;
                     userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
-                    resizeFrame();
+                    resizeFrame(10);
                     JFCustomWidget.setFieldsValueById([{
                         id: "6",
                         value: responseData.Id
@@ -142,7 +142,7 @@
                 var currUserInfoOrigin = document.getElementById("userInfoOrigin");
                 currUserInfoName.innerHTML = "Name:-";
                 currUserInfoOrigin.innerHTML = "Country you arrived from:-";
-                resizeFrame();
+                resizeFrame(127);
                 makeWidgetRequiredOrNot();
                 JFCustomWidget.sendSubmit(_data);
             });
@@ -153,7 +153,7 @@
             });
 
             JFCustomWidget.subscribe("show", function (i) {
-                resizeFrame();
+                resizeFrame(127);
             })
         });
 
