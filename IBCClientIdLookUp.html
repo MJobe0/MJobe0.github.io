@@ -30,7 +30,7 @@
         var _data = { value: "", valid: true }
 
         function resizeFrame() {
-            const currHeight = $("body").height();
+            const currHeight = $("#wrapper").height();
             JFCustomWidget.requestFrameResize({ height: currHeight + 10 })
         }
 
@@ -156,19 +156,21 @@
         });
 
     </script>
-    <div id="myDiv" class="input-group mb-3">
-        <!-- <div class="input-group-prepend">
+    <div id="wrapper">
+        <div id="myDiv" class="input-group mb-3">
+            <!-- <div class="input-group-prepend">
             <button id="getLinkButton" class="btn btn-success" type="button" onclick="getLinkStageOne()">
                 <i id="myLoadIcon" class=""></i>Search ID</button>
         </div> -->
-        <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
-            aria-describedby="basic-addon1">
-        <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
-                class=""></i>Search ID</button>
-    </div>
-    <div id="userInfo">
-        <p id="userInfoName"></p>
-        <p id="userInfoOrigin"></p>
+            <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
+                aria-describedby="basic-addon1">
+            <button class="btn btn-outline-secondary" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
+                    class=""></i>Search ID</button>
+        </div>
+        <div id="userInfo">
+            <p id="userInfoName"></p>
+            <p id="userInfoOrigin"></p>
+        </div>
     </div>
 </body>
 
