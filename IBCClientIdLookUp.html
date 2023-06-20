@@ -31,6 +31,8 @@
 
         function resizeFrame() {
             const currHeight = $("#wrapper").height();
+            console.log("CURRHEIGHT:", currHeight);
+            console.log("CURRHEIGHT + 10:", currHeight + 10)
             JFCustomWidget.requestFrameResize({ height: currHeight + 100 })
         }
 
