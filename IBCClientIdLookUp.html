@@ -25,27 +25,11 @@
     </script>
 </head>
 <style>
-    .error {
-        border: 2px solid red;
-    }
 </style>
 
 <body>
     <script type="text/javascript">
         var _data = { value: "", valid: true }
-
-        function validateInput() {
-            const input = document.getElementById("inputField").value;
-            const regex = /^CL/;
-
-            if (!regex.test(input)) {
-                // Input does not start with 'CL'
-                document.getElementById("errorText").style.display = "block";
-            } else {
-                // Input starts with 'CL'
-                document.getElementById("errorText").style.display = "none";
-            }
-        }
 
         function createHtmlTable(obj) {
             // Create the table element
@@ -233,13 +217,11 @@
                 <i id="myLoadIcon" class=""></i>Search ID</button>
         </div> -->
             <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
-                aria-describedby="basic-addon1" oninput="validateInput()">
+                aria-describedby="basic-addon1">
             <button class="btn btn-success" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
                     class=""></i>Search ID</button>
         </div>
-        <p id="errorText" style="color: red; display: none;">Input must start with 'CL'</p>
         <div id="table-container">
-
         </div>
     </div>
 </body>
