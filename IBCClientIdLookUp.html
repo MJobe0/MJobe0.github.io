@@ -24,10 +24,31 @@
         })();
     </script>
 </head>
+<style>
+    .error {
+        border: 2px solid red;
+    }
+</style>
 
 <body>
     <script type="text/javascript">
         var _data = { value: "", valid: true }
+
+        function validateInput() {
+            const input = document.getElementById("clientInfo").value;
+            const regex = /^CL\d{6}$/;
+
+            if (!regex.test(input)) {
+                // Input does not match the desired format
+                // You can display an error message or apply some styling to indicate the error
+                // For example, add a CSS class to the input field
+                document.getElementById("clientInfo").classList.add("error");
+            } else {
+                // Input matches the desired format
+                // You can remove the error styling if it was applied
+                document.getElementById("clientInfo").classList.remove("error");
+            }
+        }
 
         function createHtmlTable(obj) {
             // Create the table element
@@ -215,7 +236,7 @@
                 <i id="myLoadIcon" class=""></i>Search ID</button>
         </div> -->
             <input type="text" id="clientInfo" name="clientInfo" class="form-control" placeholder="" aria-label=""
-                aria-describedby="basic-addon1">
+                aria-describedby="basic-addon1" oninput="validateInput()">
             <button class="btn btn-success" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
                     class=""></i>Search ID</button>
         </div>
