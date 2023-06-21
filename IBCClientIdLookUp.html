@@ -29,6 +29,42 @@
     <script type="text/javascript">
         var _data = { value: "", valid: true }
 
+        function createHtmlTable(obj) {
+            // Create the table element
+            var table = document.createElement('table');
+
+            // Create the table header row
+            var thead = document.createElement('thead');
+            var headerRow = document.createElement('tr');
+
+            // Loop through the object keys and create table headers
+            for (var key in obj) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            }
+
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create the table body
+            var tbody = document.createElement('tbody');
+            var dataRow = document.createElement('tr');
+
+            // Loop through the object values and create table data cells
+            for (var value in obj) {
+                var td = document.createElement('td');
+                td.textContent = obj[value];
+                dataRow.appendChild(td);
+            }
+
+            tbody.appendChild(dataRow);
+            table.appendChild(tbody);
+
+            var container = document.getElementById('table-container');
+            container.appendChild(table);
+        }
+
         function resizeFrame(increaseBy) {
             const currHeight = $("#wrapper").height();
             console.log("CURRHEIGHT:", currHeight);
@@ -38,9 +74,9 @@
 
         function getClientInfo() {
             const params = JFCustomWidget.getWidgetSettings();
-            const userInput = document.getElementById('clientInfo').value;
-            var userInfoName = document.getElementById("userInfoName");
-            var userInfoOrigin = document.getElementById("userInfoOrigin");
+            // const userInput = document.getElementById('clientInfo').value;
+            // var userInfoName = document.getElementById("userInfoName");
+            // var userInfoOrigin = document.getElementById("userInfoOrigin");
 
             document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
@@ -63,8 +99,14 @@
                 success: function (responseData, textStatus, jqXHR) {
                     console.log("success: ", responseData);
                     document.getElementById("myLoadIcon").classList.remove("fa", "fa-spinner", "fa-spin");
-                    userInfoName.innerHTML = `Name: ${responseData.Name}`;
-                    userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
+                    var myObject = {
+                        "Name": responseData.Name,
+                        "DOB": responseData.Birth_Date__c,
+                        "Country you arrived from": responseData.What_country_have_you_arrived_from__c
+                    }
+                    createHtmlTable(myObject);
+                    // userInfoName.innerHTML = `Name: ${responseData.Name}`;
+                    // userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
                     resizeFrame(10);
                     JFCustomWidget.setFieldsValueById([{
                         id: "6",
@@ -137,10 +179,17 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                var currUserInfoName = document.getElementById("userInfoName");
-                var currUserInfoOrigin = document.getElementById("userInfoOrigin");
-                currUserInfoName.innerHTML = "Name:-";
-                currUserInfoOrigin.innerHTML = "Country you arrived from:-";
+                // var currUserInfoName = document.getElementById("userInfoName");
+                // var currUserInfoOrigin = document.getElementById("userInfoOrigin");
+                // currUserInfoName.innerHTML = "Name:-";
+                // currUserInfoOrigin.innerHTML = "Country you arrived from:-";
+                var container1 = document.getElementById('table-container');
+                var table1 = container1.querySelector('table');
+
+                if (table1) {
+                    container1.removeChild(table);
+                }
+
                 resizeFrame(127);
                 makeWidgetRequiredOrNot();
                 JFCustomWidget.sendSubmit(_data);
@@ -168,9 +217,8 @@
             <button class="btn btn-success" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
                     class=""></i>Search ID</button>
         </div>
-        <div id="userInfo">
-            <p id="userInfoName"></p>
-            <p id="userInfoOrigin"></p>
+        <div id="table-container">
+
         </div>
     </div>
 </body>
