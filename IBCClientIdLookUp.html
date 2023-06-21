@@ -35,18 +35,15 @@
         var _data = { value: "", valid: true }
 
         function validateInput() {
-            const input = document.getElementById("clientInfo").value;
-            const regex = /^CL\d{6}$/;
+            const input = document.getElementById("inputField").value;
+            const regex = /^CL/;
 
             if (!regex.test(input)) {
-                // Input does not match the desired format
-                // You can display an error message or apply some styling to indicate the error
-                // For example, add a CSS class to the input field
-                document.getElementById("clientInfo").classList.add("error");
+                // Input does not start with 'CL'
+                document.getElementById("errorText").style.display = "block";
             } else {
-                // Input matches the desired format
-                // You can remove the error styling if it was applied
-                document.getElementById("clientInfo").classList.remove("error");
+                // Input starts with 'CL'
+                document.getElementById("errorText").style.display = "none";
             }
         }
 
@@ -240,6 +237,7 @@
             <button class="btn btn-success" type="button" onclick="getClientInfo()"><i id="myLoadIcon"
                     class=""></i>Search ID</button>
         </div>
+        <p id="errorText" style="color: red; display: none;">Input must start with 'CL'</p>
         <div id="table-container">
 
         </div>
