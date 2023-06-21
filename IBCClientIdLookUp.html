@@ -180,6 +180,10 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
+                var tblContainer = document.getElementById("table-container");
+                console.log("Before", tblContainer);
+                tblContainer.innerHTML = "";
+                console.log("After", tblContainer);
                 // var currUserInfoName = document.getElementById("userInfoName");
                 // var currUserInfoOrigin = document.getElementById("userInfoOrigin");
                 // currUserInfoName.innerHTML = "Name:-";
