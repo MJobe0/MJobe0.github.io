@@ -74,6 +74,10 @@
         }
 
         function getClientInfo() {
+            var tblContainer = document.getElementById("table-container");
+            console.log("Before", tblContainer);
+            tblContainer.innerHTML = "";
+            console.log("After", tblContainer);
             const params = JFCustomWidget.getWidgetSettings();
             const userInput = document.getElementById('clientInfo').value;
             // var userInfoName = document.getElementById("userInfoName");
@@ -180,21 +184,14 @@
             }
 
             JFCustomWidget.subscribe('submit', function () {
-                var tblContainer = document.getElementById("table-container");
-                console.log("Before", tblContainer);
-                tblContainer.innerHTML = "";
-                console.log("After", tblContainer);
+                var tblContainer1 = document.getElementById("table-container");
+                console.log("Before", tblContainer1);
+                tblContainer1.innerHTML = "";
+                console.log("After", tblContainer1);
                 // var currUserInfoName = document.getElementById("userInfoName");
                 // var currUserInfoOrigin = document.getElementById("userInfoOrigin");
                 // currUserInfoName.innerHTML = "Name:-";
                 // currUserInfoOrigin.innerHTML = "Country you arrived from:-";
-                var container1 = document.getElementById('table-container');
-                var table1 = container1.querySelector('table');
-
-                if (table1) {
-                    container1.removeChild(table);
-                }
-
                 resizeFrame(127);
                 makeWidgetRequiredOrNot();
                 JFCustomWidget.sendSubmit(_data);
