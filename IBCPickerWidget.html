@@ -172,22 +172,31 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var row = $('<div></div>').addClass('row'); // Create a new row container
-                        container.append(row);
+                        var optionsPerLine = 5; // Maximum number of options per line
+                        var currentLine = $('<div></div>'); // Container for the current line
+                        var lineCount = 0; // Number of lines created
 
                         for (var i = 0; i < labels.length; i++) {
                             var label = labels[i];
                             var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
                             block.append(span);
-                            row.append(block);
 
-                            // Create a new row after every fifth block
-                            if ((i + 1) % 5 === 0) {
-                                row = $('<div></div>').addClass('row'); // Create a new row container
-                                container.append(row);
+                            currentLine.append(block);
+
+                            // Check if the current line is full or if it's the last option
+                            if (i % optionsPerLine === optionsPerLine - 1 || i === labels.length - 1) {
+                                container.append(currentLine);
+                                currentLine = $('<div></div>'); // Create a new line
+                                lineCount++;
+                            } else {
+                                currentLine.append(block);
                             }
                         }
+
+                        // Adjust the container's width to accommodate the number of lines
+                        var containerWidth = lineCount * (100 / optionsPerLine);
+                        container.css('width', containerWidth + '%');
 
                         // Call the function initially and on window resize
                         setOptionFontSize();
