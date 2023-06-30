@@ -30,7 +30,7 @@
     <style>
         .container {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             padding: 0;
             margin: 0;
             max-width: 740px;
@@ -64,11 +64,6 @@
 
         .selected {
             border: 4px solid #2F3B65;
-        }
-
-        .row {
-            display: flex;
-            flex-wrap: nowrap;
         }
 
         @media screen and (max-width: 600px) {
@@ -177,20 +172,20 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var rowSize = 5; // Number of options per row
-                        var currentRow = $('<div></div>').addClass('row');
+                        var row = $('<div></div>').addClass('row'); // Create a new row container
+                        container.append(row);
 
                         for (var i = 0; i < labels.length; i++) {
                             var label = labels[i];
                             var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
                             block.append(span);
-                            currentRow.append(block);
+                            row.append(block);
 
-                            // Check if the current row is full or if it's the last option
-                            if ((i + 1) % rowSize === 0 || i === labels.length - 1) {
-                                container.append(currentRow);
-                                currentRow = $('<div></div>').addClass('row');
+                            // Create a new row after every fifth block
+                            if ((i + 1) % 5 === 0) {
+                                row = $('<div></div>').addClass('row'); // Create a new row container
+                                container.append(row);
                             }
                         }
 
