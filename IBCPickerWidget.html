@@ -60,6 +60,12 @@
             border: 4px solid #2F3B65;
         }
 
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
         @media screen and (max-width: 600px) {
             .option {
                 width: calc(33.33% - 10px);
@@ -162,19 +168,18 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var table = $('<table></table>').appendTo(container);
-                        var row = $('<tr></tr>').appendTo(table);
+                        var row = $('<div></div>').addClass('row').appendTo(container);
 
                         for (var i = 0; i < labels.length; i++) {
                             if (i % 5 === 0 && i !== 0) {
-                                row = $('<tr></tr>').appendTo(table);
+                                row = $('<div></div>').addClass('row').appendTo(container);
                             }
 
                             var label = labels[i];
-                            var cell = $('<td></td>').addClass('option').attr('id', 'option' + (i + 1));
+                            var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
-                            cell.append(span);
-                            row.append(cell);
+                            block.append(span);
+                            row.append(block);
                         }
 
                         // Call the function initially and on window resize
@@ -221,7 +226,6 @@
 
                     $('.option').click(handleClick);
                 }
-
             }
 
             JFCustomWidget.subscribe('submit', function () {
@@ -234,7 +238,6 @@
                 widget.init();
             });
         });
-
     </script>
     <div class="container" id="container">
     </div>
