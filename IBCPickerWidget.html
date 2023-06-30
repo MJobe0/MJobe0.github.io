@@ -38,7 +38,7 @@
         }
 
         .option {
-            flex: 1;
+            flex: 0 0 calc(20% - 10px); /* Adjusted flex value to accommodate 5 options per row */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
@@ -47,6 +47,7 @@
             justify-content: center;
             cursor: pointer;
             margin-right: 10px;
+            margin-bottom: 10px; /* Added margin-bottom to create space between rows */
             white-space: normal;
             padding: 10px;
             box-sizing: border-box;
