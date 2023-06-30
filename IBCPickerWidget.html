@@ -77,6 +77,11 @@
             flex-basis: calc(50% - 10px);
         }
 
+        .option.two-options,
+        .option.three-options {
+            flex-basis: calc(33.33% - 10px);
+        }
+        
         @media screen and (max-width: 600px) {
             .option {
                 flex-basis: calc(33.33% - 10px);
@@ -114,15 +119,9 @@
                 }
             }
         }
+
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
-
-            var settings1 = JFCustomWidget.getWidgetSettings();
-
-            userSetFont = settings1["fontsize"] ?? "21";
-
-            console.log("User Set font", userSetFont)
-
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
@@ -131,7 +130,7 @@
                 const optionText = option.querySelector('span');
 
                 // Reset font size to the maximum value
-                optionText.style.fontSize = userSetFont + "px";
+                optionText.style.fontSize = '21px';
 
                 // Reduce font size until the text fits within the option width
                 while (optionText.offsetWidth > optionWidth) {
@@ -157,7 +156,7 @@
                 }
             });
 
-            // Check if there are only two options on any row
+            // Check if there are only two or three options on any row
             const container = document.querySelector('.container');
             const rows = Array.from(container.children);
             rows.forEach(row => {
@@ -166,6 +165,12 @@
                     optionsInRow.forEach(option => option.classList.add('two-options'));
                 } else {
                     optionsInRow.forEach(option => option.classList.remove('two-options'));
+                }
+
+                if (optionsInRow.length === 3) {
+                    optionsInRow.forEach(option => option.classList.add('three-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('three-options'));
                 }
             });
         }
