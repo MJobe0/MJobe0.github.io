@@ -66,6 +66,11 @@
             border: 4px solid #2F3B65;
         }
 
+        .row {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
         @media screen and (max-width: 600px) {
             .option {
                 flex-basis: calc(33.33% - 10px);
@@ -103,7 +108,7 @@
                 }
             }
         }
-        
+
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
             // Get all the option elements
@@ -172,12 +177,21 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
+                        var rowSize = 5; // Number of options per row
+                        var currentRow = $('<div></div>').addClass('row');
+
                         for (var i = 0; i < labels.length; i++) {
                             var label = labels[i];
                             var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
                             block.append(span);
-                            container.append(block);
+                            currentRow.append(block);
+
+                            // Check if the current row is full or if it's the last option
+                            if ((i + 1) % rowSize === 0 || i === labels.length - 1) {
+                                container.append(currentRow);
+                                currentRow = $('<div></div>').addClass('row');
+                            }
                         }
 
                         // Call the function initially and on window resize
