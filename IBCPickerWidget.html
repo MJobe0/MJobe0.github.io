@@ -113,6 +113,10 @@
 
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
+            widgetSettings = JFCustomWidget.getWidgetSettings();
+
+            var userFontSize = widgetSettings["fontSize"];
+
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
@@ -121,7 +125,7 @@
                 const optionText = option.querySelector('span');
 
                 // Reset font size to the maximum value
-                optionText.style.fontSize = '21px';
+                optionText.style.fontSize = userFontSize ?? "21";
 
                 // Reduce font size until the text fits within the option width
                 while (optionText.offsetWidth > optionWidth) {
