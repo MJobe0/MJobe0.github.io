@@ -29,22 +29,29 @@
 <body>
     <style>
         .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
             max-width: 740px;
             overflow-x: auto;
         }
 
         .option {
-            display: inline-block;
-            width: 20%;
+            flex-basis: calc(20% - 10px);
+            /* Adjust this value to set the desired width of each option */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
             white-space: normal;
-            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
             overflow: hidden;
         }
 
@@ -54,28 +61,23 @@
 
         .option span {
             font-weight: bold;
+            text-align: center;
         }
 
         .selected {
             border: 4px solid #2F3B65;
         }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
         @media screen and (max-width: 600px) {
             .option {
-                width: calc(33.33% - 10px);
+                flex-basis: calc(33.33% - 10px);
                 font-size: 14px;
             }
         }
 
         @media screen and (max-width: 400px) {
             .option {
-                width: calc(50% - 10px);
+                flex-basis: calc(50% - 10px);
                 font-size: 12px;
             }
         }
@@ -88,6 +90,9 @@
 
             if (JFCustomWidget.isWidgetRequired() === true) {
                 if (_data.value === "" || _data.value === undefined) {
+                    // console.log(JFCustomWidget)
+                    // console.log(JFCustomWidget.isWidgetRequired())
+                    // JFCustomWidget.makeWidgetRequired();
                     JFCustomWidget.showWidgetError("Please select an option for this question")
                     _data.valid = true
                     return
@@ -138,6 +143,7 @@
             });
         }
 
+
         $(function () {
             function PickerWidget(containerId, formData) {
                 /**
@@ -168,18 +174,12 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var row = $('<div></div>').addClass('row').appendTo(container);
-
                         for (var i = 0; i < labels.length; i++) {
-                            if (i % 5 === 0 && i !== 0) {
-                                row = $('<div></div>').addClass('row').appendTo(container);
-                            }
-
                             var label = labels[i];
                             var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
                             block.append(span);
-                            row.append(block);
+                            container.append(block);
                         }
 
                         // Call the function initially and on window resize
@@ -226,6 +226,7 @@
 
                     $('.option').click(handleClick);
                 }
+
             }
 
             JFCustomWidget.subscribe('submit', function () {
@@ -238,6 +239,7 @@
                 widget.init();
             });
         });
+
     </script>
     <div class="container" id="container">
     </div>
