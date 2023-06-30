@@ -73,6 +73,10 @@
             flex-basis: calc(50% - 10px);
         }
 
+        .option.two-options {
+            flex-basis: calc(50% - 10px);
+        }
+        
         @media screen and (max-width: 600px) {
             .option {
                 flex-basis: calc(33.33% - 10px);
@@ -110,15 +114,8 @@
                 }
             }
         }
-
         // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
-            widgetSettings = JFCustomWidget.getWidgetSettings();
-
-            var userFontSize = widgetSettings["fontSize"] ?? "21"
-
-            console.log("user fontsize", userFontSize)
-
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
@@ -152,8 +149,19 @@
                     }
                 }
             });
-        }
 
+            // Check if there are only two options on any row
+            const container = document.querySelector('.container');
+            const rows = Array.from(container.children);
+            rows.forEach(row => {
+                const optionsInRow = Array.from(row.children);
+                if (optionsInRow.length === 2) {
+                    optionsInRow.forEach(option => option.classList.add('two-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('two-options'));
+                }
+            });
+        }
 
         $(function () {
             function PickerWidget(containerId, formData) {
