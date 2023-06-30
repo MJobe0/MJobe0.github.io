@@ -90,13 +90,6 @@
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
-        function resizeFrame(increaseBy) {
-            const currHeight = $("#container").height();
-            console.log("CURRHEIGHT:", currHeight);
-            console.log("CURRHEIGHT + 10:", currHeight + increaseBy);
-            JFCustomWidget.requestFrameResize({ height: currHeight + increaseBy });
-        }
-
         function makeWidgetRequiredOrNot() {
             console.log(JFCustomWidget.isWidgetRequired())
 
@@ -122,7 +115,9 @@
         function setOptionFontSize() {
             widgetSettings = JFCustomWidget.getWidgetSettings();
 
-            var userFontSize = widgetSettings["fontSize"];
+            var userFontSize = widgetSettings["fontSize"] ?? "21"
+
+            console.log("user fontsize", userFontSize)
 
             // Get all the option elements
             const options = document.querySelectorAll('.option');
@@ -132,7 +127,7 @@
                 const optionText = option.querySelector('span');
 
                 // Reset font size to the maximum value
-                optionText.style.fontSize = userFontSize ?? "21";
+                optionText.style.fontSize = '21px';
 
                 // Reduce font size until the text fits within the option width
                 while (optionText.offsetWidth > optionWidth) {
@@ -204,8 +199,6 @@
                             block.append(span);
                             container.append(block);
                         }
-
-                        resizeFrame(100)
 
                         // Call the function initially and on window resize
                         setOptionFontSize();
