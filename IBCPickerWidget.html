@@ -90,6 +90,13 @@
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
+        function resizeFrame(increaseBy) {
+            const currHeight = $("#container").height();
+            console.log("CURRHEIGHT:", currHeight);
+            console.log("CURRHEIGHT + 10:", currHeight + increaseBy);
+            JFCustomWidget.requestFrameResize({ height: currHeight + increaseBy });
+        }
+
         function makeWidgetRequiredOrNot() {
             console.log(JFCustomWidget.isWidgetRequired())
 
@@ -197,6 +204,8 @@
                             block.append(span);
                             container.append(block);
                         }
+
+                        resizeFrame(100)
 
                         // Call the function initially and on window resize
                         setOptionFontSize();
