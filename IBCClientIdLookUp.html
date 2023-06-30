@@ -116,10 +116,10 @@
                     // userInfoOrigin.innerHTML = `Country you arrived from: ${responseData.What_country_have_you_arrived_from__c}`;
                     resizeFrame(10);
                     JFCustomWidget.setFieldsValueById([{
-                        id: "6",
+                        id: "336",
                         value: responseData.Id
                     }, {
-                        id: "7",
+                        id: "337",
                         value: responseData.Service_Center_Case__c
                     }]);
                     return
@@ -139,7 +139,7 @@
             if (JFCustomWidget.isWidgetRequired() === true) {
                 console.log(JFCustomWidget.isWidgetRequired())
 
-                JFCustomWidget.getFieldsValueById(["6", "7"], function (res) {
+                JFCustomWidget.getFieldsValueById(["336", "337"], function (res) {
                     console.log("res by Name= ", res.data[0].value);
                     var valueInIdField = res.data[0].value
                     var valueInCountryField = res.data[1].value
