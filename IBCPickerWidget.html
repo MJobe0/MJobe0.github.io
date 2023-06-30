@@ -29,7 +29,8 @@
 <body>
     <style>
         .container {
-            justify-content: space-between; /* Add this line */
+            justify-content: space-between;
+            /* Add this line */
             display: flex;
             flex-wrap: wrap;
             padding: 0;
@@ -66,6 +67,10 @@
 
         .selected {
             border: 4px solid #2F3B65;
+        }
+
+        .container.two-options .option {
+            flex-basis: calc(50% - 10px);
         }
 
         @media screen and (max-width: 600px) {
@@ -173,6 +178,13 @@
                     function generateBlocks(labels) {
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
+
+                        if (labels.length === 2) {
+                            // Add a special class for two options
+                            container.addClass('two-options');
+                        } else {
+                            container.removeClass('two-options');
+                        }
 
                         for (var i = 0; i < labels.length; i++) {
                             var label = labels[i];
