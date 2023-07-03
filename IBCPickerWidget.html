@@ -81,7 +81,7 @@
             /* Updated line */
             height: 100px;
             background-color: white;
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -140,6 +140,10 @@
         function setOptionFontSize() {
 
             var c1 = JFCustomWidget.getWidgetSettings();
+
+            // if (c1["fontSize"] === "") {
+            //     c1.fontSize = "21"
+            // }
 
             // Get all the option elements
             const options = document.querySelectorAll('.option');
