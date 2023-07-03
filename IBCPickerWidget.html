@@ -77,14 +77,15 @@
             flex-basis: calc(50% - 10px);
         }
 
+        .option.two-options,
         .option.three-options {
-            flex-basis: calc(25% - 10px);
+            flex-basis: 33.33%;
         }
-        
+
         @media screen and (max-width: 600px) {
-            .option {
-                flex-basis: calc(33.33% - 10px);
-                font-size: 14px;
+            .option.two-options,
+            .option.three-options {
+                flex-basis: 50%;
             }
         }
 
