@@ -77,7 +77,7 @@
         }
 
         .container .option {
-            flex-basis: calc(20% - 12px);
+            /* flex-basis: calc(20% - 12px); */
             /* Updated line */
             height: 100px;
             background-color: white;
@@ -92,6 +92,14 @@
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
+        }
+
+        .container .option:nth-child(-n + 3) {
+            flex-basis: calc(33.33% - 10px);
+        }
+
+        .container .option:nth-last-child(-n + 4):not(:nth-last-child(-n + 3)) {
+            flex-basis: calc(20% - 10px);
         }
 
         /* @media screen and (max-width: 1200px) {
@@ -300,7 +308,6 @@
                 widget.init();
             });
         });
-
     </script>
     <div class="container" id="container">
     </div>
