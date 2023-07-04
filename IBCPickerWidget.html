@@ -98,7 +98,7 @@
         }
 
         .row {
-            margin-left:0px !important
+            margin-left: 0px !important
         }
     </style>
     <script type="text/javascript">
@@ -278,6 +278,14 @@
 
                                     optionIndex++;
                                 }
+                            }
+
+                            // Update the flex-basis for options in rows after the first row
+                            for (var i = 1; i < rows; i++) {
+                                var optionsInCurrentRow = (i === 1) ? optionsInSecondRow : optionsInFirstRow;
+                                var options = rowsElements.eq(i).find('.option');
+
+                                options.css('flex-basis', 'calc(' + (100 / optionsInFirstRow) + '% - 12px)');
                             }
                         }
 
