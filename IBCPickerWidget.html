@@ -264,9 +264,7 @@
 
                             for (var i = 0; i < rowsElements.length; i++) {
                                 var optionsInCurrentRow = (i === 0) ? optionsInFirstRow : optionsInSecondRow;
-
-                                var rowOptionsWidth = 100 / optionsInFirstRow; // Calculate the width for options in the first row
-                                var rowOptionsStyle = 'width: ' + rowOptionsWidth + '%'; // Apply the width as inline style
+                                var optionsWidth = 100 / optionsInCurrentRow; // Calculate the width for options in the current row
 
                                 for (var j = 0; j < optionsInCurrentRow; j++) {
                                     if (optionIndex >= totalOptions) {
@@ -274,7 +272,7 @@
                                     }
 
                                     var label = labels[optionIndex];
-                                    var block = $('<div></div>').addClass('option').attr('id', 'option' + (optionIndex + 1)).attr('style', rowOptionsStyle); // Apply the width style
+                                    var block = $('<div></div>').addClass('option').attr('id', 'option' + (optionIndex + 1)).css('width', optionsWidth + '%'); // Apply the width style
                                     var span = $('<span></span>').text(label);
                                     block.append(span);
                                     rowsElements.eq(i).append(block);
