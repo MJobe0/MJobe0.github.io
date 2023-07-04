@@ -38,13 +38,6 @@
             overflow-x: auto;
         }
 
-        .row {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            width: 100%;
-        }
-
         .option {
             flex-basis: 18%;
             height: 100px;
@@ -75,17 +68,49 @@
             border: 4px solid #2F3B65;
         }
 
-        @media screen and (max-width: 767px) {
-            .option {
-                flex-basis: calc(50% - 10px);
+        .container.two-options .option {
+            flex-basis: calc(50% - 10px);
+        }
+
+        .option.two-options {
+            flex-basis: calc(50% - 10px);
+        }
+
+        .container .option {
+            flex-basis: calc(20% - 12px);
+            /* Updated line */
+            height: 100px;
+            background-color: white;
+            /* border: 1px solid #ddd; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            white-space: normal;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* @media screen and (max-width: 1200px) {
+            .container .option {
+                flex-basis: calc(25% - 10px);
             }
         }
 
-        @media screen and (max-width: 575px) {
-            .option {
-                flex-basis: 100%;
+        @media screen and (max-width: 900px) {
+            .container .option {
+                flex-basis: calc(33.33% - 10px);
             }
         }
+
+        @media screen and (max-width: 600px) {
+            .container .option {
+                flex-basis: calc(50% - 10px);
+            }
+        } */
     </style>
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
@@ -203,19 +228,19 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
+                        if (labels.length === 2) {
+                            // Add a special class for two options
+                            container.addClass('two-options');
+                        } else {
+                            container.removeClass('two-options');
+                        }
+
                         for (var i = 0; i < labels.length; i++) {
                             var label = labels[i];
-
-                            // Create a new row if needed
-                            if (i % 3 === 0) {
-                                var row = $('<div></div>').addClass('row');
-                                container.append(row);
-                            }
-
                             var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
                             var span = $('<span></span>').text(label);
                             block.append(span);
-                            row.append(block);
+                            container.append(block);
                         }
 
                         // Call the function initially and on window resize
@@ -251,30 +276,34 @@
                             $('.option').removeClass('selected');
                             clickedBlock.addClass('selected');
                             var label = clickedBlock.find('span').text();
+                            console.log('Selected: ' + label);
                             _data.value = label;
+
                             makeWidgetRequiredOrNot();
                         }
                     }
 
-                    // Generate the initial blocks based on the provided labels
                     generateBlocks(blockLabels);
 
-                    // Attach the click event handler to the options
-                    $('.option').on('click', handleClick);
+                    $('.option').click(handleClick);
                 }
 
-                // Call the init function when the document is ready
-                $(document).ready(init);
             }
 
-            var formData = JFCustomWidget.getWidgetData();
+            JFCustomWidget.subscribe('submit', function () {
+                makeWidgetRequiredOrNot();
+                JFCustomWidget.sendSubmit(_data);
+            });
 
-            // Initialize the picker widget
-            var widget = new PickerWidget('#container', formData);
+            JFCustomWidget.subscribe('ready', function (data) {
+                var widget = new PickerWidget('Test01', data);
+                widget.init();
+            });
         });
-    </script>
 
-    <div id="container" class="container"></div>
+    </script>
+    <div class="container" id="container">
+    </div>
 </body>
 
 </html>
