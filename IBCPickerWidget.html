@@ -38,6 +38,13 @@
             overflow-x: auto;
         }
 
+        .row {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
         .option {
             flex-basis: 18%;
             height: 100px;
@@ -68,49 +75,17 @@
             border: 4px solid #2F3B65;
         }
 
-        .container.two-rows .option {
-            flex-basis: calc(50% - 10px);
-        }
-
-        .option.two-rows {
-            flex-basis: calc(50% - 10px);
-        }
-
-        .container .option {
-            flex-basis: calc(20% - 12px);
-            /* Updated line */
-            height: 100px;
-            background-color: white;
-            /* border: 1px solid #ddd; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            white-space: normal;
-            padding: 10px;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        /* @media screen and (max-width: 1200px) {
-            .container .option {
-                flex-basis: calc(25% - 10px);
-            }
-        }
-
-        @media screen and (max-width: 900px) {
-            .container .option {
-                flex-basis: calc(33.33% - 10px);
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .container .option {
+        @media screen and (max-width: 767px) {
+            .option {
                 flex-basis: calc(50% - 10px);
             }
-        } */
+        }
+
+        @media screen and (max-width: 575px) {
+            .option {
+                flex-basis: 100%;
+            }
+        }
     </style>
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
@@ -184,10 +159,16 @@
             const rows = Array.from(container.children);
             rows.forEach(row => {
                 const optionsInRow = Array.from(row.children);
-                if (optionsInRow.length <= 3) {
-                    row.classList.add('two-rows');
+                if (optionsInRow.length === 2) {
+                    optionsInRow.forEach(option => option.classList.add('two-options'));
                 } else {
-                    row.classList.remove('two-rows');
+                    optionsInRow.forEach(option => option.classList.remove('two-options'));
+                }
+
+                if (optionsInRow.length === 3) {
+                    optionsInRow.forEach(option => option.classList.add('three-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('three-options'));
                 }
             });
         }
@@ -222,29 +203,19 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var numRows = Math.ceil(labels.length / 3); // Calculate the number of rows based on the number of labels
-                        container.removeClass('two-rows'); // Remove the two-rows class initially
+                        for (var i = 0; i < labels.length; i++) {
+                            var label = labels[i];
 
-                        for (var i = 0; i < numRows; i++) {
-                            var row = $('<div></div>').addClass('row');
-                            container.append(row);
-
-                            var startIdx = i * 3; // Calculate the starting index for each row
-                            var endIdx = startIdx + 3; // Calculate the ending index for each row
-
-                            if (endIdx > labels.length) {
-                                endIdx = labels.length;
+                            // Create a new row if needed
+                            if (i % 3 === 0) {
+                                var row = $('<div></div>').addClass('row');
+                                container.append(row);
                             }
 
-                            var rowLabels = labels.slice(startIdx, endIdx);
-
-                            for (var j = 0; j < rowLabels.length; j++) {
-                                var label = rowLabels[j];
-                                var block = $('<div></div>').addClass('option').attr('id', 'option' + (j + 1));
-                                var span = $('<span></span>').text(label);
-                                block.append(span);
-                                row.append(block);
-                            }
+                            var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
+                            var span = $('<span></span>').text(label);
+                            block.append(span);
+                            row.append(block);
                         }
 
                         // Call the function initially and on window resize
@@ -280,33 +251,30 @@
                             $('.option').removeClass('selected');
                             clickedBlock.addClass('selected');
                             var label = clickedBlock.find('span').text();
-                            console.log('Selected: ' + label);
                             _data.value = label;
-
                             makeWidgetRequiredOrNot();
                         }
                     }
 
+                    // Generate the initial blocks based on the provided labels
                     generateBlocks(blockLabels);
 
-                    $('.option').click(handleClick);
+                    // Attach the click event handler to the options
+                    $('.option').on('click', handleClick);
                 }
 
+                // Call the init function when the document is ready
+                $(document).ready(init);
             }
 
-            JFCustomWidget.subscribe('submit', function () {
-                makeWidgetRequiredOrNot();
-                JFCustomWidget.sendSubmit(_data);
-            });
+            var formData = JFCustomWidget.getWidgetData();
 
-            JFCustomWidget.subscribe('ready', function (data) {
-                var widget = new PickerWidget('Test01', data);
-                widget.init();
-            });
+            // Initialize the picker widget
+            var widget = new PickerWidget('#container', formData);
         });
     </script>
-    <div class="container" id="container">
-    </div>
+
+    <div id="container" class="container"></div>
 </body>
 
 </html>
