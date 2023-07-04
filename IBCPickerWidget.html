@@ -68,11 +68,11 @@
             border: 4px solid #2F3B65;
         }
 
-        .container.two-options .option {
+        .container.two-rows .option {
             flex-basis: calc(50% - 10px);
         }
 
-        .option.two-options {
+        .option.two-rows {
             flex-basis: calc(50% - 10px);
         }
 
@@ -184,16 +184,10 @@
             const rows = Array.from(container.children);
             rows.forEach(row => {
                 const optionsInRow = Array.from(row.children);
-                if (optionsInRow.length === 2) {
-                    optionsInRow.forEach(option => option.classList.add('two-options'));
+                if (optionsInRow.length <= 3) {
+                    row.classList.add('two-rows');
                 } else {
-                    optionsInRow.forEach(option => option.classList.remove('two-options'));
-                }
-
-                if (optionsInRow.length === 3) {
-                    optionsInRow.forEach(option => option.classList.add('three-options'));
-                } else {
-                    optionsInRow.forEach(option => option.classList.remove('three-options'));
+                    row.classList.remove('two-rows');
                 }
             });
         }
@@ -228,19 +222,29 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        if (labels.length === 2) {
-                            // Add a special class for two options
-                            container.addClass('two-options');
-                        } else {
-                            container.removeClass('two-options');
-                        }
+                        var numRows = Math.ceil(labels.length / 3); // Calculate the number of rows based on the number of labels
+                        container.removeClass('two-rows'); // Remove the two-rows class initially
 
-                        for (var i = 0; i < labels.length; i++) {
-                            var label = labels[i];
-                            var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
-                            var span = $('<span></span>').text(label);
-                            block.append(span);
-                            container.append(block);
+                        for (var i = 0; i < numRows; i++) {
+                            var row = $('<div></div>').addClass('row');
+                            container.append(row);
+
+                            var startIdx = i * 3; // Calculate the starting index for each row
+                            var endIdx = startIdx + 3; // Calculate the ending index for each row
+
+                            if (endIdx > labels.length) {
+                                endIdx = labels.length;
+                            }
+
+                            var rowLabels = labels.slice(startIdx, endIdx);
+
+                            for (var j = 0; j < rowLabels.length; j++) {
+                                var label = rowLabels[j];
+                                var block = $('<div></div>').addClass('option').attr('id', 'option' + (j + 1));
+                                var span = $('<span></span>').text(label);
+                                block.append(span);
+                                row.append(block);
+                            }
                         }
 
                         // Call the function initially and on window resize
@@ -300,7 +304,6 @@
                 widget.init();
             });
         });
-
     </script>
     <div class="container" id="container">
     </div>
