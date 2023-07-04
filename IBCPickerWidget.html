@@ -179,35 +179,23 @@
                 // }
             });
 
-            // Check the number of options and adjust the layout accordingly
+            // Check if there are only two or three options on any row
             const container = document.querySelector('.container');
-            const totalOptions = options.length;
+            const rows = Array.from(container.children);
+            rows.forEach(row => {
+                const optionsInRow = Array.from(row.children);
+                if (optionsInRow.length === 2) {
+                    optionsInRow.forEach(option => option.classList.add('two-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('two-options'));
+                }
 
-            if (totalOptions < 6) {
-                // Reset to default layout
-                container.classList.remove('two-options');
-                container.classList.remove('three-options');
-            } else if (totalOptions === 6) {
-                // Set 3 options per row
-                container.classList.add('two-options');
-                container.classList.remove('three-options');
-            } else if (totalOptions === 7) {
-                // Set 4 and 3 options per row
-                container.classList.remove('two-options');
-                container.classList.add('three-options');
-            } else if (totalOptions === 8) {
-                // Set 4 options per row
-                container.classList.add('two-options');
-                container.classList.remove('three-options');
-            } else if (totalOptions === 9) {
-                // Set 5 and 4 options per row
-                container.classList.remove('two-options');
-                container.classList.add('three-options');
-            } else if (totalOptions === 10) {
-                // Set 5 options per row
-                container.classList.add('two-options');
-                container.classList.remove('three-options');
-            }
+                if (optionsInRow.length === 3) {
+                    optionsInRow.forEach(option => option.classList.add('three-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('three-options'));
+                }
+            });
         }
 
         $(function () {
