@@ -284,6 +284,14 @@
                             var firstRowOptions = rowsElements.eq(0).find('.option');
                             var optionFlexBasis = firstRowOptions.eq(0).css('flex-basis');
                             rowsElements.find('.option').css('flex-basis', optionFlexBasis);
+
+                            // Adjust flex-basis of options in the second row for 7 options
+                            if (totalOptions === 7) {
+                                var secondRowOptions = rowsElements.eq(1).find('.option');
+                                var optionsInFirstRowWidth = firstRowOptions.outerWidth(true) * optionsInFirstRow;
+                                var secondRowFlexBasis = optionsInFirstRowWidth / optionsInSecondRow;
+                                secondRowOptions.css('flex-basis', secondRowFlexBasis + 'px');
+                            }
                         }
 
                         // Call the function initially and on window resize
