@@ -280,18 +280,11 @@
                                 }
                             }
 
-                            // Apply the same flex-basis value to options in both rows
-                            var firstRowOptions = rowsElements.eq(0).find('.option');
-                            var optionFlexBasis = firstRowOptions.eq(0).css('flex-basis');
-                            rowsElements.find('.option').css('flex-basis', optionFlexBasis);
+                            // Set the flex-basis for all options in both rows
+                            var options = container.find('.option');
+                            var flexBasisValue = 100 / optionsInFirstRow + '%';
 
-                            // Adjust flex-basis of options in the second row for 7 options
-                            if (totalOptions === 7) {
-                                var secondRowOptions = rowsElements.eq(1).find('.option');
-                                var firstRowOptionsWidth = firstRowOptions.outerWidth(true) * optionsInFirstRow;
-                                var secondRowFlexBasis = firstRowOptionsWidth / optionsInSecondRow;
-                                secondRowOptions.css('flex-basis', secondRowFlexBasis + 'px');
-                            }
+                            options.css('flex-basis', flexBasisValue);
                         }
 
                         // Call the function initially and on window resize
