@@ -124,27 +124,64 @@
             }
         }
 
+        // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => {
-                const optionText = option.querySelector('span');
-                const optionWidth = option.clientWidth;
-                const optionHeight = option.clientHeight;
 
-                // Reset font size and text wrapping
-                optionText.style.fontSize = '';
-                optionText.style.whiteSpace = 'nowrap';
+            var c1 = JFCustomWidget.getWidgetSettings();
+
+            // if (c1["fontSize"] === "") {
+            //     c1.fontSize = "21"
+            // }
+
+            // Get all the option elements
+            const options = document.querySelectorAll('.option');
+
+            options.forEach(option => {
+                const optionWidth = option.offsetWidth;
+                const optionText = option.querySelector('span');
+
+                // Reset font size to the maximum value
+                optionText.style.fontSize = c1["fontSize"] + "px";
 
                 // Reduce font size until the text fits within the option width
-                while (optionText.offsetWidth > optionWidth || optionText.offsetHeight > optionHeight) {
-                    let fontSize = parseInt(window.getComputedStyle(optionText).fontSize);
-                    fontSize -= 1;
-                    optionText.style.fontSize = `${fontSize}px`;
+                // while (optionText.offsetWidth > optionWidth) {
+                //     let fontSize = parseInt(optionText.style.fontSize);
+                //     fontSize -= 1;
+                //     optionText.style.fontSize = `${fontSize}px`;
+                // }
 
-                    // Enable text wrapping if the text height exceeds the option height
-                    if (optionText.offsetHeight > optionHeight) {
-                        optionText.style.whiteSpace = 'normal';
-                    }
+                // // Check if the text height exceeds the option height
+                // if (optionText.offsetHeight > option.clientHeight) {
+                //     // Reduce font size until the text fits within the option height
+                //     while (optionText.offsetHeight > option.clientHeight) {
+                //         let fontSize = parseInt(optionText.style.fontSize);
+                //         fontSize -= 1;
+                //         optionText.style.fontSize = `${fontSize}px`;
+                //     }
+
+                //     // Check if the text is still too long after reducing the font size
+                //     if (optionText.offsetWidth > optionWidth) {
+                //         // Enable text wrapping
+                //         optionText.style.whiteSpace = 'normal';
+                //     }
+                // }
+            });
+
+            // Check if there are only two or three options on any row
+            const container = document.querySelector('.container');
+            const rows = Array.from(container.children);
+            rows.forEach(row => {
+                const optionsInRow = Array.from(row.children);
+                if (optionsInRow.length === 2) {
+                    optionsInRow.forEach(option => option.classList.add('two-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('two-options'));
+                }
+
+                if (optionsInRow.length === 3) {
+                    optionsInRow.forEach(option => option.classList.add('three-options'));
+                } else {
+                    optionsInRow.forEach(option => option.classList.remove('three-options'));
                 }
             });
         }
