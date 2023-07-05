@@ -284,8 +284,8 @@
                                     optionIndex++;
                                 }
 
-                                // Add extra space if there are odd number of options on the row
-                                if (optionsInCurrentRow % 2 !== 0) {
+                                // If first row is not the same as second row add empty option
+                                if (optionsInFirstRow !== optionsInSecondRow) {
                                     var emptyBlock = $('<div></div>').addClass('option empty');
                                     rowsElements.eq(i).append(emptyBlock);
                                 }
