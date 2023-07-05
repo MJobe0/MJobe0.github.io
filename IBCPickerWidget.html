@@ -288,8 +288,8 @@
                             // Adjust flex-basis of options in the second row for 7 options
                             if (totalOptions === 7) {
                                 var secondRowOptions = rowsElements.eq(1).find('.option');
-                                var optionsInFirstRowWidth = firstRowOptions.outerWidth(true) * optionsInFirstRow;
-                                var secondRowFlexBasis = optionsInFirstRowWidth / optionsInSecondRow;
+                                var firstRowOptionsWidth = firstRowOptions.outerWidth(true) * optionsInFirstRow;
+                                var secondRowFlexBasis = firstRowOptionsWidth / optionsInSecondRow;
                                 secondRowOptions.css('flex-basis', secondRowFlexBasis + 'px');
                             }
                         }
