@@ -39,10 +39,7 @@
         }
 
         .option {
-            flex-grow: 1;
-            /* Updated line */
-            flex-basis: 0;
-            /* Updated line */
+            flex-basis: 14%;
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
@@ -56,6 +53,14 @@
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
+        }
+
+        .container.two-options .option {
+            flex-basis: calc(50% - 10px);
+        }
+
+        .option.two-options {
+            flex-basis: calc(50% - 10px);
         }
 
         .option:hover {
@@ -72,10 +77,9 @@
         }
 
         .container .option {
-            /* flex-basis: calc(20% - 12px); Remove this line */
-            /* height: 100px; Remove this line */
+            flex-basis: calc(20% - 12px);
+            height: 100px;
             background-color: white;
-            /* border: 1px solid #ddd; Remove this line */
             display: flex;
             align-items: center;
             justify-content: center;
