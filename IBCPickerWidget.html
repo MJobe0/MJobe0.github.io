@@ -40,7 +40,9 @@
 
         .option {
             flex-grow: 1;
+            /* Updated line */
             flex-basis: 0;
+            /* Updated line */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
@@ -71,8 +73,10 @@
 
         .container .option {
             flex-basis: calc(20% - 12px);
+            /* Updated line */
             height: 100px;
             background-color: white;
+            /* border: 1px solid #ddd; */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -94,16 +98,7 @@
         }
 
         .row {
-            margin-left: 0px !important;
-        }
-
-        /* New CSS rules to make each option size the same */
-        .two-options .option {
-            flex-basis: calc(50% - 7px);
-        }
-
-        .three-options .option {
-            flex-basis: calc(33.33% - 8px);
+            margin-left:0px !important
         }
     </style>
     <script type="text/javascript">
