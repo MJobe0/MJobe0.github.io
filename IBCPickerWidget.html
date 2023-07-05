@@ -98,7 +98,7 @@
         }
 
         .row {
-            margin-left:0px !important
+            margin-left: 0px !important
         }
     </style>
     <script type="text/javascript">
@@ -277,6 +277,13 @@
                                     rowsElements.eq(i).append(block);
 
                                     optionIndex++;
+                                }
+
+                                // If there are odd options, set the size of options in the second row and subsequent rows
+                                if (optionsInFirstRow !== optionsInSecondRow && i > 0) {
+                                    var firstOptionSize = rowsElements.eq(0).find('.option').eq(0).outerWidth();
+
+                                    rowsElements.eq(i).find('.option').css('flex-basis', firstOptionSize + 'px');
                                 }
                             }
                         }
