@@ -279,11 +279,10 @@
                                     optionIndex++;
                                 }
 
-                                // If there are odd options, set the size of options in the second row and subsequent rows
-                                if (optionsInFirstRow !== optionsInSecondRow && i > 0) {
-                                    var firstOptionSize = rowsElements.eq(0).find('.option').eq(0).outerWidth();
-
-                                    rowsElements.eq(i).find('.option').css('flex-basis', firstOptionSize + 'px');
+                                // Add extra space if there are odd number of options on the row
+                                if (optionsInCurrentRow % 2 !== 0) {
+                                    var emptyBlock = $('<div></div>').addClass('option empty');
+                                    rowsElements.eq(i).append(emptyBlock);
                                 }
                             }
                         }
