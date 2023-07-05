@@ -40,10 +40,12 @@
 
         .option {
             flex-grow: 1;
+            /* Updated line */
+            flex-basis: 0;
+            /* Updated line */
             height: 100px;
-            /* Remove flex-basis */
             background-color: white;
-            /* border: 1px solid #ddd; */
+            border: 1px solid #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -96,7 +98,7 @@
         }
 
         .row {
-            margin-left: 0px !important
+            margin-left:0px !important
         }
     </style>
     <script type="text/javascript">
@@ -276,47 +278,6 @@
 
                                     optionIndex++;
                                 }
-                            }
-                        }
-
-                        // Determine the number of options in each row based on the total number of options
-                        var optionsInFirstRow = Math.ceil(totalOptions / rows);
-                        var optionsInSecondRow = totalOptions - optionsInFirstRow;
-
-                        // Calculate the flex-basis value for options in each row
-                        var flexBasisFirstRow = 100 / optionsInFirstRow;
-                        var flexBasisSecondRow = 100 / optionsInSecondRow;
-
-                        for (var i = 0; i < rows; i++) {
-                            var row = $('<div></div>').addClass('row');
-                            container.append(row);
-                        }
-
-                        var rowsElements = container.find('.row');
-                        var optionIndex = 0;
-
-                        for (var i = 0; i < rowsElements.length; i++) {
-                            var optionsInCurrentRow = (i === 0) ? optionsInFirstRow : optionsInSecondRow;
-
-                            for (var j = 0; j < optionsInCurrentRow; j++) {
-                                if (optionIndex >= totalOptions) {
-                                    break; // Exit the loop if all options have been processed
-                                }
-
-                                var label = labels[optionIndex];
-                                var block = $('<div></div>').addClass('option').attr('id', 'option' + (optionIndex + 1));
-                                var span = $('<span></span>').text(label);
-                                block.append(span);
-
-                                // Set the flex-basis for options in each row
-                                if (i === 0) {
-                                    block.css('flex-basis', flexBasisFirstRow + '%');
-                                } else {
-                                    block.css('flex-basis', flexBasisSecondRow + '%');
-                                }
-
-                                rowsElements.eq(i).append(block);
-                                optionIndex++;
                             }
                         }
 
