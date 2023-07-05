@@ -279,36 +279,16 @@
                                     optionIndex++;
                                 }
                             }
+
+                            // Apply the same flex-basis value to options in both rows
+                            var firstRowOptions = rowsElements.eq(0).find('.option');
+                            var optionFlexBasis = firstRowOptions.eq(0).css('flex-basis');
+                            rowsElements.find('.option').css('flex-basis', optionFlexBasis);
                         }
 
                         // Call the function initially and on window resize
                         setOptionFontSize();
-                        adjustSecondRowSize(); // Adjust the size of options in the second row
-                        window.addEventListener('resize', function () {
-                            setOptionFontSize();
-                            adjustSecondRowSize(); // Adjust the size of options in the second row
-                        });
-                    }
-
-                    function adjustSecondRowSize() {
-                        var container = $('.container');
-                        var firstRowOptions = container.find('.row:first-child .option');
-                        var secondRowOptions = container.find('.row:nth-child(2) .option');
-
-                        // Reset flex-basis for all options
-                        firstRowOptions.css('flex-basis', '');
-                        secondRowOptions.css('flex-basis', '');
-
-                        // Calculate the maximum width among the options in the first row
-                        var maxFirstRowOptionWidth = Math.max.apply(
-                            null,
-                            firstRowOptions.map(function () {
-                                return $(this).outerWidth();
-                            })
-                        );
-
-                        // Set the same flex-basis for options in the second row
-                        secondRowOptions.css('flex-basis', maxFirstRowOptionWidth + 'px');
+                        window.addEventListener('resize', setOptionFontSize);
                     }
 
                     function handleClick(event) {
