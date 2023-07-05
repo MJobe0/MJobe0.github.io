@@ -29,20 +29,15 @@
 <body>
     <style>
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 10px;
             max-width: 1000px;
             /* Adjust the max-width as needed */
             overflow-x: auto;
         }
 
         .option {
-            flex-grow: 1;
-            /* Updated line */
-            flex-basis: 0;
-            /* Updated line */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
@@ -50,9 +45,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            white-space: normal;
             padding: 10px;
             box-sizing: border-box;
             overflow: hidden;
@@ -69,19 +61,6 @@
 
         .option.selected {
             border: 4px solid #2F3B65;
-        }
-
-        .container .option {
-            flex-basis: calc(20% - 12px);
-            /* Updated line */
-        }
-
-        .container .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 10px;
         }
     </style>
     <script type="text/javascript">
