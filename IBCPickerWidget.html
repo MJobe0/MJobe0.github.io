@@ -280,11 +280,9 @@
                                 }
                             }
 
-                            // Set the flex-basis for all options in both rows
-                            var options = container.find('.option');
-                            var flexBasisValue = 100 / optionsInFirstRow + '%';
-
-                            options.css('flex-basis', flexBasisValue);
+                            // Apply the same flex-basis to all options
+                            var optionWidthPercentage = 100 / optionsInFirstRow;
+                            $('.option').css('flex-basis', optionWidthPercentage + '%');
                         }
 
                         // Call the function initially and on window resize
