@@ -288,7 +288,7 @@
                                 console.log("Curr row:", optionsInCurrentRow)
 
                                 // If it's not the curr option and the first row and second row are not equal to add empty option
-                                if (!optionsInCurrentRow && optionsInFirstRow !== optionsInSecondRow) {
+                                if (i !== 0 && optionsInFirstRow !== optionsInSecondRow) {
                                     var emptyBlock = $('<div></div>').addClass('option empty');
                                     rowsElements.eq(i).append(emptyBlock);
                                 }
