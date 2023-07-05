@@ -68,31 +68,31 @@
             border: 4px solid #2F3B65;
         }
 
-        .container.two-options .option {
-            flex-basis: 50%;
-        }
-
-        .option.two-options {
-            flex-basis: 50%;
-        }
-
         .container .option {
-            flex-basis: 20%;
+            flex-basis: calc(20% - 12px);
+        }
+
+        .container.two-options .option {
+            flex-basis: calc(50% - 10px);
         }
 
         .container .option:nth-child(n+7) {
-            flex-basis: 14%;
+            flex-basis: calc(14% - 12px);
+        }
+
+        .option.two-options {
+            flex-basis: calc(50% - 10px);
         }
 
         @media screen and (max-width: 900px) {
             .container .option {
-                flex-basis: 33.33%;
+                flex-basis: calc(33.33% - 10px);
             }
         }
 
         @media screen and (max-width: 600px) {
             .container .option {
-                flex-basis: 50%;
+                flex-basis: calc(50% - 10px);
             }
         }
 
@@ -216,68 +216,39 @@
                         var container = $('#container');
                         container.empty(); // Clear any existing blocks
 
-                        var totalOptions = labels.length;
+                        var optionsInFirstRow, optionsInSecondRow;
 
-                        if (totalOptions < 6) {
-                            // Add a special class for two options
-                            container.removeClass('two-options');
+                        // Determine the number of options in each row based on the total number of options
+                        if (labels.length === 6) {
+                            optionsInFirstRow = 3;
+                            optionsInSecondRow = 3;
+                        } else if (labels.length === 7) {
+                            optionsInFirstRow = 4;
+                            optionsInSecondRow = 3;
+                        } else if (labels.length === 8) {
+                            optionsInFirstRow = 4;
+                            optionsInSecondRow = 4;
+                        } else if (labels.length === 9) {
+                            optionsInFirstRow = 5;
+                            optionsInSecondRow = 4;
+                        } else if (labels.length === 10) {
+                            optionsInFirstRow = 5;
+                            optionsInSecondRow = 5;
+                        }
 
-                            for (var i = 0; i < totalOptions; i++) {
-                                var label = labels[i];
-                                var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
-                                var span = $('<span></span>').text(label);
-                                block.append(span);
-                                container.append(block);
-                            }
-                        } else {
-                            var optionsInFirstRow = 0;
-                            var optionsInSecondRow = 0;
+                        for (var i = 0; i < labels.length; i++) {
+                            var label = labels[i];
+                            var block = $('<div></div>').addClass('option').attr('id', 'option' + (i + 1));
+                            var span = $('<span></span>').text(label);
+                            block.append(span);
 
-                            // Determine the number of options in each row based on the total number of options
-                            if (totalOptions === 6) {
-                                optionsInFirstRow = 3;
-                                optionsInSecondRow = 3;
-                            } else if (totalOptions === 7) {
-                                optionsInFirstRow = 4;
-                                optionsInSecondRow = 3;
-                            } else if (totalOptions === 8) {
-                                optionsInFirstRow = 4;
-                                optionsInSecondRow = 4;
-                            } else if (totalOptions === 9) {
-                                optionsInFirstRow = 5;
-                                optionsInSecondRow = 4;
-                            } else if (totalOptions === 10) {
-                                optionsInFirstRow = 5;
-                                optionsInSecondRow = 5;
+                            if (i < optionsInFirstRow) {
+                                block.addClass('first-row');
+                            } else {
+                                block.addClass('second-row');
                             }
 
-                            var rows = Math.ceil(totalOptions / optionsInFirstRow); // Calculate the number of rows
-
-                            for (var i = 0; i < rows; i++) {
-                                var row = $('<div></div>').addClass('row');
-                                container.append(row);
-                            }
-
-                            var rowsElements = container.find('.row');
-                            var optionIndex = 0;
-
-                            for (var i = 0; i < rowsElements.length; i++) {
-                                var optionsInCurrentRow = (i === 0) ? optionsInFirstRow : optionsInSecondRow;
-
-                                for (var j = 0; j < optionsInCurrentRow; j++) {
-                                    if (optionIndex >= totalOptions) {
-                                        break; // Exit the loop if all options have been processed
-                                    }
-
-                                    var label = labels[optionIndex];
-                                    var block = $('<div></div>').addClass('option').attr('id', 'option' + (optionIndex + 1));
-                                    var span = $('<span></span>').text(label);
-                                    block.append(span);
-                                    rowsElements.eq(i).append(block);
-
-                                    optionIndex++;
-                                }
-                            }
+                            container.append(block);
                         }
 
                         // Call the function initially and on window resize
