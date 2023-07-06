@@ -109,6 +109,13 @@
     <script type="text/javascript">
         var _data = { value: "", valid: JFCustomWidget.isWidgetRequired() }
 
+        function resizeFrame(increaseBy) {
+            const currHeight = $("#wrapper").height();
+            console.log("CURRHEIGHT:", currHeight);
+            console.log("CURRHEIGHT + 10:", currHeight + increaseBy);
+            JFCustomWidget.requestFrameResize({ height: currHeight + increaseBy });
+        }
+
         function makeWidgetRequiredOrNot() {
             console.log(JFCustomWidget.isWidgetRequired())
 
@@ -204,6 +211,8 @@
                     console.log(formData)
                     console.log(c)
 
+                    resizeFrame(150);
+
                     const param = c["optionLabels"].split(/\r?\n/);
 
                     var blockLabels = param ?? ['Option 1', 'Option 2', 'Option 3'];
@@ -294,6 +303,8 @@
                                 }
                             }
                         }
+
+                        resizeFrame(150);
 
                         // Call the function initially and on window resize
                         setOptionFontSize();
