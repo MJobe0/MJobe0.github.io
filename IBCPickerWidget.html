@@ -135,55 +135,43 @@
             }
         }
 
-        // Function to calculate and set the appropriate font size for each option
         function setOptionFontSize() {
-
             var c1 = JFCustomWidget.getWidgetSettings();
-
-            // if (c1["fontSize"] === "") {
-            //     c1.fontSize = "21"
-            // }
 
             // Get all the option elements
             const options = document.querySelectorAll('.option');
 
             options.forEach(option => {
-                const optionWidth = option.offsetWidth;
-                var optionText = option.querySelector('span');
+                const optionText = option.querySelector('span');
+                if (optionText) { // Check if option contains a span element
+                    const optionWidth = option.offsetWidth;
 
-                console.log("OpText:", optionText);
-
-                try {
                     // Reset font size to the maximum value
                     optionText.style.fontSize = c1["fontSize"] + "px";
 
-                } catch (error) {
-                    optionText = option.querySelector('span');
-                    optionText.style.fontSize = c1["fontSize"] + "px";
+                    // Reduce font size until the text fits within the option width
+                    // while (optionText.offsetWidth > optionWidth) {
+                    //     let fontSize = parseInt(optionText.style.fontSize);
+                    //     fontSize -= 1;
+                    //     optionText.style.fontSize = `${fontSize}px`;
+                    // }
+
+                    // // Check if the text height exceeds the option height
+                    // if (optionText.offsetHeight > option.clientHeight) {
+                    //     // Reduce font size until the text fits within the option height
+                    //     while (optionText.offsetHeight > option.clientHeight) {
+                    //         let fontSize = parseInt(optionText.style.fontSize);
+                    //         fontSize -= 1;
+                    //         optionText.style.fontSize = `${fontSize}px`;
+                    //     }
+
+                    //     // Check if the text is still too long after reducing the font size
+                    //     if (optionText.offsetWidth > optionWidth) {
+                    //         // Enable text wrapping
+                    //         optionText.style.whiteSpace = 'normal';
+                    //     }
+                    // }
                 }
-
-                // Reduce font size until the text fits within the option width
-                // while (optionText.offsetWidth > optionWidth) {
-                //     let fontSize = parseInt(optionText.style.fontSize);
-                //     fontSize -= 1;
-                //     optionText.style.fontSize = `${fontSize}px`;
-                // }
-
-                // // Check if the text height exceeds the option height
-                // if (optionText.offsetHeight > option.clientHeight) {
-                //     // Reduce font size until the text fits within the option height
-                //     while (optionText.offsetHeight > option.clientHeight) {
-                //         let fontSize = parseInt(optionText.style.fontSize);
-                //         fontSize -= 1;
-                //         optionText.style.fontSize = `${fontSize}px`;
-                //     }
-
-                //     // Check if the text is still too long after reducing the font size
-                //     if (optionText.offsetWidth > optionWidth) {
-                //         // Enable text wrapping
-                //         optionText.style.whiteSpace = 'normal';
-                //     }
-                // }
             });
 
             // Check if there are only two or three options on any row
