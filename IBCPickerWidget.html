@@ -333,6 +333,7 @@
                             var result = selectedBlocks.join('; ');
                             console.log('Selected blocks: ' + result);
                             _data.value = result;
+                            JFCustomWidget.sendSubmit(_data);
                             makeWidgetRequiredOrNot();
                         } else {
                             // Remove the 'selected' class from all options
@@ -341,7 +342,7 @@
                             var label = clickedBlock.find('span').text();
                             console.log('Selected: ' + label);
                             _data.value = label;
-
+                            JFCustomWidget.sendSubmit(_data);
                             makeWidgetRequiredOrNot();
                         }
                     }
