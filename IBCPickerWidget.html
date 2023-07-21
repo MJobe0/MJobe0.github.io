@@ -151,8 +151,10 @@
                 const optionWidth = option.offsetWidth;
                 const optionText = option.querySelector('span');
 
+
+                console.log("OpText:", optionText)
                 // Reset font size to the maximum value
-                optionText.style?.fontSize = c1["fontSize"] + "px";
+                optionText.style.fontSize = c1["fontSize"] + "px";
 
                 // Reduce font size until the text fits within the option width
                 // while (optionText.offsetWidth > optionWidth) {
