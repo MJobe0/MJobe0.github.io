@@ -149,12 +149,18 @@
 
             options.forEach(option => {
                 const optionWidth = option.offsetWidth;
-                const optionText = option.querySelector('span');
+                var optionText = option.querySelector('span');
 
+                console.log("OpText:", optionText);
 
-                console.log("OpText:", optionText)
-                // Reset font size to the maximum value
-                optionText.style.fontSize = c1["fontSize"] + "px";
+                try {
+                    // Reset font size to the maximum value
+                    optionText.style.fontSize = c1["fontSize"] + "px";
+
+                } catch (error) {
+                    optionText = option.querySelector('span');
+                    optionText.style.fontSize = c1["fontSize"] + "px";
+                }
 
                 // Reduce font size until the text fits within the option width
                 // while (optionText.offsetWidth > optionWidth) {
