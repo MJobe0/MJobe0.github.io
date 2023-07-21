@@ -334,6 +334,7 @@
                             console.log('Selected blocks: ' + result);
                             _data.value = result;
                             JFCustomWidget.sendSubmit(_data);
+                            JFCustomWidget.sendData(_data);
                             makeWidgetRequiredOrNot();
                         } else {
                             // Remove the 'selected' class from all options
@@ -343,6 +344,7 @@
                             console.log('Selected: ' + label);
                             _data.value = label;
                             JFCustomWidget.sendSubmit(_data);
+                            JFCustomWidget.sendData(_data);
                             makeWidgetRequiredOrNot();
                         }
                     }
