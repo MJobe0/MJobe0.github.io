@@ -31,12 +31,16 @@
             flex-wrap: wrap;
             padding: 0;
             margin: 0;
+            max-width: 1000px;
+            /* Adjust the max-width as needed */
             overflow-x: auto;
-            justify-content: flex-start;
         }
 
         .option {
-            flex: 0 0 auto;
+            flex-grow: 1;
+            /* Updated line */
+            flex-basis: 0;
+            /* Updated line */
             height: 100px;
             background-color: white;
             border: 1px solid #ddd;
