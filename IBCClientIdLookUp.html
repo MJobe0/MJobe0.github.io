@@ -82,6 +82,8 @@
             console.log("After", tblContainer);
             const params = JFCustomWidget.getWidgetSettings();
             const userInput = document.getElementById('clientInfo').value;
+            _data.value = userInput;
+            JFCustomWidget.sendData(_data);
             // var userInfoName = document.getElementById("userInfoName");
             // var userInfoOrigin = document.getElementById("userInfoOrigin");
 
@@ -196,7 +198,7 @@
                 // currUserInfoOrigin.innerHTML = "Country you arrived from:-";
                 resizeFrame(127);
                 makeWidgetRequiredOrNot();
-                JFCustomWidget.sendSubmit(_data);
+                JFCustomWidget.sendData(_data);
             });
 
             JFCustomWidget.subscribe('ready', function (data) {
