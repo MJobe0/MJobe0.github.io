@@ -409,12 +409,12 @@
     
                         $(document).on('input', '#emptbl :input', function() {
                             console.log('Change Happened');
-                            JFCustomWidget.sendData(getData(fieldToStoreData));
+                            JFCustomWidget.sendSubmit(getData(fieldToStoreData));
                         });
                         
                         $(document).on('click', '#emptbl :button', function() {
                             console.log('Change Happened');
-                            JFCustomWidget.sendData(getData(fieldToStoreData));
+                            JFCustomWidget.sendSubmit(getData(fieldToStoreData));
                         });
 
                         $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
