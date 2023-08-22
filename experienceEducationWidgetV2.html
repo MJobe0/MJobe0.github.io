@@ -710,21 +710,21 @@
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below1");
 
-                    JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
-                    console.log("GAP VALUE: ", res.data[0].value);
+                    // JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
+                    // console.log("GAP VALUE: ", res.data[0].value);
 
-                    if(res.data[0].value !== "") {
-                        JFCustomWidget.makeWidgetNotRequired();
-                    JFCustomWidget.hideWidgetError();
-                    _data.valid = false
-                    }
-                    else {
-                        _data.valid = true;
+                    // if(res.data[0].value !== "") {
+                    //     JFCustomWidget.makeWidgetNotRequired();
+                    // JFCustomWidget.hideWidgetError();
+                    // _data.valid = false
+                    // }
+                    // else {
+                    //     _data.valid = true;
 
-                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below2");
-                    }
+                    // JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below2");
+                    // }
     
-                    });
+                    // });
                     // JFCustomWidget.makeWidgetRequired();
                     return
                 }
