@@ -711,19 +711,11 @@
                     //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                     return
                 }
-                if (validateDates() === false) {
+                if (validateDates() === false && gapfilled !== true) {
                     _data.valid = true;
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below1");
-
-                    if (gapfilled === true) {
-                        JFCustomWidget.makeWidgetNotRequired();
-                    JFCustomWidget.hideWidgetError();
-                    _data.valid = false
-                    }
-                    else {
-                        return
-                    }
+                    return
 
                     // JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     // console.log("GAP VALUE: ", res.data[0].value);
