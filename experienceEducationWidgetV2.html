@@ -59,6 +59,8 @@
             };
     
             var maxLimit;
+
+            var gapfilled = false;
     
             //Global functions
             function modFields(rowNumber, activityType) {
@@ -710,6 +712,10 @@
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below1");
 
+                    if (gapfilled !== true) {
+                        return
+                    }
+
                     // JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     // console.log("GAP VALUE: ", res.data[0].value);
 
@@ -726,7 +732,6 @@
     
                     // });
                     // JFCustomWidget.makeWidgetRequired();
-                    return
                 }
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
