@@ -408,6 +408,10 @@
                         $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
     
                         $("input[type=date]").attr("min", currMaxYear);
+
+                        $('#emptbl').on('change', 'input', function () {
+                            console.log("changed");
+                        });
                     }
     
                     function maxYear() {
