@@ -341,7 +341,7 @@
                         console.log("form Data = ", formData)
                         console.log("form data value = ", formData.value)
     
-                        if (formData.value !== undefined && formData.value !== "") {
+                        if (formData.value !== undefined && formData.value !== "" &&  formData.value !== "filled" ) {
                             try {
                                 restoreTableData(JSON.parse(formData.value))
                             } catch (error) {
