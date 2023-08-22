@@ -59,6 +59,10 @@
             };
     
             var maxLimit;
+
+            $('#emptbl').on('change', 'input', function () {
+                console.log("changed");
+            });
     
             //Global functions
             function modFields(rowNumber, activityType) {
@@ -409,9 +413,6 @@
     
                         $("input[type=date]").attr("min", currMaxYear);
 
-                        $('#emptbl').on('change', 'input', function () {
-                            console.log("changed");
-                        });
                     }
     
                     function maxYear() {
