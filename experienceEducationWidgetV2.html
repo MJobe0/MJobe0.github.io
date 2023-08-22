@@ -704,7 +704,7 @@
                     if(res.data[0].value !== "") {
                         JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
-                    _data.valid = true
+                    _data.valid = false
                     }
                     else {
                         _data.valid = true;
@@ -719,7 +719,7 @@
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
-                    _data.valid = true
+                    _data.valid = false
                     return
                 }
             }
