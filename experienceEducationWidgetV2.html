@@ -716,7 +716,12 @@
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below1");
 
-                    if (gapfilled !== true) {
+                    if (gapfilled === true) {
+                        JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = false
+                    }
+                    else {
                         return
                     }
 
