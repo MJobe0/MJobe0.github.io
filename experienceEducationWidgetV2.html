@@ -178,6 +178,8 @@
                     id: fieldToFill,
                     value: JSON.stringify(widgetValue)
                 }]);
+
+                console.log("DATAAAAAAAAAA",_data)
     
                 return _data
             }
@@ -271,7 +273,9 @@
                     var row = table.deleteRow(id);
                     resizeFrame();
                     validateDates();
-                    makeWidgetRequiredOrNot()
+                    makeWidgetRequiredOrNot();
+                    var fieldToStoreData1 = params["storageField"];
+                    JFCustomWidget.sendData(getData(fieldToStoreData));
                     return
                     //rowCount--;
                 }
@@ -407,17 +411,12 @@
     
                         $(document).on('input', '#emptbl :input', function() {
                             console.log('Change Happened');
-                            //JFCustomWidget.sendData(getData(fieldToStoreData))
+                            JFCustomWidget.sendData(getData(fieldToStoreData));
                         });
                         
                         $(document).on('click', '#emptbl :button', function() {
                             console.log('Change Happened');
-                            //JFCustomWidget.sendData(getData(fieldToStoreData))
-                        });
-
-                        $('form').on('click', '.delete-button', function() {
-                            console.log('Change Happened');
-                            //JFCustomWidget.sendData(getData(fieldToStoreData))
+                            JFCustomWidget.sendData(getData(fieldToStoreData));
                         });
 
                         $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
