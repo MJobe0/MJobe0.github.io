@@ -600,6 +600,10 @@
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
+                    if (data?.value === "filled") {
+                        gapfilled = true
+                        return
+                    }
                     try {
                         makeWidgetRequiredOrNot()
 
