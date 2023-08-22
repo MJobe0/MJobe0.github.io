@@ -630,8 +630,9 @@
                     }
     
                     //console.log(JFCustomWidget)
-    
-                    JFCustomWidget.subscribe('submit', function (data6) {
+                });
+
+                JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
@@ -653,8 +654,6 @@
                         // send the data
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                     });
-    
-                });
             })
     
     
