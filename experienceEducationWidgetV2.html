@@ -180,8 +180,6 @@
                     id: fieldToFill,
                     value: JSON.stringify(widgetValue)
                 }]);
-
-                console.log("DATAAAAAAAAAA",_data)
     
                 return _data
             }
@@ -275,7 +273,7 @@
                     var row = table.deleteRow(id);
                     resizeFrame();
                     validateDates();
-                    makeWidgetRequiredOrNot();
+                    makeWidgetRequiredOrNot()
                     return
                     //rowCount--;
                 }
@@ -341,7 +339,7 @@
                         console.log("form Data = ", formData)
                         console.log("form data value = ", formData.value)
     
-                        if (formData.value !== undefined && formData.value !== "" &&  formData.value !== "filled" ) {
+                        if (formData.value !== undefined && formData.value !== "" &&  formData.value !== "filled") {
                             try {
                                 restoreTableData(JSON.parse(formData.value))
                             } catch (error) {
@@ -402,27 +400,16 @@
                             makeWidgetRequiredOrNot();
                         });
     
-                        // $(document).ready(function () {
-                        //     // $('html').css('overflow-x', 'initial');
+                        $(document).ready(function () {
+                            // $('html').css('overflow-x', 'initial');
     
-                        //     console.log("ready!");
-                        //     makeWidgetRequiredOrNot();
-                        // });
+                            console.log("ready!");
+                            makeWidgetRequiredOrNot();
+                        });
     
-                        $(document).on('input', '#emptbl :input', function() {
-                            console.log('Change Happened');
-                            JFCustomWidget.sendSubmit(getData(fieldToStoreData));
-                        });
-                        
-                        $(document).on('click', '#emptbl :button', function() {
-                            console.log('Change Happened');
-                            JFCustomWidget.sendSubmit(getData(fieldToStoreData));
-                        });
-
-                        // $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
+                        $('input, select, textarea').on('change', JFCustomWidget.sendData(getData(fieldToStoreData)));
     
                         $("input[type=date]").attr("min", currMaxYear);
-
                     }
     
                     function maxYear() {
@@ -484,7 +471,7 @@
                             gradeBandCell.innerHTML = `<div class="form-group"><label for="gradeBand${x}" class="form-label">Grade/Band</label><input class="form-control" type="text" name="Grade/Band" value="" id="gradeBand${x}" required /></div>`;
                             resultsCell.innerHTML = `<div class="form-group"><label for="results${x}" class="form-label">Results</label><input class="form-control" type="text" name="Results" value="" id="results${x}" required /></div>`;
                             commentsCell.innerHTML = `<div class="form-group"><label for="comments${x}" class="form-label">Comments</label><textarea class="form-control" type="text" name="Comments" value="" id="comments${x}"></textarea></div>`;
-                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash delete-button" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
+                            buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
                             //set values
                             if (isPop) {
                                 document.getElementById(`typeOfActivity${x}`).value = popData["Type of Activity"] ?? "";
@@ -500,7 +487,7 @@
                             }
     
                             resizeFrame();
-                            // JFCustomWidget.sendData(getData(fieldToStoreData));
+                            JFCustomWidget.sendData(getData(fieldToStoreData));
                         }
                     }
     
@@ -636,17 +623,15 @@
                     }
     
                     //console.log(JFCustomWidget)
-                });
-
-                 JFCustomWidget.subscribe('submit', function (data6) {
+    
+                    JFCustomWidget.subscribe('submit', function (data6) {
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
-                            // widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                            widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            console.log("DATA_TO_JOT", _data)
                             JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
@@ -660,6 +645,8 @@
                         // send the data
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                     });
+    
+                });
             })
     
     
@@ -714,9 +701,9 @@
                 if (validateDates() === false && gapfilled !== true) {
                     _data.valid = true;
 
-                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below1");
+                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
+                    
                     return
-
                     // JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     // console.log("GAP VALUE: ", res.data[0].value);
 
@@ -728,11 +715,12 @@
                     // else {
                     //     _data.valid = true;
 
-                    // JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below2");
+                    // JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
                     // }
     
                     // });
-                    // JFCustomWidget.makeWidgetRequired();
+                    // // JFCustomWidget.makeWidgetRequired();
+                    // return
                 }
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
