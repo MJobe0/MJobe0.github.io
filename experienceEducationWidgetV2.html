@@ -59,8 +59,6 @@
             };
     
             var maxLimit;
-
-            var gapfilled = false;
     
             //Global functions
             function modFields(rowNumber, activityType) {
@@ -339,7 +337,7 @@
                         console.log("form Data = ", formData)
                         console.log("form data value = ", formData.value)
     
-                        if (formData.value !== undefined && formData.value !== "" &&  formData.value !== "filled") {
+                        if (formData.value !== undefined && formData.value !== "") {
                             try {
                                 restoreTableData(JSON.parse(formData.value))
                             } catch (error) {
@@ -587,10 +585,6 @@
                 JFCustomWidget.subscribe('populate', fillConditionValue);
 
                 function fillConditionValue(data) {
-                    if (data?.value === "filled") {
-                        gapfilled = true
-                        return
-                    }
                     try {
                         makeWidgetRequiredOrNot()
 
@@ -630,11 +624,13 @@
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
+                            getData(widgetParm["storageField"])
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
                             JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
+                            getData(widgetParm["storageField"])
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
                             JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
@@ -698,29 +694,28 @@
                     //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                     return
                 }
-                if (validateDates() === false && gapfilled !== true) {
+                if (validateDates() === false) {
                     _data.valid = true;
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
-                    
-                    return
-                    // JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
-                    // console.log("GAP VALUE: ", res.data[0].value);
 
-                    // if(res.data[0].value !== "") {
-                    //     JFCustomWidget.makeWidgetNotRequired();
-                    // JFCustomWidget.hideWidgetError();
-                    // _data.valid = false
-                    // }
-                    // else {
-                    //     _data.valid = true;
+                    JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
+                    console.log("GAP VALUE: ", res.data[0].value);
 
-                    // JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
-                    // }
+                    if(res.data[0].value !== "") {
+                        JFCustomWidget.makeWidgetNotRequired();
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = false
+                    }
+                    else {
+                        _data.valid = true;
+
+                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
+                    }
     
-                    // });
-                    // // JFCustomWidget.makeWidgetRequired();
-                    // return
+                    });
+                    // JFCustomWidget.makeWidgetRequired();
+                    return
                 }
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
