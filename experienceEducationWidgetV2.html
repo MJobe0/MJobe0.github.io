@@ -624,16 +624,14 @@
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
-                            getData(widgetParm["storageField"])
                             makeWidgetRequiredOrNot()
-                            getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                            JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                            console.log("ALL TASKS COMPLETE FWH1")
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
-                            getData(widgetParm["storageField"])
                             makeWidgetRequiredOrNot()
-                            getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                            JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                            console.log("ALL TASKS COMPLETE FWH2")
                         }
     
                         console.log(widgetParm["storageField"]);
