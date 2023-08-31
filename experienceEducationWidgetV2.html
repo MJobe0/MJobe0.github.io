@@ -626,12 +626,12 @@
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.value });
+                            JFCustomWidget.sendSubmit(_data);
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.value });
+                            JFCustomWidget.sendSubmit(_data);
                         }
     
                         console.log(widgetParm["storageField"]);
