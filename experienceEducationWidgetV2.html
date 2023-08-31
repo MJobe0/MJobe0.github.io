@@ -625,13 +625,17 @@
                         if (widgetParm["fullWorkHistory"] === "No") {
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
+                            if( _data.valid !== true){
                             getData(widgetParm["storageField"])
                             JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                            }
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
+                            if( _data.valid !== true){
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
+                            JFCustomWidget.sendSubmit({ valid: true, value: _data.value });
+                            }
                         }
     
                         console.log(widgetParm["storageField"]);
@@ -644,7 +648,7 @@
             })
     
     
-            async function makeWidgetRequiredOrNot() {
+            function makeWidgetRequiredOrNot() {
                 var currTable = document.getElementById('emptbl');
                 var currRowCount = currTable.rows.length;
                 console.log("CURRENT ROW COUNT: ", currRowCount)
@@ -697,7 +701,7 @@
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
 
-                    await JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
+                    JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
                     if(res.data[0].value !== "") {
