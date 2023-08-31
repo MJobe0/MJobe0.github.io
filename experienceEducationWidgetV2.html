@@ -626,12 +626,12 @@
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.value });
+                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendSubmit({ valid: true, value: _data.value });
+                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
     
                         console.log(widgetParm["storageField"]);
@@ -644,7 +644,7 @@
             })
     
     
-            function makeWidgetRequiredOrNot() {
+            async function makeWidgetRequiredOrNot() {
                 var currTable = document.getElementById('emptbl');
                 var currRowCount = currTable.rows.length;
                 console.log("CURRENT ROW COUNT: ", currRowCount)
@@ -658,7 +658,7 @@
                     // JFCustomWidget.makeWidgetRequired();
                     JFCustomWidget.showWidgetError("Please click the Add Row button to complete this section")
                     _data.valid = true
-                    return true
+                    return
                 }
                 // if ($('input:invalid').length >= 1) {
                 //     console.log(JFCustomWidget.isWidgetRequired())
@@ -681,7 +681,7 @@
                         //JFCustomWidget.makeWidgetRequired();
                         JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
                         _data.valid = true
-                        return true
+                        return
                     }
                 } catch (error) {
                     
@@ -690,35 +690,36 @@
                     _data.valid = true
                     //JFCustomWidget.makeWidgetRequired();
                     //JFCustomWidget.showWidgetError("Please make sure that all fields are correctly filled in")
-                    return true
+                    return
                 }
                 if (validateDates() === false) {
                     _data.valid = true;
 
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
 
-                    JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
+                    await JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
                     if(res.data[0].value !== "") {
                         JFCustomWidget.makeWidgetNotRequired();
-                        JFCustomWidget.hideWidgetError();
-                        _data.valid = false
+                    JFCustomWidget.hideWidgetError();
+                    _data.valid = false
                     }
                     else {
                         _data.valid = true;
-                        JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
+
+                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
                     }
     
                     });
                     // JFCustomWidget.makeWidgetRequired();
-                    return true
+                    return
                 }
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
                     _data.valid = false
-                    return false
+                    return
                 }
             }
     
