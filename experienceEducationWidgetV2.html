@@ -619,10 +619,12 @@
                     //console.log(JFCustomWidget)
     
                     JFCustomWidget.subscribe('submit', function (data6) {
+                        console.log("VALUE 1:", _data.value)
                         console.log(data6)
                         // console.log("year of birth ", yearOfBirth)
                         const widgetParm = JFCustomWidget.getWidgetSettings();
                         if (widgetParm["fullWorkHistory"] === "No") {
+                            console.log("VALUE 2NO:", _data.value)
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             if( _data.valid !== true){
@@ -631,6 +633,7 @@
                             }
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
+                            console.log("VALUE 2YES:", _data.value)
                             makeWidgetRequiredOrNot()
                             if( _data.valid !== true){
                             getData(widgetParm["storageField"])
@@ -639,7 +642,7 @@
                         }
     
                         console.log(widgetParm["storageField"]);
-    
+                        console.log("VALUE 3:", _data.value)
                         // send the data
                         // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
                     });
