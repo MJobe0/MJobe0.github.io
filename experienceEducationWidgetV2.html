@@ -625,12 +625,14 @@
                         if (widgetParm["fullWorkHistory"] === "No") {
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
-                            JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                            getData(widgetParm["storageField"])
+                            JFCustomWidget.sendData(_data);
                             console.log("ALL TASKS COMPLETE FWH1")
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
-                            JFCustomWidget.sendSubmit(getData(widgetParm["storageField"]));
+                            getData(widgetParm["storageField"])
+                            JFCustomWidget.sendData(_data);
                             console.log("ALL TASKS COMPLETE FWH2")
                         }
     
@@ -718,7 +720,7 @@
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
-                    _data.valid = false
+                    _data.valid = false;
                     return
                 }
             }
