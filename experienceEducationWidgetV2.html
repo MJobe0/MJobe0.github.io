@@ -626,14 +626,12 @@
                             widget.setCompanyNames([widgetParm["companyField1"], widgetParm["companyField2"], widgetParm["companyField3"], widgetParm["companyField4"], widgetParm["companyField5"], widgetParm["companyField6"]]);
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendData(_data);
-                            console.log("ALL TASKS COMPLETE FWH1")
+                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
                         else if (widgetParm["fullWorkHistory"] === "Yes") {
                             makeWidgetRequiredOrNot()
                             getData(widgetParm["storageField"])
-                            JFCustomWidget.sendData(_data);
-                            console.log("ALL TASKS COMPLETE FWH2")
+                            JFCustomWidget.sendSubmit({ valid: true, value: _data.valid ? "" : _data.value });
                         }
     
                         console.log(widgetParm["storageField"]);
@@ -695,10 +693,6 @@
                     return
                 }
                 if (validateDates() === false) {
-                    _data.valid = true;
-
-                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
-
                     JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
@@ -707,9 +701,8 @@
                     JFCustomWidget.hideWidgetError();
                     _data.valid = false
                     }
-                    else {
-                        _data.valid = true;
-
+                    if(res.data[0].value === "") {
+                    _data.valid = true;
                     JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
                     }
     
@@ -720,7 +713,7 @@
                 else {
                     JFCustomWidget.makeWidgetNotRequired();
                     JFCustomWidget.hideWidgetError();
-                    _data.valid = false;
+                    _data.valid = false
                     return
                 }
             }
