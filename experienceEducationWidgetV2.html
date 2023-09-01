@@ -234,11 +234,12 @@
                             JFCustomWidget.setFieldsValueById(dateDiffRes);
                             numOfIncorrectDates = numOfIncorrectDates - 1;
                             // _data.valid = true
-                            return true
                         }
                         //add coomments to array
                     }
                 }
+
+                return true
                 // console.log(numOfIncorrectDates)
                 // if (numOfIncorrectDates >= 1) {
                 //     document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
@@ -693,11 +694,6 @@
                     return
                 }
                 if (validateDates() === false) {
-
-                    console.log("ERROR DATES")
-
-                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
-
                     JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
