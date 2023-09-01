@@ -50,7 +50,7 @@
         </style>
         <script type="text/javascript">
     
-            var numOfIncorrectDates = 0;
+            // var numOfIncorrectDates = 0;
             var currFullWorkHistory = "No";
     
             var _data = {
@@ -183,6 +183,8 @@
             }
     
             function validateDates() {
+                var numOfIncorrectDates = 0;
+
                 const currRowLength = document.getElementsByName("Start Date")?.length
 
                 currFullWorkHistory = JFCustomWidget?.getWidgetSetting("fullWorkHistory");
@@ -223,7 +225,7 @@
                             console.log("here")
                             numOfIncorrectDates = numOfIncorrectDates + 1
                             // _data.valid = false
-                            return false
+                            // return false
                             //return { value: "Yes", valid: false };
                         }
                         else {
@@ -239,18 +241,13 @@
                     }
                 }
 
-                return true
-                // console.log(numOfIncorrectDates)
-                // if (numOfIncorrectDates >= 1) {
-                //     document.getElementById("textArea").innerHTML = "The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below";
-                //     // JFCustomWidget.sendData({ value: "Yes" });
-                //     resizeFrame();
-                // }
-                // else {
-                //     document.getElementById("textArea").innerHTML = "";
-                //     resizeFrame();
-                //     // JFCustomWidget.sendData({ value: "No" });
-                // }
+                console.log(numOfIncorrectDates)
+                if (numOfIncorrectDates >= 1) {
+                    return false
+                }
+                else {
+                    return true
+                }
             }
     
             function getMonthDifference(startDate, endDate) {
