@@ -216,13 +216,6 @@
                         if (getMonthDifference(new Date(currEndDate), new Date(currStartDate)) >= 1) {
                             document.getElementsByName("End Date")[i].style = "background-color: red;"
                             document.getElementsByName("Start Date")[i + 1].style = "background-color: red;"
-                            console.log("1 month data diff")
-    
-                            dateDiffRes[0].value = "Yes";
-                            console.log("Invalid dates = ", dateDiffRes)
-    
-                            JFCustomWidget.setFieldsValueById(dateDiffRes);
-                            console.log("here")
                             numOfIncorrectDates = numOfIncorrectDates + 1
                             // _data.valid = false
                             // return false
@@ -231,10 +224,7 @@
                         else {
                             document.getElementsByName("End Date")[i].style = "background-color: none;"
                             document.getElementsByName("Start Date")[i + 1].style = "background-color: none;"
-                            dateDiffRes[0].value = "No";
-                            console.log("Valid dates = ", dateDiffRes)
-                            JFCustomWidget.setFieldsValueById(dateDiffRes);
-                            numOfIncorrectDates = numOfIncorrectDates - 1;
+                            // numOfIncorrectDates = numOfIncorrectDates - 1;
                             // _data.valid = true
                         }
                         //add coomments to array
@@ -243,9 +233,17 @@
 
                 console.log(numOfIncorrectDates)
                 if (numOfIncorrectDates >= 1) {
+                    console.log("1 month data diff")
+                    dateDiffRes[0].value = "Yes";
+                    console.log("Invalid dates = ", dateDiffRes)
+                    JFCustomWidget.setFieldsValueById(dateDiffRes);
+                    console.log("here")
                     return false
                 }
                 else {
+                    dateDiffRes[0].value = "No";
+                    console.log("Valid dates = ", dateDiffRes)
+                    JFCustomWidget.setFieldsValueById(dateDiffRes);
                     return true
                 }
             }
