@@ -693,6 +693,8 @@
                     return
                 }
                 if (validateDates() === false) {
+                    JFCustomWidget.showWidgetError("The date(s) above highlighted in red have a gap greater then 1 month, please mention why in the field below");
+
                     JFCustomWidget.getFieldsValueByName(["widgetGap"], function (res) {
                     console.log("GAP VALUE: ", res.data[0].value);
 
