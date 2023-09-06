@@ -433,11 +433,11 @@
                             row.id = id;
                             // var rowNumberCell = row.insertCell(0);
                             var addressCell = row.insertCell(0);
-                            var startDateCell = row.insertCell(3);
-                            var endDateCell = row.insertCell(4);
-                            var buttonsCell = row.insertCell(9);
+                            var startDateCell = row.insertCell(1);
+                            var endDateCell = row.insertCell(2);
+                            var buttonsCell = row.insertCell(3);
                             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                            addressCell.innerHTML = `<div class="form-group"><label for="address${x}" class="form-label">Address</label><input class="form-control" type="text" name="Address" value="" id="address${x}" required /></div>`;
+                            addressCell.innerHTML = `<div class="form-group"><label for="address${x}" class="form-label">Address</label><input class="form-control" type="textarea" name="Address" value="" id="address${x}" required /></div>`;
                             startDateCell.innerHTML = `<div class="form-group"><label for="startDate${x}" class="form-label">Start Date</label><input class="form-control" type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required /></div>`;
                             endDateCell.innerHTML = `<div class="form-group"><label for="endDate${x}" class="form-label">End Date</label><input class="form-control" type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" /></div>`;
                             buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
