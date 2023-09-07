@@ -159,7 +159,10 @@
                 }).get();
     
                 var newTblHeader = `<tr id="tblHeading">
-                    <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Address</th>
+                    <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Address Line 1</th>
+                    <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Address Line 2</th>
+                    <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">City</th>
+                    <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Post Code</th>
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">Start Date</th>
                     <th style="border: 1px solid #dddddd; border-collapse: collapse; padding: 8px; text-align: left;">End Date</th>
                 </tr>`
@@ -432,18 +435,27 @@
                             var row = table.insertRow(x);
                             row.id = id;
                             // var rowNumberCell = row.insertCell(0);
-                            var addressCell = row.insertCell(0);
-                            var startDateCell = row.insertCell(1);
-                            var endDateCell = row.insertCell(2);
-                            var buttonsCell = row.insertCell(3);
+                            var addressLine1Cell = row.insertCell(0);
+                            var addressLine2Cell = row.insertCell(1);
+                            var cityCell = row.insertCell(2);
+                            var postCodeCell = row.insertCell(3);
+                            var startDateCell = row.insertCell(4);
+                            var endDateCell = row.insertCell(5);
+                            var buttonsCell = row.insertCell(6);
                             // rowNumberCell.outerHTML = `<th style="padding: 20px; fontSize:30px;" name="rowNumberColumn[]" id="rowNumber${x}">≡</th>`;
-                            addressCell.innerHTML = `<div class="form-group"><label for="address${x}" class="form-label">Address</label><input class="form-control" type="textarea" name="Address" value="" id="address${x}" required /></div>`;
+                            addressLine1Cell.innerHTML = `<div class="form-group"><label for="addressLine1${x}" class="form-label">Address Line 1</label><input class="form-control" type="textarea" name="Address Line 1" value="" id="addressLine1${x}" required /></div>`;
+                            addressLine2Cell.innerHTML = `<div class="form-group"><label for="addressLine2${x}" class="form-label">address Line 2</label><input class="form-control" type="textarea" name="Address Line 2" value="" id="addressLine2${x}"/></div>`;
+                            cityCell.innerHTML = `<div class="form-group"><label for="city${x}" class="form-label">City</label><input class="form-control" type="textarea" name="City" value="" id="city${x}" required /></div>`;
+                            postCodeCell.innerHTML = `<div class="form-group"><label for="postCode${x}" class="form-label">Post Code</label><input class="form-control" type="textarea" name="Post Code" value="" id="postCode${x}" required /></div>`;
                             startDateCell.innerHTML = `<div class="form-group"><label for="startDate${x}" class="form-label">Start Date</label><input class="form-control" type="date" name="Start Date" onchange="validateDates()" value="" id="startDate${x}" required /></div>`;
                             endDateCell.innerHTML = `<div class="form-group"><label for="endDate${x}" class="form-label">End Date</label><input class="form-control" type="date" name="End Date" onchange="validateDates()" value="" id="endDate${x}" /></div>`;
                             buttonsCell.innerHTML = `<div class="btn-group-vertical"><button type="button" id="upRow${x}" onclick="moveRowUp(${id})">↑</button> <button class="bi bi-trash" type="button" id="deleteRow${x}" onclick="deleteRow(${x})"></button> <button type="button" id="downRow${x}" onclick="moveRowDown(${id})">↓</button></div>`;    
                             //set values
                             if (isPop) {
-                                document.getElementById(`address${x}`).value = popData["Address"] ?? "";
+                                document.getElementById(`addressLine1${x}`).value = popData["Address Line 1"] ?? "";
+                                document.getElementById(`addressLine2${x}`).value = popData["Address Line 2"] ?? "";
+                                document.getElementById(`postCode${x}`).value = popData["Post Code"] ?? "";
+                                document.getElementById(`city${x}`).value = popData["City"] ?? "";
                                 //modFields(x, popData["Type of Activity"] ?? "");
                                 document.getElementById(`startDate${x}`).value = popData["Start Date"] ?? "";
                                 document.getElementById(`endDate${x}`).value = popData["End Date"] ?? "";
@@ -500,9 +512,12 @@
                             var newTbl = $(newWidgetValue1).find('tr:has(td)').map(function (i, v) {
                                 var $td = $('td', this);
                                 return {
-                                    "address": $td.eq(0).text(),
-                                    "Start Date": $td.eq(1).text(),
-                                    "End Date": $td.eq(2).text(),
+                                    "Address Line 1": $td.eq(0).text(),
+                                    "Address Line 2": $td.eq(1).text(),
+                                    "Post Code": $td.eq(2).text(),
+                                    "City": $td.eq(3).text(),
+                                    "Start Date": $td.eq(4).text(),
+                                    "End Date": $td.eq(5).text(),
                                 }
                             }).get();
     
