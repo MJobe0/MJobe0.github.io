@@ -1,0 +1,39 @@
+.github-diff {
+    background-color: #f6f8fa;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    padding: 16px;
+    font-family: Menlo, monospace;
+    font-size: 14px;
+  }
+  
+  .github-diff-line {
+    display: flex;
+  }
+  
+  .github-diff-line-num {
+    width: 40px;
+    color: #999;
+    padding-right: 10px;
+  }
+  
+  .github-diff-line-code {
+    flex-grow: 1;
+  }
+  
+  .github-diff-line-code-old {
+    background-color: #ffeef0;
+    color: #d73a49;
+    padding: 2px;
+    margin: 0 2px;
+    display: inline-block;
+  }
+  
+  .github-diff-line-code-new {
+    background-color: #e6ffed;
+    color: #28a745;
+    padding: 2px;
+    margin: 0 2px;
+    display: inline-block;
+  }
+  

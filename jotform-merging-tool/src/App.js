@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
+import Login from './Login';
+import Home from "./Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello World
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route index element={<App />} /> */}
+          <Route path="login" element={<Login />} />
+          <Route index element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
 export default App;
+
+
+// Installed packages:
+// Jotform
+// npm install react-router-dom
