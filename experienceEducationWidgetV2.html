@@ -183,34 +183,31 @@
             }
 
             function markDatesWithGaps() {
-                // Step 1: Extract start and end dates from table rows
-                const rows = document.querySelectorAll('tr'); // Assuming you have a table with rows
+                const rows = document.getElementsByName("Start Date")?.length;
                 const dates = [];
 
                 for (let i = 0; i < rows.length; i++) {
-                    console.log("Part 1",rows[i].querySelector('input[name="startDate' + (i + 1) + '"]'))
-                    const startDateInput = rows[i].querySelector('input[name="startDate' + (i + 1) + '"]');
-                    const endDateInput = rows[i].querySelector('input[name="endDate' + (i + 1) + '"]');
+                    console.log("Part 1",document.getElementsByName("End Date")[i]?.value)
+                    const startDateInput = document.getElementsByName("Start Date")[i]?.value;
+                    const endDateInput = document.getElementsByName("End Date")[i]?.value;
 
-                    const startDateValue = startDateInput.value;
-                    const endDateValue = endDateInput.value;
+                    // const startDateValue = startDateInput.value;
+                    // const endDateValue = endDateInput.value;
 
                     const startDate = new Date(startDateValue);
                     const endDate = new Date(endDateValue);
+                    const entId = [i]
 
-                    dates.push({ startDate, endDate });
+                    dates.push({ startDate, endDate, entId});
                 }
 
-                // Step 2: Sort the extracted dates
                 dates.sort((a, b) => a.startDate - b.startDate);
 
-                // Step 3: Check for gaps between adjacent dates
                 for (let i = 1; i < dates.length; i++) {
                     const prevEndDate = dates[i - 1].endDate;
                     const currentStartDate = dates[i].startDate;
 
                     if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
-                    // Step 4: Mark rows with gaps in red without changing their order
                     rows[i].style.color = 'red';
                     }
                 }
