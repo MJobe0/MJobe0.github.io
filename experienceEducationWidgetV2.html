@@ -187,11 +187,11 @@
                 const rows = document.querySelectorAll('tr'); // Assuming you have a table with rows
                 const dates = [];
 
-                for (let i = 0; i < rows.length; i++) {
+                for (let i = 1; i < rows.length; i++) {
                     console.log("Part 1",rows[i].querySelector('[class="Start Date"]'))
                     console.log("Part 1",rows[i].querySelector('[class="Start Date"]')?.textContent)
-                    const startDate = new Date(rows[i].querySelector('[class="Start Date"]').textContent); // Assuming you have a class "start-date" for the start date
-                    const endDate = new Date(rows[i].querySelector('[class="End Date"]').textContent); // Assuming you have a class "end-date" for the end date
+                    const startDate = new Date(rows[i].querySelector('[class="Start Date"]')?.textContent); // Assuming you have a class "start-date" for the start date
+                    const endDate = new Date(rows[i].querySelector('[class="End Date"]')?.textContent); // Assuming you have a class "end-date" for the end date
                     dates.push({ startDate, endDate });
                 }
 
