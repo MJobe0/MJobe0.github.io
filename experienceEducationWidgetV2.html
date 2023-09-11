@@ -184,14 +184,20 @@
 
             function markDatesWithGaps() {
                 // Step 1: Extract start and end dates from table rows
-                const rows = document.getElementsByName("Start Date")?.length// Assuming you have a table with rows
+                const rows = document.querySelectorAll('tr'); // Assuming you have a table with rows
                 const dates = [];
 
-                for (let i = 1; i < rows.length; i++) {
-                    console.log("Part 1",rows[i].querySelector('input[name="startDate"]'))
-                    console.log("Part 1",rows[i].querySelector('input[name="startDate"]')?.textContent)
-                    const startDate = new Date(rows[i].querySelector('input[name="startDate"]')?.textContent); // Assuming you have a class "start-date" for the start date
-                    const endDate = new Date(rows[i].querySelector('input[name="endDate"]')?.textContent); // Assuming you have a class "end-date" for the end date
+                for (let i = 0; i < rows.length; i++) {
+                    console.log("Part 1",rows[i].querySelector('input[name="startDate' + (i + 1) + '"]'))
+                    const startDateInput = rows[i].querySelector('input[name="startDate' + (i + 1) + '"]');
+                    const endDateInput = rows[i].querySelector('input[name="endDate' + (i + 1) + '"]');
+
+                    const startDateValue = startDateInput.value;
+                    const endDateValue = endDateInput.value;
+
+                    const startDate = new Date(startDateValue);
+                    const endDate = new Date(endDateValue);
+
                     dates.push({ startDate, endDate });
                 }
 
@@ -205,7 +211,7 @@
 
                     if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
                     // Step 4: Mark rows with gaps in red without changing their order
-                    rows[i].style = "background-color: red;"
+                    rows[i].style.color = 'red';
                     }
                 }
             }
