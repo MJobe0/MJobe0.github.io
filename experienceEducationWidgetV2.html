@@ -181,6 +181,32 @@
     
                 return _data
             }
+
+            function markDatesWithGaps() {
+                // Step 1: Extract start and end dates from table rows
+                const rows = document.querySelectorAll('tr'); // Assuming you have a table with rows
+                const dates = [];
+
+                for (let i = 0; i < rows.length; i++) {
+                    const startDate = new Date(rows[i].querySelector('Start Date').textContent); // Assuming you have a class "start-date" for the start date
+                    const endDate = new Date(rows[i].querySelector('End Date').textContent); // Assuming you have a class "end-date" for the end date
+                    dates.push({ startDate, endDate });
+                }
+
+                // Step 2: Sort the extracted dates
+                dates.sort((a, b) => a.startDate - b.startDate);
+
+                // Step 3: Check for gaps between adjacent dates
+                for (let i = 1; i < dates.length; i++) {
+                    const prevEndDate = dates[i - 1].endDate;
+                    const currentStartDate = dates[i].startDate;
+
+                    if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
+                    // Step 4: Mark rows with gaps in red without changing their order
+                    rows[i].style.color = 'red';
+                    }
+                }
+            }
     
             function validateDates() {
                 var numOfIncorrectDates = 0;
@@ -805,7 +831,7 @@
             <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <!-- <button type="button" id="test1" onclick="test01()"> True </button> -->
+                    <button type="button" id="test1" onclick="markDatesWithGaps()">Test </button>
                      <!--<button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
