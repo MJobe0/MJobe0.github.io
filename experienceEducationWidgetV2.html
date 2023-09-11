@@ -183,28 +183,22 @@
             }
 
             function markDatesWithGaps() {
-                // Step 1: Extract start and end dates from table rows
-                const rows = document.querySelectorAll('tr'); // Assuming you have a table with rows
+                const rows = document.getElementsByName("Start Date")?.length
                 const dates = [];
 
-                for (let i = 1; i < rows.length; i++) {
-                    console.log("Part 1",rows[i].querySelector('input[name="startDate"]'))
-                    console.log("Part 1",rows[i].querySelector('input[name="startDate"]')?.textContent)
-                    const startDate = new Date(rows[i].querySelector('input[name="startDate"]')?.textContent); // Assuming you have a class "start-date" for the start date
-                    const endDate = new Date(rows[i].querySelector('input[name="endDate"]')?.textContent); // Assuming you have a class "end-date" for the end date
+                for (let i = 0; i < rows.length; i++) {
+                    console.log("Part 1", document.getElementsByName("End Date")[i]?.value)
+                    const startDate = new Date(document.getElementsByName("Start Date")[i]?.value);
+                    const endDate = new Date(document.getElementsByName("End Date")[i]?.value);
                     dates.push({ startDate, endDate });
                 }
 
-                // Step 2: Sort the extracted dates
                 dates.sort((a, b) => a.startDate - b.startDate);
 
-                // Step 3: Check for gaps between adjacent dates
                 for (let i = 1; i < dates.length; i++) {
                     const prevEndDate = dates[i - 1].endDate;
                     const currentStartDate = dates[i].startDate;
-
                     if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
-                    // Step 4: Mark rows with gaps in red without changing their order
                     rows[i].style = "background-color: red;"
                     }
                 }
