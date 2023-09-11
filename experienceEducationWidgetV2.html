@@ -188,10 +188,11 @@
                 const dates = [];
 
                 for (let i = 1; i < rows.length; i++) {
-                    console.log("Part 1",rows[i].querySelector('[class="Start Date"]'))
-                    console.log("Part 1",rows[i].querySelector('[class="Start Date"]')?.textContent)
-                    const startDate = new Date(rows[i].querySelector('[class="Start Date"]')?.textContent); // Assuming you have a class "start-date" for the start date
-                    const endDate = new Date(rows[i].querySelector('[class="End Date"]')?.textContent); // Assuming you have a class "end-date" for the end date
+                    console.log("Part 0",rows[i].querySelector())
+                    console.log("Part 1",rows[i].querySelector(".Start Date"))
+                    console.log("Part 1",rows[i].querySelector(".Start Date")?.textContent)
+                    const startDate = new Date(rows[i].querySelector(".Start Date")?.textContent); // Assuming you have a class "start-date" for the start date
+                    const endDate = new Date(rows[i].querySelector(".End Date")?.textContent); // Assuming you have a class "end-date" for the end date
                     dates.push({ startDate, endDate });
                 }
 
