@@ -188,7 +188,6 @@
                 const dates = [];
 
                 for (let i = 1; i < rows.length; i++) {
-                    console.log("Part 0",rows[i].querySelector())
                     console.log("Part 1",rows[i].querySelector(".Start Date"))
                     console.log("Part 1",rows[i].querySelector(".Start Date")?.textContent)
                     const startDate = new Date(rows[i].querySelector(".Start Date")?.textContent); // Assuming you have a class "start-date" for the start date
@@ -206,7 +205,7 @@
 
                     if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
                     // Step 4: Mark rows with gaps in red without changing their order
-                    rows[i].style.color = 'red';
+                    rows[i].style = "background-color: red;"
                     }
                 }
             }
