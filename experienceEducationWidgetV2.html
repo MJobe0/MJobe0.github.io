@@ -211,6 +211,7 @@
                     const currentStartDate = dates[i].startDate;
 
                     if (getMonthDifference(prevEndDate, currentStartDate) >= 1) {
+                        console.log("endDate" + dates[i - 1].entId)
                             document.getElementById("endDate" + dates[i - 1].entId)[i].style = "background-color: red;"
                             document.getElementById("startDate" + dates[i].entId)[i + 1].style = "background-color: red;"
                             numOfIncorrectDates = numOfIncorrectDates + 1
