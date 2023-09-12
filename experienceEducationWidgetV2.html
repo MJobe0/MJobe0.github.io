@@ -255,6 +255,22 @@
                         }
                     }
                  }
+
+                 console.log(numOfIncorrectDates)
+                if (numOfIncorrectDates >= 1) {
+                    console.log("1 month data diff")
+                    dateDiffRes[0].value = "Yes";
+                    console.log("Invalid dates = ", dateDiffRes)
+                    JFCustomWidget.setFieldsValueById(dateDiffRes);
+                    console.log("here")
+                    return false
+                }
+                else {
+                    dateDiffRes[0].value = "No";
+                    console.log("Valid dates = ", dateDiffRes)
+                    JFCustomWidget.setFieldsValueById(dateDiffRes);
+                    return true
+                }
             }
     
             function validateDates() {
