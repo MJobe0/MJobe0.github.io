@@ -186,10 +186,10 @@
                 var numOfIncorrectDates = 0;
                 currFullWorkHistory = JFCustomWidget?.getWidgetSetting("fullWorkHistory");
 
-                const rows = document.getElementsByName("Start Date")?.length;
+                const rows = document.getElementsByName("Start Date");
                 const dates = [];
 
-                for (let i = 0; i < rows.length; i++) {
+                for (let i = 0; i < rows?.length; i++) {
                     console.log("Part 1",document.getElementsByName("End Date")[i]?.value)
                     const startDateInput = document.getElementsByName("Start Date")[i]?.value;
                     const endDateInput = document.getElementsByName("End Date")[i]?.value;
