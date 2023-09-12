@@ -182,7 +182,10 @@
                 return _data
             }
 
-            function markDatesWithGaps() {
+            function validateDates2() {
+                var numOfIncorrectDates = 0;
+                currFullWorkHistory = JFCustomWidget?.getWidgetSetting("fullWorkHistory");
+
                 const rows = document.getElementsByName("Start Date")?.length;
                 const dates = [];
 
@@ -207,8 +210,14 @@
                     const prevEndDate = dates[i - 1].endDate;
                     const currentStartDate = dates[i].startDate;
 
-                    if (prevEndDate.getMonth() !== currentStartDate.getMonth()) {
-                    rows[i].style.color = 'red';
+                    if (getMonthDifference(prevEndDate, currentStartDate) >= 1) {
+                            document.getElementsById("endDate" + dates[i - 1].entId)[i].style = "background-color: red;"
+                            document.getElementsById("startDate" + dates[i].entId)[i + 1].style = "background-color: red;"
+                            numOfIncorrectDates = numOfIncorrectDates + 1
+                    }
+                    else {
+                            document.getElementsById("endDate" + dates[i - 1].entId)[i].style = "background-color: none;"
+                            document.getElementsById("startDate" + dates[i].entId)[i + 1].style = "background-color: none;"
                     }
                 }
             }
@@ -836,7 +845,7 @@
             <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <button type="button" id="test1" onclick="markDatesWithGaps()">Test </button>
+                    <button type="button" id="test1" onclick="validateDates2()">Test </button>
                      <!--<button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
