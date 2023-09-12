@@ -181,97 +181,6 @@
     
                 return _data
             }
-
-            function validateDates2() {
-                var numOfIncorrectDates = 0;
-                currFullWorkHistory = JFCustomWidget?.getWidgetSetting("fullWorkHistory");
-
-                const rows = document.getElementsByName("Start Date");
-                const dates = [];
-
-                for (let i = 0; i < rows?.length; i++) {
-                    if (currFullWorkHistory === "Yes") {
-                        var dateDiffRes = [{
-                            id: "215",
-                            value: ""
-                        }]
-                    }
-                    else {
-                        var dateDiffRes = [{
-                            id: "439",
-                            value: ""
-                        }]
-                    }
-
-                    console.log("Part 1",document.getElementsByName("End Date")[i]?.value)
-                    const startDateInput = document.getElementsByName("Start Date")[i]?.value;
-                    const endDateInput = document.getElementsByName("End Date")[i]?.value;
-
-                    // const startDateValue = startDateInput.value;
-                    // const endDateValue = endDateInput.value;
-
-                    const startDate = new Date(startDateInput);
-                    const endDate = new Date(endDateInput);
-                    const entId = [i + 1]
-
-                    dates.push({ startDate, endDate, entId});
-                }
-
-                dates.sort((a, b) => a.startDate - b.startDate);
-
-                for (let i = 1; i < dates.length; i++) {
-                    const prevEndDate = dates[i - 1].endDate;
-                    const currentStartDate = dates[i].startDate;
-
-                //     if (getMonthDifference(prevEndDate, currentStartDate) >= 1) {
-                //         console.log("endDate" + dates[i - 1].entId)
-                //             document.getElementById("endDate" + dates[i - 1].entId)[i].style = "background-color: red;"
-                //             document.getElementById("startDate" + dates[i].entId)[i + 1].style = "background-color: red;"
-                //             numOfIncorrectDates = numOfIncorrectDates + 1
-                //     }
-                //     else {
-                //             document.getElementById("endDate" + dates[i - 1].entId)[i].style = "background-color: none;"
-                //             document.getElementById("startDate" + dates[i].entId)[i + 1].style = "background-color: none;"
-                //     }
-
-                if (prevEndDate != null && currentStartDate != null) {
-                    console.log(document.getElementById("endDate" + dates[i - 1].entId))
-                    console.log(document.getElementById("endDate" + dates[i - 1].entId).style)
-                        document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
-                        document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
-                        console.log("startDate" + dates[i].entId)
-                        console.log( document.getElementById("endDate" + dates[i - 1].entId))
-                        document.getElementById("startDate" + dates[i].entId).style = "background-color: none;"
-                        document.getElementById("startDate" + dates[i].entId).style = "background-color: none;"
-                        console.log("all good")
-                        if (getMonthDifference(prevEndDate, currentStartDate) >= 1)  {
-                            document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: red;"
-                            document.getElementById("startDate" + dates[i].entId).style = "background-color: red;"
-                            numOfIncorrectDates = numOfIncorrectDates + 1
-                        }
-                        else {
-                            document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
-                            document.getElementById("startDate" + dates[i].entId).style = "background-color: none;"
-                        }
-                    }
-                 }
-
-                 console.log(numOfIncorrectDates)
-                if (numOfIncorrectDates >= 1) {
-                    console.log("1 month data diff")
-                    dateDiffRes[0].value = "Yes";
-                    console.log("Invalid dates = ", dateDiffRes)
-                    JFCustomWidget.setFieldsValueById(dateDiffRes);
-                    console.log("here")
-                    return false
-                }
-                else {
-                    dateDiffRes[0].value = "No";
-                    console.log("Valid dates = ", dateDiffRes)
-                    JFCustomWidget.setFieldsValueById(dateDiffRes);
-                    return true
-                }
-            }
     
             function validateDates() {
                 var numOfIncorrectDates = 0;
@@ -896,7 +805,7 @@
             <table>
                 <tr>
                     <button type="button" id="addRowButton">Add Row</button>
-                    <button type="button" id="test1" onclick="validateDates2()">Test </button>
+                    <!-- <button type="button" id="test1" onclick="test01()"> True </button> -->
                      <!--<button type="button" id="test2" onclick="test02()"> False </button> -->
                     <span>
                         <p id="textArea"></p>
