@@ -221,8 +221,10 @@
                     const currentStartDate = dates[i].startDate;
 
                     if (prevEndDate != null && currentStartDate != null) {
-                        console.log(document.getElementById("endDate" + dates[i - 1].entId))
-                        console.log(document.getElementById("endDate" + dates[i - 1].entId).style)
+                            console.log(document.getElementById("endDate" + dates[i - 1].entId))
+                            console.log(document.getElementById("endDate" + dates[i - 1].entId).style)
+                            document.getElementById("endDate" + dates[i].entId).style = "background-color: none;"
+                            document.getElementById("endDate" + dates[i].entId).style = "background-color: none;"
                             document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
                             document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
                             console.log("startDate" + dates[i].entId)
