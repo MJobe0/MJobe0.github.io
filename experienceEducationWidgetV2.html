@@ -235,13 +235,13 @@
                                 document.getElementById("startDate" + dates[i + 1].entId).style = "background-color: none;"
                             }
                             if (getMonthDifference(prevEndDate, currentStartDate) >= 1)  {
-                                document.getElementById("endDate" + dates[i].entId).style = "background-color: red;"
-                                document.getElementById("startDate" + dates[i - 1].entId).style = "background-color: red;"
+                                document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: red;"
+                                document.getElementById("startDate" + dates[i].entId).style = "background-color: red;"
                                 numOfIncorrectDates = numOfIncorrectDates + 1
                             }
                             else {
-                                document.getElementById("endDate" + dates[i].entId).style = "background-color: none;"
-                                document.getElementById("startDate" + dates[i - 1].entId).style = "background-color: none;"
+                                document.getElementById("endDate" + dates[i - 1].entId).style = "background-color: none;"
+                                document.getElementById("startDate" + dates[i].entId).style = "background-color: none;"
                             }
                         }
                     }
