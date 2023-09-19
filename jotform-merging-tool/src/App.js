@@ -25,3 +25,4 @@ export default App;
 // Jotform
 // npm install react-router-dom
 // npm i react-json-view-compare
+// $ npm install gh-pages --save-dev - https://github.com/gitname/react-gh-pages
