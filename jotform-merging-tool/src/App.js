@@ -24,3 +24,4 @@ export default App;
 // Installed packages:
 // Jotform
 // npm install react-router-dom
+// npm i react-json-view-compare
