@@ -42,6 +42,7 @@
                     chartData.push(parseFloat(resItem?.value) ?? 0)
                     console.log(resItem.value);
                     myChart.config.data = chartData;
+                    myChart.update();
                 });
 
                 // const labels = [
