@@ -41,6 +41,7 @@
                 res.data.forEach(resItem => {
                     chartData.push(parseFloat(resItem?.value) ?? 0)
                     console.log(resItem.value);
+                    myChart.config.data = chartData;
                 });
 
                 // const labels = [
@@ -53,52 +54,52 @@
                 //     'July'
                 // ];
 
-                const data = {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: '2022',
-                        data: [...chartData],
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                    }]
-                };
+            //     const data = {
+            //         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            //         datasets: [{
+            //             label: '2022',
+            //             data: [...chartData],
+            //             fill: false,
+            //             borderColor: 'rgb(75, 192, 192)',
+            //         }]
+            //     };
 
-                //config
-                const config = {
-                    type: 'line',
-                    data: data,
-                    options: {
-                        transitions: {
-                            show: {
-                                animations: {
-                                    x: {
-                                        from: 0
-                                    },
-                                    y: {
-                                        from: 0
-                                    }
-                                }
-                            },
-                            hide: {
-                                animations: {
-                                    x: {
-                                        to: 0
-                                    },
-                                    y: {
-                                        to: 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                };
+            //     //config
+            //     const config = {
+            //         type: 'line',
+            //         data: data,
+            //         options: {
+            //             transitions: {
+            //                 show: {
+            //                     animations: {
+            //                         x: {
+            //                             from: 0
+            //                         },
+            //                         y: {
+            //                             from: 0
+            //                         }
+            //                     }
+            //                 },
+            //                 hide: {
+            //                     animations: {
+            //                         x: {
+            //                             to: 0
+            //                         },
+            //                         y: {
+            //                             to: 0
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     };
 
-                //render the chart using our configuration:
-                const myChart = new Chart(
-                    document.getElementById('myChart'),
-                    config
-                );
-            });
+            //     //render the chart using our configuration:
+            //     const myChart = new Chart(
+            //         document.getElementById('myChart'),
+            //         config
+            //     );
+             });
         }
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
