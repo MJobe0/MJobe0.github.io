@@ -26,7 +26,7 @@
             /* position: relative; */
             width: 100%;
             /* Set the width of the container */
-            max-width: 400px;
+            /* max-width: 400px; */
             /* Set the maximum width of the container */
         }
     </style>
@@ -36,6 +36,28 @@
         <!-- <button onclick="updateChart()">Update Chart</button> -->
     </div>
     <script>
+
+        // JavaScript
+        const ctx = document.getElementById('myDoughnutChart').getContext('2d');
+
+        const initialData = {
+            labels: ["Investment Gain", "ROI"],
+            datasets: [
+                {
+                    data: [50, 50], // Initial data values for Variable 1 and Variable 2
+                    backgroundColor: ["#FF5733", "#3498DB"], // Colors for the segments
+                },
+            ],
+        };
+
+        const myDoughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: initialData,
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+            },
+        });
 
         console.log("JFCustomWidget: ", JFCustomWidget)
         var chartData = [];
@@ -62,23 +84,6 @@
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
-            // JavaScript
-            const ctx = document.getElementById('myDoughnutChart').getContext('2d');
-
-            const initialData = {
-                labels: ["Investment Gain", "ROI"],
-                datasets: [
-                    {
-                        data: [50, 50], // Initial data values for Variable 1 and Variable 2
-                        backgroundColor: ["#FF5733", "#3498DB"], // Colors for the segments
-                    },
-                ],
-            };
-
-            const myDoughnutChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: initialData,
-            });
 
         });
 
