@@ -37,26 +37,37 @@
     </div>
     <script>
 
-        // JavaScript
+        const DATA_COUNT = 2;
+        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+
         const ctx = document.getElementById('myDoughnutChart').getContext('2d');
 
         const initialData = {
             labels: ["Invested", "Profit"],
             datasets: [
                 {
-                    data: [50, 50],
-                    backgroundColor: ["#FF5733", "#3498DB"],
-                },
-            ],
+                    label: 'Dataset 1',
+                    data: Utils.numbers(NUMBER_CFG),
+                    backgroundColor: Object.values(Utils.CHART_COLORS),
+                }
+            ]
         };
 
         const myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',
-            data: initialData,
+            data: data,
             options: {
-                maintainAspectRatio: false,
                 responsive: true,
-            },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Breakdown'
+                    }
+                }
+            }
         });
 
         console.log("JFCustomWidget: ", JFCustomWidget)
