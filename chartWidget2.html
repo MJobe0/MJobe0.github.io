@@ -21,11 +21,8 @@
 </style>
 
 <body>
-    <span id="labelText"></span>
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
-    <canvas id="myChart" width="1000" height="700" aria-label="Hello World" role="img"></canvas>
+    <canvas id="myDoughnutChart"></canvas>
+    <!-- <button onclick="updateChart()">Update Chart</button> -->
     <script>
 
         console.log("JFCustomWidget: ", JFCustomWidget)
@@ -34,141 +31,36 @@
         JFCustomWidget.subscribe('populate', fillConditionValue);
 
         function fillConditionValue(data) {
-            var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"]
+            console.log(data)
+            // Get new values for Variable 1 and Variable 2 (you can fetch these values dynamically)
+            const newValue1 = Math.random() * 100;
+            const newValue2 = Math.random() * 100;
 
-            JFCustomWidget.getFieldsValueByName(fields, function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    chartData.push(parseFloat(resItem?.value) ?? 0)
-                    console.log(resItem.value);
-                    myChart.config.data = chartData;
-                    myChart.update();
-                });
+            // Update the chart's data
+            myDoughnutChart.data.datasets[0].data = [newValue1, newValue2];
 
-                // const labels = [
-                //     'January',
-                //     'February',
-                //     'March',
-                //     'April',
-                //     'May',
-                //     'June',
-                //     'July'
-                // ];
+            // Redraw the chart
+            myDoughnutChart.update();
+        };
 
-            //     const data = {
-            //         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            //         datasets: [{
-            //             label: '2022',
-            //             data: [...chartData],
-            //             fill: false,
-            //             borderColor: 'rgb(75, 192, 192)',
-            //         }]
-            //     };
-
-            //     //config
-            //     const config = {
-            //         type: 'line',
-            //         data: data,
-            //         options: {
-            //             transitions: {
-            //                 show: {
-            //                     animations: {
-            //                         x: {
-            //                             from: 0
-            //                         },
-            //                         y: {
-            //                             from: 0
-            //                         }
-            //                     }
-            //                 },
-            //                 hide: {
-            //                     animations: {
-            //                         x: {
-            //                             to: 0
-            //                         },
-            //                         y: {
-            //                             to: 0
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     };
-
-            //     //render the chart using our configuration:
-            //     const myChart = new Chart(
-            //         document.getElementById('myChart'),
-            //         config
-            //     );
-             });
-        }
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
-            console.log("ready message arrived from JotForm", msg);
-            var fields = ["data1", "data2", "data3", "data4", "data5", "data6", "data7"]
+            // JavaScript
+            const ctx = document.getElementById('myDoughnutChart').getContext('2d');
 
-            JFCustomWidget.getFieldsValueByName(fields, function (res) {
-                console.log("res by Name=", res)
-                res.data.forEach(resItem => {
-                    chartData.push(parseFloat(resItem?.value) ?? 0)
-                    console.log(resItem.value);
-                });
+            const initialData = {
+                labels: ["Variable 1", "Variable 2"],
+                datasets: [
+                    {
+                        data: [50, 50], // Initial data values for Variable 1 and Variable 2
+                        backgroundColor: ["#FF5733", "#3498DB"], // Colors for the segments
+                    },
+                ],
+            };
 
-                // const labels = [
-                //     'January',
-                //     'February',
-                //     'March',
-                //     'April',
-                //     'May',
-                //     'June',
-                //     'July'
-                // ];
-
-                const data = {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: '2022',
-                        data: [...chartData],
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                    }]
-                };
-
-                //config
-                const config = {
-                    type: 'line',
-                    data: data,
-                    options: {
-                        transitions: {
-                            show: {
-                                animations: {
-                                    x: {
-                                        from: 0
-                                    },
-                                    y: {
-                                        from: 0
-                                    }
-                                }
-                            },
-                            hide: {
-                                animations: {
-                                    x: {
-                                        to: 0
-                                    },
-                                    y: {
-                                        to: 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                };
-
-                //render the chart using our configuration:
-                const myChart = new Chart(
-                    document.getElementById('myChart'),
-                    config
-                );
+            const myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: initialData,
             });
 
         });
