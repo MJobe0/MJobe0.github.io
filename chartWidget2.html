@@ -31,14 +31,10 @@
         }
     </style>
     <div id="chart-container">
-
         <canvas id="myDoughnutChart"></canvas>
         <!-- <button onclick="updateChart()">Update Chart</button> -->
     </div>
     <script>
-
-        const DATA_COUNT = 2;
-        const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
 
         const ctx = document.getElementById('myDoughnutChart').getContext('2d');
 
@@ -46,11 +42,10 @@
             labels: ["Invested", "Profit"],
             datasets: [
                 {
-                    label: 'Dataset 1',
-                    data: Utils.numbers(NUMBER_CFG),
-                    backgroundColor: Object.values(Utils.CHART_COLORS),
-                }
-            ]
+                    data: [50, 50],
+                    backgroundColor: ["#FF5733", "#3498DB"],
+                },
+            ],
         };
 
         const myDoughnutChart = new Chart(ctx, {
