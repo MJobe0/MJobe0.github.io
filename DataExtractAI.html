@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <input type="file" id="fileInput" onchange="uploadFile()">
+    <script>
+        function uploadFile() {
+            var currParams = JFCustomWidget.getWidgetSettings();
+            const inputElement = document.getElementById('fileInput');
+            const file = inputElement.files[0];
+            if (file) {
+                console.log("Curr file:", file);
+                var formdata = new FormData();
+                formdata.append('file', file);
+                formdata.append("questions", "What is the total amount?");
+
+                var requestOptions = {
+                    method: 'POST',
+                    body: formdata,
+                    redirect: 'follow',
+                };
+
+                fetch("https://mjobe-document-vqa-v2.hf.space/uploadfile/", requestOptions)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('API Response:', data);
+                        fillFields(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
+        function fillFields(data) {
+            console.log('API call successful! Data:', data);
+        }
+
+        JFCustomWidget.subscribe('populate', fillConditionValue);
+
+        function fillConditionValue(data) {
+            console.log(data)
+        };
+
+        //subscrive to ready
+        JFCustomWidget.subscribe("ready", function (msg) {
+            console.log("Ready:", msg)
+        });
+
+        //subscribe to submit
+        JFCustomWidget.subscribe("submit", function (msg) {
+        });
+    </script>
+</body>
+
+</html>
