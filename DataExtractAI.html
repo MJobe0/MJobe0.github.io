@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <input type="file" id="fileInput" onchange="uploadFile">
+    <input type="file" id="fileInput" onchange="uploadFile()">
     <script>
         var currFieldIds;
         var currQuestions;
@@ -31,12 +31,18 @@
                 console.log("Curr file:", file);
                 var formdata = new FormData();
                 formdata.append('file', file);
-                formdata.append("questions", "What is the total amount?");
+                formdata.append("questions", currQuestions);
 
                 var requestOptions = {
                     method: 'POST',
                     body: formdata,
                     redirect: 'follow',
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://127.0.0.1:5500",
+                        //"Access-Control-Allow-Credentials": true,
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "Content-Type",
+                    },
                 };
 
                 fetch("https://mjobe-document-vqa-v2.hf.space/uploadfile/", requestOptions)
