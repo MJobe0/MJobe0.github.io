@@ -64,6 +64,23 @@
 
         function fillFields(data) {
             console.log('API call successful! Data:', data);
+            JFCustomWidget.setFieldsValueById([{
+                    id: currFieldIds[0],
+                    value: data["What is the invoice date?"]
+                },
+                {
+                    id: currFieldIds[1],
+                    value: data["What is the invoice number?"]
+                },
+                {
+                    id: currFieldIds[2],
+                    value: data["What is the start of invoice period?"]
+                },
+                {
+                    id: currFieldIds[3],
+                    value: data["What is the end of invoice period?"]
+                },
+            ]);
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
