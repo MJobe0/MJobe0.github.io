@@ -17,11 +17,9 @@
 </head>
 
 <body>
-    <input type="file" id="fileInput" onchange="uploadFile()">
+    <input type="file" id="fileInput" onchange="uploadFile">
     <script>
         function uploadFile() {
-            var currParams = JFCustomWidget.getWidgetSettings();
-            console.log(currParams)
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
             if (file) {
@@ -65,6 +63,8 @@
 
         //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
+            var currParams = JFCustomWidget.getWidgetSettings();
+            console.log(currParams)
             console.log("Ready:", msg)
         });
 
