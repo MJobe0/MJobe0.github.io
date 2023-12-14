@@ -19,7 +19,12 @@
 <body>
     <input type="file" id="fileInput" onchange="uploadFile">
     <script>
+        var currFieldIds;
+        var currQuestions;
         function uploadFile() {
+            console.log("currFieldIds", currFieldIds)
+            console.log("currQuestions", currQuestions)
+
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
             if (file) {
@@ -66,6 +71,8 @@
             var currParams = JFCustomWidget.getWidgetSettings();
             console.log(currParams)
             console.log("Ready:", msg)
+            currFieldIds = currParams["fieldIds"].split(",");
+            currQuestions = currParams["questions"];
         });
 
         //subscribe to submit
