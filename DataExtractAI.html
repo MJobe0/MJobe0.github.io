@@ -21,6 +21,7 @@
     <script>
         function uploadFile() {
             var currParams = JFCustomWidget.getWidgetSettings();
+            console.log(currParams)
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
             if (file) {
