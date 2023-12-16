@@ -21,54 +21,66 @@
     <script>
         var currFieldIds;
         var currQuestions;
+        function uploadFile() {
+            console.log("currFieldIds", currFieldIds)
+            console.log("currQuestions", currQuestions)
 
-        async function uploadFile() {
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
-
             if (file) {
                 console.log("Curr file:", file);
                 var formdata = new FormData();
                 formdata.append('file', file);
                 formdata.append("questions", currQuestions);
 
-                try {
-                    const response = await fetch("https://mjobe-document-vqa-v2.hf.space/uploadfile/", {
-                        method: 'POST',
-                        body: formdata,
-                        redirect: 'follow',
-                        headers: {
-                            "Access-Control-Allow-Origin": "http://127.0.0.1:5500",
-                            "Access-Control-Allow-Methods": "POST",
-                            "Access-Control-Allow-Headers": "Content-Type",
-                        },
+                var requestOptions = {
+                    method: 'POST',
+                    body: formdata,
+                    redirect: 'follow',
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://127.0.0.1:5500",
+                        //"Access-Control-Allow-Credentials": true,
+                        "Access-Control-Allow-Methods": "POST",
+                        "Access-Control-Allow-Headers": "Content-Type",
+                    },
+                };
+
+                fetch("https://mjobe-document-vqa-v2.hf.space/uploadfile/", requestOptions)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('API Response:', data);
+                        fillFields(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
                     });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    console.log('API Response:', data);
-
-                    await fillFields(data);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
             }
         }
 
-        async function fillFields(data) {
+        function fillFields(data) {
             console.log('API call successful! Data:', data);
-
-            const promises = currFieldIds.map((fieldId, index) => {
-                return JFCustomWidget.setFieldsValueById([{
-                    id: fieldId,
-                    value: data[currQuestions[index]]
-                }]);
-            });
-
-            await Promise.all(promises);
+            JFCustomWidget.setFieldsValueById([{
+                id: currFieldIds[0],
+                value: data["What is the invoice date?"]
+            },
+            {
+                id: currFieldIds[1],
+                value: data["What is the invoice number?"]
+            },
+            {
+                id: currFieldIds[2],
+                value: data["What is the start of invoice period?"]
+            },
+            {
+                id: currFieldIds[3],
+                value: data["What is the end of invoice period?"]
+            },
+            ]);
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
@@ -77,17 +89,18 @@
             console.log(data)
         };
 
-        // subscribe to ready
+        //subscrive to ready
         JFCustomWidget.subscribe("ready", function (msg) {
             var currParams = JFCustomWidget.getWidgetSettings();
             console.log(currParams)
             console.log("Ready:", msg)
             currFieldIds = currParams["fieldIds"].split(",");
-            currQuestions = currParams["questions"].split(",");
+            currQuestions = currParams["questions"];
         });
 
-        // subscribe to submit
-        JFCustomWidget.subscribe("submit", function (msg) { });
+        //subscribe to submit
+        JFCustomWidget.subscribe("submit", function (msg) {
+        });
     </script>
 </body>
 
