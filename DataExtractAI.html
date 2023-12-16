@@ -66,7 +66,7 @@
             console.log('API call successful! Data:', data);
             JFCustomWidget.setFieldsValueById([{
                 id: currFieldIds[0],
-                value: data["What is the invoice date?"]
+                value: data["What is the invoice issue date?"]
             },
             {
                 id: currFieldIds[1],
@@ -74,12 +74,12 @@
             },
             {
                 id: currFieldIds[2],
-                value: data["What is the start of invoice period?"]
+                value: data["What is the Invoice due date?"]
             },
-            {
-                id: currFieldIds[3],
-                value: data["What is the end of invoice period?"]
-            },
+            // {
+            //     id: currFieldIds[3],
+            //     value: data["What is the end of invoice period?"]
+            // },
             ]);
         }
 
