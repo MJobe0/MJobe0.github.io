@@ -20,6 +20,10 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        .loading-icon {
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -27,6 +31,7 @@
     <div class="mb-3">
         <label for="formFile" class="form-label">Upload invoice (JPEG, PNG)</label>
         <input class="form-control" type="file" id="fileInput" onchange="uploadFile()">
+        <div></div>
         <div class="status-container">
             <span id="statusMessage"></span>
             <i class="loading-icon fa fa-spinner fa-spin"></i>
