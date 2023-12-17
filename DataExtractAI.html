@@ -27,7 +27,7 @@
     <div class="mb-3">
         <label for="formFile" class="form-label">Upload invoice (JPEG, PNG)</label>
         <input class="form-control" type="file" id="fileInput" onchange="uploadFile()">
-      </div>
+    </div>
     <script>
         var currFieldIds;
         var currQuestions;
@@ -38,6 +38,16 @@
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
             if (file) {
+                const fileType = file.type;
+
+                var url = "https://mjobe-document-vqa-v2.hf.space/uploadfile/"
+
+                if (fileType.startsWith('image/')) {
+                    var url = "https://mjobe-document-vqa-v2.hf.space/uploadfile/"
+                }
+                else if (fileType === 'application/pdf') {
+                    var url = "https://mjobe-document-vqa-v2.hf.space/pdfQA/"
+                }
                 console.log("Curr file:", file);
                 var formdata = new FormData();
                 formdata.append('file', file);
@@ -55,7 +65,7 @@
                     },
                 };
 
-                fetch("https://mjobe-document-vqa-v2.hf.space/uploadfile/", requestOptions)
+                fetch(url, requestOptions)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
