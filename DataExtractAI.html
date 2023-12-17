@@ -27,13 +27,31 @@
     <div class="mb-3">
         <label for="formFile" class="form-label">Upload invoice (JPEG, PNG)</label>
         <input class="form-control" type="file" id="fileInput" onchange="uploadFile()">
+        <div class="status-container">
+            <span id="statusMessage"></span>
+            <i class="loading-icon fa fa-spinner fa-spin"></i>
+        </div>
     </div>
     <script>
         var currFieldIds;
         var currQuestions;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadingIcon = document.querySelector('.loading-icon');
+            loadingIcon.style.display = 'none';
+        });
+
         function uploadFile() {
             console.log("currFieldIds", currFieldIds)
             console.log("currQuestions", currQuestions)
+
+            const statusContainer = document.querySelector('.status-container');
+            const statusMessage = document.getElementById('statusMessage');
+            const loadingIcon = document.querySelector('.loading-icon');
+
+            statusContainer.style.display = 'block';
+            statusMessage.innerText = 'Uploading...';
+            loadingIcon.style.display = 'inline';
 
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
@@ -101,6 +119,13 @@
                 value: data["What is the total amount?"]
             },
             ]);
+
+            const statusContainer = document.querySelector('.status-container');
+            const statusMessage = document.getElementById('statusMessage');
+            const loadingIcon = document.querySelector('.loading-icon');
+
+            statusMessage.innerText = 'Upload successful!';
+            loadingIcon.style.display = 'none';
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
