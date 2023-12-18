@@ -107,6 +107,8 @@
 
             const dueDateValue = issueDate === dueDate ? "Unknown" : dueDate;
 
+            console.log("here:", dueDateValue)
+
             JFCustomWidget.setFieldsValueById([{
                 id: currFieldIds[0],
                 value: issueDate
@@ -117,7 +119,7 @@
             },
             {
                 id: currFieldIds[2],
-                value: dueDateValue
+                value: dueDateValue ?? "Unknown"
             },
             {
                 id: currFieldIds[3],
