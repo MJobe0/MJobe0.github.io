@@ -103,7 +103,7 @@
         function fillFields(data) {
             console.log('API call successful! Data:', data);
             const issueDate = data["What is the invoice issue date?"];
-            const dueDate = data["What is the Invoice due date?"];
+            const dueDate = data["What is the invoice due date?"];
 
             const dueDateValue = issueDate === dueDate ? "Unknown" : dueDate;
 
