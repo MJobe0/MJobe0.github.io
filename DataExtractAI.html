@@ -34,7 +34,7 @@
         <div></div>
         <div class="status-container">
             <span id="statusMessage"></span>
-            <i class="loading-icon fa fa-spinner fa-spin"></i>
+            <i id="myLoadIcon" class=""></i>
         </div>
     </div>
     <script>
@@ -42,21 +42,16 @@
         var currQuestions;
 
         document.addEventListener('DOMContentLoaded', function () {
-            const loadingIcon = document.querySelector('.loading-icon');
-            loadingIcon.style.display = 'none';
+            document.getElementById("myLoadIcon")?.classList?.remove("fa", "fa-spinner", "fa-spin");
         });
 
         function uploadFile() {
             console.log("currFieldIds", currFieldIds)
             console.log("currQuestions", currQuestions)
 
-            const statusContainer = document.querySelector('.status-container');
-            const statusMessage = document.getElementById('statusMessage');
-            const loadingIcon = document.querySelector('.loading-icon');
+            document.getElementById("myLoadIcon").classList.add("fa", "fa-spinner", "fa-spin");
 
-            statusContainer.style.display = 'block';
             statusMessage.innerText = 'Uploading...';
-            loadingIcon.style.display = 'inline';
 
             const inputElement = document.getElementById('fileInput');
             const file = inputElement.files[0];
@@ -125,12 +120,9 @@
             },
             ]);
 
-            const statusContainer = document.querySelector('.status-container');
-            const statusMessage = document.getElementById('statusMessage');
-            const loadingIcon = document.querySelector('.loading-icon');
+            document.getElementById("myLoadIcon")?.classList?.remove("fa", "fa-spinner", "fa-spin");
 
             statusMessage.innerText = 'Upload successful!';
-            loadingIcon.style.display = 'none';
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
