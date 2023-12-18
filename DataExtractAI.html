@@ -58,10 +58,10 @@
             if (file) {
                 const fileType = file.type;
 
-                var url = "https://mjobe-document-vqa-v2.hf.space/uploadfile/"
+                var url = "https://mjobe-document-vqa-v2.hf.space/uploadfilev2/"
 
                 if (fileType.startsWith('image/')) {
-                    var url = "https://mjobe-document-vqa-v2.hf.space/uploadfile/"
+                    var url = "https://mjobe-document-vqa-v2.hf.space/uploadfilev2/"
                 }
                 else if (fileType === 'application/pdf') {
                     var url = "https://mjobe-document-vqa-v2.hf.space/pdfQA/"
@@ -102,9 +102,14 @@
 
         function fillFields(data) {
             console.log('API call successful! Data:', data);
+            const issueDate = data["What is the invoice issue date?"];
+            const dueDate = data["What is the Invoice due date?"];
+
+            const dueDateValue = issueDate === dueDate ? "Unknown" : dueDate;
+
             JFCustomWidget.setFieldsValueById([{
                 id: currFieldIds[0],
-                value: data["What is the invoice issue date?"]
+                value: issueDate
             },
             {
                 id: currFieldIds[1],
@@ -112,13 +117,12 @@
             },
             {
                 id: currFieldIds[2],
-                value: data["What is the Invoice due date?"]
+                value: dueDateValue
             },
             {
                 id: currFieldIds[3],
                 value: data["What is the total amount?"]
-            },
-            ]);
+            }]);
 
             document.getElementById("myLoadIcon")?.classList?.remove("fa", "fa-spinner", "fa-spin");
 
