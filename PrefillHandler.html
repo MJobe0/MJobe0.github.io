@@ -67,6 +67,12 @@
 
             function fillConditionValue(data) {
                 console.log("Widget Value", data)
+                JFCustomWidget.setFieldsValueById([{
+                    id: "494",
+                    value: data
+                }]);
+                
+                JFCustomWidget.sendSubmit("True");
             }
 
             JFCustomWidget.subscribe('ready', function (data) {
