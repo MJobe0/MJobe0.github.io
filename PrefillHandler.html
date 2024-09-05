@@ -73,8 +73,8 @@
                 var widget = new PrefillHandler('prefillhandlerContainer', data);
                 var newData
                 if (data != null) {
-                    fields = ["506"];
-                    JFCustomWidget.getFieldsValueById(fields, function (res) {
+                    //fields = ["506"];
+                    JFCustomWidget.getFieldsValueById(["506"], function (res) {
                         console.log("res value (Pulse App) = ", res.data)
                         newData = res.data[0].value
                         widget.prefillFields(newData);
