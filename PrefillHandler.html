@@ -50,19 +50,17 @@
             }
 
             function prefillFields(data) {
-                try {
-                    var dataAsJson = JSON?.parse(data);
-                }
-                catch {
-                    console.log(`Unable to parse ${data}`)
-                }
+                // try {
+                //     var dataAsJson = JSON?.parse(data);
+                // }
+                // catch {
+                //     console.log(`Unable to parse ${data}`)
+                // }
 
-                // JFCustomWidget.setFieldsValueById([{
-                //     id: "494",
-                //     value: "jbjbj | juinkjn"
-                // }]);
-
-                JFCustomWidget.setFieldsValueById(dataAsJson);
+                JFCustomWidget.setFieldsValueById([{
+                    id: "494",
+                    value: data
+                }]);
             }
 
             JFCustomWidget.subscribe('populate', fillConditionValue);
@@ -73,9 +71,14 @@
 
             JFCustomWidget.subscribe('ready', function (data) {
                 var widget = new PrefillHandler('prefillhandlerContainer', data);
+                var newData
                 if (data != null) {
-                    console.log("Widget Value", data)
-                    //widget.prefillFields(data);
+                    fields = ["506"];
+                    JFCustomWidget.getFieldsValueById(fields, function (res) {
+                        console.log("res value (Pulse App) = ", res.data)
+                        newData = res.data[0].value
+                        widget.prefillFields(newData);
+                    });
                 }
 
                 //JFCustomWidget.subscribe('clear', widget.clearValues);
