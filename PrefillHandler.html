@@ -65,6 +65,12 @@
                 JFCustomWidget.setFieldsValueById(dataAsJson);
             }
 
+            JFCustomWidget.subscribe('populate', fillConditionValue);
+
+            function fillConditionValue(data) {
+                console.log("Widget Value", data)
+            }
+
             JFCustomWidget.subscribe('ready', function (data) {
                 var widget = new PrefillHandler('prefillhandlerContainer', data);
                 if (data != null) {
