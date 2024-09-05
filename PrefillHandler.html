@@ -42,24 +42,39 @@
         window.addEventListener('load', function () {
 
             function PrefillHandler(containerID, formData) {
-                var params = JFCustomWidget.getWidgetSettings();
+                //var params = JFCustomWidget.getWidgetSettings();
 
                 // exposed functions
-                this.init = init;
+                this.prefillFields = prefillFields;
 
             }
 
-            function init() {
+            function prefillFields(data) {
+                try {
+                    var dataAsJson = JSON?.parse(data);
+                }
+                catch {
+                    console.log(`Unable to parse ${data}`)
+                }
 
+                // JFCustomWidget.setFieldsValueById([{
+                //     id: "494",
+                //     value: "jbjbj | juinkjn"
+                // }]);
+
+                JFCustomWidget.setFieldsValueById(dataAsJson);
             }
 
             JFCustomWidget.subscribe('ready', function (data) {
                 var widget = new PrefillHandler('prefillhandlerContainer', data);
-                widget.init();
+                if (data != null) {
+                    console.log("Widget Value", data)
+                    //widget.prefillFields(data);
+                }
 
                 //JFCustomWidget.subscribe('clear', widget.clearValues);
                 JFCustomWidget.subscribe('submit', function () {
-                    JFCustomWidget.sendSubmit(widget.getData());
+                    //JFCustomWidget.sendSubmit(widget.getData());
                 });
             });
         });
