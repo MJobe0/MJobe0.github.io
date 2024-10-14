@@ -147,6 +147,9 @@
         }
 
         JFCustomWidget.subscribe('ready', function (data) {
+            console.log("Data Ready", data);
+            console.log("JFCustomWidget", JFCustomWidget)
+            console.log("JFCustomWidgetUtils", JFCustomWidgetUtils)
             params = JFCustomWidget.getWidgetSettings();
         });
 
