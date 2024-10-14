@@ -11,12 +11,16 @@
     <!-- Optional JavaScript -->
     <script type="text/javascript">
         (function () {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
             po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
         })();
     </script>
 </head>
+
 <style>
     * {
         margin: 0px;
@@ -80,26 +84,9 @@
         $(function () {
             function ActiveDirectoryDropDown(containerId, formData, params) {
 
-                /**
-               * Exposed
-               */
                 this.init = init;
 
                 function init() {
-
-                    console.log("form Data = ", formData)
-                    console.log("form data value = ", formData.value)
-
-                    if (formData.value !== undefined && formData.value !== "" && formData.value !== "filled") {
-                        try {
-                            //restoreTableData(JSON.parse(formData.value))
-                        } catch (error) {
-                        }
-                    }
-                    else {
-
-                    }
-
                     const locations = {
                         "New York": ["ny.email1@example.com", "ny.email2@example.com", "ny.email3@example.com"],
                         "Los Angeles": ["la.email1@example.com", "la.email2@example.com", "la.email3@example.com"],
@@ -115,7 +102,6 @@
                     locationDropdown.addEventListener("change", function () {
                         const selectedLocation = locationDropdown.value;
                         const emails = locations[selectedLocation];
-
                         signerDropdown.style.display = "block";
 
                         updateSignerDropdown("signer1", emails);
@@ -167,14 +153,13 @@
                 JFCustomWidget.subscribe('ready', function (data) {
                     var widget = new ActiveDirectoryDropDown('Test01', data, JFCustomWidget.getWidgetSettings());
                     widget.init();
-                    //widget.resizeFrame();
                 });
 
-                JFCustomWidget.subscribe('submit', function (data6) {
-                    // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+                JFCustomWidget.subscribe('submit', function (data) {
+                    console.log("Form submitted with:", data);
                 });
             }
-        })
+        });
     </script>
 </body>
 
