@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location & Signer Dropdowns</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f4f4;
+            font: 14px Tahoma, Geneva, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            padding: 10px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .dropdown-container {
+            margin: 20px 0;
+        }
+
+        select {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        .signer-dropdown {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown-container">
+        <label for="locationDropdown">Choose a location:</label>
+        <select id="locationDropdown">
+            <option value="" disabled selected>Select location</option>
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Houston">Houston</option>
+        </select>
+    </div>
+
+    <div class="signer-dropdown" id="signerDropdown">
+        <div class="dropdown-container">
+            <label for="signer1">Signer 1:</label>
+            <select id="signer1"></select>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        $(function () {
+            function ActiveDirectoryDropDown(containerId, formData, params) {
+
+                /**
+               * Exposed
+               */
+                this.init = init;
+
+                function init() {
+
+                    console.log("form Data = ", formData)
+                    console.log("form data value = ", formData.value)
+
+                    if (formData.value !== undefined && formData.value !== "" && formData.value !== "filled") {
+                        try {
+                            //restoreTableData(JSON.parse(formData.value))
+                        } catch (error) {
+                        }
+                    }
+                    else {
+
+                    }
+                }
+
+                const locations = {
+                    "New York": ["ny.email1@example.com", "ny.email2@example.com", "ny.email3@example.com"],
+                    "Los Angeles": ["la.email1@example.com", "la.email2@example.com", "la.email3@example.com"],
+                    "Chicago": ["ch.email1@example.com", "ch.email2@example.com", "ch.email3@example.com"],
+                    "Houston": ["hou.email1@example.com", "hou.email2@example.com", "hou.email3@example.com"]
+                };
+
+                const locationDropdown = document.getElementById("locationDropdown");
+                const signerDropdown = document.getElementById("signerDropdown");
+
+                let signer1Value;
+
+                locationDropdown.addEventListener("change", function () {
+                    const selectedLocation = locationDropdown.value;
+                    const emails = locations[selectedLocation];
+
+                    signerDropdown.style.display = "block";
+
+                    updateSignerDropdown("signer1", emails);
+
+                    storeSelectedValue("signer1", emails[0]);
+
+                    setEmailValueToField();
+                });
+
+                function updateSignerDropdown(signerId, emails) {
+                    const signerSelect = document.getElementById(signerId);
+                    signerSelect.innerHTML = "";
+
+                    emails.forEach((email) => {
+                        const option = document.createElement("option");
+                        option.value = email;
+                        option.textContent = email;
+                        signerSelect.appendChild(option);
+                    });
+
+                    signerSelect.value = emails[0];
+
+                    signerSelect.addEventListener("change", function () {
+                        storeSelectedValue(signerId, signerSelect.value);
+                    });
+                }
+
+                function storeSelectedValue(signerId, value) {
+                    if (signerId === "signer1") {
+                        signer1Value = value;
+                    }
+                    console.log(`Updated ${signerId} value:`, value);
+                }
+
+                function setEmailValueToField() {
+                    JFCustomWidget.setFieldsValueById({
+                        id: params.FieldToFill,
+                        value: signer1Value
+                    });
+                }
+
+                JFCustomWidget.subscribe('populate', fillConditionValue);
+
+                function fillConditionValue(data) {
+                    console.log("Fill Data", data);
+                }
+
+                JFCustomWidget.subscribe('ready', function (data) {
+                    var widget = new ActiveDirectoryDropDown('Test01', data, JFCustomWidget.getWidgetSettings());
+                    widget.init();
+                    widget.resizeFrame();
+                });
+
+                JFCustomWidget.subscribe('submit', function (data6) {
+                    // JFCustomWidget.sendSubmit(widget.getData(widgetParm["storageField"]));
+                });
+            }
+        })
+    </script>
+</body>
+
+</html>
