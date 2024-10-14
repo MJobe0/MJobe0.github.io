@@ -133,10 +133,13 @@
         }
 
         function setEmailValueToField() {
-            JFCustomWidget.setFieldsValueById({
+            console.log("Email value: ", signer1Value);
+            console.log("Field Id: ", params.fieldToFill);
+
+            JFCustomWidget.setFieldsValueById([{
                 id: params.fieldToFill,
                 value: signer1Value
-            });
+            }]);
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
