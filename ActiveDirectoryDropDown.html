@@ -30,7 +30,6 @@
     }
 
     body {
-        background: #f4f4f4;
         font: 14px Tahoma, Geneva, sans-serif;
         text-align: center;
         padding: 20px;
@@ -62,7 +61,7 @@
 
 <body>
     <div class="dropdown-container">
-        <label for="locationDropdown">Choose a location:</label>
+        <label for="locationDropdown"></label>
         <select id="locationDropdown">
             <option value="" disabled selected>Select location</option>
             <option value="New York">New York</option>
@@ -74,7 +73,7 @@
 
     <div class="signer-dropdown" id="signerDropdown">
         <div class="dropdown-container">
-            <label for="signer1">Signer 1:</label>
+            <label for="signer1"></label>
             <select id="signer1"></select>
         </div>
     </div>
@@ -101,9 +100,7 @@
             signerDropdown.style.display = "block";
 
             updateSignerDropdown("signer1", emails);
-
             storeSelectedValue("signer1", emails[0]);
-
             setEmailValueToField();
         });
 
@@ -122,6 +119,7 @@
 
             signerSelect.addEventListener("change", function () {
                 storeSelectedValue(signerId, signerSelect.value);
+                setEmailValueToField();
             });
         }
 
