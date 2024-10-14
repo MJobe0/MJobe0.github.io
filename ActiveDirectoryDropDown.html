@@ -2,30 +2,13 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -116,63 +99,63 @@
                     else {
 
                     }
-                }
 
-                const locations = {
-                    "New York": ["ny.email1@example.com", "ny.email2@example.com", "ny.email3@example.com"],
-                    "Los Angeles": ["la.email1@example.com", "la.email2@example.com", "la.email3@example.com"],
-                    "Chicago": ["ch.email1@example.com", "ch.email2@example.com", "ch.email3@example.com"],
-                    "Houston": ["hou.email1@example.com", "hou.email2@example.com", "hou.email3@example.com"]
-                };
+                    const locations = {
+                        "New York": ["ny.email1@example.com", "ny.email2@example.com", "ny.email3@example.com"],
+                        "Los Angeles": ["la.email1@example.com", "la.email2@example.com", "la.email3@example.com"],
+                        "Chicago": ["ch.email1@example.com", "ch.email2@example.com", "ch.email3@example.com"],
+                        "Houston": ["hou.email1@example.com", "hou.email2@example.com", "hou.email3@example.com"]
+                    };
 
-                const locationDropdown = document.getElementById("locationDropdown");
-                const signerDropdown = document.getElementById("signerDropdown");
+                    const locationDropdown = document.getElementById("locationDropdown");
+                    const signerDropdown = document.getElementById("signerDropdown");
 
-                let signer1Value;
+                    let signer1Value;
 
-                locationDropdown.addEventListener("change", function () {
-                    const selectedLocation = locationDropdown.value;
-                    const emails = locations[selectedLocation];
+                    locationDropdown.addEventListener("change", function () {
+                        const selectedLocation = locationDropdown.value;
+                        const emails = locations[selectedLocation];
 
-                    signerDropdown.style.display = "block";
+                        signerDropdown.style.display = "block";
 
-                    updateSignerDropdown("signer1", emails);
+                        updateSignerDropdown("signer1", emails);
 
-                    storeSelectedValue("signer1", emails[0]);
+                        storeSelectedValue("signer1", emails[0]);
 
-                    setEmailValueToField();
-                });
-
-                function updateSignerDropdown(signerId, emails) {
-                    const signerSelect = document.getElementById(signerId);
-                    signerSelect.innerHTML = "";
-
-                    emails.forEach((email) => {
-                        const option = document.createElement("option");
-                        option.value = email;
-                        option.textContent = email;
-                        signerSelect.appendChild(option);
+                        setEmailValueToField();
                     });
 
-                    signerSelect.value = emails[0];
+                    function updateSignerDropdown(signerId, emails) {
+                        const signerSelect = document.getElementById(signerId);
+                        signerSelect.innerHTML = "";
 
-                    signerSelect.addEventListener("change", function () {
-                        storeSelectedValue(signerId, signerSelect.value);
-                    });
-                }
+                        emails.forEach((email) => {
+                            const option = document.createElement("option");
+                            option.value = email;
+                            option.textContent = email;
+                            signerSelect.appendChild(option);
+                        });
 
-                function storeSelectedValue(signerId, value) {
-                    if (signerId === "signer1") {
-                        signer1Value = value;
+                        signerSelect.value = emails[0];
+
+                        signerSelect.addEventListener("change", function () {
+                            storeSelectedValue(signerId, signerSelect.value);
+                        });
                     }
-                    console.log(`Updated ${signerId} value:`, value);
-                }
 
-                function setEmailValueToField() {
-                    JFCustomWidget.setFieldsValueById({
-                        id: params.fieldToFill,
-                        value: signer1Value
-                    });
+                    function storeSelectedValue(signerId, value) {
+                        if (signerId === "signer1") {
+                            signer1Value = value;
+                        }
+                        console.log(`Updated ${signerId} value:`, value);
+                    }
+
+                    function setEmailValueToField() {
+                        JFCustomWidget.setFieldsValueById({
+                            id: params.fieldToFill,
+                            value: signer1Value
+                        });
+                    }
                 }
 
                 JFCustomWidget.subscribe('populate', fillConditionValue);
@@ -184,7 +167,7 @@
                 JFCustomWidget.subscribe('ready', function (data) {
                     var widget = new ActiveDirectoryDropDown('Test01', data, JFCustomWidget.getWidgetSettings());
                     widget.init();
-                    widget.resizeFrame();
+                    //widget.resizeFrame();
                 });
 
                 JFCustomWidget.subscribe('submit', function (data6) {
