@@ -127,6 +127,7 @@
                 .then(data => {
                     const emails = data || [];
                     if (emails.length > 0) {
+                        JFCustomWidget.sendData("data2");
                         signerDropdown.style.display = "block";
                         updateSignerDropdown("signer1", emails);
                         storeSelectedValue("signer1", emails[0].userPrincipalName);
