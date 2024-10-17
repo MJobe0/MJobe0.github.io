@@ -132,6 +132,8 @@
                 id: params.fieldToFill,
                 value: signer1Value
             }]);
+
+            JFCustomWidget.sendData(signer1Value);
         }
 
         function fetchSigners(location) {
@@ -143,7 +145,7 @@
                 .then(data => {
                     const emails = data || [];
                     if (emails.length > 0) {
-                        JFCustomWidget.sendData("data2");
+                        JFCustomWidget.sendData(emails[0].userPrincipalName);
                         signerDropdown.style.display = "block";
                         updateSignerDropdown(emails);
                         storeSelectedValue(emails[0].userPrincipalName);
@@ -184,6 +186,7 @@
         });
 
         JFCustomWidget.subscribe('submit', function (data) {
+            JFCustomWidget.sendData(signer1Value);
             console.log("Form submitted with:", data);
         });
 
