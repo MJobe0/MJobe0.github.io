@@ -63,7 +63,8 @@
                             data-component="dropdown" aria-label="">
                             <option value="">Please Select</option>
                         </select>
-                        <p id="loadingMessage" class="loading-message form-sub-label">Please select a location from the location drop
+                        <p id="loadingMessage" class="loading-message form-sub-label">Please select a location from the
+                            location drop
                             down</p>
                     </div>
                 </li>
@@ -134,7 +135,6 @@
         }
 
         function fetchSigners(location) {
-            // Show loading message before fetching data
             showLoadingMessage();
 
             const apiUrl = `http://localhost:7280/api/GetUsersFiltered`;
@@ -148,7 +148,7 @@
                         updateSignerDropdown(emails);
                         storeSelectedValue(emails[0].userPrincipalName);
                         setEmailValueToField();
-                        showSuccessMessage(); // Display success message
+                        showSuccessMessage();
                     } else {
                         loadingMessage.textContent = "No data found!";
                     }
@@ -168,9 +168,16 @@
             }
         }
 
+
+        function resizeFrame() {
+            const currHeight = $("body").height();
+            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight + 10 })
+        }
+
         JFCustomWidget.subscribe('populate', fillConditionValue);
 
         JFCustomWidget.subscribe('ready', function (data) {
+            resizeFrame();
             console.log("Data Ready", data);
             console.log("JFCustomWidget", JFCustomWidget);
             console.log("JFCustomWidgetUtils", JFCustomWidgetUtils);
