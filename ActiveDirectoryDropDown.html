@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -52,6 +52,16 @@
         color: #666;
         margin-top: 10px;
     }
+
+    .form-dropdown:not([size]),
+    .form-textbox {
+        height: 3em;
+    }
+
+    .form-line {
+        padding: 0px;
+        margin: 0px;
+    }
 </style>
 
 <body>
@@ -60,11 +70,12 @@
             <ul>
                 <li class="form-line" data-type="control_dropdown" id="ADDropdown">
                     <div id="ADDropdown" class="form-input-wide" data-layout="half">
-                        <select class="form-dropdown" id="input_ADDropdown" name="ADDropdown_typeA" style="width:100%"
+                        <select class="form-dropdown" id="input_ADDropdown" name="ADDropdown_typeA" style="width:310px"
                             data-component="dropdown" aria-label="">
                             <option value="">Please Select</option>
                         </select>
-                        <p id="loadingMessage" class="loading-message">Please select a location from the location drop down</p>
+                        <p id="loadingMessage" class="loading-message">Please select a location from the location drop
+                            down</p>
                     </div>
                 </li>
             </ul>
