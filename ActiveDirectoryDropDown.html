@@ -4,10 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link type="text/css" rel="stylesheet"
+        href="https://digiblu.jotform.com/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=3.3.57758" />
+    <link type="text/css" rel="stylesheet"
+        href="https://digiblu.jotform.com/css/styles/payment/payment_styles.css?3.3.57758" />
+    <link type="text/css" rel="stylesheet"
+        href="https://digiblu.jotform.com/css/styles/payment/payment_feature.css?3.3.57758" />
+    <link type="text/css" rel="stylesheet"
+        href="https://digiblu.jotform.com/stylebuilder/static/form-common.css?v=3c1609c" />
     <!-- Optional JavaScript -->
     <script type="text/javascript">
         (function () {
@@ -42,35 +49,24 @@
         font-size: 20px;
     }
 
-    .dropdown-container {
-        margin: 20px 0;
-    }
-
-    select {
-        padding: 10px;
-        margin: 10px;
-        border-radius: 5px;
-        font-size: 14px;
-        width: 250px;
-        cursor: pointer;
-    }
-
     .signer-dropdown {
         display: none;
     }
 </style>
 
 <body>
-    <!-- <div class="dropdown-container">
-        <label for="locationDropdown">Choose a location:</label>
-        <select id="locationDropdown">
-            <option value="" disabled selected>Select location</option>
-        </select>
-    </div> -->
     <div class="signer-dropdown" id="signerDropdown">
-        <div class="dropdown-container">
-            <label for="signer1">Email:</label>
-            <select id="signer1"></select>
+        <div role="main">
+            <ul>
+                <li class="form-line" data-type="control_dropdown" id="ADDropdown">
+                    <div id="ADDropdown" class="form-input-wide" data-layout="half">
+                        <select class="form-dropdown" id="input_ADDropdown" name="ADDropdown_typeA" style="width:310px"
+                            data-component="dropdown" aria-label="">
+                            <option value="">Please Select</option>
+                        </select>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -79,14 +75,18 @@
 
         var params;
 
-        const locationDropdown = document.getElementById("locationDropdown");
         const signerDropdown = document.getElementById("signerDropdown");
+        const signerSelect = document.getElementById("input_ADDropdown");
 
         let signer1Value;
 
-        function updateSignerDropdown(signerId, emails) {
-            const signerSelect = document.getElementById(signerId);
+        function updateSignerDropdown(emails) {
             signerSelect.innerHTML = "";
+
+            const defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.textContent = "Please Select";
+            signerSelect.appendChild(defaultOption);
 
             emails.forEach((email) => {
                 const option = document.createElement("option");
@@ -95,19 +95,17 @@
                 signerSelect.appendChild(option);
             });
 
-            signerSelect.value = emails[0];
+            signerSelect.value = emails[0].userPrincipalName;
 
             signerSelect.addEventListener("change", function () {
-                storeSelectedValue(signerId, signerSelect.value);
+                storeSelectedValue(signerSelect.value);
                 setEmailValueToField();
             });
         }
 
-        function storeSelectedValue(signerId, value) {
-            if (signerId === "signer1") {
-                signer1Value = value;
-            }
-            console.log(`Updated ${signerId} value:`, value);
+        function storeSelectedValue(value) {
+            signer1Value = value;
+            console.log(`Updated signer value:`, value);
         }
 
         function setEmailValueToField() {
@@ -129,8 +127,8 @@
                     if (emails.length > 0) {
                         JFCustomWidget.sendData("data2");
                         signerDropdown.style.display = "block";
-                        updateSignerDropdown("signer1", emails);
-                        storeSelectedValue("signer1", emails[0].userPrincipalName);
+                        updateSignerDropdown(emails);
+                        storeSelectedValue(emails[0].userPrincipalName);
                         setEmailValueToField();
                     }
                 })
@@ -150,8 +148,8 @@
 
         JFCustomWidget.subscribe('ready', function (data) {
             console.log("Data Ready", data);
-            console.log("JFCustomWidget", JFCustomWidget)
-            console.log("JFCustomWidgetUtils", JFCustomWidgetUtils)
+            console.log("JFCustomWidget", JFCustomWidget);
+            console.log("JFCustomWidgetUtils", JFCustomWidgetUtils);
             params = JFCustomWidget.getWidgetSettings();
         });
 
