@@ -52,18 +52,24 @@
     .signer-dropdown {
         display: none;
     }
+
+    .loading-message {
+        color: #666;
+        margin-top: 10px;
+    }
 </style>
 
 <body>
     <div class="signer-dropdown" id="signerDropdown">
         <div role="main">
             <ul>
-                <li class="form-line" data-type="control_dropdown" id="ADDropdown">
+                <li data-type="control_dropdown" id="ADDropdown">
                     <div id="ADDropdown" class="form-input-wide" data-layout="half">
                         <select class="form-dropdown" id="input_ADDropdown" name="ADDropdown_typeA" style="width:310px"
                             data-component="dropdown" aria-label="">
                             <option value="">Please Select</option>
                         </select>
+                        <p id="loadingMessage" class="loading-message"></p>
                     </div>
                 </li>
             </ul>
@@ -77,8 +83,22 @@
 
         const signerDropdown = document.getElementById("signerDropdown");
         const signerSelect = document.getElementById("input_ADDropdown");
+        const loadingMessage = document.getElementById("loadingMessage");
 
         let signer1Value;
+
+        function showLoadingMessage() {
+            signerSelect.innerHTML = "";
+            const loadingOption = document.createElement("option");
+            loadingOption.value = "";
+            loadingOption.textContent = "Retrieving data...";
+            signerSelect.appendChild(loadingOption);
+            loadingMessage.textContent = "";
+        }
+
+        function showSuccessMessage() {
+            loadingMessage.textContent = "Data retrieved successfully!";
+        }
 
         function updateSignerDropdown(emails) {
             signerSelect.innerHTML = "";
@@ -96,7 +116,6 @@
             });
 
             signerSelect.value = emails[0].userPrincipalName;
-
             signerSelect.addEventListener("change", function () {
                 storeSelectedValue(signerSelect.value);
                 setEmailValueToField();
@@ -119,6 +138,8 @@
         }
 
         function fetchSigners(location) {
+            showLoadingMessage();
+
             const apiUrl = `http://localhost:7280/api/GetUsersFiltered`;
             fetch(apiUrl)
                 .then(response => response.json())
@@ -130,9 +151,15 @@
                         updateSignerDropdown(emails);
                         storeSelectedValue(emails[0].userPrincipalName);
                         setEmailValueToField();
+                        showSuccessMessage();
+                    } else {
+                        loadingMessage.textContent = "No data found!";
                     }
                 })
-                .catch(error => console.error('Error fetching signers:', error));
+                .catch(error => {
+                    console.error('Error fetching signers:', error);
+                    loadingMessage.textContent = "Error retrieving data!";
+                });
         }
 
         function fillConditionValue(data) {
