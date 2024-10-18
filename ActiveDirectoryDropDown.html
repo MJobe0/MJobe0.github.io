@@ -63,7 +63,8 @@
                             data-component="dropdown" aria-label="">
                             <option value="">Please Select</option>
                         </select>
-                        <p id="loadingMessage" class="loading-message form-sub-label">Please select a Job Title from the Job Title dropdown</p>
+                        <p id="loadingMessage" class="loading-message form-sub-label">Please select a Job Title from the
+                            Job Title dropdown</p>
                     </div>
                 </li>
             </ul>
@@ -94,21 +95,44 @@
             loadingMessage.textContent = "Data retrieved successfully!";
         }
 
-        function updateSignerDropdown(emails) {
+        function updateSignerDropdown(emails, location) {
             signerSelect.innerHTML = "";
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
             defaultOption.textContent = "Please Select";
             signerSelect.appendChild(defaultOption);
 
+            const jobTitleGroup = document.createElement("optgroup");
+            jobTitleGroup.label = `Colleagues with Same Job Title`;
+
+            const departmentGroup = document.createElement("optgroup");
+            departmentGroup.label = "Colleagues from the Same Department";
+
             emails.forEach((email) => {
                 const option = document.createElement("option");
                 option.value = email.mail;
                 option.textContent = `${email.displayName} - ${email.jobTitle} - ${email.department}`;
-                signerSelect.appendChild(option);
+
+                if (email.jobTitle === location) {
+                    jobTitleGroup.appendChild(option);
+                } else {
+                    departmentGroup.appendChild(option);
+                }
             });
 
-            signerSelect.value = emails[0].mail;
+            if (jobTitleGroup.children.length > 0) {
+                signerSelect.appendChild(jobTitleGroup);
+            }
+            if (departmentGroup.children.length > 0) {
+                signerSelect.appendChild(departmentGroup);
+            }
+
+            if (jobTitleGroup.children.length > 0) {
+                signerSelect.value = jobTitleGroup.children[0].value;
+            } else if (departmentGroup.children.length > 0) {
+                signerSelect.value = departmentGroup.children[0].value;
+            }
+
             signerSelect.addEventListener("change", function () {
                 storeSelectedValue(signerSelect.value);
                 setEmailValueToField();
