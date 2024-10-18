@@ -95,7 +95,7 @@
             loadingMessage.textContent = "Data retrieved successfully!";
         }
 
-        function updateSignerDropdown(emails, location) {
+        function updateSignerDropdown(emails) {
             signerSelect.innerHTML = "";
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
@@ -113,7 +113,7 @@
                 option.value = email.mail;
                 option.textContent = `${email.displayName} - ${email.jobTitle} - ${email.department}`;
 
-                if (email.jobTitle === location) {
+                if (email.jobTitle === selectedLocation) {
                     jobTitleGroup.appendChild(option);
                 } else {
                     departmentGroup.appendChild(option);
@@ -184,7 +184,7 @@
         function fillConditionValue(data) {
             console.log("Fill Data", data);
 
-            const selectedLocation = data.value || "";
+            var selectedLocation = data.value || "";
             if (selectedLocation) {
                 fetchSigners(selectedLocation);
             }
