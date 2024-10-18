@@ -106,12 +106,12 @@
 
             emails.forEach((email) => {
                 const option = document.createElement("option");
-                option.value = email.userPrincipalName;
-                option.textContent = email.userPrincipalName;
+                option.value = email.mail;
+                option.textContent = email.mail;
                 signerSelect.appendChild(option);
             });
 
-            signerSelect.value = emails[0].userPrincipalName;
+            signerSelect.value = emails[0].mail;
 
             signerSelect.addEventListener("change", function () {
                 storeSelectedValue(signerSelect.value);
@@ -145,10 +145,10 @@
                 .then(data => {
                     const emails = data || [];
                     if (emails.length > 0) {
-                        JFCustomWidget.sendData(emails[0].userPrincipalName);
+                        JFCustomWidget.sendData(emails[0].mail);
                         signerDropdown.style.display = "block";
                         updateSignerDropdown(emails);
-                        storeSelectedValue(emails[0].userPrincipalName);
+                        storeSelectedValue(emails[0].mail);
                         setEmailValueToField();
                         showSuccessMessage();
                     } else {
