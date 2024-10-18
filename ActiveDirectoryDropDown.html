@@ -104,7 +104,7 @@
             emails.forEach((email) => {
                 const option = document.createElement("option");
                 option.value = email.mail;
-                option.textContent = `${email.displayName} - ${email.jobTitle} - ${email.department}<br>${email.mail}`;
+                option.textContent = `${email.displayName} - ${email.jobTitle} - ${email.department}/r${email.mail}`;
                 signerSelect.appendChild(option);
             });
 
