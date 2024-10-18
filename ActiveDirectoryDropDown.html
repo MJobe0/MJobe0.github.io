@@ -139,7 +139,7 @@
         function fetchSigners(location) {
             showLoadingMessage();
 
-            const apiUrl = `http://localhost:7280/api/GetUsersFiltered`;
+            const apiUrl = `https://fa-eel-jf-workflow-handler-001.azurewebsites.net/api/GetUsersFiltered?code=G4jRSNYXcOwlsiQ2q2nGvRjrcwVJJjrDgoNJH92OLfpmAzFuOeHdmA%3D%3D`;
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
