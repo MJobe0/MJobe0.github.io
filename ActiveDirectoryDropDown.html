@@ -75,6 +75,7 @@
         "use strict";
 
         var params;
+        var selectedLocation;
 
         const signerDropdown = document.getElementById("signerDropdown");
         const signerSelect = document.getElementById("input_ADDropdown");
@@ -184,7 +185,7 @@
         function fillConditionValue(data) {
             console.log("Fill Data", data);
 
-            var selectedLocation = data.value || "";
+            selectedLocation = data.value || "";
             if (selectedLocation) {
                 fetchSigners(selectedLocation);
             }
