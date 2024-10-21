@@ -36,18 +36,19 @@
 
         var params;
         var textToClassify;
+        var currClassification;
 
-        function setClassification(currClassification) {
+        function setClassification() {
             JFCustomWidget.setFieldsValueById([{
                 id: params.fieldToFill,
                 value: currClassification
             }]);
 
-            JFCustomWidget.sendData(currClassification);
+            //JFCustomWidget.sendData(currClassification);
         }
 
 
-        function classifyText() {
+        async function classifyText() {
             const commentsFieldId = params.commentsField
             JFCustomWidget.getFieldsValueById([commentsFieldId], function (res) {
                 console.log("res by Name= ", res.data[0].value);
@@ -79,7 +80,8 @@
                     })
                     .then(data => {
                         console.log('API Response:', data);
-                        setClassification(data?.label);
+                        currClassification = data?.label
+                        setClassification();
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -109,6 +111,13 @@
         JFCustomWidget.subscribe('submit', function (data) {
             console.log("Form submitted with:", data);
             classifyText();
+
+            var data2 = {
+                value: currClassification,
+                valid: true
+            }
+            console.log(data2)
+            JFCustomWidget.sendSubmit(data2);
         });
 
     </script>
