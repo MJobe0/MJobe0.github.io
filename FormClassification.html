@@ -36,62 +36,52 @@
 
         var params;
         var textToClassify;
-        var currClassification;
 
-        function setClassification() {
+        function setClassification(currClassification) {
             JFCustomWidget.setFieldsValueById([{
                 id: params.fieldToFill,
                 value: currClassification
             }]);
 
-            //JFCustomWidget.sendData(currClassification);
+            JFCustomWidget.sendData(currClassification);
         }
 
+        async function classifyText(textToClassify) {
+            const url = "https://mjobe-document-vqa-v2.hf.space/classify/"
+            var formdata = new FormData();
+            formdata.append('text', textToClassify);
 
-        async function classifyText() {
-            const commentsFieldId = params.commentsField
-            JFCustomWidget.getFieldsValueById([commentsFieldId], function (res) {
-                console.log("res by Name= ", res.data[0].value);
-                const textToClassify = res.data[0].value;
-                console.log("Text to Classify", textToClassify);
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow',
+                headers: {
+                    "Access-Control-Allow-Origin": "http://127.0.0.1:5500",
+                    //"Access-Control-Allow-Credentials": true,
+                    "Access-Control-Allow-Methods": "POST",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                },
+            };
 
-                const url = "https://mjobe-document-vqa-v2.hf.space/classify/"
-                var formdata = new FormData();
-                formdata.append('text', textToClassify);
-
-                var requestOptions = {
-                    method: 'POST',
-                    body: formdata,
-                    redirect: 'follow',
-                    headers: {
-                        "Access-Control-Allow-Origin": "http://127.0.0.1:5500",
-                        //"Access-Control-Allow-Credentials": true,
-                        "Access-Control-Allow-Methods": "POST",
-                        "Access-Control-Allow-Headers": "Content-Type",
-                    },
-                };
-
-                fetch(url, requestOptions)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('API Response:', data);
-                        currClassification = data?.[0].label
-                        setClassification();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            });
-
+            fetch(url, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('API Response:', data);
+                    setClassification(data?.[0].label);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
 
         function fillConditionValue(data) {
             console.log("Fill Data", data);
+            classifyText(data?.value);
         }
 
         function resizeFrame() {
@@ -106,18 +96,10 @@
             console.log("JFCustomWidget", JFCustomWidget);
             console.log("JFCustomWidgetUtils", JFCustomWidgetUtils);
             params = JFCustomWidget.getWidgetSettings();
+        });
 
-            JFCustomWidget.subscribe('submit', function (data) {
-                console.log("Form submitted with:", data);
-                classifyText();
-
-                var data2 = {
-                    value: currClassification,
-                    valid: true
-                }
-                console.log(data2)
-                JFCustomWidget.sendSubmit(data2);
-            });
+        JFCustomWidget.subscribe('submit', function (data) {
+            console.log("Form submitted with:", data);
         });
 
     </script>
