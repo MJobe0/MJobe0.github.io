@@ -106,18 +106,18 @@
             console.log("JFCustomWidget", JFCustomWidget);
             console.log("JFCustomWidgetUtils", JFCustomWidgetUtils);
             params = JFCustomWidget.getWidgetSettings();
-        });
 
-        JFCustomWidget.subscribe('submit', function (data) {
-            console.log("Form submitted with:", data);
-            classifyText();
+            JFCustomWidget.subscribe('submit', function (data) {
+                console.log("Form submitted with:", data);
+                classifyText();
 
-            var data2 = {
-                value: currClassification,
-                valid: true
-            }
-            console.log(data2)
-            JFCustomWidget.sendSubmit(data2);
+                var data2 = {
+                    value: currClassification,
+                    valid: true
+                }
+                console.log(data2)
+                JFCustomWidget.sendSubmit(data2);
+            });
         });
 
     </script>
