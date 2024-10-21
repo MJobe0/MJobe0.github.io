@@ -160,7 +160,7 @@
         function fetchSigners(location) {
             showLoadingMessage();
 
-            const apiUrl = `https://fa-eel-jf-workflow-handler-001.azurewebsites.net/api/GetUsersFiltered?code=G4jRSNYXcOwlsiQ2q2nGvRjrcwVJJjrDgoNJH92OLfpmAzFuOeHdmA%3D%3D&jobTitle=${location}`;
+            const apiUrl = `https://fa-eel-jf-workflow-handler-001.azurewebsites.net/api/api/data/ad/customfilter?code=bTyElYg54Cn6stsnkC1gxcRaJGocL_dKhS5l2QrojhqfAzFu7vWmfw%3D%3D&jobTitle=${location}`;
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
