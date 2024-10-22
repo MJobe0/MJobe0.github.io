@@ -193,7 +193,8 @@
 
         function resizeFrame() {
             const currHeight = $("body").height();
-            JFCustomWidget.requestFrameResize({ width: 1000, height: currHeight })
+            const currWidth = $("body").width();
+            JFCustomWidget.requestFrameResize({ width: currWidth, height: currHeight })
         }
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
