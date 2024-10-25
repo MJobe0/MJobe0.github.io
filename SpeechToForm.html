@@ -79,6 +79,9 @@
             formData.append('file', audio);
             formData.append('questions', params.fieldMapping || {});
 
+            console.log("fieldMapping", params.fieldMapping);
+            console.log("fieldMapping", JSON.stringify(params.fieldMapping));
+
             const apiUrl = 'https://mjobe-document-vqa-v2.hf.space/transcribe_and_answer/';
 
             fetch(apiUrl, {
