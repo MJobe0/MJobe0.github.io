@@ -116,9 +116,6 @@
         var mediaRecorder;
         var isRecording = false;
 
-        document.getElementById('recButton').classList.add("notRec");
-        document.getElementById('recButton').addEventListener('click', toggleRecording);
-
         function toggleRecording() {
             if (isRecording) {
                 stopRecording();
@@ -134,7 +131,7 @@
                     mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.start();
 
-                    document.getElementById('recording-status').textContent = "Recording";
+                    //document.getElementById('recording-status').textContent = "Recording";
                     document.getElementById('recButton').classList.remove("notRec");
                     document.getElementById('recButton').classList.add("Rec");
                     isRecording = true;
@@ -154,14 +151,15 @@
         function stopRecording() {
             if (mediaRecorder && isRecording) {
                 mediaRecorder.stop();
-                document.getElementById('recording-status').textContent = "Not Recording";
+                //document.getElementById('recording-status').textContent = "Not Recording";
                 document.getElementById('recButton').classList.remove("Rec");
                 document.getElementById('recButton').classList.add("notRec");
                 isRecording = false;
             }
         }
 
-        document.getElementById('record-btn').addEventListener('click', toggleRecording);
+        document.getElementById('recButton').addEventListener('click', toggleRecording);
+        document.getElementById('recButton').classList.add("notRec");
 
         // Handle File Upload
         document.getElementById('upload-btn').addEventListener('click', function () {
