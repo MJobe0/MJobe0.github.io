@@ -77,7 +77,7 @@
         function sendAudioToAPI(audio) {
             const formData = new FormData();
             formData.append('file', audio);
-            formData.append('questions', params.fieldMapping || {});
+            formData.append('questions', JSON.stringify(params.fieldMapping) || {});
 
             console.log("fieldMapping", params.fieldMapping);
             console.log("fieldMapping", JSON.stringify(params.fieldMapping));
