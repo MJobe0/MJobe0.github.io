@@ -20,6 +20,8 @@
 <body>
     <div id="recorder-container">
         <button id="record-btn">Start Recording</button>
+        <input type="file" id="upload-file" accept="audio/*" style="display:none">
+        <button id="upload-btn">Upload Audio</button>
         <p id="transcription-output">Transcription: <span id="transcribed-text"></span></p>
     </div>
 
@@ -50,11 +52,11 @@
                     isRecording = true;
 
                     mediaRecorder.ondataavailable = function (event) {
-                        audioBlob = event.data;
-                    };
+                        const audioBlob = event.data;
 
-                    mediaRecorder.onstop = function () {
-                        sendAudioToAPI(audioBlob);
+                        // Convert Blob to File to ensure compatibility with backend
+                        const audioFile = new File([audioBlob], "recording.webm", { type: "audio/webm" });
+                        sendAudioToAPI(audioFile);
                     };
                 })
                 .catch(function (err) {
@@ -73,10 +75,23 @@
 
         document.getElementById('record-btn').addEventListener('click', toggleRecording);
 
+        // Handle File Upload
+        document.getElementById('upload-btn').addEventListener('click', function () {
+            document.getElementById('upload-file').click(); // Open file dialog
+        });
+
+        // When a file is selected, upload it
+        document.getElementById('upload-file').addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                sendAudioToAPI(file); // Send the selected file
+            }
+        });
+
         // Step 3: Sending Audio to Hugging Face API
-        function sendAudioToAPI(audio) {
+        function sendAudioToAPI(audioFile) {
             const formData = new FormData();
-            formData.append('file', audio, 'recording.webm');
+            formData.append('file', audioFile);
             formData.append('questions', JSON.stringify(params.fieldMapping || {}));
 
             const apiUrl = 'https://mjobe-document-vqa-v2.hf.space/transcribe_and_answer/';
