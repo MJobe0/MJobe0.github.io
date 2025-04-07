@@ -144,10 +144,7 @@
             $(".status-indicator").removeClass("ready").addClass("triggered").text("Alert Triggered");
             
             try {
-                if (typeof JFCustomWidget.showWidgetError === 'function') {
-                    JFCustomWidget.showWidgetError(message);
-                } 
-                else if (window.parent && window.parent.JotForm) {
+              if (window.parent && window.parent.JotForm) {
                     let alertFunction;
                     
                     switch(type.toLowerCase()) {
