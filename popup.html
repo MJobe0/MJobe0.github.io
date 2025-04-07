@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JotForm Native Alert Widget</title>
+    <title>JotForm Inline Notification</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,20 +22,121 @@
             background-color: transparent;
         }
         
-        #alert-widget-container {
+        #notification-widget-container {
             width: 100%;
+            box-sizing: border-box;
+            padding: 0;
             min-height: 30px;
-            padding: 10px;
+        }
+        
+        /* Notification styles */
+        .notification {
+            display: none;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.3s ease-out;
             box-sizing: border-box;
         }
         
-        /* Widget status indicator */
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .notification-content {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            line-height: 0.8;
+            cursor: pointer;
+            padding: 5px;
+            color: inherit;
+            opacity: 0.6;
+        }
+        
+        .close-btn:hover {
+            opacity: 1;
+        }
+        
+        /* Notification types */
+        .info {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            color: #0c5ea3;
+        }
+        
+        .info .close-btn {
+            color: #0c5ea3;
+        }
+        
+        .success {
+            background-color: #e8f6ee;
+            border-left: 4px solid #4CAF50;
+            color: #2e7d32;
+        }
+        
+        .success .close-btn {
+            color: #2e7d32;
+        }
+        
+        .warning {
+            background-color: #fff8e6;
+            border-left: 4px solid #FFC107;
+            color: #b38707;
+        }
+        
+        .warning .close-btn {
+            color: #b38707;
+        }
+        
+        .error {
+            background-color: #fde8e8;
+            border-left: 4px solid #f44336;
+            color: #c62828;
+        }
+        
+        .error .close-btn {
+            color: #c62828;
+        }
+        
+        /* Status indicators */
         .status-indicator {
             padding: 6px 10px;
             border-radius: 4px;
             font-size: 12px;
             display: inline-block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .ready {
@@ -53,28 +154,61 @@
             color: #666;
             margin-top: 8px;
         }
+        
+        /* Hidden in edit mode */
+        .form-edit-mode .notification {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
-    <div id="alert-widget-container">
-        <div class="status-indicator ready">Alert Ready</div>
+    <div id="notification-widget-container">
+        <div class="status-indicator ready">Notification Ready</div>
+        
+        <!-- Notification element -->
+        <div id="notification" class="notification">
+            <div class="notification-header">
+                <div id="notification-title" class="notification-title">Important Notice</div>
+                <button id="close-notification" class="close-btn">&times;</button>
+            </div>
+            <div id="notification-content" class="notification-content">
+                Notification message will appear here.
+            </div>
+        </div>
+        
         <div class="settings-summary" id="settingsSummary"></div>
     </div>
     
     <script>
         let widgetSettings = {};
         let lastValue = null;
-        let isAlertTriggered = false;
+        let isNotificationShown = false;
+        let autoHideTimer = null;
+        
+        $(document).ready(function() {
+            $("#close-notification").click(function() {
+                hideNotification();
+            });
+            
+            if (window.location.href.indexOf('builder.jotform.com') > -1) {
+                $('body').addClass('form-edit-mode');
+            }
+        });
         
         JFCustomWidget.subscribe("ready", function(message) {
             widgetSettings = JFCustomWidget.getWidgetSettings();
             console.log("Widget settings:", widgetSettings);
             
+            updateNotificationFromSettings();
+            
             updateSettingsSummary();
             
-            if (widgetSettings.triggerOnLoad === "Yes" || widgetSettings.triggerOnLoad === "1" || widgetSettings.triggerOnLoad === true) {
+            if (widgetSettings.showOnLoad === "Yes" || widgetSettings.showOnLoad === "1" || widgetSettings.showOnLoad === true) {
                 setTimeout(function() {
-                    showAlert(widgetSettings.defaultMessage || "This is an automatic alert.");
+                    showNotification(
+                        widgetSettings.defaultMessage || "This is an automatic notification.",
+                        widgetSettings.notificationType || "info"
+                    );
                 }, 1000);
             }
             
@@ -93,38 +227,51 @@
             
             if (widgetSettings.messageSource === "settings" || !data.value) {
                 if (data.value && data.value !== "0" && data.value.toLowerCase() !== "false") {
-                    showAlert(widgetSettings.defaultMessage || "Attention required!");
+                    showNotification(
+                        widgetSettings.defaultMessage || "Attention required!",
+                        widgetSettings.notificationType || "warning"
+                    );
                 }
             }
             else {
                 let message = data.value;
-                let alertType = "warning";
+                let notificationType = widgetSettings.notificationType || "warning";
+                let title = widgetSettings.defaultTitle || "Attention";
+                let shouldShake = widgetSettings.enableShake === "Yes" || widgetSettings.enableShake === "1" || widgetSettings.enableShake === true;
                 
                 if (data.value.includes(';') && data.value.includes(':')) {
                     const parts = parseDataString(data.value);
                     
-                    if (parts.trigger && (parts.trigger[0] === 1 || parts.trigger[0] === true || 
-                                        parts.trigger[0] === "1" || parts.trigger[0] === "true")) {
-                        message = parts.message ? parts.message[0] : "Attention required!";
+                    const shouldTrigger = parts.trigger && (
+                        parts.trigger[0] === 1 || 
+                        parts.trigger[0] === true || 
+                        parts.trigger[0] === "1" || 
+                        parts.trigger[0] === "true"
+                    );
+                    
+                    if (shouldTrigger || parts.message) {
+                        message = parts.message ? parts.message[0] : (widgetSettings.defaultMessage || "Attention required!");
                         
                         if (parts.type) {
-                            alertType = parts.type[0];
+                            notificationType = parts.type[0];
                         }
                         
-                        showAlert(message, alertType);
-                    }
-                    else if (parts.message) {
-                        message = parts.message[0];
-                        
-                        if (parts.type) {
-                            alertType = parts.type[0];
+                        if (parts.title) {
+                            title = parts.title[0];
                         }
                         
-                        showAlert(message, alertType);
+                        if (parts.shake) {
+                            shouldShake = parts.shake[0] === true || 
+                                         parts.shake[0] === 1 || 
+                                         parts.shake[0] === "1" || 
+                                         parts.shake[0] === "true";
+                        }
+                        
+                        showNotification(message, notificationType, title, shouldShake);
                     }
                 } 
                 else if (data.value && data.value !== "0" && data.value.toLowerCase() !== "false") {
-                    showAlert(data.value, alertType);
+                    showNotification(data.value, notificationType);
                 }
             }
             
@@ -139,74 +286,121 @@
             JFCustomWidget.sendSubmit(data);
         });
         
-        function showAlert(message, type = "warning") {
-            isAlertTriggered = true;
-            $(".status-indicator").removeClass("ready").addClass("triggered").text("Alert Triggered");
+        function updateNotificationFromSettings() {
+            if (widgetSettings.defaultTitle) {
+                $("#notification-title").text(widgetSettings.defaultTitle);
+            }
             
-            try {
-              if (window.parent && window.parent.JotForm) {
-                    let alertFunction;
-                    
-                    switch(type.toLowerCase()) {
-                        case "error":
-                            alertFunction = window.parent.JotForm.errored;
-                            break;
-                        case "success":
-                            alertFunction = window.parent.JotForm.success;
-                            break;
-                        case "info":
-                            alertFunction = window.parent.JotForm.info;
-                            break;
-                        case "warning":
-                        default:
-                            alertFunction = window.parent.JotForm.warning;
-                    }
-                    
-                    if (typeof alertFunction === 'function') {
-                        alertFunction(null, message);
-                    } else {
-                        alert(message);
-                    }
-                } 
-                else {
-                    alert(message);
-                }
-                
-                if (widgetSettings.autoReset === "Yes" || widgetSettings.autoReset === "1" || widgetSettings.autoReset === true) {
-                    const delay = parseInt(widgetSettings.resetDelay) || 5;
-                    setTimeout(function() {
-                        resetIndicator();
-                    }, delay * 1000);
-                }
-                
-            } catch (e) {
-                console.error("Error showing alert:", e);
-                alert(message);
+            if (widgetSettings.defaultMessage) {
+                $("#notification-content").text(widgetSettings.defaultMessage);
+            }
+            
+            // Set notification type/style if provided
+            if (widgetSettings.notificationType) {
+                setNotificationType(widgetSettings.notificationType);
             }
         }
         
-        function resetIndicator() {
-            isAlertTriggered = false;
-            $(".status-indicator").removeClass("triggered").addClass("ready").text("Alert Ready");
+        function showNotification(message, type = "info", title = null, shake = false) {
+            if (autoHideTimer) {
+                clearTimeout(autoHideTimer);
+                autoHideTimer = null;
+            }
+            
+            $("#notification-content").html(message);
+            
+            if (title) {
+                $("#notification-title").text(title);
+            } else if (widgetSettings.defaultTitle) {
+                $("#notification-title").text(widgetSettings.defaultTitle);
+            }
+            
+            setNotificationType(type);
+            
+            $("#notification").fadeIn(300);
+            isNotificationShown = true;
+            
+            if (shake || (widgetSettings.enableShake === "Yes" || widgetSettings.enableShake === "1" || widgetSettings.enableShake === true)) {
+                $("#notification").removeClass("shake").outerWidth(); // Force reflow
+                $("#notification").addClass("shake");
+            }
+            
+            $(".status-indicator").removeClass("ready").addClass("triggered").text("Notification Shown");
+            
+            if (widgetSettings.autoHide === "Yes" || widgetSettings.autoHide === "1" || widgetSettings.autoHide === true) {
+                const delay = parseInt(widgetSettings.autoHideDelay) || 5;
+                autoHideTimer = setTimeout(function() {
+                    hideNotification();
+                }, delay * 1000);
+            }
+            
+            resizeFrame();
         }
         
+        // Helper function to set notification type and styling
+        function setNotificationType(type) {
+            // Remove any existing type classes
+            $("#notification").removeClass("info success warning error");
+            
+            // Add the appropriate type class
+            switch(type.toLowerCase()) {
+                case "success":
+                    $("#notification").addClass("success");
+                    break;
+                case "warning":
+                    $("#notification").addClass("warning");
+                    break;
+                case "error":
+                    $("#notification").addClass("error");
+                    break;
+                case "info":
+                default:
+                    $("#notification").addClass("info");
+            }
+        }
+        
+        function hideNotification() {
+            $("#notification").fadeOut(300);
+            
+            setTimeout(function() {
+                $(".status-indicator").removeClass("triggered").addClass("ready").text("Notification Ready");
+            }, 500);
+            
+            isNotificationShown = false;
+            
+            setTimeout(resizeFrame, 350);
+        }
+        
+        // Helper function to update settings summary display
         function updateSettingsSummary() {
             let summary = "";
             
-            if (widgetSettings.defaultMessage) {
-                summary += `Default message: "${widgetSettings.defaultMessage.substring(0, 30)}${widgetSettings.defaultMessage.length > 30 ? '...' : ''}"<br>`;
+            if (widgetSettings.defaultTitle) {
+                summary += `Title: "${widgetSettings.defaultTitle}"<br>`;
             }
             
-            if (widgetSettings.triggerOnLoad === "Yes" || widgetSettings.triggerOnLoad === "1" || widgetSettings.triggerOnLoad === true) {
-                summary += "Auto-trigger on load: Yes<br>";
+            if (widgetSettings.defaultMessage) {
+                summary += `Message: "${widgetSettings.defaultMessage.substring(0, 30)}${widgetSettings.defaultMessage.length > 30 ? '...' : ''}"<br>`;
+            }
+            
+            if (widgetSettings.notificationType) {
+                summary += `Type: ${widgetSettings.notificationType}<br>`;
+            }
+            
+            if (widgetSettings.showOnLoad === "Yes" || widgetSettings.showOnLoad === "1" || widgetSettings.showOnLoad === true) {
+                summary += "Show on load: Yes<br>";
+            }
+            
+            if (widgetSettings.autoHide === "Yes" || widgetSettings.autoHide === "1" || widgetSettings.autoHide === true) {
+                summary += `Auto-hide: Yes (${parseInt(widgetSettings.autoHideDelay) || 5}s)<br>`;
+            }
+            
+            if (widgetSettings.enableShake === "Yes" || widgetSettings.enableShake === "1" || widgetSettings.enableShake === true) {
+                summary += "Shake effect: Enabled<br>";
             }
             
             if (widgetSettings.messageSource) {
                 summary += `Message source: ${widgetSettings.messageSource}<br>`;
-            }
-            
-            if (widgetSettings.autoReset === "Yes" || widgetSettings.autoReset === "1" || widgetSettings.autoReset === true) {
-                summary += `Auto-reset: Yes (${parseInt(widgetSettings.resetDelay) || 5}s)<br>`;
             }
             
             $("#settingsSummary").html(summary);
@@ -220,7 +414,7 @@
                 if (part.includes(':')) {
                     const [key, values] = part.split(':');
                     if (key && values) {
-                        if (key.trim() === 'message' || key.trim() === 'type') {
+                        if (['message', 'type', 'title'].includes(key.trim())) {
                             datasets[key.trim()] = [values];
                         } else {
                             datasets[key.trim()] = values.split(',').map(val => {
@@ -236,9 +430,12 @@
         }
         
         function resizeFrame() {
-            const height = $("#alert-widget-container").outerHeight() + 20;
+            const containerHeight = $("#notification-widget-container").outerHeight();
+            const notificationHeight = isNotificationShown ? $("#notification").outerHeight() : 0;
+            const totalHeight = containerHeight + notificationHeight + 20; // Add padding
+            
             JFCustomWidget.requestFrameResize({
-                height: height
+                height: totalHeight
             });
         }
     </script>
