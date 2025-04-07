@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Prompt Widget</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = '//js.jotform.com/JotFormCustomWidget.min.js?onload=onLoadCallback';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+        }
+        
+        #prompt-container {
+            width: 100%;
+            min-height: 20px;
+            position: relative;
+        }
+        
+        /* Custom Alert Style */
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            z-index: 9999;
+        }
+        
+        .alert-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0F5DBD;
+        }
+        
+        .alert-message {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .alert-button {
+            background-color: #0F5DBD;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            float: right;
+        }
+        
+        .alert-button:hover {
+            background-color: #0a4a9e;
+        }
+        
+        .alert-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+        
+        /* Widget status indicator */
+        .status-indicator {
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: inline-block;
+        }
+        
+        .ready {
+            background-color: #e8f4ff;
+            color: #0F5DBD;
+        }
+        
+        .triggered {
+            background-color: #ffebeb;
+            color: #d63031;
+        }
+    </style>
+</head>
+<body>
+    <div id="prompt-container">
+        <div class="status-indicator ready">Prompt Ready</div>
+    </div>
+    
+    <div class="alert-overlay" id="alertOverlay"></div>
+    <div class="custom-alert" id="customAlert">
+        <div class="alert-title" id="alertTitle">Attention Required</div>
+        <div class="alert-message" id="alertMessage"></div>
+        <button class="alert-button" id="alertButton">OK</button>
+    </div>
+    
+    <script>
+        // Global variables
+        let widgetSettings = {};
+        let isPromptShown = false;
+        let lastValue = null;
+        
+        $(document).ready(function() {
+            $("#alertButton").click(function() {
+                hideAlert();
+            });
+            
+            $("#alertOverlay").click(function() {
+                hideAlert();
+            });
+        });
+        
+        JFCustomWidget.subscribe("ready", function(message) {
+            widgetSettings = JFCustomWidget.getWidgetSettings();
+            console.log("Widget settings:", widgetSettings);
+            
+            if (widgetSettings.title) {
+                $("#alertTitle").text(widgetSettings.title);
+            }
+            
+            if (widgetSettings.defaultMessage) {
+                $("#alertMessage").text(widgetSettings.defaultMessage);
+            }
+            
+            if (widgetSettings.triggerOnLoad === "Yes" || widgetSettings.triggerOnLoad === "1" || widgetSettings.triggerOnLoad === true) {
+                setTimeout(function() {
+                    showAlert(widgetSettings.defaultMessage || "This is an automatic prompt.");
+                }, 1000);
+            }
+            
+            resizeFrame();
+        });
+        
+        JFCustomWidget.subscribe("populate", function(data) {
+            console.log("Received data:", data);
+            
+            if (data.value === lastValue && lastValue !== null) {
+                console.log("Skipping duplicate trigger value:", data.value);
+                return;
+            }
+            
+            lastValue = data.value;
+            
+            if (widgetSettings.messageSource === "settings" || !data.value) {
+                if (data.value && data.value !== "0" && data.value.toLowerCase() !== "false") {
+                    showAlert(widgetSettings.defaultMessage || "Attention required!");
+                }
+            }
+            else {
+                let message = data.value;
+                
+                if (data.value.includes(';') && data.value.includes(':')) {
+                    const parts = parseDataString(data.value);
+                    
+                    if (parts.trigger && (parts.trigger[0] === 1 || parts.trigger[0] === true || 
+                                        parts.trigger[0] === "1" || parts.trigger[0] === "true")) {
+                        message = parts.message ? parts.message[0] : "Attention required!";
+                        showAlert(message);
+                    }
+                    else if (parts.message) {
+                        showAlert(parts.message[0]);
+                    }
+                } 
+                else if (data.value && data.value !== "0" && data.value.toLowerCase() !== "false") {
+                    showAlert(data.value);
+                }
+            }
+            
+            resizeFrame();
+        });
+        
+        JFCustomWidget.subscribe("submit", function() {
+            const data = {
+                valid: true,
+                value: ""
+            };
+            JFCustomWidget.sendSubmit(data);
+        });
+        
+        function showAlert(message) {
+            $("#alertMessage").html(message);
+            $("#alertOverlay").fadeIn(200);
+            $("#customAlert").fadeIn(200);
+            isPromptShown = true;
+            
+            $(".status-indicator").removeClass("ready").addClass("triggered").text("Prompt Triggered");
+            
+            if (widgetSettings.autoHide && widgetSettings.autoHideTime) {
+                setTimeout(function() {
+                    hideAlert();
+                }, parseInt(widgetSettings.autoHideTime) * 1000);
+            }
+        }
+        
+        function hideAlert() {
+            $("#alertOverlay").fadeOut(200);
+            $("#customAlert").fadeOut(200);
+            
+            setTimeout(function() {
+                $(".status-indicator").removeClass("triggered").addClass("ready").text("Prompt Ready");
+            }, 1000);
+            
+            isPromptShown = false;
+        }
+        
+        function parseDataString(dataString) {
+            const datasets = {};
+            const parts = dataString.split(';');
+            
+            parts.forEach(part => {
+                if (part.includes(':')) {
+                    const [key, values] = part.split(':');
+                    if (key && values) {
+                        if (key.trim() === 'message') {
+                            datasets[key.trim()] = [values];
+                        } else {
+                            datasets[key.trim()] = values.split(',').map(val => {
+                                const numVal = Number(val);
+                                return isNaN(numVal) ? val : numVal;
+                            });
+                        }
+                    }
+                }
+            });
+            
+            return datasets;
+        }
+        
+        function resizeFrame() {
+            const height = isPromptShown ? 400 : $("#prompt-container").outerHeight();
+            JFCustomWidget.requestFrameResize({
+                height: height
+            });
+        }
+    </script>
+</body>
+</html>
