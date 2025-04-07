@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Prompt Widget</title>
+    <title>JotForm Native Alert Widget</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,67 +22,11 @@
             background-color: transparent;
         }
         
-        #prompt-container {
+        #alert-widget-container {
             width: 100%;
-            min-height: 20px;
-            position: relative;
-        }
-        
-        /* Custom Alert Style */
-        .custom-alert {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            max-width: 400px;
-            width: 90%;
-            z-index: 9999;
-        }
-        
-        .alert-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #0F5DBD;
-        }
-        
-        .alert-message {
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .alert-button {
-            background-color: #0F5DBD;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            float: right;
-        }
-        
-        .alert-button:hover {
-            background-color: #0a4a9e;
-        }
-        
-        .alert-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9998;
+            min-height: 30px;
+            padding: 10px;
+            box-sizing: border-box;
         }
         
         /* Widget status indicator */
@@ -91,6 +35,7 @@
             border-radius: 4px;
             font-size: 12px;
             display: inline-block;
+            margin-bottom: 5px;
         }
         
         .ready {
@@ -102,51 +47,34 @@
             background-color: #ffebeb;
             color: #d63031;
         }
+        
+        .settings-summary {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
-    <div id="prompt-container">
-        <div class="status-indicator ready">Prompt Ready</div>
-    </div>
-    
-    <div class="alert-overlay" id="alertOverlay"></div>
-    <div class="custom-alert" id="customAlert">
-        <div class="alert-title" id="alertTitle">Attention Required</div>
-        <div class="alert-message" id="alertMessage"></div>
-        <button class="alert-button" id="alertButton">OK</button>
+    <div id="alert-widget-container">
+        <div class="status-indicator ready">Alert Ready</div>
+        <div class="settings-summary" id="settingsSummary"></div>
     </div>
     
     <script>
-        // Global variables
         let widgetSettings = {};
-        let isPromptShown = false;
         let lastValue = null;
-        
-        $(document).ready(function() {
-            $("#alertButton").click(function() {
-                hideAlert();
-            });
-            
-            $("#alertOverlay").click(function() {
-                hideAlert();
-            });
-        });
+        let isAlertTriggered = false;
         
         JFCustomWidget.subscribe("ready", function(message) {
             widgetSettings = JFCustomWidget.getWidgetSettings();
             console.log("Widget settings:", widgetSettings);
             
-            if (widgetSettings.title) {
-                $("#alertTitle").text(widgetSettings.title);
-            }
-            
-            if (widgetSettings.defaultMessage) {
-                $("#alertMessage").text(widgetSettings.defaultMessage);
-            }
+            updateSettingsSummary();
             
             if (widgetSettings.triggerOnLoad === "Yes" || widgetSettings.triggerOnLoad === "1" || widgetSettings.triggerOnLoad === true) {
                 setTimeout(function() {
-                    showAlert(widgetSettings.defaultMessage || "This is an automatic prompt.");
+                    showAlert(widgetSettings.defaultMessage || "This is an automatic alert.");
                 }, 1000);
             }
             
@@ -170,6 +98,7 @@
             }
             else {
                 let message = data.value;
+                let alertType = "warning";
                 
                 if (data.value.includes(';') && data.value.includes(':')) {
                     const parts = parseDataString(data.value);
@@ -177,14 +106,25 @@
                     if (parts.trigger && (parts.trigger[0] === 1 || parts.trigger[0] === true || 
                                         parts.trigger[0] === "1" || parts.trigger[0] === "true")) {
                         message = parts.message ? parts.message[0] : "Attention required!";
-                        showAlert(message);
+                        
+                        if (parts.type) {
+                            alertType = parts.type[0];
+                        }
+                        
+                        showAlert(message, alertType);
                     }
                     else if (parts.message) {
-                        showAlert(parts.message[0]);
+                        message = parts.message[0];
+                        
+                        if (parts.type) {
+                            alertType = parts.type[0];
+                        }
+                        
+                        showAlert(message, alertType);
                     }
                 } 
                 else if (data.value && data.value !== "0" && data.value.toLowerCase() !== "false") {
-                    showAlert(data.value);
+                    showAlert(data.value, alertType);
                 }
             }
             
@@ -199,30 +139,80 @@
             JFCustomWidget.sendSubmit(data);
         });
         
-        function showAlert(message) {
-            $("#alertMessage").html(message);
-            $("#alertOverlay").fadeIn(200);
-            $("#customAlert").fadeIn(200);
-            isPromptShown = true;
+        function showAlert(message, type = "warning") {
+            isAlertTriggered = true;
+            $(".status-indicator").removeClass("ready").addClass("triggered").text("Alert Triggered");
             
-            $(".status-indicator").removeClass("ready").addClass("triggered").text("Prompt Triggered");
-            
-            if (widgetSettings.autoHide && widgetSettings.autoHideTime) {
-                setTimeout(function() {
-                    hideAlert();
-                }, parseInt(widgetSettings.autoHideTime) * 1000);
+            try {
+                if (typeof JFCustomWidget.showWidgetError === 'function') {
+                    JFCustomWidget.showWidgetError(message);
+                } 
+                else if (window.parent && window.parent.JotForm) {
+                    let alertFunction;
+                    
+                    switch(type.toLowerCase()) {
+                        case "error":
+                            alertFunction = window.parent.JotForm.errored;
+                            break;
+                        case "success":
+                            alertFunction = window.parent.JotForm.success;
+                            break;
+                        case "info":
+                            alertFunction = window.parent.JotForm.info;
+                            break;
+                        case "warning":
+                        default:
+                            alertFunction = window.parent.JotForm.warning;
+                    }
+                    
+                    if (typeof alertFunction === 'function') {
+                        alertFunction(null, message);
+                    } else {
+                        alert(message);
+                    }
+                } 
+                else {
+                    alert(message);
+                }
+                
+                if (widgetSettings.autoReset === "Yes" || widgetSettings.autoReset === "1" || widgetSettings.autoReset === true) {
+                    const delay = parseInt(widgetSettings.resetDelay) || 5;
+                    setTimeout(function() {
+                        resetIndicator();
+                    }, delay * 1000);
+                }
+                
+            } catch (e) {
+                console.error("Error showing alert:", e);
+                alert(message);
             }
         }
         
-        function hideAlert() {
-            $("#alertOverlay").fadeOut(200);
-            $("#customAlert").fadeOut(200);
+        function resetIndicator() {
+            isAlertTriggered = false;
+            $(".status-indicator").removeClass("triggered").addClass("ready").text("Alert Ready");
+        }
+        
+        function updateSettingsSummary() {
+            let summary = "";
             
-            setTimeout(function() {
-                $(".status-indicator").removeClass("triggered").addClass("ready").text("Prompt Ready");
-            }, 1000);
+            if (widgetSettings.defaultMessage) {
+                summary += `Default message: "${widgetSettings.defaultMessage.substring(0, 30)}${widgetSettings.defaultMessage.length > 30 ? '...' : ''}"<br>`;
+            }
             
-            isPromptShown = false;
+            if (widgetSettings.triggerOnLoad === "Yes" || widgetSettings.triggerOnLoad === "1" || widgetSettings.triggerOnLoad === true) {
+                summary += "Auto-trigger on load: Yes<br>";
+            }
+            
+            if (widgetSettings.messageSource) {
+                summary += `Message source: ${widgetSettings.messageSource}<br>`;
+            }
+            
+            if (widgetSettings.autoReset === "Yes" || widgetSettings.autoReset === "1" || widgetSettings.autoReset === true) {
+                summary += `Auto-reset: Yes (${parseInt(widgetSettings.resetDelay) || 5}s)<br>`;
+            }
+            
+            $("#settingsSummary").html(summary);
         }
         
         function parseDataString(dataString) {
@@ -233,7 +223,7 @@
                 if (part.includes(':')) {
                     const [key, values] = part.split(':');
                     if (key && values) {
-                        if (key.trim() === 'message') {
+                        if (key.trim() === 'message' || key.trim() === 'type') {
                             datasets[key.trim()] = [values];
                         } else {
                             datasets[key.trim()] = values.split(',').map(val => {
@@ -249,7 +239,7 @@
         }
         
         function resizeFrame() {
-            const height = isPromptShown ? 400 : $("#prompt-container").outerHeight();
+            const height = $("#alert-widget-container").outerHeight() + 20;
             JFCustomWidget.requestFrameResize({
                 height: height
             });
