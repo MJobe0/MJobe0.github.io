@@ -32,6 +32,25 @@
             margin: auto;
             margin-top: -20px;
         }
+
+        @media (max-width: 768px) {
+            #chart-container {
+                height: 200px;
+                padding: 5px;
+                margin-top: -10px;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #chart-container {
+                height: 200px;
+                padding: 2px;
+            }
+        }
     </style>
 </head>
 
@@ -96,6 +115,11 @@
             }
         });
 
+        window.addEventListener('resize', function () {
+            roiBarChart.resize();
+            resizeFrame();
+        });
+
         console.log("JFCustomWidget: ", JFCustomWidget);
 
         JFCustomWidget.subscribe('populate', fillConditionValue);
@@ -132,7 +156,7 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("chart-container").height();
+            const currHeight = $("#chart-container").height();
             JFCustomWidget.requestFrameResize({ height: currHeight })
         }
 
