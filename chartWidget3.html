@@ -29,33 +29,8 @@
 
         #chart-container {
             width: 100%;
-            max-width: 100%;
             margin: auto;
             margin-top: -20px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        #roiBarChart {
-            max-width: 100%;
-            height: auto !important;
-        }
-
-        @media (max-width: 768px) {
-            #chart-container {
-                padding: 5px;
-                margin-top: -10px;
-            }
-
-            body {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #chart-container {
-                padding: 2px;
-            }
         }
     </style>
 </head>
@@ -91,27 +66,15 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom',
-                        labels: {
-                            usePointStyle: true,
-                            padding: 15,
-                            font: {
-                                size: function (context) {
-                                    return window.innerWidth < 480 ? 12 : 14;
-                                }
-                            }
-                        }
+                        position: 'bottom'
                     },
                     title: {
                         display: true,
                         text: '',
                         font: {
-                            size: function (context) {
-                                return window.innerWidth < 480 ? 14 : 18;
-                            }
+                            size: 18
                         }
                     }
                 },
@@ -120,42 +83,17 @@
                         title: {
                             display: true,
                             text: ''
-                        },
-                        ticks: {
-                            font: {
-                                size: function (context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            }
                         }
                     },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Amount (£)',
-                            font: {
-                                size: function (context) {
-                                    return window.innerWidth < 480 ? 11 : 13;
-                                }
-                            }
-                        },
-                        ticks: {
-                            font: {
-                                size: function (context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            }
+                            text: 'Amount (£)'
                         }
                     }
                 }
             }
-        });
-
-        // Resize chart on window resize
-        window.addEventListener('resize', function () {
-            roiBarChart.resize();
-            resizeFrame();
         });
 
         console.log("JFCustomWidget: ", JFCustomWidget);
@@ -194,7 +132,7 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("#chart-container").height();
+            const currHeight = $("chart-container").height();
             JFCustomWidget.requestFrameResize({ height: currHeight })
         }
 
