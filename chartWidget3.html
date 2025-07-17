@@ -23,51 +23,14 @@
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 0;
             background-color: #f9f9f9;
-            box-sizing: border-box;
         }
 
         #chart-container {
             width: 100%;
-            max-width: 700px;
-            height: 350px;
             margin: auto;
             margin-top: -20px;
-            position: relative;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        #roiBarChart {
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 5px;
-            }
-            
-            #chart-container {
-                height: 300px;
-                margin-top: -10px;
-                padding: 0 5px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #chart-container {
-                height: 250px;
-                padding: 0;
-            }
-        }
-
-        @media (max-width: 320px) {
-            #chart-container {
-                height: 220px;
-            }
         }
     </style>
 </head>
@@ -103,26 +66,15 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: function(context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            },
-                            padding: window.innerWidth < 480 ? 10 : 20
-                        }
+                        position: 'bottom'
                     },
                     title: {
                         display: true,
                         text: '',
                         font: {
-                            size: function(context) {
-                                return window.innerWidth < 480 ? 14 : 18;
-                            }
+                            size: 18
                         }
                     }
                 },
@@ -131,32 +83,13 @@
                         title: {
                             display: true,
                             text: ''
-                        },
-                        ticks: {
-                            font: {
-                                size: function(context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            }
                         }
                     },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Amount (£)',
-                            font: {
-                                size: function(context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            }
-                        },
-                        ticks: {
-                            font: {
-                                size: function(context) {
-                                    return window.innerWidth < 480 ? 10 : 12;
-                                }
-                            }
+                            text: 'Amount (£)'
                         }
                     }
                 }
@@ -199,15 +132,9 @@
         }
 
         function resizeFrame() {
-            const currHeight = $("#chart-container").height();
+            const currHeight = $("chart-container").height();
             JFCustomWidget.requestFrameResize({ height: currHeight })
         }
-
-        // Handle window resize for better responsiveness
-        window.addEventListener('resize', function() {
-            roiBarChart.resize();
-            resizeFrame();
-        });
 
         JFCustomWidget.subscribe("ready", function (msg) {
             console.log("Ready:", msg);
